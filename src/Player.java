@@ -8,6 +8,18 @@ public class Player {
         this.name = newName;
         this.score = DEF_SCORE;
     }
+
+    public String getName(){
+        return this.name;
+    }
     
+    public void setScore(double newScore){
+        this.score = newScore;
+    }
+
+    public void showPlayer(){
+        System.out.println("Jugador: " + this.name + 
+                           "\n Puntuación: " + this.score);
+    }
 
 }
