@@ -17,4 +17,9 @@ public class Match {
     public boolean isMatched(String playerName){
         return homePlayer.getName() == playerName || visitingPlayer.getName() == playerName;
     }
+
+    public void showMatch(){
+        System.out.println("Jugador local: " + homePlayer
+                            + "\nJugador visitante: " + visitingPlayer);
+    }
 }
