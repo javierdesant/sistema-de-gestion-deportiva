@@ -33,9 +33,15 @@ public class PlayerList {
         }   
         return res;
     }
-    
+
     public void score(String playerName, double score){
         this.getPlayer(playerName).setScore(score);
     }
-   
+
+    //TODO Hacer que muestre nombre y puntuación de jugadores ordenado descendentemente (supongo que por puntuación)
+    public void rank(){
+
+    }
+    
+
 }
