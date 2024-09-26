@@ -15,7 +15,14 @@ public class PlayerList {
     public void remove(Player player){
         this.players.remove(player);
     }
-
+   
+    public void show(){
+        Iterator<Player> iterator = players.descendingIterator();
+        while (iterator.hasNext()) {
+            iterator.next().showPlayer();
+        }
+    }
+    
     private Player getPlayer(String playerName){
         Iterator<Player> iterator = players.descendingIterator();
         Player res = null;
@@ -26,17 +33,9 @@ public class PlayerList {
         }   
         return res;
     }
-
+    
     public void score(String playerName, double score){
         this.getPlayer(playerName).setScore(score);
     }
-
-    public void show(){
-        Iterator<Player> iterator = players.descendingIterator();
-        while (iterator.hasNext()) {
-            iterator.next().showPlayer();
-        }
-    }
-
-    
+   
 }

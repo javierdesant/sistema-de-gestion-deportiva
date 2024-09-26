@@ -18,8 +18,7 @@ public class Player {
     }
 
     public void showPlayer(){
-        System.out.println("Jugador: " + this.name + 
-                           "\n Puntuación: " + this.score);
+        System.out.println("Jugador: " + this.name);
     }
 
 }
