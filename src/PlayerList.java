@@ -2,10 +2,10 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 public class PlayerList {
-    private LinkedList<Player> players;
+    private final LinkedList<Player> players;
 
     PlayerList(){
-        this.players = new LinkedList<Player>();
+        this.players = new LinkedList<>();
     }
     
     public void create(String playerName){
@@ -28,7 +28,7 @@ public class PlayerList {
         Player res = null;
         while(iterator.hasNext() && res == null){
             Player currentPlayer = iterator.next();
-            if(currentPlayer.getName() == playerName)
+            if(currentPlayer.getName().equals(playerName))
                 res = currentPlayer;
         }   
         return res;
