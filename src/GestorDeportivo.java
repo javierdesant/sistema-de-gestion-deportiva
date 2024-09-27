@@ -17,6 +17,20 @@ public class GestorDeportivo {
         playerList.create("Robert");
         playerList.score("Robert", 3.8);
 
+        playerList.show();
+
+        MatchList matchList = new MatchList();
+
+        try {
+            matchList.randomize(playerList);
+        } catch (Error error) {
+            System.out.println("This error is correct: " + error.getMessage());
+        }
+
+        playerList.create("Paco");
+        playerList.score("Paco", 3.8);
+
+        matchList.randomize(playerList);
 
         playerList.show();
     }
