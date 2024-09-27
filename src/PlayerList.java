@@ -34,6 +34,10 @@ public class PlayerList {
         return res;
     }
 
+    public LinkedList<Player> getPlayers(){
+        return this.players;
+    }
+
     public void score(String playerName, double score){
         this.getPlayer(playerName).setScore(score);
     }
