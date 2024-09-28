@@ -24,14 +24,19 @@ public class GestorDeportivo {
         try {
             matchList.randomize(playerList);
         } catch (Error error) {
-            System.out.println("This error is correct: " + error.getMessage());
+            System.out.println("This error is correct: " + error.getMessage() + "\n");
         }
 
         playerList.create("Paco");
         playerList.score("Paco", 3.8);
 
         matchList.randomize(playerList);
+        matchList.show_matchmake();
 
-        playerList.show();
+        matchList.clear_matchmake();
+        matchList.show_matchmake();
+        
+        matchList.randomize(playerList);
+        matchList.show_matchmake();
     }
 }
