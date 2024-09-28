@@ -9,7 +9,11 @@ public class MatchList{
         this.matches = new LinkedList<Match>();
     }
 
-    public void show_matchmake(){
+    public void add(Match newMatch){
+        this.matches.add(newMatch);
+    }
+
+    public void show(){
         System.out.println("------EMPAREJAMIENTOS-------");
         if (this.matches.isEmpty()) {
             System.out.println("No hay emparejamientos");
@@ -22,9 +26,11 @@ public class MatchList{
         }
         System.out.println("----------------------------");
     }
-    public void clear_matchmake(){
+    
+    public void clear(){
         matches.clear();
     }
+    
     public void randomize(PlayerList playerList){
         LinkedList<Player> players = playerList.getPlayers();
         if (players.size() % 2 == 0) {
