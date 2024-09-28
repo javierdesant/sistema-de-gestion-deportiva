@@ -8,7 +8,7 @@ public class PlayerList {
         this.players = new LinkedList<>();
     }
 
-    
+
 
     // TODO: estoy trabjando en esto
     public void add(Player newPlayer){
@@ -19,19 +19,19 @@ public class PlayerList {
         }
     }
     
-    public void create(String playerName){
-        Player newPlayer = new Player(playerName);
-        Iterator<Player> iterator = players.iterator();
-        boolean exists = false;
-        while (iterator.hasNext() && !exists) {
-            exists = iterator.next().getName().equals(playerName);
-        }
-        if (exists) {
-            throw new Error("Player already exists");
-        } else {
-            this.players.add(newPlayer);
-        }
-    }
+    // public void create(String playerName){
+    //     Player newPlayer = new Player(playerName);
+    //     Iterator<Player> iterator = players.iterator();
+    //     boolean exists = false;
+    //     while (iterator.hasNext() && !exists) {
+    //         exists = iterator.next().getName().equals(playerName);
+    //     }
+    //     if (exists) {
+    //         throw new Error("Player already exists");
+    //     } else {
+    //         this.players.add(newPlayer);
+    //     }
+    // }
     // TODO: estoy trabjando en esto
 
 
@@ -46,7 +46,7 @@ public class PlayerList {
         while (iterator.hasNext()) {
             iterator.next().showPlayer();
         }
-        System.out.println("----------------------------\n");
+        System.out.println("----------------------------");
     }
     
     private Player getPlayer(String playerName){
