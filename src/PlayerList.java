@@ -17,10 +17,12 @@ public class PlayerList {
     }
    
     public void show(){
+        System.out.println("-----LISTA DE JUGADORES-----");
         Iterator<Player> iterator = players.descendingIterator();
         while (iterator.hasNext()) {
             iterator.next().showPlayer();
         }
+        System.out.println("----------------------------\n");
     }
     
     private Player getPlayer(String playerName){
