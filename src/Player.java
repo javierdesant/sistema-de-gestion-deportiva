@@ -12,9 +12,17 @@ public class Player {
     public String getName(){
         return this.name;
     }
+
+    public double getScore(){
+        return this.score;
+    }
     
     public void setScore(double newScore){
         this.score = newScore;
+    }
+
+    public boolean equals(Player player){
+        return this.name.equals(player.getName());
     }
 
     public void showPlayer(){
@@ -24,5 +32,4 @@ public class Player {
     public void showRank(){
         System.out.println("Puntuación: " + this.score);
     }
-
 }

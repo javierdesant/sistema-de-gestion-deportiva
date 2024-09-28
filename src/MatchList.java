@@ -10,13 +10,17 @@ public class MatchList{
     }
 
     public void show_matchmake(){
-        System.out.println("------EMPAREJAMIENTOS-------\n");
-        Iterator<Match> iterator = matches.descendingIterator();
-        while (iterator.hasNext()) {
-            iterator.next().showMatch();
-            System.out.println();
+        System.out.println("------EMPAREJAMIENTOS-------");
+        if (this.matches.isEmpty()) {
+            System.out.println("No hay emparejamientos");
+        } else {
+            Iterator<Match> iterator = this.matches.descendingIterator();
+            while (iterator.hasNext()) {
+                iterator.next().showMatch();
+                System.out.println();
+            }
         }
-        System.out.println("----------------------------\n");
+        System.out.println("----------------------------");
     }
     public void clear_matchmake(){
         matches.clear();
