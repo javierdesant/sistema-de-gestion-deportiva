@@ -19,7 +19,7 @@ public class Match {
     }
 
     public void showMatch(){
-        System.out.println("Jugador local: " + homePlayer
-                            + "\nJugador visitante: " + visitingPlayer);
+        System.out.println("Jugador local: " + homePlayer.getName()
+                            + "\nJugador visitante: " + visitingPlayer.getName());
     }
 }
