@@ -111,6 +111,7 @@ public class GestorDeportivo {
 
                     case "exit":
                         System.out.println("Cerrando...");
+                        scanner.close();
                         exit = true;
                         break;
 
