@@ -2,65 +2,65 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class MatchList{
+public class MatchList {
     private final LinkedList<Match> matches;
 
-    MatchList(){
+    MatchList() {
         this.matches = new LinkedList<Match>();
     }
-    private void addMatch(Match newMatch){
-        this.matches.add(newMatch);
-    }
-    public void matchmake(PlayerList playerList, String home, String visiting){
-        try{
-            Player homePlayer = playerList.getPlayers().get(playerList.getPlayers().indexOf(new Player(home)));
-            Player visitingPlayer = playerList.getPlayers().get(playerList.getPlayers().indexOf(new Player(visiting)));
-            if(!homePlayer.isMatched() && !visitingPlayer.isMatched()){
-                Match newMatch = new Match(homePlayer, visitingPlayer);
-                addMatch(newMatch);
-                System.out.println(home + " y " + visiting + " han sido emparejados correctamente");
-            } else throw new Error("Los jugadores deben de estar sin emparejar");
-        }catch (IndexOutOfBoundsException e){
-            throw new Error("Introduzca jugadores existentes");
+
+    public void add(PlayerList playerList, Match newMatch) {
+        Player homePlayer = newMatch.getHomePlayer();
+        Player visitingPlayer = newMatch.getVisitingPlayer();
+
+        boolean isValidMatch = !this.matches.contains(newMatch);
+
+        Iterator<Match> iterator = this.matches.iterator();
+
+        while (isValidMatch && iterator.hasNext()) {
+            Match match = iterator.next();
+            isValidMatch = !match.getHomePlayer().equals(homePlayer) &&
+                    !match.getHomePlayer().equals(visitingPlayer) &&
+                    !match.getVisitingPlayer().equals(homePlayer) &&
+                    !match.getVisitingPlayer().equals(visitingPlayer);
+        }
+
+        if (!isValidMatch) {
+            throw new Error("Uno de los jugadores ya está emparejado en otro partido");
+        } else {
+            this.matches.add(newMatch);
         }
     }
 
-    public void show(){
-        System.out.println("------EMPAREJAMIENTOS-------\n");
+    public void show() {
+        System.out.println("------EMPAREJAMIENTOS-------");
 
         if (this.matches.isEmpty()) {
-            System.out.println("No hay emparejamientos\n");
-            
+            System.out.println("No hay emparejamientos");
         } else {
-            Iterator<Match> iterator = this.matches.descendingIterator();
-            while (iterator.hasNext()) {
-                iterator.next().showMatch();
-                System.out.println();
+            for (Match match : this.matches) {
+                match.show();
             }
         }
+
         System.out.println("----------------------------");
     }
-    
-    public void clear(PlayerList playerList){
-        matches.clear();
-        Iterator<Player> iterator = playerList.getPlayers().listIterator();
-        while (iterator.hasNext()) {
-            iterator.next().setMatched(false);
-        }
-        System.out.println("matches have been cleared successfully");
+
+    public void clear(PlayerList playerList) {
+        this.matches.clear();
     }
-    
-    public void randomize(PlayerList playerList){
-        LinkedList<Player> players = playerList.getPlayers();
-        if (players.size() % 2 == 0) {
-            LinkedList<Player> randomPlayers = new LinkedList<>(players);
+
+    public void randomize(PlayerList playerList) {  // TODO: contemplar posibles emparejamientos previos
+        LinkedList<Player> randomPlayers = new LinkedList<>(playerList.getPlayers());
+
+        if (randomPlayers.size() % 2 == 0) {
             Collections.shuffle(randomPlayers);
             while (!randomPlayers.isEmpty()) {
-                this.matches.add(new Match(randomPlayers.pop(), randomPlayers.pop()));
+                this.matches.add(new Match(playerList, randomPlayers.pop(), randomPlayers.pop()));
             }
-            System.out.println("matchmakes have been successfully created at random");
+            System.out.println("Emparejamiento aleatorio realizado con éxito.");
         } else {
-            throw new Error("Players amount must be even");
+            throw new Error("El número de jugadores debe ser par");
         }
     }
 }
