@@ -22,7 +22,7 @@ public class PlayerList {
    
     public void show(){
         System.out.println("-----LISTA DE JUGADORES-----");
-        Iterator<Player> iterator = players.descendingIterator();
+        Iterator<Player> iterator = players.listIterator();
         while (iterator.hasNext()) {
             iterator.next().showPlayer();
         }
@@ -30,7 +30,7 @@ public class PlayerList {
     }
     
     private Player getPlayer(String playerName){
-        Iterator<Player> iterator = players.descendingIterator();
+        Iterator<Player> iterator = players.listIterator();
         Player res = null;
         while(iterator.hasNext() && res == null){
             Player currentPlayer = iterator.next();
