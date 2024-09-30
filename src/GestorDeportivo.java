@@ -64,14 +64,21 @@ public class GestorDeportivo {
                         if (commandArgs.length != 1) {
                             throw new Error("Argumentos no válidos");
                         }
-                        playerList.add(new Player(commandArgs[0])); // TODO: mostrar algo de feedback cuando se añade un jugador
+                        int length = playerList.getPlayers().size();
+                        playerList.add(new Player(commandArgs[0]));
+                        if(playerList.getPlayers().size() > length){
+                            System.out.println("Jugador creado con éxito");
+                        } else throw new Error("Error en la creación del jugador");
                         break;
                     
                     case "remove":
                         if (commandArgs.length != 1) {
                             throw new Error("Argumentos no válidos");
                         }
-                        playerList.remove(new Player(commandArgs[0]));  // TODO: mostrar feedback cuando se borra un jugador y cuando no existe en la lista
+                        if (playerList.getPlayers().contains(new Player(commandArgs[0]))){
+                            playerList.remove(new Player(commandArgs[0]));
+                            System.out.println("Jugador borrado con éxito");
+                        } else throw new Error("El jugador no existe");
                         break;
 
                     case "show":
@@ -79,7 +86,7 @@ public class GestorDeportivo {
                         break;
 
                     case "rank":
-                        playerList.rank();  // TODO: Implementar método rank en PlayerList
+                        playerList.rank();
                         break;
 
                     case "score":
@@ -105,14 +112,15 @@ public class GestorDeportivo {
                         if (commandArgs.length != 2) {
                             throw new Error("Argumentos no válidos");
                         }
-                        matchList.add(new Match(new Player(commandArgs[0]), new Player(commandArgs[1])));   // TODO: comprobar que los jugadores existen
-                        break;                                                                              // TODO: mostrar feedback cuando se añade un emparejamiento
+                        matchList.add(new Match(new Player(commandArgs[0]), new Player(commandArgs[1])));   
+                        break;                                                                              
+                                                                                                            // TODO: comprobar que los jugadores existen
+                                                                                                            // TODO: mostrar feedback cuando se añade un emparejamiento
                                                                                                             // FIXME: se pueden añadir emparejamientos con jugadores que no existen
                                                                                                             // FIXME: se pueden añadir emparejamientos con jugadores que ya tienen emparejamiento
 
                     case "random_matchmake":
                         matchList.randomize(playerList);
-                        // matchList.show();    TODO: deberiamos añadir show tras randomize para mostrar los emparejamientos?
                         break;
 
                     case "exit":
