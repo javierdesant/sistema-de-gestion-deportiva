@@ -8,9 +8,21 @@ public class MatchList{
     MatchList(){
         this.matches = new LinkedList<Match>();
     }
-
-    public void add(Match newMatch){
+    private void addMatch(Match newMatch){
         this.matches.add(newMatch);
+    }
+    public void matchmake(PlayerList playerList, String home, String visiting){
+        try{
+            Player homePlayer = playerList.getPlayers().get(playerList.getPlayers().indexOf(new Player(home)));
+            Player visitingPlayer = playerList.getPlayers().get(playerList.getPlayers().indexOf(new Player(visiting)));
+            if(!homePlayer.isMatched() && !visitingPlayer.isMatched()){
+                Match newMatch = new Match(homePlayer, visitingPlayer);
+                addMatch(newMatch);
+                System.out.println(home + " y " + visiting + " han sido emparejados correctamente");
+            } else throw new Error("Los jugadores deben de estar sin emparejar");
+        }catch (IndexOutOfBoundsException e){
+            throw new Error("Introduzca jugadores existentes");
+        }
     }
 
     public void show(){
