@@ -12,6 +12,4 @@
 
 - Rafael Iralde Domínguez ([Cafileiro](https://github.com/Cafileiro))
 
-## Autoevaluación
-
-// TODO
+<!-- TODO: ## Autoevaluación -->
