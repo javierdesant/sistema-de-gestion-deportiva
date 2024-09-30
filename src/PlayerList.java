@@ -47,6 +47,7 @@ public class PlayerList {
 
     public void score(String playerName, double score){
         this.getPlayer(playerName).setScore(score);
+        System.out.println("La puntuación de " + playerName + " ahora es " + score);
     }
 
     public void rank() {
