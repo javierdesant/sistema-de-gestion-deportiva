@@ -3,49 +3,45 @@ public class Player {
 
     private String name;
     private double score;
-    private boolean isMatched;
-    
-    Player(String newName){
+
+    Player(String newName) {
         this.name = newName;
         this.score = DEF_SCORE;
-        this.isMatched = false;
     }
 
-    public String getName(){
+    public String getName() {
         return this.name;
     }
 
-    public double getScore(){
+    public double getScore() {
         return this.score;
     }
-    
-    public void setScore(double newScore){
+
+    public void setScore(double newScore) {
         this.score = newScore;
     }
 
+    public void show() {
+        System.out.println("Jugador: " + this.name + " - Puntuación: " + this.score);
+    }
+
+    public void showPlayer() {
+        System.out.println("Jugador: " + this.name);
+    }
+
+    public void showRank() {
+        System.out.println("Puntuación: " + this.score);
+    }
+
     @Override
-    public boolean equals(Object object){
-        if (this == object){
+    public boolean equals(Object object) {
+        if (this == object) {
             return true;
         }
-        if (object == null || getClass() != object.getClass()){
+        if (object == null || getClass() != object.getClass()) {
             return false;
         }
         Player player = (Player) object;
         return this.name.equals(player.getName());
-    }
-
-    public void showPlayer(){
-        System.out.println("Jugador: " + this.name);
-    }
-    
-    public void showRank(){
-        System.out.println("Puntuación: " + this.score);
-    }
-    public boolean isMatched(){
-        return isMatched;
-    }
-    public void setMatched(boolean status){
-        this.isMatched = status;
     }
 }
