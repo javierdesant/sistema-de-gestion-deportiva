@@ -21,7 +21,15 @@ public class Player {
         this.score = newScore;
     }
 
-    public boolean equals(Player player){
+    @Override
+    public boolean equals(Object object){
+        if (this == object){
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()){
+            return false;
+        }
+        Player player = (Player) object;
         return this.name.equals(player.getName());
     }
 
