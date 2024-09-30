@@ -112,12 +112,8 @@ public class GestorDeportivo {
                         if (commandArgs.length != 2) {
                             throw new Error("Argumentos no válidos");
                         }
-                        matchList.add(new Match(new Player(commandArgs[0]), new Player(commandArgs[1])));   
+                        matchList.matchmake(playerList, commandArgs[0], commandArgs[1]);  
                         break;                                                                              
-                                                                                                            // TODO: comprobar que los jugadores existen
-                                                                                                            // TODO: mostrar feedback cuando se añade un emparejamiento
-                                                                                                            // FIXME: se pueden añadir emparejamientos con jugadores que no existen
-                                                                                                            // FIXME: se pueden añadir emparejamientos con jugadores que ya tienen emparejamiento
 
                     case "random_matchmake":
                         matchList.randomize(playerList);
