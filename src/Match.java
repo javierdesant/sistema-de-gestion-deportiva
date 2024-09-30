@@ -13,11 +13,6 @@ public class Match {
     public Player getVisiting(){
         return this.visitingPlayer;
     }
-
-    public boolean isMatched(String playerName){
-        return homePlayer.getName() == playerName || visitingPlayer.getName() == playerName;
-    }
-
     public void showMatch(){
         System.out.println("Jugador local: " + homePlayer.getName()
                             + "\nJugador visitante: " + visitingPlayer.getName());

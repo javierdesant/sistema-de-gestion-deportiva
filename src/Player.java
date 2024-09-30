@@ -3,10 +3,12 @@ public class Player {
 
     private String name;
     private double score;
+    private boolean isMatched;
     
     Player(String newName){
         this.name = newName;
         this.score = DEF_SCORE;
+        this.isMatched = false;
     }
 
     public String getName(){
@@ -39,5 +41,8 @@ public class Player {
     
     public void showRank(){
         System.out.println("Puntuación: " + this.score);
+    }
+    public boolean isMatched(){
+        return isMatched;
     }
 }
