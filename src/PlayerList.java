@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -48,10 +49,27 @@ public class PlayerList {
         this.getPlayer(playerName).setScore(score);
     }
 
-    //TODO Hacer que muestre nombre y puntuación de jugadores ordenado descendentemente (supongo que por puntuación)
-    public void rank(){
-
-    }
-    
+    public void rank() {
+        ArrayList<Player> playerList = new ArrayList<>(players);
+        for (int i=0; i < playerList.size()-1; i++) {
+            for (int j=0; j < playerList.size()-i-1; j++) {
+                if (playerList.get(j).getScore() < playerList.get(j+1).getScore()) {
+                    Player temp = playerList.get(j);
+                    playerList.set(j, playerList.get(j+1));
+                    playerList.set(j+1, temp);
+                }
+            }
+        }
+        System.out.println("----------RANKING-----------");
+        Iterator<Player> iterator = playerList.iterator();
+        while (iterator.hasNext()) {
+            Player currentPlayer = iterator.next();
+            currentPlayer.showPlayer();
+            currentPlayer.showRank();
+            System.out.println();
+        }
+        System.out.println("----------------------------");
+        
+    }    
 
 }
