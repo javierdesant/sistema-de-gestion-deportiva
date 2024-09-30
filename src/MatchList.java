@@ -14,9 +14,11 @@ public class MatchList{
     }
 
     public void show(){
-        System.out.println("------EMPAREJAMIENTOS-------");
+        System.out.println("------EMPAREJAMIENTOS-------\n");
+
         if (this.matches.isEmpty()) {
-            System.out.println("No hay emparejamientos");
+            System.out.println("No hay emparejamientos\n");
+            
         } else {
             Iterator<Match> iterator = this.matches.descendingIterator();
             while (iterator.hasNext()) {
