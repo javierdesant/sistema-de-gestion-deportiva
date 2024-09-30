@@ -31,6 +31,7 @@ public class MatchList{
     
     public void clear(){
         matches.clear();
+        System.out.println("matches have been cleared successfully");
     }
     
     public void randomize(PlayerList playerList){
@@ -41,6 +42,7 @@ public class MatchList{
             while (!randomPlayers.isEmpty()) {
                 this.matches.add(new Match(randomPlayers.pop(), randomPlayers.pop()));
             }
+            System.out.println("matchmakes have been successfully created at random");
         } else {
             throw new Error("Players amount must be even");
         }
