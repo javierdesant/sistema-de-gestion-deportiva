@@ -4,7 +4,9 @@ public class Match {
 
     Match(Player homePlayer, Player visitingPlayer){
         this.homePlayer = homePlayer;
+        homePlayer.setMatched(true);
         this.visitingPlayer = visitingPlayer;
+        visitingPlayer.setMatched(true);
     }
 
     public Player getHome(){
