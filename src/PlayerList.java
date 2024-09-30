@@ -8,9 +8,6 @@ public class PlayerList {
         this.players = new LinkedList<>();
     }
 
-
-
-    // TODO: estoy trabjando en esto
     public void add(Player newPlayer){
         if (this.players.contains(newPlayer)) {
             throw new Error("Player already exists");
@@ -18,23 +15,6 @@ public class PlayerList {
             this.players.add(newPlayer);
         }
     }
-    
-    // public void create(String playerName){
-    //     Player newPlayer = new Player(playerName);
-    //     Iterator<Player> iterator = players.iterator();
-    //     boolean exists = false;
-    //     while (iterator.hasNext() && !exists) {
-    //         exists = iterator.next().getName().equals(playerName);
-    //     }
-    //     if (exists) {
-    //         throw new Error("Player already exists");
-    //     } else {
-    //         this.players.add(newPlayer);
-    //     }
-    // }
-    // TODO: estoy trabjando en esto
-
-
 
     public void remove(Player player){
         this.players.remove(player);
