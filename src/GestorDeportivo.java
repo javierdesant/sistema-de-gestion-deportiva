@@ -54,7 +54,7 @@ public class GestorDeportivo {
             try {
                 System.out.println();
                 System.out.print(" > ");
-                String[] splitCommand = scanner.next().trim().split(" ");   // FIXME: No detecta los argumentos
+                String[] splitCommand = scanner.nextLine().trim().split(" ");
                 String commandName = splitCommand[0];
                 String[] commandArgs = splitCommand.length > 1 ? splitCommand[1].split(";") : new String[0];
                 System.out.println();
@@ -102,7 +102,10 @@ public class GestorDeportivo {
                         break;
 
                     case "matchmake":
-                        matchList.add(new Match(new Player(commandArgs[0]), new Player(commandArgs[1])));
+                        if (commandArgs.length != 2) {
+                            throw new Error("Argumentos no válidos");
+                        }
+                        matchList.add(new Match(new Player(commandArgs[0]), new Player(commandArgs[1])));   // TODO: comprobar que los jugadores existen
                         break;
 
                     case "random_matchmake":
