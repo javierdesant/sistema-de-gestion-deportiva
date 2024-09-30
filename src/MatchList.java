@@ -41,8 +41,12 @@ public class MatchList{
         System.out.println("----------------------------");
     }
     
-    public void clear(){
+    public void clear(PlayerList playerList){
         matches.clear();
+        Iterator<Player> iterator = playerList.getPlayers().listIterator();
+        while (iterator.hasNext()) {
+            iterator.next().setMatched(false);
+        }
         System.out.println("matches have been cleared successfully");
     }
     

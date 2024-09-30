@@ -105,7 +105,7 @@ public class GestorDeportivo {
                         break;
                     
                     case "clear_matchmake":
-                        matchList.clear();
+                        matchList.clear(playerList);
                         break;
 
                     case "matchmake":
