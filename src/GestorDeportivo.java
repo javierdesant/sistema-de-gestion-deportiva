@@ -64,14 +64,14 @@ public class GestorDeportivo {
                         if (commandArgs.length != 1) {
                             throw new Error("Argumentos no válidos");
                         }
-                        playerList.add(new Player(commandArgs[0]));
+                        playerList.add(new Player(commandArgs[0])); // TODO: mostrar algo de feedback cuando se añade un jugador
                         break;
                     
                     case "remove":
                         if (commandArgs.length != 1) {
                             throw new Error("Argumentos no válidos");
                         }
-                        playerList.remove(new Player(commandArgs[0]));
+                        playerList.remove(new Player(commandArgs[0]));  // TODO: mostrar feedback cuando se borra un jugador y cuando no existe en la lista
                         break;
 
                     case "show":
@@ -106,10 +106,13 @@ public class GestorDeportivo {
                             throw new Error("Argumentos no válidos");
                         }
                         matchList.add(new Match(new Player(commandArgs[0]), new Player(commandArgs[1])));   // TODO: comprobar que los jugadores existen
-                        break;
+                        break;                                                                              // TODO: mostrar feedback cuando se añade un emparejamiento
+                                                                                                            // FIXME: se pueden añadir emparejamientos con jugadores que no existen
+                                                                                                            // FIXME: se pueden añadir emparejamientos con jugadores que ya tienen emparejamiento
 
                     case "random_matchmake":
                         matchList.randomize(playerList);
+                        // matchList.show();    TODO: deberiamos añadir show tras randomize para mostrar los emparejamientos?
                         break;
 
                     case "exit":
@@ -142,76 +145,5 @@ public class GestorDeportivo {
             }
             
         } while (!exit);
-    
-
-        // Código viejo
-        // TODO: borrar antes de entregar
-
-        // PlayerList playerList = new PlayerList();
-        
-        // playerList.create("Luisa");
-        // playerList.score("Luisa", 9.0);
-
-        // playerList.create("Manuel");
-        // playerList.score("Manuel", 2.7);
-
-        // playerList.create("Kurt");
-        // playerList.score("Kurt", 4.0);
-
-        // playerList.create("Sofia");
-        // playerList.score("Sofia", 3.8);
-
-        // playerList.create("Robert");
-        // playerList.score("Robert", 3.8);
-
-        // playerList.create("Paco");
-        // playerList.score("Paco", 6.2);
-
-        // playerList.show();
-
-        // MatchList matchList = new MatchList();
-
-        // matchList.randomize(playerList);
-        // matchList.show_matchmake();
-
-        // matchList.clear_matchmake();
-        // matchList.show_matchmake();
-        
-        // matchList.randomize(playerList);
-        // matchList.show_matchmake();
-
-        // System.out.println("-----------TESTS-----------");  // TODO: Implementar tests correctamente tras cambiar la app
-
-        // System.out.println("TEST 1. Adding existing player (Sofia):");
-        // try {
-        //     playerList.create("Sofia");
-        //     System.out.println("This should not be printed");
-        // } catch (Error error) {
-        //     System.out.println("This error is correct: " + error.getMessage() + "\n");
-        // }
-
-        // try {
-        //     playerList.add(new Player("Sofia"));
-        //     System.out.println("This should not be printed");
-        // } catch (Error error) {
-        //     System.out.println("This error is correct: " + error.getMessage() + "\n");
-        // }
-
-        // System.out.println("TEST 2. Trying to randomize a MatchList with uneven players:");
-        
-        // Player testPlayer = new Player("Name");
-        // playerList.add(testPlayer);
-        // playerList.score("Name", 3.8);
-        // try {    
-        //     playerList.show();
-        //     new MatchList().randomize(playerList);
-        //     System.out.println("This should not be printed");
-        // } catch (Error error) {
-        //     System.out.println("This error is correct: " + error.getMessage() + "\n");
-        // } finally {
-        //     playerList.remove(testPlayer);
-        // }
-
-        // System.out.println("---------------------------");
     }
 }
