@@ -45,4 +45,7 @@ public class Player {
     public boolean isMatched(){
         return isMatched;
     }
+    public void setMatched(boolean status){
+        this.isMatched = status;
+    }
 }
