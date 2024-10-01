@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedList;
 
 public class PlayerList {
@@ -61,9 +60,8 @@ public class PlayerList {
             }
         }
         System.out.println("----------RANKING-----------");
-        Iterator<Player> iterator = playerList.iterator();
-        while (iterator.hasNext()) {
-            iterator.next().show();
+        for (Player player : playerList) {
+            player.show();
             System.out.println();
         }
         System.out.println("----------------------------");
