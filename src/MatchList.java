@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -7,7 +6,7 @@ public class MatchList {
     private final LinkedList<Match> matches;
 
     MatchList() {
-        this.matches = new LinkedList<Match>();
+        this.matches = new LinkedList<>();
     }
 
     public void add(Match newMatch) {
