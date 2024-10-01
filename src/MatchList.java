@@ -46,7 +46,7 @@ public class MatchList {
         System.out.println("----------------------------");
     }
 
-    public void clear(PlayerList playerList) {
+    public void clear() {
         this.matches.clear();
     }
 

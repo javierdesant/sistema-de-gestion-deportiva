@@ -96,7 +96,7 @@ public class GestorDeportivo {
                         break;
 
                     case "clear_matchmake":
-                        matchList.clear(playerList);
+                        matchList.clear();
                         System.out.println("Los emparejamientos han sido eliminados.");
                         break;
 
