@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -9,7 +10,7 @@ public class MatchList {
         this.matches = new LinkedList<Match>();
     }
 
-    public void add(PlayerList playerList, Match newMatch) {
+    public void add(Match newMatch) {
         Player homePlayer = newMatch.getHomePlayer();
         Player visitingPlayer = newMatch.getVisitingPlayer();
 
@@ -17,7 +18,7 @@ public class MatchList {
 
         Iterator<Match> iterator = this.matches.iterator();
 
-        while (isValidMatch && iterator.hasNext()) {
+        while (isValidMatch && iterator.hasNext()) {    // TODO: usar .stream para simplificar la lógica
             Match match = iterator.next();
             isValidMatch = !match.getHomePlayer().equals(homePlayer) &&
                     !match.getHomePlayer().equals(visitingPlayer) &&
@@ -25,10 +26,12 @@ public class MatchList {
                     !match.getVisitingPlayer().equals(visitingPlayer);
         }
 
-        if (!isValidMatch) {
-            throw new Error("Uno de los jugadores ya está emparejado en otro partido");
-        } else {
+        if (isValidMatch) {
             this.matches.add(newMatch);
+        } else if (this.matches.contains(newMatch)) {
+            throw new Error("El emparejamiento ya existe");
+        } else {
+            throw new Error("Uno de los jugadores ya está emparejado en otro partido");
         }
     }
 
