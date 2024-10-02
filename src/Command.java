@@ -9,32 +9,35 @@ public class Command {
         this.name = null;
         this.arguments = null;
     }
-    public String getCommand(){
+
+    public String getCommand() {
         return this.name;
     }
-    public Command readCommand(){
+
+    public Command readCommand() {
         System.out.printf("> ");
         String[] splitCommand = scanner.nextLine().trim().split(" ");
         this.name = splitCommand[0];
         this.arguments = splitCommand.length > 1 ? splitCommand[1].split(";") : new String[0];
         return this;
     }
-    public void chooseCommand(PlayerList playerList, MatchList matchList){
+
+    public void chooseCommand(PlayerList playerList, MatchList matchList) {
         this.readCommand();
         switch (this.name) {
             case "create":
-                    assert this.arguments.length == 1;
+                assert this.arguments.length == 1 : "Introduzca un nombre";
 
-                    playerList.add(new Player(this.arguments[0]));
-                    System.out.println("Jugador añadido con éxito.");
+                playerList.add(new Player(this.arguments[0]));
+                System.out.println("Jugador añadido con éxito.");
 
                 break;
 
             case "remove":
-                assert this.arguments.length == 1;
+                assert this.arguments.length == 1 : "Introduzca un jugador";
 
-                    playerList.remove(new Player(this.arguments[0]));
-                    System.out.println("Jugador eliminado con éxito.");
+                playerList.remove(new Player(this.arguments[0]));
+                System.out.println("Jugador eliminado con éxito.");
                 break;
 
             case "show":
@@ -46,10 +49,10 @@ public class Command {
                 break;
 
             case "score":
-                assert this.arguments.length == 2;
+                assert this.arguments.length == 2 : "Introduzca un jugador y su puntuación a asignar";
                 playerList.score(this.arguments[0], Double.parseDouble(this.arguments[1]));
                 System.out.println(
-                        "La puntuación de " + this.arguments[0] + " ahora es " + this.arguments[1] + ".");    
+                        "La puntuación de " + this.arguments[0] + " ahora es " + this.arguments[1] + ".");
                 break;
 
             case "show_matchmake":
@@ -62,10 +65,11 @@ public class Command {
                 break;
 
             case "matchmake":
-                assert this.arguments.length == 2;
+                assert this.arguments.length == 2 : "Introduzca dos jugadores";
 
                 matchList.add(new Match(playerList, new Player(this.arguments[0]), new Player(this.arguments[1])));
-                System.out.println("Los jugadores " + this.arguments[0] + " y " + this.arguments[1] + " han sido emparejados correctamente.");
+                System.out.println("Los jugadores " + this.arguments[0] + " y " + this.arguments[1]
+                        + " han sido emparejados correctamente.");
                 break;
 
             case "random_matchmake":
@@ -88,11 +92,12 @@ public class Command {
                         " exit");
                 break;
 
-            case "exit": 
+            case "exit":
                 System.out.println("Cerrando...");
                 break;
-                
-            default: System.out.println("Comando no válido. (Escriba h o help para ver el listado de comandos)");
+
+            default:
+                System.out.println("Comando no válido. (Escriba h o help para ver el listado de comandos)");
         }
     }
 }
