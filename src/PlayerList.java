@@ -9,17 +9,12 @@ public class PlayerList {
     }
 
     public void add(Player newPlayer) {
-        if (!this.players.contains(newPlayer)) {
-            this.players.add(newPlayer);
-        } else {
-            throw new Error("El jugador ya existe");
-        }
+        assert !this.players.contains(newPlayer) : "El jugador ya existe";
+        this.players.add(newPlayer);
     }
 
     public void remove(Player player) {
-        if (!this.players.remove(player)) {
-            throw new Error("El jugador no existe");
-        }
+        assert this.players.remove(player) : "El jugador no existe";
     }
 
     public void show() {
@@ -34,14 +29,10 @@ public class PlayerList {
         return this.players;
     }
 
-    public void score(String playerName, double score) {    // TODO: implementar límite máximo, mínimo y de decimales
+    public void score(String playerName, double score) { // TODO: implementar límite máximo, mínimo y de decimales
         int index = this.players.indexOf(new Player(playerName));
-
-        if (index != -1) {
-            this.players.get(index).setScore(score);
-        } else {
-            throw new Error("El jugador no existe");
-        }
+        assert index != -1 : "El jugador no existe";
+        this.players.get(index).setScore(score);
     }
 
     public boolean contains(Player player) {
