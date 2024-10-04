@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.text.DecimalFormat;
 
 public class Command {
     private String name;
@@ -49,10 +50,12 @@ public class Command {
                 break;
 
             case "score":
+                double score = Double.parseDouble(this.arguments[1]);
                 assert this.arguments.length == 2 : "Introduzca un jugador y su puntuación a asignar";
+                DecimalFormat df = new DecimalFormat("#.##");
                 playerList.score(this.arguments[0], Double.parseDouble(this.arguments[1]));
                 System.out.println(
-                        "La puntuación de " + this.arguments[0] + " ahora es " + this.arguments[1] + ".");
+                        "La puntuación de " + this.arguments[0] + " ahora es " + df.format(score) + ".");
                 break;
 
             case "show_matchmake":

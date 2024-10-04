@@ -28,10 +28,15 @@ public class PlayerList {
     public LinkedList<Player> getPlayers() {
         return this.players;
     }
-
+    private boolean isValidScore(double score){
+        if(score < -999999.0)return false;
+        else if(score > 999999.0)return false;
+        else return true;
+    }
     public void score(String playerName, double score) { // TODO: implementar límite máximo, mínimo y de decimales
         int index = this.players.indexOf(new Player(playerName));
         assert index != -1 : "El jugador no existe";
+        assert isValidScore(score): "La puntuación supera los limites";
         this.players.get(index).setScore(score);
     }
 

@@ -1,3 +1,5 @@
+import java.text.DecimalFormat;
+
 public class Player {
     private final double DEF_SCORE = 0.0;
 
@@ -22,7 +24,8 @@ public class Player {
     }
 
     public void show() {
-        System.out.println("Jugador: " + this.name + " - Puntuación: " + this.score);
+        DecimalFormat df = new DecimalFormat("#.##");
+        System.out.println("Jugador: " + this.name + " - Puntuación: " + df.format(this.score));
     }
 
     public void showPlayer() {
@@ -30,7 +33,8 @@ public class Player {
     }
 
     public void showRank() {
-        System.out.println("Puntuación: " + this.score);
+        DecimalFormat df = new DecimalFormat("#.##");
+        System.out.println("Puntuación: " + df.format(this.score));
     }
 
     @Override
