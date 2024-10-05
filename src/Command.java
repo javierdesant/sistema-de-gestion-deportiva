@@ -76,7 +76,20 @@ public class Command {
                 break;
 
             case "random_matchmake":
-                matchList.randomize(playerList);
+                System.out.println("Esta opción creará emparejamientos aleatorios con todos los jugadores eliminado los emparejamientos anteriores.¿Quiere proceder con la ejecución del comando? Si/No");
+                switch (scanner.nextLine()) {
+                    case "Si":
+                        matchList.clear();
+                        matchList.randomize(playerList);
+                        break;
+                    case "No":
+                        break;
+                    default:
+                        System.out.println("Opción invalida");
+                        break;
+                }
+                
+                
                 break;
 
             case "help":
