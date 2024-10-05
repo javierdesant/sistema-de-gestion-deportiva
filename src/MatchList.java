@@ -41,7 +41,10 @@ public class MatchList {
         this.matches.clear();
     }
 
-    public void randomize(PlayerList playerList) { // TODO: contemplar posibles emparejamientos previos
+    public void randomize(PlayerList playerList) {
+        assert !playerList.isEmpty() : "No hay jugadores";
+        assert this.matches.isEmpty() : "Los emparejamientos deben estar vacíos";
+
         LinkedList<Player> randomPlayers = new LinkedList<>(playerList.getPlayers());
         assert randomPlayers.size() % 2 == 0 : "El número de jugadores debe ser par";
 

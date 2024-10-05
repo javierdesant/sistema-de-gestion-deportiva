@@ -23,63 +23,71 @@ public class Command {
         return this;
     }
 
-    public void chooseCommand(PlayerList playerList, MatchList matchList) { // TODO: handle null exceptions
+    public void chooseCommand(PlayerList playerList, MatchList matchList) {
+        assert playerList != null : "La lista de jugadores no puede ser nula";
+        assert matchList != null : "La lista de emparejamientos no puede ser nula";
+
         this.readCommand();
-        switch (this.name) {
-            case "create":
-                assert this.arguments.length == 1 : "Introduzca un nombre";
-                this.create(playerList, this.arguments[0]);
-                break;
 
-            case "remove":
-                assert this.arguments.length == 1 : "Introduzca un jugador";
-                this.remove(playerList, this.arguments[0]);
-                break;
+        try {
+            switch (this.name) {
+                case "create":
+                    assert this.arguments.length == 1 : "Argumentos no válidos";
+                    this.create(playerList, this.arguments[0]);
+                    break;
 
-            case "show":
-                this.show(playerList);
-                break;
+                case "remove":
+                    assert this.arguments.length == 1 : "Argumentos no válidos";
+                    this.remove(playerList, this.arguments[0]);
+                    break;
 
-            case "rank":
-                this.rank(playerList);
-                break;
+                case "show":
+                    this.show(playerList);
+                    break;
 
-            case "score":
-                assert this.arguments.length == 2 : "Introduzca un jugador y su puntuación a asignar";
-                try {
-                    this.score(playerList, this.arguments[0], Double.parseDouble(this.arguments[1]));
-                } catch (NumberFormatException e) {
-                    System.out.println("Introduzca un número válido.");
-                }
-                break;
+                case "rank":
+                    this.rank(playerList);
+                    break;
 
-            case "show_matchmake":
-                this.showMatchmake(matchList);
-                break;
+                case "score":
+                    assert this.arguments.length == 2 : "Argumentos no válidos";
+                    try {
+                        this.score(playerList, this.arguments[0], Double.parseDouble(this.arguments[1]));
+                    } catch (NumberFormatException e) {
+                        System.out.println("Introduzca un número válido");
+                    }
+                    break;
 
-            case "clear_matchmake":
-                this.clearMatchmake(matchList);
-                break;
+                case "show_matchmake":
+                    this.showMatchmake(matchList);
+                    break;
 
-            case "matchmake":
-                assert this.arguments.length == 2 : "Introduzca dos jugadores";
-                this.matchmake(matchList, playerList, this.arguments[0], this.arguments[1]);
-                break;
+                case "clear_matchmake":
+                    this.clearMatchmake(matchList);
+                    break;
 
-            case "random_matchmake":
-                this.randomMatchmake(matchList, playerList);
-                break;
+                case "matchmake":
+                    assert this.arguments.length == 2 : "Argumentos no válidos";
+                    this.matchmake(matchList, playerList, this.arguments[0], this.arguments[1]);
+                    break;
 
-            case "help":
-                this.help();
-                break;
+                case "random_matchmake":
+                    this.randomMatchmake(matchList, playerList);
+                    break;
 
-            case "exit":
-                this.exit();
-                break;
+                case "help":
+                    this.help();
+                    break;
 
-            default:
-                System.out.println("Comando no válido. (Escriba h o help para ver el listado de comandos)");
+                case "exit":
+                    this.exit();
+                    break;
+
+                default:
+                    System.out.println("Comando no válido. (Escriba h o help para ver el listado de comandos)");
+            }
+        } catch (AssertionError e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -95,7 +103,7 @@ public class Command {
 
     private void show(PlayerList playerList) {
         if (playerList.isEmpty()) {
-            System.out.println("No hay jugadores.");
+            System.out.println("No hay jugadores");
         } else {
             System.out.println("-----LISTA DE JUGADORES-----");
             playerList.show();
@@ -134,19 +142,21 @@ public class Command {
     }
 
     private void randomMatchmake(MatchList matchList, PlayerList playerList) {
-      System.out.println("Esta opción creará emparejamientos aleatorios con todos los jugadores, eliminado los emparejamientos anteriores.");
-      System.out.println("¿Desea continuar? (S/N)");
-      switch (scanner.nextLine()) {
-          case "S":
-              matchList.clear();
-              matchList.randomize(playerList);
-              break;
-          case "N":
-              break;
-          default:
-              System.out.println("Opción invalida");
-              break;
-      }
+        System.out.println(
+                "Esta opción creará emparejamientos aleatorios con todos los jugadores, eliminado los emparejamientos anteriores.");
+        System.out.print("¿Desea continuar? (S/N) ");
+        switch (scanner.nextLine().toUpperCase()) {
+            case "S":
+                matchList.clear();
+                matchList.randomize(playerList);
+                break;
+            case "N":
+                System.out.println("Cancelando...");
+                break;
+            default:
+                System.out.println("Opción no válida. Cancelando...");
+                break;
+        }
     }
 
     private void help() {
