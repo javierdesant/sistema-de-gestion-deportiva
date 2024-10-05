@@ -134,7 +134,19 @@ public class Command {
     }
 
     private void randomMatchmake(MatchList matchList, PlayerList playerList) {
-        matchList.randomize(playerList);
+      System.out.println("Esta opción creará emparejamientos aleatorios con todos los jugadores, eliminado los emparejamientos anteriores.");
+      System.out.println("¿Desea continuar? (S/N)");
+      switch (scanner.nextLine()) {
+          case "S":
+              matchList.clear();
+              matchList.randomize(playerList);
+              break;
+          case "N":
+              break;
+          default:
+              System.out.println("Opción invalida");
+              break;
+      }
     }
 
     private void help() {

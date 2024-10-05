@@ -16,4 +16,10 @@
 
 Para el correcto funcionamiento de la práctica se necesitaran tener activados los asserts en su equipo. 
 
-<!-- TODO: ## Autoevaluación -->
+## Autoevaluación
+
+- Jhonatan Ferreira Souza == 9
+
+- Javier de Santiago Soto == 9
+
+- Rafael Iralde Domínguez == 8
