@@ -12,4 +12,8 @@
 
 - Rafael Iralde Domínguez ([Cafileiro](https://github.com/Cafileiro))
 
+## Importante
+
+Para el correcto funcionamiento de la práctica se necesitaran tener activados los asserts en su equipo. 
+
 <!-- TODO: ## Autoevaluación -->
