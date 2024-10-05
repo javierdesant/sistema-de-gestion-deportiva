@@ -23,6 +23,26 @@ public class Command {
         return this;
     }
 
+    private boolean isNumeric(String str) {
+        try {
+            double d = Double.parseDouble(str);
+        } catch (NumberFormatException nfe) {
+            return false; 
+        }
+        return true; 
+    }
+
+    private boolean isNaN(String str) {
+        for (int i = 0; i < str.length(); i++) {
+            if (isNumeric(String.valueOf(str.charAt(i)))){
+                  return true;
+            }else{
+            }      
+        }
+        return false;      
+
+    }
+
     public void chooseCommand(PlayerList playerList, MatchList matchList) {
         assert playerList != null : "La lista de jugadores no puede ser nula";
         assert matchList != null : "La lista de emparejamientos no puede ser nula";
@@ -33,6 +53,7 @@ public class Command {
             switch (this.name) {
                 case "create":
                     assert this.arguments.length == 1 : "Argumentos no válidos";
+                    assert !isNaN(this.arguments[0]): "Argumentos no validos" ;
                     this.create(playerList, this.arguments[0]);
                     break;
 
