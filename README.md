@@ -12,14 +12,20 @@
 
 - Rafael Iralde Domínguez ([Cafileiro](https://github.com/Cafileiro))
 
-## Importante
+## Importante!
 
-Para el correcto funcionamiento de la práctica se necesitaran tener activados los asserts en su equipo. 
+Para el correcto funcionamiento de la práctica se necesitaran tener activados los asserts en su equipo.
+
+Para ello, asegúrese de usar la opción `-ea` al ejecutar su programa Java. Por ejemplo:
+
+```sh
+cd src && javac *.java && java -ea GestorDeportivo
+```
 
 ## Autoevaluación
 
-- Jhonatan Ferreira Souza == 9
+- Jhonatan Ferreira Souza - **9/10**
 
-- Javier de Santiago Soto == 9
+- Javier de Santiago Soto:  **9/10**
 
-- Rafael Iralde Domínguez == 8
+- Rafael Iralde Domínguez:  **8/10**

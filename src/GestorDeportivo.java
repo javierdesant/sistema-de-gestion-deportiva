@@ -21,9 +21,9 @@ public class GestorDeportivo {
 
         System.out.println("\n### Bienvenido al Gestor Deportivo ###\n");
 
-        System.out.println("Introduzca un comando o escriba 'exit' para salir.");
-        System.out.println("Comandos disponibles:\n");
-
+        System.out.println("Introduzca un comando o escriba 'exit' para salir.\n");
+        
+        System.out.println("Comandos disponibles:");
         System.out.println(" help\n" +
                 " create [player]\n" +
                 " remove [player]\n" +
@@ -37,7 +37,7 @@ public class GestorDeportivo {
                 " exit");
 
         Command command = new Command();
-        
+
         do {
             command.chooseCommand(playerList, matchList);
         } while (!command.getCommand().equals("exit"));
