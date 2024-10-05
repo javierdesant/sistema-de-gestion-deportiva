@@ -14,38 +14,54 @@ public class PlayerList {
     }
 
     public void remove(Player player) {
-        assert this.players.remove(player) : "El jugador no existe";
+        boolean removed = this.players.remove(player);
+        assert removed : "El jugador no existe";
     }
 
     public void show() {
-        System.out.println("-----LISTA DE JUGADORES-----");
         for (Player player : players) {
             player.showPlayer();
         }
-        System.out.println("----------------------------");
     }
 
     public LinkedList<Player> getPlayers() {
         return this.players;
     }
-    private boolean isValidScore(double score){
-        if(score < -999999.0)return false;
-        else if(score > 999999.0)return false;
-        else return true;
-    }
-    public void score(String playerName, double score) { // TODO: implementar límite máximo, mínimo y de decimales
+
+    public void score(String playerName, double score) {
+        assert isValidScore(score) : "La puntuación supera los límites";
         int index = this.players.indexOf(new Player(playerName));
         assert index != -1 : "El jugador no existe";
-        assert isValidScore(score): "La puntuación supera los limites";
         this.players.get(index).setScore(score);
+    }
+
+    private boolean isValidScore(double score) {
+        if (score < -999999.0)
+            return false;
+        else if (score > 999999.0)
+            return false;
+        else
+            return true;
     }
 
     public boolean contains(Player player) {
         return this.players.contains(player);
     }
 
+    public boolean isEmpty() {
+        return this.players.isEmpty();
+    }
+
     public void rank() {
         ArrayList<Player> playerList = new ArrayList<>(players);
+        bubbleSort(playerList);
+        for (Player player : playerList) {
+            player.show();
+            System.out.println();
+        }
+    }
+
+    private void bubbleSort(ArrayList<Player> playerList) {
         for (int i = 0; i < playerList.size() - 1; i++) {
             for (int j = 0; j < playerList.size() - i - 1; j++) {
                 if (playerList.get(j).getScore() < playerList.get(j + 1).getScore()) {
@@ -55,11 +71,5 @@ public class PlayerList {
                 }
             }
         }
-        System.out.println("----------RANKING-----------");
-        for (Player player : playerList) {
-            player.show();
-            System.out.println();
-        }
-        System.out.println("----------------------------");
     }
 }

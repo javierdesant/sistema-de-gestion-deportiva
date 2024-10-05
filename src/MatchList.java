@@ -17,7 +17,7 @@ public class MatchList {
 
         Iterator<Match> iterator = this.matches.iterator();
 
-        while (iterator.hasNext()) { // TODO: usar .stream para simplificar la lógica
+        while (iterator.hasNext()) {
             Match match = iterator.next();
             assert !match.getHomePlayer().equals(homePlayer) &&
                     !match.getHomePlayer().equals(visitingPlayer) &&
@@ -28,8 +28,6 @@ public class MatchList {
     }
 
     public void show() {
-        System.out.println("------EMPAREJAMIENTOS-------");
-
         if (this.matches.isEmpty()) {
             System.out.println("No hay emparejamientos");
         } else {
@@ -37,8 +35,6 @@ public class MatchList {
                 match.show();
             }
         }
-
-        System.out.println("----------------------------");
     }
 
     public void clear() {
