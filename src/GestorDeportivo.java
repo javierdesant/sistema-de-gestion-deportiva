@@ -36,8 +36,8 @@ public class GestorDeportivo {
                 " random_matchmake\n" +
                 " exit");
         Command command = new Command();
-        do{
-             command.chooseCommand(playerList, matchList);
-        }while(!command.getCommand().equals("exit"));
+        do {
+            command.chooseCommand(playerList, matchList);
+        } while (!command.getCommand().equals("exit"));
     }
 }
