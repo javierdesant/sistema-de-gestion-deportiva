@@ -75,6 +75,7 @@ public class Command {
                     this.randomMatchmake(matchList, playerList);
                     break;
 
+                case "h":
                 case "help":
                     this.help();
                     break;
