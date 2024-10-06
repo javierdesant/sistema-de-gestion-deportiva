@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.text.DecimalFormat;
 
 public class Command {
     private String name;
@@ -16,31 +15,12 @@ public class Command {
     }
 
     public Command readCommand() {
-        System.out.printf(" > ");
+        System.out.println();
+        System.out.printf("> ");
         String[] splitCommand = scanner.nextLine().trim().split(" ");
         this.name = splitCommand[0];
         this.arguments = splitCommand.length > 1 ? splitCommand[1].split(";") : new String[0];
         return this;
-    }
-
-    private boolean isNumeric(String str) {
-        try {
-            double d = Double.parseDouble(str);
-        } catch (NumberFormatException nfe) {
-            return false; 
-        }
-        return true; 
-    }
-
-    private boolean isNaN(String str) {
-        for (int i = 0; i < str.length(); i++) {
-            if (isNumeric(String.valueOf(str.charAt(i)))){
-                  return true;
-            }else{
-            }      
-        }
-        return false;      
-
     }
 
     public void chooseCommand(PlayerList playerList, MatchList matchList) {
@@ -53,7 +33,7 @@ public class Command {
             switch (this.name) {
                 case "create":
                     assert this.arguments.length == 1 : "Argumentos no válidos";
-                    assert !isNaN(this.arguments[0]): "Argumentos no validos" ;
+                    assert this.arguments[0].matches("[a-zA-Z]+") : "Nombre no válido";
                     this.create(playerList, this.arguments[0]);
                     break;
 
@@ -139,10 +119,9 @@ public class Command {
         System.out.println("----------------------------");
     }
 
-    private void score(PlayerList playerList, String playerName, double score) { // FIXME: usar printf
-        DecimalFormat df = new DecimalFormat("#.##");
+    private void score(PlayerList playerList, String playerName, double score) {
         playerList.score(playerName, score);
-        System.out.println("La puntuación de " + playerName + " ahora es " + df.format(score) + ".");
+        System.out.printf("La puntuación de %s ahora es %.2f.\n", playerName, score);
     }
 
     private void showMatchmake(MatchList matchList) {

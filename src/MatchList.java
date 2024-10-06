@@ -22,7 +22,7 @@ public class MatchList {
             assert !match.getHomePlayer().equals(homePlayer) &&
                     !match.getHomePlayer().equals(visitingPlayer) &&
                     !match.getVisitingPlayer().equals(homePlayer) &&
-                    !match.getVisitingPlayer().equals(visitingPlayer) : "Uno de los jugadores ya está emparejado";
+                    !match.getVisitingPlayer().equals(visitingPlayer) : "Los jugadores deben estar sin emparejar";
         }
         this.matches.add(newMatch);
     }

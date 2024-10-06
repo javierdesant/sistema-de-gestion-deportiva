@@ -57,7 +57,6 @@ public class PlayerList {
         bubbleSort(playerList);
         for (Player player : playerList) {
             player.show();
-            System.out.println();
         }
     }
 

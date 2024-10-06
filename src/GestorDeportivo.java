@@ -22,7 +22,7 @@ public class GestorDeportivo {
         System.out.println("\n### Bienvenido al Gestor Deportivo ###\n");
 
         System.out.println("Introduzca un comando o escriba 'exit' para salir.\n");
-        
+
         System.out.println("Comandos disponibles:");
         System.out.println(" help\n" +
                 " create [player]\n" +
