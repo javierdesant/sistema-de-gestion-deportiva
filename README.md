@@ -24,7 +24,7 @@ cd src && javac *.java && java -ea GestorDeportivo
 
 ## Autoevaluación
 
-- Jhonatan Ferreira Souza - **9/10**
+- Jhonatan Ferreira Souza: **9/10**
 
 - Javier de Santiago Soto:  **9/10**
 
