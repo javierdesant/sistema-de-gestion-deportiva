@@ -1,6 +1,6 @@
 public class Match {
-    private Player homePlayer;
-    private Player visitingPlayer;
+    private final Player homePlayer;
+    private final Player visitingPlayer;
 
     Match(PlayerList playerList, Player homePlayer, Player visitingPlayer) {
         assert playerList.contains(homePlayer) : "El jugador local no existe";
