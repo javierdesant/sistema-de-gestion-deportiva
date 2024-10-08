@@ -1,12 +1,14 @@
-import java.text.DecimalFormat;
-
 public class Player {
-    private String name;
+    private final String name;
     private double score;
 
-    Player(String newName) {
-        this.name = newName;
-        this.score = 0;
+    Player(String name, Double score) {
+        this.name = name;
+        this.score = score;
+    }
+
+    Player(String name) {
+        this(name, 0.0);
     }
 
     public String getName() {
@@ -30,8 +32,7 @@ public class Player {
     }
 
     public void showRank() {
-        DecimalFormat df = new DecimalFormat("#.##");
-        System.out.println("Puntuación: " + df.format(this.score));
+        System.out.printf("Puntuación: %.2f\n", this.score);
     }
 
     @Override

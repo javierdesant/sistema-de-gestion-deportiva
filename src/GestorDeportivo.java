@@ -1,23 +1,13 @@
 public class GestorDeportivo {
     public static void main(String[] args) {
         PlayerList playerList = new PlayerList();
-
-        playerList.add(new Player("Luisa"));
-        playerList.score("Luisa", 4.5);
-
-        playerList.add(new Player("Manuel"));
-        playerList.score("Manuel", 2.7);
-
-        playerList.add(new Player("Kurt"));
-        playerList.score("Kurt", 4.0);
-
-        playerList.add(new Player("Sofia"));
-        playerList.score("Sofia", 3.8);
-
-        playerList.add(new Player("Robert"));
-        playerList.score("Robert", 3.8);
-
         MatchList matchList = new MatchList();
+
+        playerList.add(new Player("Luisa", 4.5));
+        playerList.add(new Player("Manuel", 2.7));
+        playerList.add(new Player("Kurt", 4.0));
+        playerList.add(new Player("Sofia", 3.8));
+        playerList.add(new Player("Robert", 3.8));
 
         System.out.println("\n### Bienvenido al Gestor Deportivo ###\n");
 
