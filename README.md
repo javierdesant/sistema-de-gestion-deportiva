@@ -12,9 +12,9 @@
 
 - Rafael Iralde Domínguez ([Cafileiro](https://github.com/Cafileiro))
 
-## Importante!
+## ¡Importante!
 
-Para el correcto funcionamiento de la práctica se necesitaran tener activados los asserts en su equipo.
+Para el correcto funcionamiento de la práctica se necesitarán tener activados los asserts en su equipo.
 
 Para ello, asegúrese de usar la opción `-ea` al ejecutar su programa Java. Por ejemplo:
 
