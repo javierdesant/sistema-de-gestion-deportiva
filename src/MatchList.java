@@ -12,18 +12,18 @@ public class MatchList {
     public void add(Match newMatch) {
         Player homePlayer = newMatch.getHomePlayer();
         Player visitingPlayer = newMatch.getVisitingPlayer();
-
-        assert !this.matches.contains(newMatch) : "El emparejamiento ya existe";
+        boolean isInvalidMatch = this.matches.contains(newMatch);
 
         Iterator<Match> iterator = this.matches.iterator();
-
-        while (iterator.hasNext()) {
+        while (iterator.hasNext() && !isInvalidMatch) {
             Match match = iterator.next();
-            assert !match.getHomePlayer().equals(homePlayer) &&
-                    !match.getHomePlayer().equals(visitingPlayer) &&
-                    !match.getVisitingPlayer().equals(homePlayer) &&
-                    !match.getVisitingPlayer().equals(visitingPlayer) : "Los jugadores deben estar sin emparejar";
+            isInvalidMatch = match.getHomePlayer().equals(homePlayer) ||
+                    match.getHomePlayer().equals(visitingPlayer) ||
+                    match.getVisitingPlayer().equals(homePlayer) ||
+                    match.getVisitingPlayer().equals(visitingPlayer);
         }
+
+        assert !isInvalidMatch : "Los jugadores deben estar sin emparejar";
         this.matches.add(newMatch);
     }
 
