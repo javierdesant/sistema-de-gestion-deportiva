@@ -14,15 +14,6 @@ public class Command {
         return this.name;
     }
 
-    public Command readCommand() {
-        System.out.println();
-        System.out.printf("> ");
-        String[] splitCommand = scanner.nextLine().trim().split(" ");
-        this.name = splitCommand[0];
-        this.arguments = splitCommand.length > 1 ? splitCommand[1].split(";") : new String[0];
-        return this;
-    }
-
     public void chooseCommand(PlayerList playerList, MatchList matchList) {
         assert playerList != null : "La lista de jugadores no puede ser nula";
         assert matchList != null : "La lista de emparejamientos no puede ser nula";
@@ -91,6 +82,14 @@ public class Command {
         } catch (AssertionError e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    private void readCommand() {
+        System.out.println();
+        System.out.print("> ");
+        String[] splitCommand = scanner.nextLine().trim().split(" ");
+        this.name = splitCommand[0];
+        this.arguments = splitCommand.length > 1 ? splitCommand[1].split(";") : new String[0];
     }
 
     private void create(PlayerList playerList, String playerName) {
