@@ -36,12 +36,7 @@ public class PlayerList {
     }
 
     private boolean isValidScore(double score) {
-        if (score < -999999.0)
-            return false;
-        else if (score > 999999.0)
-            return false;
-        else
-            return true;
+        return -999999.0 < score && score < 999999.0;
     }
 
     public boolean contains(Player player) {
