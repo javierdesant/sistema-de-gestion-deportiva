@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "GestorDeportivo",
+            "request": "launch",
+            "mainClass": "es.upm.etsisi.GestorDeportivo",
+            "projectName": "sistema-de-gestion-deportiva"
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"

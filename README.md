@@ -19,7 +19,7 @@ Para el correcto funcionamiento de la práctica se necesitarán tener activados 
 Para ello, asegúrese de usar la opción `-ea` al ejecutar su programa Java. Por ejemplo:
 
 ```sh
-cd src && javac *.java && java -ea GestorDeportivo
+cd src/main/java && javac *.java && java -ea GestorDeportivo
 ```
 
 ## Autoevaluación

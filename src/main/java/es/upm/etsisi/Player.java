@@ -1,3 +1,5 @@
+package es.upm.etsisi;
+
 public class Player {
     private final String name;
     private double score;

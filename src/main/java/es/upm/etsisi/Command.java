@@ -1,3 +1,5 @@
+package es.upm.etsisi;
+
 import java.util.Scanner;
 
 public class Command {

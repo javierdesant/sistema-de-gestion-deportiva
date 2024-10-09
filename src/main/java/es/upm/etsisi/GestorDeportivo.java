@@ -1,3 +1,5 @@
+package es.upm.etsisi;
+
 public class GestorDeportivo {
     public static void main(String[] args) {
         PlayerList playerList = new PlayerList();

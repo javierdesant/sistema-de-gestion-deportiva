@@ -1,3 +1,5 @@
+package es.upm.etsisi;
+
 public class Match {
     private final Player homePlayer;
     private final Player visitingPlayer;
