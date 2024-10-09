@@ -5,8 +5,8 @@
 - Luis Fernández Muñoz
 
 ## Autores
-
-- Jhonatan Ferreira Souza ([JhonyRetro](https://github.com/JhonyRetro))
+// Poned vuestro correo y un mini texto del porqué de la autoevaluación (borrar antes de dejar finalizado)
+- Jhonatan Ferreira Souza ([JhonyRetro](https://github.com/JhonyRetro)) jhonatan.ferreiras@alumnos.upm.es
 
 - Javier de Santiago Soto ([JavierDeSant](https://github.com/javierdesant))
 
@@ -24,7 +24,7 @@ cd src && javac *.java && java -ea GestorDeportivo
 
 ## Autoevaluación
 
-- Jhonatan Ferreira Souza: **9/10**
+- Jhonatan Ferreira Souza: **7/10** _He conseguido hacer parte de los métodos, y he ayudado a mis compañeros con la resolución de otros._
 
 - Javier de Santiago Soto:  **9/10**
 
