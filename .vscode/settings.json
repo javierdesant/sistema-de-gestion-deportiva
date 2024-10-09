@@ -3,5 +3,7 @@
         "src"
     ],
     "java.project.referencedLibraries": [],
-    "java.debug.settings.vmArgs": "-ea"
+    "java.debug.settings.vmArgs": "-ea",
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "maven.view": "flat"
 }
