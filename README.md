@@ -5,12 +5,12 @@
 - Luis Fernández Muñoz
 
 ## Autores
-// Poned vuestro correo y un mini texto del porqué de la autoevaluación (borrar antes de dejar finalizado)
-- Jhonatan Ferreira Souza ([JhonyRetro](https://github.com/JhonyRetro)) jhonatan.ferreiras@alumnos.upm.es
+<!--Poned vuestro correo y un mini texto del porqué de la autoevaluación (borrar antes de dejar finalizado) -->
+- Jhonatan Ferreira Souza ([JhonyRetro](https://github.com/JhonyRetro)) | **jhonatan.ferreiras@alumnos.upm.es**
 
-- Javier de Santiago Soto ([JavierDeSant](https://github.com/javierdesant))
+- Javier de Santiago Soto ([JavierDeSant](https://github.com/javierdesant)) | **javier.desantiago@alumnos.upm.es**
 
-- Rafael Iralde Domínguez ([Cafileiro](https://github.com/Cafileiro))
+- Rafael Iralde Domínguez ([Cafileiro](https://github.com/Cafileiro)) | **rafael.iralde@alumnos.upm.es**
 
 ## ¡Importante!
 
