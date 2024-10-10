@@ -32,7 +32,7 @@ public class Command {
 
                 case "remove":
                     assert this.arguments.length == 1 : "Argumentos no válidos";
-                    this.remove(playerList, this.arguments[0]);
+                    this.remove(matchList, playerList, this.arguments[0]);
                     break;
 
                 case "show":
@@ -99,8 +99,26 @@ public class Command {
         System.out.println("Jugador añadido con éxito.");
     }
 
-    private void remove(PlayerList playerList, String playerName) {
-        playerList.remove(new Player(playerName));
+    private void remove(MatchList matchList, PlayerList playerList, String playerName) {
+        if (matchList.isMatched(playerName)) {
+            System.out.println(
+                    "El jugador que intenta borrar se encuentra emparejado. Borrar a este jugador supone también borrar su emparejamiento");
+            System.out.print("¿Desea continuar? (S/N) ");
+            switch (scanner.nextLine().toUpperCase()) {
+                case "S":
+                    matchList.remove(playerName);
+                    playerList.remove(new Player(playerName));
+                    break;
+                case "N":
+                    System.out.println("Cancelando...");
+                    break;
+                default:
+                    System.out.println("Opción no válida. Cancelando...");
+                    break;
+            }
+        } else {
+            playerList.remove(new Player(playerName));
+        }
         System.out.println("Jugador eliminado con éxito.");
     }
 

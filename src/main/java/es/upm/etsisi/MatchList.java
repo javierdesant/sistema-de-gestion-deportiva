@@ -12,21 +12,45 @@ public class MatchList {
     }
 
     public void add(Match newMatch) {
-        Player homePlayer = newMatch.getHomePlayer();
-        Player visitingPlayer = newMatch.getVisitingPlayer();
-        boolean isInvalidMatch = this.matches.contains(newMatch);
-
-        Iterator<Match> iterator = this.matches.iterator();
-        while (iterator.hasNext() && !isInvalidMatch) {
-            Match match = iterator.next();
-            isInvalidMatch = match.getHomePlayer().equals(homePlayer) ||
-                    match.getHomePlayer().equals(visitingPlayer) ||
-                    match.getVisitingPlayer().equals(homePlayer) ||
-                    match.getVisitingPlayer().equals(visitingPlayer);
-        }
-
-        assert !isInvalidMatch : "Los jugadores deben estar sin emparejar";
+        assert !isValidMatch(newMatch) : "Los jugadores deben estar sin emparejar";
         this.matches.add(newMatch);
+    }
+
+    public void remove(String playerName) {
+        for (Match match : this.matches) {
+            if (match.getHomePlayer().getName().equals(playerName)
+                    || match.getVisitingPlayer().getName().equals(playerName)) {
+                this.matches.remove(match);
+            }
+        }
+    }
+
+    public boolean isMatched(String playerName) {
+        boolean isMatched = false;
+        for (Match match : this.matches) {
+            if (match.getHomePlayer().getName().equals(playerName)
+                    || match.getVisitingPlayer().getName().equals(playerName)) {
+                isMatched = true;
+            }
+        }
+        return isMatched;
+    }
+
+    private boolean isValidMatch(Match match) {
+        Player homePlayer = match.getHomePlayer();
+        Player visitingPlayer = match.getVisitingPlayer();
+        boolean isValid = this.matches.contains(match);
+        if (!isValid) {
+            Iterator<Match> iterator = this.matches.iterator();
+            while (iterator.hasNext() && !isValid) {
+                Match currentMatch = iterator.next();
+                isValid = currentMatch.getHomePlayer().equals(homePlayer) ||
+                        currentMatch.getHomePlayer().equals(visitingPlayer) ||
+                        currentMatch.getVisitingPlayer().equals(homePlayer) ||
+                        currentMatch.getVisitingPlayer().equals(visitingPlayer);
+            }
+        }
+        return isValid;
     }
 
     public void show() {
