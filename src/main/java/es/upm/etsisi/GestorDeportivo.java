@@ -16,17 +16,19 @@ public class GestorDeportivo {
         System.out.println("Introduzca un comando o escriba 'exit' para salir.\n");
 
         System.out.println("Comandos disponibles:");
-        System.out.println(" help\n" +
-                " create [player]\n" +
-                " remove [player]\n" +
-                " show\n" +
-                " rank\n" +
-                " score [player];[score]\n" +
-                " show_matchmake\n" +
-                " clear_matchmake\n" +
-                " matchmake [player1];[player2]\n" +
-                " random_matchmake\n" +
-                " exit");
+        System.out.println("""
+                help
+                create [player]
+                remove [player]
+                show
+                rank
+                score [player];[score]
+                show_matchmake
+                clear_matchmake
+                matchmake [player1];[player2]
+                random_matchmake
+                exit
+                """);
 
         Command command = new Command();
 
