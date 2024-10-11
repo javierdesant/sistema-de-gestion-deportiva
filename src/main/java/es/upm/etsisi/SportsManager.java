@@ -1,6 +1,6 @@
 package es.upm.etsisi;
 
-public class GestorDeportivo {
+public class SportsManager {
     public static void main(String[] args) {
         PlayerList playerList = new PlayerList();
         MatchList matchList = new MatchList();
@@ -28,10 +28,10 @@ public class GestorDeportivo {
                 " random_matchmake\n" +
                 " exit");
 
-        Command command = new Command();
+        CommandManager commandManager = new CommandManager();
 
         do {
-            command.chooseCommand(playerList, matchList);
-        } while (!command.getCommand().equals("exit"));
+            commandManager.chooseCommand(playerList, matchList);
+        } while (!commandManager.getCommand().equals("exit"));
     }
 }

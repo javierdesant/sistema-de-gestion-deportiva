@@ -2,12 +2,12 @@ package es.upm.etsisi;
 
 import java.util.Scanner;
 
-public class Command {
+public class CommandManager {
     private String name;
     private String[] arguments;
     private static final Scanner scanner = new Scanner(System.in);
 
-    Command() {
+    CommandManager() {
         this.name = null;
         this.arguments = null;
     }
