@@ -30,14 +30,16 @@ public class MatchList {
         }
     }
 
-    public boolean isMatched(String playerName) {
+    public boolean isMatched(String playerName) {   // TODO: crear método contains player en la clase match
         boolean isMatched = false;
-        for (Match match : this.matches) {  // TODO: convertir en un while
-            if (match.getHomePlayer().getName().equals(playerName)
-                    || match.getVisitingPlayer().getName().equals(playerName)) {
-                isMatched = true;
-            }
+
+        Iterator<Match> iterator = this.matches.iterator();
+        while (iterator.hasNext() && !isMatched) {
+            Match match = iterator.next();
+            isMatched = match.getHomePlayer().getName().equals(playerName)
+                    || match.getVisitingPlayer().getName().equals(playerName);
         }
+
         return isMatched;
     }
 
