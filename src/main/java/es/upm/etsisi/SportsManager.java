@@ -15,10 +15,10 @@ public class SportsManager {
 
         System.out.println("Introduzca un comando o escriba 'exit' para salir.");
 
-        CommandManager commandManager = new CommandManager();
+        CommandManager commandManager = new CommandManager(playerList, matchList);
 
         do {
-            commandManager.chooseCommand(playerList, matchList);
-        } while (!commandManager.getCommand().equals("exit"));
+            commandManager.chooseCommand();
+        } while (commandManager.isOpen());
     }
 }

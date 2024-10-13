@@ -3,185 +3,94 @@ package es.upm.etsisi;
 import java.util.Scanner;
 
 public class CommandManager {
-    private String name;
-    private String[] arguments;
-    private static final Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner;
+    private Command command;
+    private final PlayerList playerList;
+    private final MatchList matchList;
 
-    CommandManager() {
-        this.name = null;
-        this.arguments = null;
-    }
-
-    public String getCommand() {
-        return this.name;
-    }
-
-    public void chooseCommand(PlayerList playerList, MatchList matchList) {
+    CommandManager(PlayerList playerList, MatchList matchList) {
         assert playerList != null : Message.NULL_PLAYERLIST;
         assert matchList != null : Message.NULL_MATCHLIST;
 
+        this.scanner = new Scanner(System.in);
+        this.playerList = playerList;
+        this.matchList = matchList;
+    }
+
+    private void setCommand(Command command) {
+        this.command = command;
+    }
+
+    public boolean isOpen() {
+        return !this.command.getName().equals("exit");
+    }
+
+    public void chooseCommand() {
         this.readCommand();
 
         try {
-            switch (this.name) {
+            switch (this.command.getName()) {
                 case "create":
-                    assert this.arguments.length == 1 : Message.INVALID_ARGUMENTS;
-                    assert this.arguments[0].matches("[a-zA-Z]+") : Message.INVALID_NAME;
-                    this.create(playerList, this.arguments[0]);
+                    this.command.create();
                     break;
 
                 case "remove":
-                    assert this.arguments.length == 1 : Message.INVALID_ARGUMENTS;
-                    this.remove(matchList, playerList, this.arguments[0]);
+                    this.command.remove();
                     break;
 
                 case "show":
-                    this.show(playerList);
+                    this.command.show();
                     break;
 
                 case "rank":
-                    this.rank(playerList);
+                    this.command.rank();
                     break;
 
                 case "score":
-                    assert this.arguments.length == 2 : Message.INVALID_ARGUMENTS;
-                    try {
-                        this.score(playerList, this.arguments[0], Double.parseDouble(this.arguments[1]));
-                    } catch (NumberFormatException e) {
-                        Message.INVALID_NUMBER.writeln();
-                    }
+                    this.command.score();
                     break;
 
                 case "show_matchmake":
-                    this.showMatchmake(matchList);
+                    this.command.showMatchmake();
                     break;
 
                 case "clear_matchmake":
-                    this.clearMatchmake(matchList);
+                    this.command.clearMatchmake();
                     break;
 
                 case "matchmake":
-                    assert this.arguments.length == 2 : Message.INVALID_ARGUMENTS;
-                    this.matchmake(matchList, playerList, this.arguments[0], this.arguments[1]);
+                    this.command.matchmake();
                     break;
 
                 case "random_matchmake":
-                    this.randomMatchmake(matchList, playerList);
+                    this.command.randomMatchmake();
                     break;
 
                 case "h":
                 case "help":
-                    this.help();
+                    this.command.help();
                     break;
 
                 case "exit":
-                    this.exit();
+                    this.command.exit();
+                    this.scanner.close();
                     break;
 
                 default:
                     Message.INVALID_COMMAND.writeln();
             }
         } catch (AssertionError error) {
-            System.out.println(error.getMessage());
+            System.out.println("ERROR: " + error.getMessage());
         }
     }
 
     private void readCommand() {
         System.out.println();
         Message.COMMAND_PROMPT.write();
-        String[] splitCommand = scanner.nextLine().trim().split(" ");
-        this.name = splitCommand[0];
-        this.arguments = splitCommand.length > 1 ? splitCommand[1].split(";") : new String[0];
-    }
 
-    private void create(PlayerList playerList, String playerName) {
-        playerList.add(new Player(playerName));
-        Message.PLAYER_ADDED.writeln();
-    }
-
-    private void remove(MatchList matchList, PlayerList playerList, String playerName) {
-        if (matchList.isMatched(playerName)) {
-            Message.ERASE_MATCHED_PLAYER_WARNING.writeln();
-            Message.CONTINUE_PROMPT.write();
-            switch (scanner.nextLine().toUpperCase()) {
-                case "S":
-                    matchList.remove(playerName);
-                    playerList.remove(new Player(playerName));
-                    Message.PLAYER_REMOVED.writeln();
-                    break;
-                case "N":
-                    Message.CANCEL.writeln();
-                    break;
-                default:
-                    Message.INVALID_OPTION.writeln();
-                    Message.CANCEL.writeln();
-                    break;
-            }
-        } else {
-            playerList.remove(new Player(playerName));
-            Message.PLAYER_REMOVED.writeln();
-        }
-    }
-
-    private void show(PlayerList playerList) {
-        Message.PLAYERLIST_HEADER.writeln();
-        playerList.show();
-        Message.FOOTER.writeln();
-    }
-
-    private void rank(PlayerList playerList) {
-        Message.RANKING_HEADER.writeln();
-        playerList.rank();
-        Message.FOOTER.writeln();
-    }
-
-    private void score(PlayerList playerList, String playerName, double score) {
-        playerList.score(playerName, score);
-        System.out.printf("La puntuación de %s ahora es %.2f.\n", playerName, score);   // TODO: replace with message
-    }
-
-    private void showMatchmake(MatchList matchList) {
-        Message.MATCHMAKE_HEADER.writeln();
-        matchList.show();
-        Message.FOOTER.writeln();
-    }
-
-    private void clearMatchmake(MatchList matchList) {
-        matchList.clear();
-        Message.MATCHMAKE_CLEARED.writeln();
-    }
-
-    private void matchmake(MatchList matchList, PlayerList playerList, String homePlayerName,
-            String visitingPlayerName) {
-        matchList.add(new Match(playerList, new Player(homePlayerName), new Player(visitingPlayerName)));
-        Message.PLAYERS_MATCHED.writeln(homePlayerName, visitingPlayerName);
-    }
-
-    private void randomMatchmake(MatchList matchList, PlayerList playerList) {
-        Message.RANDOM_MATCHMAKE_WARNING.writeln();
-        Message.CONTINUE_PROMPT.write();
-        switch (scanner.nextLine().toUpperCase()) {
-            case "S":
-                matchList.clear();
-                matchList.randomize(playerList);
-                Message.MATCHES_RANDOMIZED.writeln();
-                break;
-            case "N":
-                Message.CANCEL.writeln();
-                break;
-            default:
-                Message.INVALID_OPTION.writeln();
-                Message.CANCEL.writeln();
-                break;
-        }
-    }
-
-    private void help() {
-        Message.HELP_MESSAGE.writeln();
-    }
-
-    private void exit() {
-        scanner.close();
-        Message.EXIT_MESSAGE.writeln();
+        String[] splitCommand = this.scanner.nextLine().trim().split(" ");
+        String name = splitCommand[0];
+        String[] arguments = splitCommand.length > 1 ? splitCommand[1].split(";") : new String[0];
+        this.setCommand(new Command(this.playerList, this.matchList, name, arguments));
     }
 }
