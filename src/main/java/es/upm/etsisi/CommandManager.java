@@ -32,7 +32,7 @@ public class CommandManager {
 
                 case "remove":
                     assert this.arguments.length == 1 : Message.INVALID_ARGUMENTS;
-                    this.remove(playerList, this.arguments[0]);
+                    this.remove(matchList, playerList, this.arguments[0]);
                     break;
 
                 case "show":
@@ -88,7 +88,7 @@ public class CommandManager {
 
     private void readCommand() {
         System.out.println();
-        System.out.print(Message.COMMAND_PROMPT);
+        Message.COMMAND_PROMPT.writeln();
         String[] splitCommand = scanner.nextLine().trim().split(" ");
         this.name = splitCommand[0];
         this.arguments = splitCommand.length > 1 ? splitCommand[1].split(";") : new String[0];
@@ -99,8 +99,26 @@ public class CommandManager {
         Message.PLAYER_ADDED.writeln();
     }
 
-    private void remove(PlayerList playerList, String playerName) {
-        playerList.remove(new Player(playerName));
+    private void remove(MatchList matchList, PlayerList playerList, String playerName) {    // FIXME
+        if (matchList.isMatched(playerName)) {
+            System.out.println(
+                    "El jugador que intenta borrar se encuentra emparejado. Borrar a este jugador supone también borrar su emparejamiento");
+            System.out.print("¿Desea continuar? (S/N) ");
+            switch (scanner.nextLine().toUpperCase()) {
+                case "S":
+                    matchList.remove(playerName);
+                    playerList.remove(new Player(playerName));
+                    break;
+                case "N":
+                    System.out.println("Cancelando...");
+                    break;
+                default:
+                    System.out.println("Opción no válida. Cancelando...");
+                    break;
+            }
+        } else {
+            playerList.remove(new Player(playerName));
+        }
         Message.PLAYER_REMOVED.writeln();
     }
 
