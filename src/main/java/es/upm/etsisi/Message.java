@@ -43,7 +43,7 @@ public enum Message {
                     "  show_matchmake                   - Muestra el estado actual de las partidas\n" +
                     "  clear_matchmake                  - Limpia el estado de las partidas\n" +
                     "  matchmake [player1];[player2]    - Inicia una partida entre dos jugadores\n" +
-                    "  random_matchmake                 - Inicia una partida aleatoria entre jugadores\n" +
+                    "  random_matchmake                 - Inicia partidas aleatorias entre todos los jugadores\n" +
                     "  exit                             - Cierra el programa"
     ),
     EXIT_MESSAGE("Cerrando...");
