@@ -21,6 +21,7 @@ public enum Message {
     FOOTER("------------------------------"),
     MATCHMAKE_CLEARED("Los emparejamientos han sido eliminados."),
     RANDOM_MATCHMAKE_WARNING("Esta opción creará emparejamientos aleatorios con todos los jugadores, eliminado los emparejamientos anteriores."),
+    ERASE_MATCHED_PLAYER_WARNING("El jugador que intenta borrar se encuentra emparejado. Borrar a este jugador supone también borrar su emparejamiento."),
     CONTINUE_PROMPT("¿Desea continuar? (S/N) "),
     CANCEL("Cancelando..."),
     INVALID_OPTION("Opción no válida."),

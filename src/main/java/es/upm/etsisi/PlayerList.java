@@ -21,8 +21,12 @@ public class PlayerList {
     }
 
     public void show() {
-        for (Player player : players) {
-            player.showPlayer();
+        if (this.isEmpty()) {
+            Message.NO_PLAYERS.writeln();
+        } else {
+            for (Player player : this.players) {
+                player.showPlayer();
+            }
         }
     }
 
@@ -51,7 +55,7 @@ public class PlayerList {
 
     public void rank() {
         if (this.isEmpty()) {
-            Message.NO_MATCHES.writeln();
+            Message.NO_PLAYERS.writeln();
         } else {
             ArrayList<Player> playerList = new ArrayList<>(players);
             bubbleSort(playerList);

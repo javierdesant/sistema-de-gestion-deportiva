@@ -88,7 +88,7 @@ public class CommandManager {
 
     private void readCommand() {
         System.out.println();
-        Message.COMMAND_PROMPT.writeln();
+        Message.COMMAND_PROMPT.write();
         String[] splitCommand = scanner.nextLine().trim().split(" ");
         this.name = splitCommand[0];
         this.arguments = splitCommand.length > 1 ? splitCommand[1].split(";") : new String[0];
@@ -99,37 +99,34 @@ public class CommandManager {
         Message.PLAYER_ADDED.writeln();
     }
 
-    private void remove(MatchList matchList, PlayerList playerList, String playerName) {    // FIXME
+    private void remove(MatchList matchList, PlayerList playerList, String playerName) {
         if (matchList.isMatched(playerName)) {
-            System.out.println(
-                    "El jugador que intenta borrar se encuentra emparejado. Borrar a este jugador supone también borrar su emparejamiento");
-            System.out.print("¿Desea continuar? (S/N) ");
+            Message.ERASE_MATCHED_PLAYER_WARNING.writeln();
+            Message.CONTINUE_PROMPT.write();
             switch (scanner.nextLine().toUpperCase()) {
                 case "S":
                     matchList.remove(playerName);
                     playerList.remove(new Player(playerName));
+                    Message.PLAYER_REMOVED.writeln();
                     break;
                 case "N":
-                    System.out.println("Cancelando...");
+                    Message.CANCEL.writeln();
                     break;
                 default:
-                    System.out.println("Opción no válida. Cancelando...");
+                    Message.INVALID_OPTION.writeln();
+                    Message.CANCEL.writeln();
                     break;
             }
         } else {
             playerList.remove(new Player(playerName));
+            Message.PLAYER_REMOVED.writeln();
         }
-        Message.PLAYER_REMOVED.writeln();
     }
 
     private void show(PlayerList playerList) {
-        if (playerList.isEmpty()) {
-            Message.NO_PLAYERS.writeln();
-        } else {
-            Message.PLAYERLIST_HEADER.writeln();
-            playerList.show();
-            Message.FOOTER.writeln();
-        }
+        Message.PLAYERLIST_HEADER.writeln();
+        playerList.show();
+        Message.FOOTER.writeln();
     }
 
     private void rank(PlayerList playerList) {
@@ -162,7 +159,7 @@ public class CommandManager {
 
     private void randomMatchmake(MatchList matchList, PlayerList playerList) {
         Message.RANDOM_MATCHMAKE_WARNING.writeln();
-        Message.CONTINUE_PROMPT.writeln();
+        Message.CONTINUE_PROMPT.write();
         switch (scanner.nextLine().toUpperCase()) {
             case "S":
                 matchList.clear();
@@ -184,6 +181,7 @@ public class CommandManager {
     }
 
     private void exit() {
+        scanner.close();
         Message.EXIT_MESSAGE.writeln();
     }
 }

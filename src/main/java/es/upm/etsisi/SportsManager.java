@@ -13,22 +13,7 @@ public class SportsManager {
 
         System.out.println("\n### Bienvenido al Gestor Deportivo ###\n");
 
-        System.out.println("Introduzca un comando o escriba 'exit' para salir.\n");
-
-        System.out.println("Comandos disponibles:");
-        System.out.println("""
-                help
-                create [player]
-                remove [player]
-                show
-                rank
-                score [player];[score]
-                show_matchmake
-                clear_matchmake
-                matchmake [player1];[player2]
-                random_matchmake
-                exit
-                """);
+        System.out.println("Introduzca un comando o escriba 'exit' para salir.");
 
         CommandManager commandManager = new CommandManager();
 
