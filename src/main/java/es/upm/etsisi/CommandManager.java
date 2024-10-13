@@ -139,8 +139,7 @@ public class CommandManager {
     private void matchmake(MatchList matchList, PlayerList playerList, String homePlayerName,
             String visitingPlayerName) {
         matchList.add(new Match(playerList, new Player(homePlayerName), new Player(visitingPlayerName)));
-        System.out.println("Los jugadores " + homePlayerName + " y " + visitingPlayerName
-                + " han sido emparejados correctamente.");  // TODO: replace with message
+        Message.PLAYERS_MATCHED.writeln(homePlayerName, visitingPlayerName);
     }
 
     private void randomMatchmake(MatchList matchList, PlayerList playerList) {
@@ -150,6 +149,7 @@ public class CommandManager {
             case "S":
                 matchList.clear();
                 matchList.randomize(playerList);
+                Message.MATCHES_RANDOMIZED.writeln();
                 break;
             case "N":
                 Message.CANCEL.writeln();

@@ -6,11 +6,15 @@ public enum Message {
     INVALID_ARGUMENTS("Argumentos no válidos"),
     INVALID_NAME("Nombre no válido"),
     INVALID_NUMBER("Introduzca un número válido"),
+    MATCHES_RANDOMIZED("Emparejamiento aleatorio realizado con éxito."),
     PLAYER_ADDED("Jugador añadido con éxito."),
     PLAYER_REMOVED("Jugador eliminado con éxito."),
+    PLAYERS_MATCHED("Los jugadores #homeplayer y #visitingplayer han sido emparejados correctamente."),
+    NO_MATCHES("No hay emparejamientos"),
     NO_PLAYERS("No hay jugadores"),
     NULL_PLAYERLIST("La lista de jugadores no puede ser nula"),
     NULL_MATCHLIST("La lista de emparejamientos no puede ser nula"),
+    EVEN_PLAYERS_REQUIRED("El número de jugadores debe ser par"),
     PLAYERLIST_HEADER("------ LISTA DE JUGADORES ------"),
     RANKING_HEADER("---------- RANKING -----------"),
     MATCHMAKE_HEADER("------ EMPAREJAMIENTOS -------"),
@@ -22,10 +26,14 @@ public enum Message {
     INVALID_OPTION("Opción no válida."),
     HOME_PLAYER_NOT_EXIST("El jugador local no existe"),
     VISITING_PLAYER_NOT_EXIST("El jugador visitante no existe"),
+    SCORE_OUT_OF_BOUNDS_ERROR("La puntuación supera los límites"),
     SAME_PLAYER_ERROR("Los jugadores no pueden ser el mismo"),
+    PLAYERS_MATCHED_ERROR("Los jugadores deben estar sin emparejar"),
+    PLAYER_ALREADY_EXISTS_ERROR("El jugador ya existe"),
+    PLAYER_DOES_NOT_EXIST_ERROR("El jugador no existe"),
     HELP_MESSAGE(
             "Comandos disponibles:\n" +
-                    "  help                             - Muestra los comandos disponibles\n" +
+                    "  help                             - Muestra este mensaje\n" +
                     "  create [player]                  - Crea un nuevo jugador\n" +
                     "  remove [player]                  - Elimina un jugador\n" +
                     "  show                             - Muestra la lista de jugadores\n" +
@@ -35,7 +43,7 @@ public enum Message {
                     "  clear_matchmake                  - Limpia el estado de las partidas\n" +
                     "  matchmake [player1];[player2]    - Inicia una partida entre dos jugadores\n" +
                     "  random_matchmake                 - Inicia una partida aleatoria entre jugadores\n" +
-                    "  exit                             - Salir del programa"
+                    "  exit                             - Cierra el programa"
     ),
     EXIT_MESSAGE("Cerrando...");
 
@@ -51,6 +59,12 @@ public enum Message {
 
     void writeln() {
         System.out.println(this.message);
+    }
+
+    void writeln(String homePlayerName, String visitingPlayerName) {
+        assert this == Message.PLAYERS_MATCHED;
+
+        System.out.println(this.message.replaceAll("#homeplayer", homePlayerName).replaceAll("#visitingplayer", visitingPlayerName));
     }
 
     @Override

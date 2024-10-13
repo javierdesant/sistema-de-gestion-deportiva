@@ -11,13 +11,13 @@ public class PlayerList {
     }
 
     public void add(Player newPlayer) {
-        assert !this.players.contains(newPlayer) : "El jugador ya existe";
+        assert !this.players.contains(newPlayer) : Message.PLAYER_ALREADY_EXISTS_ERROR;
         this.players.add(newPlayer);
     }
 
     public void remove(Player player) {
         boolean removed = this.players.remove(player);
-        assert removed : "El jugador no existe";
+        assert removed : Message.PLAYER_DOES_NOT_EXIST_ERROR;
     }
 
     public void show() {
@@ -31,9 +31,9 @@ public class PlayerList {
     }
 
     public void score(String playerName, double score) {
-        assert isValidScore(score) : "La puntuación supera los límites";
+        assert isValidScore(score) : Message.SCORE_OUT_OF_BOUNDS_ERROR;
         int index = this.players.indexOf(new Player(playerName));
-        assert index != -1 : "El jugador no existe";
+        assert index != -1 : Message.PLAYER_DOES_NOT_EXIST_ERROR;
         this.players.get(index).setScore(score);
     }
 
@@ -50,10 +50,14 @@ public class PlayerList {
     }
 
     public void rank() {
-        ArrayList<Player> playerList = new ArrayList<>(players);
-        bubbleSort(playerList);
-        for (Player player : playerList) {
-            player.show();
+        if (this.isEmpty()) {
+            Message.NO_MATCHES.writeln();
+        } else {
+            ArrayList<Player> playerList = new ArrayList<>(players);
+            bubbleSort(playerList);
+            for (Player player : playerList) {
+                player.show();
+            }
         }
     }
 

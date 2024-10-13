@@ -25,13 +25,13 @@ public class MatchList {
                     match.getVisitingPlayer().equals(visitingPlayer);
         }
 
-        assert !isInvalidMatch : "Los jugadores deben estar sin emparejar";
+        assert !isInvalidMatch : Message.PLAYERS_MATCHED_ERROR;
         this.matches.add(newMatch);
     }
 
     public void show() {
         if (this.matches.isEmpty()) {
-            System.out.println("No hay emparejamientos");
+            Message.NO_MATCHES.writeln();
         } else {
             for (Match match : this.matches) {
                 match.show();
@@ -44,16 +44,15 @@ public class MatchList {
     }
 
     public void randomize(PlayerList playerList) {
-        assert !playerList.isEmpty() : "No hay jugadores";
-        assert this.matches.isEmpty() : "Los emparejamientos deben estar vacíos";
+        assert !playerList.isEmpty() : Message.NO_PLAYERS;
+        assert this.matches.isEmpty() : Message.NO_MATCHES;
 
         LinkedList<Player> randomPlayers = new LinkedList<>(playerList.getPlayers());
-        assert randomPlayers.size() % 2 == 0 : "El número de jugadores debe ser par";
+        assert randomPlayers.size() % 2 == 0 : Message.EVEN_PLAYERS_REQUIRED;
 
         Collections.shuffle(randomPlayers);
         while (!randomPlayers.isEmpty()) {
             this.matches.add(new Match(playerList, randomPlayers.pop(), randomPlayers.pop()));
         }
-        System.out.println("Emparejamiento aleatorio realizado con éxito.");
     }
 }
