@@ -14,8 +14,8 @@
 
 ## Autoevaluación
 
-- Jhonatan Ferreira Souza: **7/10** _He conseguido hacer parte de los métodos, y he ayudado a mis compañeros con la resolución de otros._
+- Jhonatan Ferreira Souza: **7/10** _Hice parte de los métodos y ayudé a mis compañeros con la resolución de otros._
 
 - Javier de Santiago Soto: **9/10** _Lideré el desarrollo, completé la lógica principal y aseguré el funcionamiento del proyecto._
 
-- Rafael Iralde Domínguez: **8/10** <!-- TODO -->
+- Rafael Iralde Domínguez: **6.5/10** _Ayudé en fallos menores y pequeños rangos de optimización._
