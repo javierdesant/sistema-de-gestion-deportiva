@@ -37,7 +37,7 @@ public class Command {
     public void remove(Scanner scanner) {
         String playerName = this.getArgument(0);
 
-        if (this.matchList.isMatched(playerName)) {
+        if (this.matchList.contains(playerName)) {
             Message.ERASE_MATCHED_PLAYER_WARNING.writeln();
             Message.CONTINUE_PROMPT.write();
             switch (scanner.nextLine().toUpperCase()) {

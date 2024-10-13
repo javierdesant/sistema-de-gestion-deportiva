@@ -30,7 +30,7 @@ public class MatchList {
         }
     }
 
-    public boolean isMatched(String playerName) {
+    public boolean contains(String playerName) {
         boolean isMatched = false;
 
         Iterator<Match> iterator = this.matches.iterator();
