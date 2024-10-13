@@ -106,23 +106,28 @@ public class Command {
     }
 
     public void randomMatchmake() {
-        Scanner scanner = new Scanner(System.in);
+        if (this.matchList.isEmpty()) {
+            this.matchList.randomize(this.playerList);
+            Message.MATCHES_RANDOMIZED.writeln();
+        } else {
+            Scanner scanner = new Scanner(System.in);
 
-        Message.RANDOM_MATCHMAKE_WARNING.writeln();
-        Message.CONTINUE_PROMPT.write();
-        switch (scanner.nextLine().toUpperCase()) {
-            case "S":
-                this.matchList.clear();
-                this.matchList.randomize(this.playerList);
-                Message.MATCHES_RANDOMIZED.writeln();
-                break;
-            case "N":
-                Message.CANCEL.writeln();
-                break;
-            default:
-                Message.INVALID_OPTION.writeln();
-                Message.CANCEL.writeln();
-                break;
+            Message.RANDOM_MATCHMAKE_WARNING.writeln();
+            Message.CONTINUE_PROMPT.write();
+            switch (scanner.nextLine().toUpperCase()) {
+                case "S":
+                    this.matchList.clear();
+                    this.matchList.randomize(this.playerList);
+                    Message.MATCHES_RANDOMIZED.writeln();
+                    break;
+                case "N":
+                    Message.CANCEL.writeln();
+                    break;
+                default:
+                    Message.INVALID_OPTION.writeln();
+                    Message.CANCEL.writeln();
+                    break;
+            }
         }
     }
 

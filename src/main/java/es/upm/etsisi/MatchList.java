@@ -11,6 +11,10 @@ public class MatchList {
         this.matches = new LinkedList<>();
     }
 
+    public boolean isEmpty() {
+        return this.matches.isEmpty();
+    }
+
     public void add(Match newMatch) {
         assert this.isValidMatch(newMatch) : Message.PLAYERS_MATCHED_ERROR;
 
