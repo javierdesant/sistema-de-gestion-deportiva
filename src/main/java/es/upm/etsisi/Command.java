@@ -34,12 +34,10 @@ public class Command {
         Message.PLAYER_ADDED.writeln();
     }
 
-    public void remove() {
+    public void remove(Scanner scanner) {
         String playerName = this.getArgument(0);
 
         if (this.matchList.isMatched(playerName)) {
-            Scanner scanner = new Scanner(System.in);
-
             Message.ERASE_MATCHED_PLAYER_WARNING.writeln();
             Message.CONTINUE_PROMPT.write();
             switch (scanner.nextLine().toUpperCase()) {
@@ -105,13 +103,11 @@ public class Command {
         Message.PLAYERS_MATCHED.writeln(homePlayerName, visitingPlayerName);
     }
 
-    public void randomMatchmake() {
+    public void randomMatchmake(Scanner scanner) {
         if (this.matchList.isEmpty()) {
             this.matchList.randomize(this.playerList);
             Message.MATCHES_RANDOMIZED.writeln();
         } else {
-            Scanner scanner = new Scanner(System.in);
-
             Message.RANDOM_MATCHMAKE_WARNING.writeln();
             Message.CONTINUE_PROMPT.write();
             switch (scanner.nextLine().toUpperCase()) {

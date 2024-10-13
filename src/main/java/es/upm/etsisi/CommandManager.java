@@ -35,7 +35,7 @@ public class CommandManager {
                     break;
 
                 case "remove":
-                    this.command.remove();
+                    this.command.remove(scanner);
                     break;
 
                 case "show":
@@ -63,7 +63,7 @@ public class CommandManager {
                     break;
 
                 case "random_matchmake":
-                    this.command.randomMatchmake();
+                    this.command.randomMatchmake(scanner);
                     break;
 
                 case "h":
