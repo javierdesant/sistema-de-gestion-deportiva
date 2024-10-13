@@ -19,3 +19,7 @@
 - Javier de Santiago Soto: **9/10** _Lideré el desarrollo, completé la lógica principal y aseguré el funcionamiento del proyecto._
 
 - Rafael Iralde Domínguez: **6.5/10** _Ayudé en fallos menores y pequeños rangos de optimización._
+
+## Enlaces
+
+Ver el proyecto en GitHub: [sistema-de-gestion-deportiva](https://github.com/javierdesant/sistema-de-gestion-deportiva)
