@@ -5,9 +5,9 @@ public class Match {
     private final Player visitingPlayer;
 
     Match(PlayerList playerList, Player homePlayer, Player visitingPlayer) {
-        assert playerList.contains(homePlayer) : "El jugador local no existe";
-        assert playerList.contains(visitingPlayer) : "El jugador visitante no existe";
-        assert !homePlayer.equals(visitingPlayer) : "Los jugadores no pueden ser el mismo";
+        assert playerList.contains(homePlayer) : Message.HOME_PLAYER_NOT_EXIST;
+        assert playerList.contains(visitingPlayer) : Message.VISITING_PLAYER_NOT_EXIST;
+        assert !homePlayer.equals(visitingPlayer) : Message.SAME_PLAYER_ERROR;
 
         this.homePlayer = homePlayer;
         this.visitingPlayer = visitingPlayer;

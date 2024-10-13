@@ -17,21 +17,21 @@ public class CommandManager {
     }
 
     public void chooseCommand(PlayerList playerList, MatchList matchList) {
-        assert playerList != null : "La lista de jugadores no puede ser nula";
-        assert matchList != null : "La lista de emparejamientos no puede ser nula";
+        assert playerList != null : Message.NULL_PLAYERLIST;
+        assert matchList != null : Message.NULL_MATCHLIST;
 
         this.readCommand();
 
         try {
             switch (this.name) {
                 case "create":
-                    assert this.arguments.length == 1 : "Argumentos no válidos";
-                    assert this.arguments[0].matches("[a-zA-Z]+") : "Nombre no válido";
+                    assert this.arguments.length == 1 : Message.INVALID_ARGUMENTS;
+                    assert this.arguments[0].matches("[a-zA-Z]+") : Message.INVALID_NAME;
                     this.create(playerList, this.arguments[0]);
                     break;
 
                 case "remove":
-                    assert this.arguments.length == 1 : "Argumentos no válidos";
+                    assert this.arguments.length == 1 : Message.INVALID_ARGUMENTS;
                     this.remove(playerList, this.arguments[0]);
                     break;
 
@@ -44,11 +44,11 @@ public class CommandManager {
                     break;
 
                 case "score":
-                    assert this.arguments.length == 2 : "Argumentos no válidos";
+                    assert this.arguments.length == 2 : Message.INVALID_ARGUMENTS;
                     try {
                         this.score(playerList, this.arguments[0], Double.parseDouble(this.arguments[1]));
                     } catch (NumberFormatException e) {
-                        System.out.println("Introduzca un número válido");
+                        Message.INVALID_NUMBER.writeln();
                     }
                     break;
 
@@ -61,7 +61,7 @@ public class CommandManager {
                     break;
 
                 case "matchmake":
-                    assert this.arguments.length == 2 : "Argumentos no válidos";
+                    assert this.arguments.length == 2 : Message.INVALID_ARGUMENTS;
                     this.matchmake(matchList, playerList, this.arguments[0], this.arguments[1]);
                     break;
 
@@ -79,16 +79,16 @@ public class CommandManager {
                     break;
 
                 default:
-                    System.out.println("Comando no válido. (Escriba h o help para ver el listado de comandos)");
+                    Message.INVALID_COMMAND.writeln();
             }
-        } catch (AssertionError e) {
-            System.out.println(e.getMessage());
+        } catch (AssertionError error) {
+            System.out.println(error.getMessage());
         }
     }
 
     private void readCommand() {
         System.out.println();
-        System.out.print("> ");
+        System.out.print(Message.COMMAND_PROMPT);
         String[] splitCommand = scanner.nextLine().trim().split(" ");
         this.name = splitCommand[0];
         this.arguments = splitCommand.length > 1 ? splitCommand[1].split(";") : new String[0];
@@ -96,87 +96,76 @@ public class CommandManager {
 
     private void create(PlayerList playerList, String playerName) {
         playerList.add(new Player(playerName));
-        System.out.println("Jugador añadido con éxito.");
+        Message.PLAYER_ADDED.writeln();
     }
 
     private void remove(PlayerList playerList, String playerName) {
         playerList.remove(new Player(playerName));
-        System.out.println("Jugador eliminado con éxito.");
+        Message.PLAYER_REMOVED.writeln();
     }
 
     private void show(PlayerList playerList) {
         if (playerList.isEmpty()) {
-            System.out.println("No hay jugadores");
+            Message.NO_PLAYERS.writeln();
         } else {
-            System.out.println("-----LISTA DE JUGADORES-----");
+            Message.PLAYERLIST_HEADER.writeln();
             playerList.show();
-            System.out.println("----------------------------");
+            Message.FOOTER.writeln();
         }
     }
 
     private void rank(PlayerList playerList) {
-        System.out.println("----------RANKING-----------");
+        Message.RANKING_HEADER.writeln();
         playerList.rank();
-        System.out.println("----------------------------");
+        Message.FOOTER.writeln();
     }
 
     private void score(PlayerList playerList, String playerName, double score) {
         playerList.score(playerName, score);
-        System.out.printf("La puntuación de %s ahora es %.2f.\n", playerName, score);
+        System.out.printf("La puntuación de %s ahora es %.2f.\n", playerName, score);   // TODO: replace with message
     }
 
     private void showMatchmake(MatchList matchList) {
-        System.out.println("------EMPAREJAMIENTOS-------");
+        Message.MATCHMAKE_HEADER.writeln();
         matchList.show();
-        System.out.println("----------------------------");
+        Message.FOOTER.writeln();
     }
 
     private void clearMatchmake(MatchList matchList) {
         matchList.clear();
-        System.out.println("Los emparejamientos han sido eliminados.");
+        Message.MATCHMAKE_CLEARED.writeln();
     }
 
     private void matchmake(MatchList matchList, PlayerList playerList, String homePlayerName,
             String visitingPlayerName) {
         matchList.add(new Match(playerList, new Player(homePlayerName), new Player(visitingPlayerName)));
         System.out.println("Los jugadores " + homePlayerName + " y " + visitingPlayerName
-                + " han sido emparejados correctamente.");
+                + " han sido emparejados correctamente.");  // TODO: replace with message
     }
 
     private void randomMatchmake(MatchList matchList, PlayerList playerList) {
-        System.out.println(
-                "Esta opción creará emparejamientos aleatorios con todos los jugadores, eliminado los emparejamientos anteriores.");
-        System.out.print("¿Desea continuar? (S/N) ");
+        Message.RANDOM_MATCHMAKE_WARNING.writeln();
+        Message.CONTINUE_PROMPT.writeln();
         switch (scanner.nextLine().toUpperCase()) {
             case "S":
                 matchList.clear();
                 matchList.randomize(playerList);
                 break;
             case "N":
-                System.out.println("Cancelando...");
+                Message.CANCEL.writeln();
                 break;
             default:
-                System.out.println("Opción no válida. Cancelando...");
+                Message.INVALID_OPTION.writeln();
+                Message.CANCEL.writeln();
                 break;
         }
     }
 
     private void help() {
-        System.out.println("Comandos disponibles:");
-        System.out.println(" help\n" +
-                " create [player]\n" +
-                " remove [player]\n" +
-                " show\n" +
-                " rank\n" +
-                " score [player];[score]\n" +
-                " show_matchmake\n" +
-                " clear_matchmake\n" +
-                " matchmake [player1];[player2]\n" +
-                " random_matchmake\n" +
-                " exit");
+        Message.HELP_MESSAGE.writeln();
     }
 
     private void exit() {
-        System.out.println("Cerrando...");
+        Message.EXIT_MESSAGE.writeln();
     }
 }
