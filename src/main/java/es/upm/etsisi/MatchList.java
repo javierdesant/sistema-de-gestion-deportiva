@@ -30,14 +30,13 @@ public class MatchList {
         }
     }
 
-    public boolean isMatched(String playerName) {   // TODO: crear método contains player en la clase match
+    public boolean isMatched(String playerName) {
         boolean isMatched = false;
 
         Iterator<Match> iterator = this.matches.iterator();
         while (iterator.hasNext() && !isMatched) {
             Match match = iterator.next();
-            isMatched = match.getHomePlayer().getName().equals(playerName)
-                    || match.getVisitingPlayer().getName().equals(playerName);
+            isMatched = match.contains(playerName);
         }
 
         return isMatched;
@@ -51,10 +50,7 @@ public class MatchList {
         Iterator<Match> iterator = this.matches.iterator();
         while (iterator.hasNext() && !isInvalidMatch) {
             Match currentMatch = iterator.next();
-            isInvalidMatch = currentMatch.getHomePlayer().equals(homePlayer) ||
-                    currentMatch.getHomePlayer().equals(visitingPlayer) ||
-                    currentMatch.getVisitingPlayer().equals(homePlayer) ||
-                    currentMatch.getVisitingPlayer().equals(visitingPlayer);
+            isInvalidMatch = currentMatch.contains(homePlayer) || currentMatch.contains(visitingPlayer);
         }
         return !isInvalidMatch;
     }

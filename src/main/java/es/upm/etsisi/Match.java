@@ -26,6 +26,14 @@ public class Match {
         System.out.println("Jugador visitante: " + this.visitingPlayer.getName());
     }
 
+    public boolean contains(Player player) {
+        return this.homePlayer.equals(player) || this.visitingPlayer.equals(player);
+    }
+
+    public boolean contains(String playerName) {
+        return this.homePlayer.getName().equals(playerName) || this.visitingPlayer.getName().equals(playerName);
+    }
+
     @Override
     public boolean equals(Object object) {
         if (this == object) {
