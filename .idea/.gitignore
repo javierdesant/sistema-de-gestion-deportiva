@@ -1,3 +1,35 @@
-# Default ignored files
-/shelf/
+# Ignore workspace-related files and folders
 /workspace.xml
+/tasks.xml
+/dictionaries
+/shelf/
+
+# Ignore project-specific configuration
+/modules.xml
+/vcs.xml
+
+# Ignore other potentially unnecessary files
+/.name
+/httpRequests/
+/dataSources/
+/dataSources.local/
+/sqlDataSources.xml
+/dynamic.xml
+/uiDesigner.xml
+
+# Ignore Gradle files (if using Gradle)
+/gradle.xml
+/libraries/
+
+# Ignore code styles
+/codeStyles/Project.xml
+/codeStyles/Project.iml
+
+# Ignore misc files
+/misc.xml
+
+# Ignore project view settings
+/scopes/
+
+# Ignore SonarLint files
+/sonarlint/
