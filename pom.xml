@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>es.upm.etsisi</groupId>
+    <artifactId>sistema-de-gestion-deportiva</artifactId>
+    <version>1.0</version>
+
+    <name>Sistema de gestión deportiva</name>
+    <description>Sistema básico de gestión de jugadores. Práctica 1 POO</description>
+    <url>https://github.com/javierdesant/sistema-de-gestion-deportiva</url>
+
+    <developers>
+        <developer>
+            <id>Javier de Santiago</id>
+            <email>javier.desantiago@alumnos.upm.es</email>
+        </developer>
+        <developer>
+            <id>Jhonatan Ferreira</id>
+            <email>jhonatan.ferreira@alumnos.upm.es</email>
+        </developer>
+        <developer>
+            <id>Rafael Iralde</id>
+            <email>rafael.iralde@alumnos.upm.es</email>
+        </developer>
+    </developers>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+    </properties>
+</project> 

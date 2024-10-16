@@ -1,0 +1,26 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "SportsManager",
+            "request": "launch",
+            "mainClass": "es.upm.etsisi.SportsManager",
+            "projectName": "sistema-de-gestion-deportiva"
+        },
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "GestorDeportivo",
+            "request": "launch",
+            "mainClass": "GestorDeportivo",
+            "projectName": "sistema-de-gestion-deportiva_3dcd6b8f",
+            "vmArgs": "-ea"
+        }
+    ]
+}
