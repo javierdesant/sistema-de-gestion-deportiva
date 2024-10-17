@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class CommandManager {
     private final Scanner scanner;
-    private Command command;
+    private OldCommand oldCommand;
     private final PlayerList playerList;
     private final MatchList matchList;
 
@@ -17,62 +17,62 @@ public class CommandManager {
         this.matchList = matchList;
     }
 
-    private void setCommand(Command command) {
-        this.command = command;
+    private void setCommand(OldCommand oldCommand) {
+        this.oldCommand = oldCommand;
     }
 
     public boolean isOpen() {
-        return !this.command.getName().equals("exit");
+        return !this.oldCommand.getName().equals("exit");
     }
 
     public void chooseCommand() {
         this.readCommand();
 
         try {
-            switch (this.command.getName()) {
+            switch (this.oldCommand.getName()) {
                 case "create":
-                    this.command.create();
+                    this.oldCommand.create();
                     break;
 
                 case "remove":
-                    this.command.remove(scanner);
+                    this.oldCommand.remove(scanner);
                     break;
 
                 case "show":
-                    this.command.show();
+                    this.oldCommand.show();
                     break;
 
                 case "rank":
-                    this.command.rank();
+                    this.oldCommand.rank();
                     break;
 
                 case "score":
-                    this.command.score();
+                    this.oldCommand.score();
                     break;
 
                 case "show_matchmake":
-                    this.command.showMatchmake();
+                    this.oldCommand.showMatchmake();
                     break;
 
                 case "clear_matchmake":
-                    this.command.clearMatchmake();
+                    this.oldCommand.clearMatchmake();
                     break;
 
                 case "matchmake":
-                    this.command.matchmake();
+                    this.oldCommand.matchmake();
                     break;
 
                 case "random_matchmake":
-                    this.command.randomMatchmake(scanner);
+                    this.oldCommand.randomMatchmake(scanner);
                     break;
 
                 case "h":
                 case "help":
-                    this.command.help();
+                    this.oldCommand.help();
                     break;
 
                 case "exit":
-                    this.command.exit();
+                    this.oldCommand.exit();
                     this.scanner.close();
                     break;
 
@@ -91,6 +91,6 @@ public class CommandManager {
         String[] splitCommand = this.scanner.nextLine().trim().split(" ");
         String name = splitCommand[0];
         String[] arguments = splitCommand.length > 1 ? splitCommand[1].split(";") : new String[0];
-        this.setCommand(new Command(this.playerList, this.matchList, name, arguments));
+        this.setCommand(new OldCommand(this.playerList, this.matchList, name, arguments));
     }
 }

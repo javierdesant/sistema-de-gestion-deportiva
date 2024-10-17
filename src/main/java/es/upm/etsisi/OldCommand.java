@@ -2,13 +2,13 @@ package es.upm.etsisi;
 
 import java.util.Scanner;
 
-public class Command {
+public class OldCommand {   // TODO: eliminar esta clase tras los cambios
     private final PlayerList playerList;
     private final MatchList matchList;
     private final String name;
     private final String[] arguments;
 
-    Command(PlayerList playerList, MatchList matchList, String name, String[] arguments) {
+    OldCommand(PlayerList playerList, MatchList matchList, String name, String[] arguments) {
         this.playerList = playerList;
         this.matchList = matchList;
         this.name = name;
