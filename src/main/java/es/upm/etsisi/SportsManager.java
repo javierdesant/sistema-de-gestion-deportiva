@@ -1,24 +1,30 @@
 package es.upm.etsisi;
 
 public class SportsManager {
-    public static void main(String[] args) {
-        PlayerList playerList = new PlayerList();
-        MatchList matchList = new MatchList();
+    private final PlayerList playerList;
+    private final MatchList matchList;
 
-        playerList.add(new Player("Luisa", 4.5));
-        playerList.add(new Player("Manuel", 2.7));
-        playerList.add(new Player("Kurt", 4.0));
-        playerList.add(new Player("Sofia", 3.8));
-        playerList.add(new Player("Robert", 3.8));
+    public SportsManager() {
+        this.playerList = new PlayerList();
+        this.matchList = new MatchList();
+    }
+
+    public void addDefaults() {
+        String[] defaultNames = {"Luisa", "Manuel", "Kurt", "Sofia", "Robert"};
+        double[] defaultScores = {4.5, 2.7, 4.0, 3.8, 3.8};
+
+        for (int i = 0; i < defaultNames.length; i++) {
+            this.playerList.add(new Player(defaultNames[i], defaultScores[i]));
+        }
+    }
+
+    public void run() {
+        CommandManager commandManager = new CommandManager(this.playerList, this.matchList);
 
         System.out.println("\n### Bienvenido al Gestor Deportivo ###\n");
 
         System.out.println("Introduzca un comando o escriba 'exit' para salir.");
 
-        CommandManager commandManager = new CommandManager(playerList, matchList);
-
-        do {
-            commandManager.chooseCommand();
-        } while (commandManager.isOpen());
+        commandManager.run();
     }
 }

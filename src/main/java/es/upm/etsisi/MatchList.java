@@ -7,7 +7,7 @@ import java.util.LinkedList;
 public class MatchList {
     private final LinkedList<Match> matches;
 
-    MatchList() {
+    public MatchList() {
         this.matches = new LinkedList<>();
     }
 

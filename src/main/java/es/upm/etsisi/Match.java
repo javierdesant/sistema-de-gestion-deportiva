@@ -4,7 +4,7 @@ public class Match {
     private final Player homePlayer;
     private final Player visitingPlayer;
 
-    Match(PlayerList playerList, Player homePlayer, Player visitingPlayer) {
+    public Match(PlayerList playerList, Player homePlayer, Player visitingPlayer) {
         assert playerList.contains(homePlayer) : Message.HOME_PLAYER_NOT_EXIST;
         assert playerList.contains(visitingPlayer) : Message.VISITING_PLAYER_NOT_EXIST;
         assert !homePlayer.equals(visitingPlayer) : Message.SAME_PLAYER_ERROR;

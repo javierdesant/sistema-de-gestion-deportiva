@@ -54,15 +54,15 @@ public enum Message {
         this.message = message;
     }
 
-    void write() {
+    public void write() {
         System.out.print(this.message);
     }
 
-    void writeln() {
+    public void writeln() {
         System.out.println(this.message);
     }
 
-    void writeln(String homePlayerName, String visitingPlayerName) {
+    public void writeln(String homePlayerName, String visitingPlayerName) {
         assert this == Message.PLAYERS_MATCHED;
 
         System.out.println(this.message.replaceAll("#homeplayer", homePlayerName).replaceAll("#visitingplayer", visitingPlayerName));

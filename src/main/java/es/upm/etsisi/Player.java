@@ -4,12 +4,12 @@ public class Player {
     private final String name;
     private double score;
 
-    Player(String name, double score) {
+    public Player(String name, double score) {
         this.name = name;
         this.score = score;
     }
 
-    Player(String name) {
+    public Player(String name) {
         this(name, 0.0);
     }
 
