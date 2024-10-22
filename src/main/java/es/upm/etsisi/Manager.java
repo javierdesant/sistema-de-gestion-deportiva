@@ -1,5 +1,6 @@
 package es.upm.etsisi;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 
 public abstract class Manager {
@@ -13,21 +14,26 @@ public abstract class Manager {
 
     protected abstract boolean isOpen();
 
-    protected void run() {  // TODO: implement Error class ?
-        // TODO: implement Invalid command
+    protected void run() {
         this.addItems();
         do {
             String input = this.read();
-            for (Item item : this.items) {
-                item.validate(input);
-                if (item.isCalled()) {
+            boolean commandMatch = false;
+            Iterator<Item> iterator = items.iterator();
+            while (iterator.hasNext() && !commandMatch) {
+                Item currentItem = iterator.next();
+                currentItem.validate(input);
+                if (currentItem.isCalled()) {
+                    commandMatch = true;
                     try {
-                        item.execute();
+                        currentItem.execute();
                     } catch (AssertionError error) {
                         System.out.println("Error: " + error.getMessage());
                     }
                 }
             }
+            if (!commandMatch)
+                Message.INVALID_COMMAND.writeln();
         } while (this.isOpen());
     }
 
