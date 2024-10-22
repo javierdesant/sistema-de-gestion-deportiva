@@ -28,6 +28,7 @@ public enum Message {
     HOME_PLAYER_NOT_EXIST("El jugador local no existe"),
     VISITING_PLAYER_NOT_EXIST("El jugador visitante no existe"),
     SCORE_OUT_OF_BOUNDS_ERROR("La puntuación supera los límites"),
+    SCORE_UPDATED("La puntuación de %s ahora es %.2f."),
     SAME_PLAYER_ERROR("Los jugadores no pueden ser el mismo"),
     PLAYERS_MATCHED_ERROR("Los jugadores deben estar sin emparejar"),
     PLAYER_ALREADY_EXISTS_ERROR("El jugador ya existe"),
@@ -60,6 +61,14 @@ public enum Message {
 
     public void writeln() {
         System.out.println(this.message);
+    }
+
+    public void writeln(String playerName, double score) {
+        System.out.println(String.format(this.message, playerName, score));
+    }
+
+    public void write(String playerName, double score) {
+        System.out.print(String.format(this.message, playerName, score));
     }
 
     public void writeln(String homePlayerName, String visitingPlayerName) {

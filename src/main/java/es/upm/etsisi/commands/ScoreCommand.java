@@ -14,7 +14,7 @@ public class ScoreCommand extends Command {
 
             double score = Double.parseDouble(this.getArgument(1));
             this.getPlayerList().score(playerName, score);
-            System.out.printf("La puntuación de %s ahora es %.2f.\n", playerName, score);   // TODO: añadir a Message enum
+            Message.SCORE_UPDATED.writeln(playerName, score);
         } catch (NumberFormatException e) {
             Message.INVALID_NUMBER.writeln();
         }
