@@ -7,8 +7,8 @@ import java.util.Scanner;
 public class RandomMatchmakeCommand extends Command {
     private final Scanner scanner;  // TODO: revisar / corregir
 
-    public RandomMatchmakeCommand(PlayerList playerList, MatchList matchList, String[] arguments, Scanner scanner) {
-        super(playerList, matchList, "random_matchmake", arguments);
+    public RandomMatchmakeCommand(PlayerList playerList, MatchList matchList, Scanner scanner) {
+        super(playerList, matchList, "random_matchmake");
         this.scanner = scanner;
     }
 

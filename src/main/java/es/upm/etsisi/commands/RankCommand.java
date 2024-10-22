@@ -3,8 +3,8 @@ package es.upm.etsisi.commands;
 import es.upm.etsisi.*;
 
 public class RankCommand extends Command {
-    public RankCommand(PlayerList playerList, MatchList matchList, String[] arguments) {
-        super(playerList, matchList, "rank", arguments);
+    public RankCommand(PlayerList playerList, MatchList matchList) {
+        super(playerList, matchList, "rank");
     }
 
     @Override

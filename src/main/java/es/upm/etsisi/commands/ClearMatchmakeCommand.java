@@ -3,8 +3,8 @@ package es.upm.etsisi.commands;
 import es.upm.etsisi.*;
 
 public class ClearMatchmakeCommand extends Command {
-    public ClearMatchmakeCommand(PlayerList playerList, MatchList matchList, String[] arguments) {
-        super(playerList, matchList, "clear_matchmake", arguments);
+    public ClearMatchmakeCommand(PlayerList playerList, MatchList matchList) {
+        super(playerList, matchList, "clear_matchmake");
     }
 
     @Override

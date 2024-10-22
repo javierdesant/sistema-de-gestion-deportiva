@@ -3,8 +3,8 @@ package es.upm.etsisi.commands;
 import es.upm.etsisi.*;
 
 public class ScoreCommand extends Command {
-    public ScoreCommand(PlayerList playerList, MatchList matchList, String[] arguments) {
-        super(playerList, matchList, "score", arguments);
+    public ScoreCommand(PlayerList playerList, MatchList matchList) {
+        super(playerList, matchList, "score");
     }
 
     @Override

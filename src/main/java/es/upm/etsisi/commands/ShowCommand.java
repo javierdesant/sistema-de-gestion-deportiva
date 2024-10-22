@@ -3,8 +3,8 @@ package es.upm.etsisi.commands;
 import es.upm.etsisi.*;
 
 public class ShowCommand extends Command {
-    public ShowCommand(PlayerList playerList, MatchList matchList, String[] arguments) {
-        super(playerList, matchList, "show", arguments);
+    public ShowCommand(PlayerList playerList, MatchList matchList) {
+        super(playerList, matchList, "show");
     }
 
     @Override

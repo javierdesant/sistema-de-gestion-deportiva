@@ -3,8 +3,8 @@ package es.upm.etsisi.commands;
 import es.upm.etsisi.*;
 
 public class MatchmakeCommand extends Command {
-    public MatchmakeCommand(PlayerList playerList, MatchList matchList, String[] arguments) {
-        super(playerList, matchList, "matchmake", arguments);
+    public MatchmakeCommand(PlayerList playerList, MatchList matchList) {
+        super(playerList, matchList, "matchmake");
     }
 
     @Override

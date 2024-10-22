@@ -3,8 +3,8 @@ package es.upm.etsisi.commands;
 import es.upm.etsisi.*;
 
 public class CreateCommand extends Command {
-    CreateCommand(PlayerList playerList, MatchList matchList, String[] arguments) {
-        super(playerList, matchList, "create", arguments);
+    CreateCommand(PlayerList playerList, MatchList matchList) {
+        super(playerList, matchList, "create");
     }
 
     @Override
