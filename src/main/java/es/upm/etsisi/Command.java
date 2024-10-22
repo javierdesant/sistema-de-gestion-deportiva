@@ -1,4 +1,4 @@
-package es.upm.etsisi.commands;
+package es.upm.etsisi;
 
 import es.upm.etsisi.*;
 
