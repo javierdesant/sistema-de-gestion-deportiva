@@ -23,9 +23,9 @@ public class MatchList {
 
     public void remove(String playerName) {
         for (Match match : this.matches) {
-            if (match.getHomePlayer().getName().equals(playerName)
-                    || match.getVisitingPlayer().getName().equals(playerName)) {
-                this.matches.remove(match);
+            for (int i = 0; i <= 1 ; i++) {
+                if (match.getPlayer(i).getName().equals(playerName))
+                    this.matches.remove(match);
             }
         }
     }
@@ -43,14 +43,12 @@ public class MatchList {
     }
 
     private boolean isValidMatch(Match match) {
-        Player homePlayer = match.getHomePlayer();
-        Player visitingPlayer = match.getVisitingPlayer();
         boolean isInvalidMatch = this.matches.contains(match);
 
         Iterator<Match> iterator = this.matches.iterator();
         while (iterator.hasNext() && !isInvalidMatch) {
             Match currentMatch = iterator.next();
-            isInvalidMatch = currentMatch.contains(homePlayer) || currentMatch.contains(visitingPlayer);
+            isInvalidMatch = currentMatch.contains(currentMatch.getPlayer(0)) || currentMatch.contains(currentMatch.getPlayer(1));
         }
         return !isInvalidMatch;
     }
