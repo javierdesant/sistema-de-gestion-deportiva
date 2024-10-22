@@ -1,37 +1,40 @@
 package es.upm.etsisi;
 
 public class Match {
-    private final Player homePlayer;
-    private final Player visitingPlayer;
+    private final Player[] players;
 
-    public Match(PlayerList playerList, Player homePlayer, Player visitingPlayer) {
-        assert playerList.contains(homePlayer) : Message.HOME_PLAYER_NOT_EXIST;
-        assert playerList.contains(visitingPlayer) : Message.VISITING_PLAYER_NOT_EXIST;
-        assert !homePlayer.equals(visitingPlayer) : Message.SAME_PLAYER_ERROR;
+    public Match(PlayerList playerList, Player firstPlayer, Player secondPlayer) {
+        assert playerList.contains(firstPlayer) : Message.HOME_PLAYER_NOT_EXIST;
+        assert playerList.contains(secondPlayer) : Message.VISITING_PLAYER_NOT_EXIST;
+        assert !firstPlayer.equals(secondPlayer);
 
-        this.homePlayer = homePlayer;
-        this.visitingPlayer = visitingPlayer;
+        this.players = new Player[2];
+        this.players[0] = firstPlayer;
+        this.players[1] = secondPlayer;
     }
 
-    public Player getHomePlayer() {
-        return this.homePlayer;
-    }
-
-    public Player getVisitingPlayer() {
-        return this.visitingPlayer;
+    public Player getPlayer(int index) {
+        return this.players[index];
     }
 
     public void show() {
-        System.out.println("Jugador local: " + this.homePlayer.getName());
-        System.out.println("Jugador visitante: " + this.visitingPlayer.getName());
+        System.out.println("Jugador: " + this.getPlayer(0).getName() + " vs Jugador: " + this.getPlayer(1).getName());
     }
 
     public boolean contains(Player player) {
-        return this.homePlayer.equals(player) || this.visitingPlayer.equals(player);
+        for (int i = 0; i < players.length; i++) {
+            if (player.equals(this.players[i]))
+                return true;
+        }
+        return false;
     }
 
     public boolean contains(String playerName) {
-        return this.homePlayer.getName().equals(playerName) || this.visitingPlayer.getName().equals(playerName);
+        for (int i = 0; i < players.length; i++) {
+            if (playerName.equals(players[i].getName()))
+                return true;
+        }
+        return false;
     }
 
     @Override
@@ -42,10 +45,6 @@ public class Match {
         if (object == null || getClass() != object.getClass()) {
             return false;
         }
-        Match match = (Match) object;
-        Player homePlayer = match.getHomePlayer();
-        Player visitingPlayer = match.getVisitingPlayer();
-        return this.homePlayer.equals(homePlayer) && this.visitingPlayer.equals(visitingPlayer) ||
-                this.homePlayer.equals(visitingPlayer) && this.visitingPlayer.equals(homePlayer);
+        return this.players[0].equals(this.players[1]);
     }
 }
