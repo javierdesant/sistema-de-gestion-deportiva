@@ -1,14 +1,16 @@
 package es.upm.etsisi;
 
+import java.util.List;
+
 public class Match {
     private final Player[] players;
 
-    public Match(PlayerList playerList, Player fP, Player sP) {
-        assert playerList.contains(fP) : Message.HOME_PLAYER_NOT_EXIST;
-        assert playerList.contains(sP) : Message.VISITING_PLAYER_NOT_EXIST;
-        assert !fP.equals(sP);
+    public Match(PlayerList playerList, Player firstPlayer, Player secondPlayer) {
+        assert playerList.contains(firstPlayer) : Message.HOME_PLAYER_NOT_EXIST;
+        assert playerList.contains(secondPlayer) : Message.VISITING_PLAYER_NOT_EXIST;
+        assert !firstPlayer.equals(secondPlayer) : Message.SAME_PLAYER_ERROR;
 
-        this.players = new Player[] { fP, sP };
+        this.players = new Player[]{firstPlayer, secondPlayer};
     }
 
     public Player[] getPlayers() {
@@ -16,28 +18,21 @@ public class Match {
     }
 
     public Player getPlayer(int index) {
-        assert index >= 0 && index < this.players.length : "Índice de jugador no válido";
+        assert 0 <= index && index < this.players.length : Message.INVALID_INDEX;
         return this.players[index];
     }
 
-    public void show() {
+    public void show() {    // TODO: implementar para cualquier numero de jugadores
+                            // TODO: implementar usando Message enum ?
         System.out.println("Jugador: " + this.getPlayer(0).getName() + " vs Jugador: " + this.getPlayer(1).getName());
     }
 
     public boolean contains(Player player) {
-        for (int i = 0; i < players.length; i++) {
-            if (player.equals(this.players[i]))
-                return true;
-        }
-        return false;
+        return List.of(this.players).contains(player);
     }
 
     public boolean contains(String playerName) {
-        for (int i = 0; i < players.length; i++) {
-            if (playerName.equals(players[i].getName()))
-                return true;
-        }
-        return false;
+        return this.contains(new Player(playerName));
     }
 
     @Override
@@ -49,12 +44,11 @@ public class Match {
             return false;
         }
         Match match = (Match) object;
-        Player[] players = new Player[this.players.length];
+        Player[] players = match.getPlayers();
         boolean result = false;
-        players = match.getPlayers();
-        for (int i = 0; i < players.length && !result; i++) {
-            for (int j = 0; j < players.length; j++) {
-                if (players[i].getName().equals(players[j].getName())) {
+        for (int i = 0; i < players.length && !result; i++) {   // FIXME: using for as while
+            for (Player player : players) {
+                if (players[i].getName().equals(player.getName())) {
                     result = true;
                 }
             }

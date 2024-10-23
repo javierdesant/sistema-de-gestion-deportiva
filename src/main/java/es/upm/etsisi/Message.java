@@ -4,6 +4,7 @@ public enum Message {
     COMMAND_PROMPT("> "),
     INVALID_COMMAND("Comando no válido. (Escriba h o help para ver el listado de comandos)"),
     INVALID_ARGUMENTS("Argumentos no válidos"),
+    INVALID_INDEX("Índice no válido"),
     INVALID_NAME("Nombre no válido"),
     INVALID_NUMBER("Introduzca un número válido"),
     MATCHES_RANDOMIZED("Emparejamiento aleatorio realizado con éxito."),
