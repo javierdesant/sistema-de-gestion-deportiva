@@ -8,7 +8,7 @@ public class RandomMatchmakeCommand extends Command {
     }
 
     @Override
-    public void execute() {     // TODO: create warning menu class
+    public void execute() {
         if (getMatchList().isEmpty()) {
             getMatchList().randomize(getPlayerList());
             Message.MATCHES_RANDOMIZED.writeln();
