@@ -34,7 +34,7 @@ public class WarningMenu extends Command {
             this.actions.put("S", () -> {
                 getMatchList().remove(playerName);
                 getPlayerList().remove(new Player(playerName));
-                Message.MATCHES_RANDOMIZED.writeln();
+                Message.PLAYER_REMOVED.writeln();
             });
         }
         this.actions.put("N", () -> Message.CANCEL.writeln());
