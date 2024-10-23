@@ -20,11 +20,11 @@ public class CommandManager extends Manager {
     }
 
     public static PlayerList getPlayerList() {
-        return playerList;
+        return CommandManager.playerList;
     }
 
     public static MatchList getMatchList() {
-        return matchList;
+        return CommandManager.matchList;
     }
 
     @Override

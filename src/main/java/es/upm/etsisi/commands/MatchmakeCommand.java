@@ -1,6 +1,9 @@
 package es.upm.etsisi.commands;
 
-import es.upm.etsisi.*;
+import es.upm.etsisi.Command;
+import es.upm.etsisi.Match;
+import es.upm.etsisi.Message;
+import es.upm.etsisi.Player;
 
 public class MatchmakeCommand extends Command {
     public MatchmakeCommand() {
