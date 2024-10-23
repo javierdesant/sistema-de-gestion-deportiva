@@ -5,33 +5,40 @@ import es.upm.etsisi.commands.*;
 import java.util.Scanner;
 
 public class CommandManager extends Manager {
+    private static PlayerList playerList;
+    private static MatchList matchList;
     private final Scanner scanner;
-    private final PlayerList playerList;
-    private final MatchList matchList;
 
-    CommandManager(PlayerList playerList, MatchList matchList) {
+    public CommandManager(PlayerList playerList, MatchList matchList) {
         super();
         assert playerList != null : Message.NULL_PLAYERLIST;
         assert matchList != null : Message.NULL_MATCHLIST;
 
+        CommandManager.playerList = playerList;
+        CommandManager.matchList = matchList;
         this.scanner = new Scanner(System.in);
-        this.playerList = playerList;
-        this.matchList = matchList;
+    }
+
+    public static PlayerList getPlayerList() {
+        return playerList;
+    }
+
+    public static MatchList getMatchList() {
+        return matchList;
     }
 
     @Override
     protected void addItems() {
-        this.add(new CreateCommand(this.playerList, this.matchList));
-        this.add(new RemoveCommand(this.playerList, this.matchList));
-        this.add(new ShowCommand(this.playerList, this.matchList));
-        this.add(new RankCommand(this.playerList, this.matchList));
-        this.add(new ScoreCommand(this.playerList, this.matchList));
-        this.add(new ShowMatchmakeCommand(this.playerList, this.matchList));
-        this.add(new ClearMatchmakeCommand(this.playerList, this.matchList));
-        this.add(new MatchmakeCommand(this.playerList, this.matchList));
-        this.add(new RandomMatchmakeCommand(this.playerList, this.matchList, scanner));
-        this.add(new ExitCommand(this.playerList, this.matchList));
-        this.add(new HelpCommand(this.playerList, this.matchList));
+        this.add(new CreateCommand());
+        this.add(new RemoveCommand());
+        this.add(new ShowCommand());
+        this.add(new RankCommand());
+        this.add(new ScoreCommand());
+        this.add(new ShowMatchmakeCommand());
+        this.add(new ClearMatchmakeCommand());
+        this.add(new MatchmakeCommand());
+        this.add(new ExitCommand());
+        this.add(new HelpCommand());
     }
 
     @Override
