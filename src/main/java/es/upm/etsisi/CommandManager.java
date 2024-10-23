@@ -29,7 +29,7 @@ public class CommandManager extends Manager {
         this.add(new ShowMatchmakeCommand(this.playerList, this.matchList));
         this.add(new ClearMatchmakeCommand(this.playerList, this.matchList));
         this.add(new MatchmakeCommand(this.playerList, this.matchList));
-        this.add(new RandomMatchmakeCommand(this.playerList, this.matchList, scanner));
+        this.add(new RandomMatchmakeCommand(this.playerList, this.matchList));
         this.add(new ExitCommand(this.playerList, this.matchList));
         this.add(new HelpCommand(this.playerList, this.matchList));
     }
