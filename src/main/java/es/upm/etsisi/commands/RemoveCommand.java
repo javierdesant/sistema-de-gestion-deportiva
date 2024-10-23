@@ -5,8 +5,8 @@ import es.upm.etsisi.*;
 import java.util.Scanner;
 
 public class RemoveCommand extends Command {
-    public RemoveCommand(PlayerList playerList, MatchList matchList) {
-        super(playerList, matchList, "remove");
+    public RemoveCommand() {
+        super("remove");
     }
 
     @Override

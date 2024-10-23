@@ -6,8 +6,8 @@ import es.upm.etsisi.Message;
 import es.upm.etsisi.PlayerList;
 
 public class ShowMatchmakeCommand extends Command {
-    public ShowMatchmakeCommand(PlayerList playerList, MatchList matchList) {
-        super(playerList, matchList, "show_matchmake");
+    public ShowMatchmakeCommand() {
+        super("show_matchmake");
     }
 
     @Override

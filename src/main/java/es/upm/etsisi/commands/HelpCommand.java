@@ -6,8 +6,8 @@ import es.upm.etsisi.Message;
 import es.upm.etsisi.PlayerList;
 
 public class HelpCommand extends Command {
-    public HelpCommand(PlayerList playerList, MatchList matchList) {
-        super(playerList, matchList, "help");
+    public HelpCommand() {
+        super("help");
     }
 
     @Override
