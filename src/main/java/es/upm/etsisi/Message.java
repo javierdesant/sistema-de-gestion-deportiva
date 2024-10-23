@@ -64,11 +64,11 @@ public enum Message {
     }
 
     public void writeln(String playerName, double score) {
-        System.out.println(String.format(this.message, playerName, score));
+        System.out.printf((this.message) + "%n", playerName, score);
     }
 
     public void write(String playerName, double score) {
-        System.out.print(String.format(this.message, playerName, score));
+        System.out.printf(this.message, playerName, score);
     }
 
     public void writeln(String homePlayerName, String visitingPlayerName) {

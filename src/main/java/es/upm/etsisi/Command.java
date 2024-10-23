@@ -1,7 +1,5 @@
 package es.upm.etsisi;
 
-import es.upm.etsisi.*;
-
 public abstract class Command implements Item {
     private final PlayerList playerList;
     private final MatchList matchList;

@@ -1,6 +1,9 @@
 package es.upm.etsisi.commands;
 
-import es.upm.etsisi.*;
+import es.upm.etsisi.Command;
+import es.upm.etsisi.MatchList;
+import es.upm.etsisi.Message;
+import es.upm.etsisi.PlayerList;
 
 public class ScoreCommand extends Command {
     public ScoreCommand(PlayerList playerList, MatchList matchList) {
