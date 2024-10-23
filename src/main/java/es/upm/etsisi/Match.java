@@ -3,17 +3,20 @@ package es.upm.etsisi;
 public class Match {
     private final Player[] players;
 
-    public Match(PlayerList playerList, Player firstPlayer, Player secondPlayer) {
-        assert playerList.contains(firstPlayer) : Message.HOME_PLAYER_NOT_EXIST;
-        assert playerList.contains(secondPlayer) : Message.VISITING_PLAYER_NOT_EXIST;
-        assert !firstPlayer.equals(secondPlayer);
+    public Match(PlayerList playerList, Player fP, Player sP) {
+        assert playerList.contains(fP) : Message.HOME_PLAYER_NOT_EXIST;
+        assert playerList.contains(sP) : Message.VISITING_PLAYER_NOT_EXIST;
+        assert !fP.equals(sP);
 
-        this.players = new Player[2];
-        this.players[0] = firstPlayer;
-        this.players[1] = secondPlayer;
+        this.players = new Player[] { fP, sP };
+    }
+
+    public Player[] getPlayers() {
+        return this.players;
     }
 
     public Player getPlayer(int index) {
+        assert index >= 0 && index < this.players.length : "Índice de jugador no válido";
         return this.players[index];
     }
 
@@ -45,6 +48,17 @@ public class Match {
         if (object == null || getClass() != object.getClass()) {
             return false;
         }
-        return this.players[0].equals(this.players[1]);
+        Match match = (Match) object;
+        Player[] players = new Player[this.players.length];
+        boolean result = false;
+        players = match.getPlayers();
+        for (int i = 0; i < players.length && !result; i++) {
+            for (int j = 0; j < players.length; j++) {
+                if (players[i].getName().equals(players[j].getName())) {
+                    result = true;
+                }
+            }
+        }
+        return result;
     }
 }
