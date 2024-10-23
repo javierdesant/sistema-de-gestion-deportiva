@@ -32,6 +32,7 @@ public class CommandManager extends Manager {
         this.add(new CreateCommand());
         this.add(new RemoveCommand());
         this.add(new ShowCommand());
+        this.add(new RandomMatchmakeCommand(scanner));
         this.add(new RankCommand());
         this.add(new ScoreCommand());
         this.add(new ShowMatchmakeCommand());
