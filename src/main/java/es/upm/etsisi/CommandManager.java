@@ -22,7 +22,7 @@ public class CommandManager extends Manager {
     @Override
     protected void addItems() {
         this.add(new CreateCommand(this.playerList));
-        this.add(new RemoveCommand(this.playerList, this.matchList));
+        this.add(new RemoveCommand(this.playerList, this.matchList, scanner));
         this.add(new ShowCommand(this.playerList));
         this.add(new RankCommand(this.playerList));
         this.add(new ScoreCommand(this.playerList));

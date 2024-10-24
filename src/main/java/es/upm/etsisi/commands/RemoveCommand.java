@@ -12,11 +12,11 @@ public class RemoveCommand extends Command {
     private final MatchList matchList;
     private final Scanner scanner;
 
-    public RemoveCommand(PlayerList playerList, MatchList matchList) {
+    public RemoveCommand(PlayerList playerList, MatchList matchList, Scanner scanner) {
         super("remove");
         this.playerList = playerList;
         this.matchList = matchList;
-        this.scanner = new Scanner(System.in);
+        this.scanner = scanner;
     }
 
     @Override
