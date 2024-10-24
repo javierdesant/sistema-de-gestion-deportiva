@@ -21,17 +21,17 @@ public class CommandManager extends Manager {
 
     @Override
     protected void addItems() {
-        this.add(new CreateCommand(this.playerList, this.matchList));
+        this.add(new CreateCommand(this.playerList));
         this.add(new RemoveCommand(this.playerList, this.matchList));
-        this.add(new ShowCommand(this.playerList, this.matchList));
-        this.add(new RankCommand(this.playerList, this.matchList));
-        this.add(new ScoreCommand(this.playerList, this.matchList));
+        this.add(new ShowCommand(this.playerList));
+        this.add(new RankCommand(this.playerList));
+        this.add(new ScoreCommand(this.playerList));
         this.add(new ShowMatchmakeCommand(this.playerList, this.matchList));
-        this.add(new ClearMatchmakeCommand(this.playerList, this.matchList));
+        this.add(new ClearMatchmakeCommand(this.matchList));
         this.add(new MatchmakeCommand(this.playerList, this.matchList));
         this.add(new RandomMatchmakeCommand(this.playerList, this.matchList, scanner));
-        this.add(new ExitCommand(this.playerList, this.matchList));
-        this.add(new HelpCommand(this.playerList, this.matchList));
+        this.add(new ExitCommand());
+        this.add(new HelpCommand());
     }
 
     @Override

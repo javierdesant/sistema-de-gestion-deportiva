@@ -1,18 +1,20 @@
 package es.upm.etsisi.commands;
 
-import es.upm.etsisi.MatchList;
 import es.upm.etsisi.Message;
 import es.upm.etsisi.PlayerList;
 
 public class RankCommand extends Command {
-    public RankCommand(PlayerList playerList, MatchList matchList) {
-        super(playerList, matchList, "rank");
+    private final PlayerList playerList;
+
+    public RankCommand(PlayerList playerList) {
+        super("rank");
+        this.playerList = playerList;
     }
 
     @Override
     public void execute() {
         Message.RANKING_HEADER.writeln();
-        getPlayerList().rank();
+        this.playerList.rank();
         Message.FOOTER.writeln();
     }
 }

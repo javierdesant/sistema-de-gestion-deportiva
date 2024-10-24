@@ -1,33 +1,19 @@
 package es.upm.etsisi.commands;
 
 import es.upm.etsisi.Item;
-import es.upm.etsisi.MatchList;
 import es.upm.etsisi.Message;
-import es.upm.etsisi.PlayerList;
 
 public abstract class Command implements Item {
-    private final PlayerList playerList;
-    private final MatchList matchList;
     private final String name_;
     private String name;
     private String[] arguments;
 
-    public Command(PlayerList playerList, MatchList matchList, String name) {
-        this.playerList = playerList;
-        this.matchList = matchList;
+    public Command(String name) {
         this.name_ = name;
     }
 
     public String getName() {
         return this.name;
-    }
-
-    protected PlayerList getPlayerList() {
-        return this.playerList;
-    }
-
-    protected MatchList getMatchList() {
-        return this.matchList;
     }
 
     protected String getArgument(int index) {     // TODO: añadir un máximo de args dependiendo del comando

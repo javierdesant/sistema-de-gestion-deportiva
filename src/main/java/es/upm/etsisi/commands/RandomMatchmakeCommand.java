@@ -8,24 +8,28 @@ import java.util.Scanner;
 
 public class RandomMatchmakeCommand extends Command {
     private final Scanner scanner;  // TODO: revisar / corregir
+    private final PlayerList playerList;
+    private final MatchList matchList;
 
     public RandomMatchmakeCommand(PlayerList playerList, MatchList matchList, Scanner scanner) {
-        super(playerList, matchList, "random_matchmake");
+        super("random_matchmake");
+        this.playerList = playerList;
+        this.matchList = matchList;
         this.scanner = scanner;
     }
 
     @Override
     public void execute() {     // TODO: create warning menu class
-        if (getMatchList().isEmpty()) {
-            getMatchList().randomize(getPlayerList());
+        if (this.matchList.isEmpty()) {
+            this.matchList.randomize(this.playerList);
             Message.MATCHES_RANDOMIZED.writeln();
         } else {
             Message.RANDOM_MATCHMAKE_WARNING.writeln();
             Message.CONTINUE_PROMPT.write();
             switch (scanner.nextLine().toUpperCase()) {
                 case "S":
-                    getMatchList().clear();
-                    getMatchList().randomize(getPlayerList());
+                    this.matchList.clear();
+                    this.matchList.randomize(this.playerList);
                     Message.MATCHES_RANDOMIZED.writeln();
                     break;
                 case "N":

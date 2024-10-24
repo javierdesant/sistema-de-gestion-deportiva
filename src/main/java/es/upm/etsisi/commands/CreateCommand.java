@@ -1,10 +1,15 @@
 package es.upm.etsisi.commands;
 
-import es.upm.etsisi.*;
+import es.upm.etsisi.Message;
+import es.upm.etsisi.Player;
+import es.upm.etsisi.PlayerList;
 
 public class CreateCommand extends Command {
-    public CreateCommand(PlayerList playerList, MatchList matchList) {
-        super(playerList, matchList, "create");
+    private final PlayerList playerList;
+
+    public CreateCommand(PlayerList playerList) {
+        super("create");
+        this.playerList = playerList;
     }
 
     @Override
@@ -13,7 +18,7 @@ public class CreateCommand extends Command {
 
         assert playerName.matches("[a-zA-Z]+") : Message.INVALID_NAME;
 
-        this.getPlayerList().add(new Player(playerName));
+        this.playerList.add(new Player(playerName));
         Message.PLAYER_ADDED.writeln();
     }
 }

@@ -2,16 +2,18 @@ package es.upm.etsisi.commands;
 
 import es.upm.etsisi.MatchList;
 import es.upm.etsisi.Message;
-import es.upm.etsisi.PlayerList;
 
 public class ClearMatchmakeCommand extends Command {
-    public ClearMatchmakeCommand(PlayerList playerList, MatchList matchList) {
-        super(playerList, matchList, "clear_matchmake");
+    private final MatchList matchList;
+
+    public ClearMatchmakeCommand(MatchList matchList) {
+        super("clear_matchmake");
+        this.matchList = matchList;
     }
 
     @Override
     public void execute() {
-        getMatchList().clear();
+        this.matchList.clear();
         Message.MATCHMAKE_CLEARED.writeln();
     }
 }

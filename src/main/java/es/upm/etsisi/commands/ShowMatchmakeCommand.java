@@ -5,14 +5,17 @@ import es.upm.etsisi.Message;
 import es.upm.etsisi.PlayerList;
 
 public class ShowMatchmakeCommand extends Command {
+    private final MatchList matchList;
+
     public ShowMatchmakeCommand(PlayerList playerList, MatchList matchList) {
-        super(playerList, matchList, "show_matchmake");
+        super("show_matchmake");
+        this.matchList = matchList;
     }
 
     @Override
     public void execute() {
         Message.MATCHMAKE_HEADER.writeln();
-        getMatchList().show();
+        this.matchList.show();
         Message.FOOTER.writeln();
     }
 }
