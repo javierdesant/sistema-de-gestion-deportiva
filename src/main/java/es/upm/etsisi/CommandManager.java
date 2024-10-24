@@ -30,13 +30,8 @@ public class CommandManager extends Manager {
         this.add(new ClearMatchmakeCommand(this.matchList));
         this.add(new MatchmakeCommand(this.playerList, this.matchList));
         this.add(new RandomMatchmakeCommand(this.playerList, this.matchList, scanner));
-        this.add(new ExitCommand());
+        this.add(new ExitCommand(this));
         this.add(new HelpCommand());
-    }
-
-    @Override
-    public boolean isOpen() {
-        return true;    // TODO
     }
 
     @Override
