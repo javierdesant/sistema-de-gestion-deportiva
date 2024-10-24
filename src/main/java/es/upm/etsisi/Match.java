@@ -24,7 +24,7 @@ public class Match {
 
     public void show() {    // TODO: implementar para cualquier numero de jugadores
                             // TODO: implementar usando Message enum ?
-        System.out.println("Jugador: " + this.getPlayer(0).getName() + " vs Jugador: " + this.getPlayer(1).getName());
+        System.out.println(this.getPlayer(0).getName() + " vs " + this.getPlayer(1).getName());
     }
 
     public boolean contains(Player player) {
