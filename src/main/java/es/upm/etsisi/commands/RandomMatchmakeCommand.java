@@ -7,9 +7,9 @@ import es.upm.etsisi.PlayerList;
 import java.util.Scanner;
 
 public class RandomMatchmakeCommand extends Command {
-    private final Scanner scanner;  // TODO: revisar / corregir
     private final PlayerList playerList;
     private final MatchList matchList;
+    private final Scanner scanner;
 
     public RandomMatchmakeCommand(PlayerList playerList, MatchList matchList, Scanner scanner) {
         super("random_matchmake");

@@ -10,11 +10,13 @@ import java.util.Scanner;
 public class RemoveCommand extends Command {
     private final PlayerList playerList;
     private final MatchList matchList;
+    private final Scanner scanner;
 
     public RemoveCommand(PlayerList playerList, MatchList matchList) {
         super("remove");
         this.playerList = playerList;
         this.matchList = matchList;
+        this.scanner = new Scanner(System.in);
     }
 
     @Override
@@ -24,8 +26,7 @@ public class RemoveCommand extends Command {
         if (this.matchList.contains(playerName)) {
             Message.ERASE_MATCHED_PLAYER_WARNING.writeln();
             Message.CONTINUE_PROMPT.write();
-            Scanner scanner = new Scanner(System.in);   // TODO: usar como argumento
-            switch (scanner.nextLine().toUpperCase()) {
+            switch (this.scanner.nextLine().toUpperCase()) {
                 case "S":
                     this.matchList.remove(playerName);
                     this.playerList.remove(new Player(playerName));
