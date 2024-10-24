@@ -15,10 +15,10 @@ public class MatchList {
         return this.matches.isEmpty();
     }
 
-    public void add(Match newMatch) {
-        assert this.isValidMatch(newMatch) : Message.PLAYERS_MATCHED_ERROR;
+    public void add(Match match) {
+        assert this.isValidMatch(match) : Message.PLAYERS_MATCHED_ERROR;
 
-        this.matches.add(newMatch);
+        this.matches.add(match);
     }
 
     public void remove(String playerName) {
