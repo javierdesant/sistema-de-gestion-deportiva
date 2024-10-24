@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="GestorDeportivo" type="Application" factoryName="Application">
-    <option name="MAIN_CLASS_NAME" value="es.upm.etsisi.SportsManager" />
+  <configuration default="false" name="SportsManager" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="es.upm.etsisi.App" />
     <module name="sistema-de-gestion-deportiva" />
     <option name="VM_PARAMETERS" value="-ea" />
     <method v="2">
