@@ -9,7 +9,6 @@ public abstract class Manager {
 
     public Manager() {
         this.items = new LinkedList<>();
-        this.addItems();
         this.open();
     }
 
@@ -29,6 +28,7 @@ public abstract class Manager {
 
     protected void run() {
         do {
+            this.addItems();    // TODO: revisar
             String input = this.read();
             boolean commandMatch = false;
             Iterator<Item> iterator = items.iterator();
