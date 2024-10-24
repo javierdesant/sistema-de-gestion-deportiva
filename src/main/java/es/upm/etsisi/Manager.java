@@ -5,17 +5,29 @@ import java.util.LinkedList;
 
 public abstract class Manager {
     private final LinkedList<Item> items;
+    private Status status;
 
     public Manager() {
         this.items = new LinkedList<>();
+        this.addItems();
+        this.open();
     }
 
     protected abstract void addItems();
 
-    protected abstract boolean isOpen();
+    public boolean isOpen() {
+        return this.status == Status.OPEN;
+    }
+
+    public void open() {
+        this.status = Status.OPEN;
+    }
+
+    public void close() {
+        this.status = Status.CLOSED;
+    }
 
     protected void run() {
-        this.addItems();
         do {
             String input = this.read();
             boolean commandMatch = false;
