@@ -1,8 +1,8 @@
-package es.upm.etsisi.models;
+package es.upm.etsisi.models.player;
 
 import java.util.ArrayList;
 
-public class Composite implements Component {
+public class Composite implements Component {   // TODO: implement
     private final ArrayList<Component> children;
 
     public Composite() {

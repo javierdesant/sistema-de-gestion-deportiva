@@ -1,8 +1,8 @@
 package es.upm.etsisi.service;
 
-import es.upm.etsisi.models.MatchList;
-import es.upm.etsisi.models.Player;
-import es.upm.etsisi.models.PlayerList;
+import es.upm.etsisi.models.game.MatchList;
+import es.upm.etsisi.models.player.Player;
+import es.upm.etsisi.models.player.PlayerList;
 
 public class SportsService {
     private final PlayerList playerList;

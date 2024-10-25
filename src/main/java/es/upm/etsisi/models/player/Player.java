@@ -1,4 +1,4 @@
-package es.upm.etsisi.models;
+package es.upm.etsisi.models.player;
 
 public class Player {
     private final String name;

@@ -1,4 +1,4 @@
-package es.upm.etsisi.models;
+package es.upm.etsisi.models.player;
 
 import es.upm.etsisi.utils.Message;
 

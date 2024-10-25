@@ -1,4 +1,4 @@
-package es.upm.etsisi.models;
+package es.upm.etsisi.service;
 
 public interface Item {
     boolean isCalled();

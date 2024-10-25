@@ -1,6 +1,8 @@
-package es.upm.etsisi.models;
+package es.upm.etsisi.models.player;
 
-public class Leaf implements Component, User {
+import es.upm.etsisi.auth.User;
+
+public class Leaf implements Component, User {  // TODO: implement
 
 
     @Override

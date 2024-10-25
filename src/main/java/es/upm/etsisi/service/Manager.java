@@ -1,6 +1,5 @@
 package es.upm.etsisi.service;
 
-import es.upm.etsisi.models.Item;
 import es.upm.etsisi.utils.Message;
 import es.upm.etsisi.utils.Status;
 
