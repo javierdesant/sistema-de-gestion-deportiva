@@ -26,7 +26,7 @@ public class Statistics {
         return statistics;
     }
 
-    public void print() {
+    public void writeln() {
         for (Categories category : Categories.values()) {
             System.out.println(category + ": " + getStatistic(category));
         }
