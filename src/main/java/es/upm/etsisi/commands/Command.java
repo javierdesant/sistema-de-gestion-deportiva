@@ -22,7 +22,10 @@ public abstract class Command implements Item {
         return this.arguments[index];
     }
 
+    @Override
     public void validate(String input) {
+        assert input != null;
+
         String[] split = input.split(" ");
         this.name = split[0];
         if (split.length > 1) {
@@ -32,6 +35,7 @@ public abstract class Command implements Item {
         }
     }
 
+    @Override
     public boolean isCalled() {
         return this.name.equals(this.name_);
     }
