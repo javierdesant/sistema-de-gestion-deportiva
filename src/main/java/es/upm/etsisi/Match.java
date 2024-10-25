@@ -1,37 +1,38 @@
 package es.upm.etsisi;
 
+import java.util.List;
+
 public class Match {
-    private final Player homePlayer;
-    private final Player visitingPlayer;
+    private final Player[] players;
 
-    Match(PlayerList playerList, Player homePlayer, Player visitingPlayer) {
-        assert playerList.contains(homePlayer) : Message.HOME_PLAYER_NOT_EXIST;
-        assert playerList.contains(visitingPlayer) : Message.VISITING_PLAYER_NOT_EXIST;
-        assert !homePlayer.equals(visitingPlayer) : Message.SAME_PLAYER_ERROR;
+    public Match(PlayerList playerList, Player firstPlayer, Player secondPlayer) {
+        assert playerList.contains(firstPlayer) : Message.HOME_PLAYER_NOT_EXIST;
+        assert playerList.contains(secondPlayer) : Message.VISITING_PLAYER_NOT_EXIST;
+        assert !firstPlayer.equals(secondPlayer) : Message.SAME_PLAYER_ERROR;
 
-        this.homePlayer = homePlayer;
-        this.visitingPlayer = visitingPlayer;
+        this.players = new Player[]{firstPlayer, secondPlayer};
     }
 
-    public Player getHomePlayer() {
-        return this.homePlayer;
+    public Player[] getPlayers() {
+        return this.players;
     }
 
-    public Player getVisitingPlayer() {
-        return this.visitingPlayer;
+    public Player getPlayer(int index) {
+        assert 0 <= index && index < this.players.length : Message.INVALID_INDEX;
+        return this.players[index];
     }
 
-    public void show() {
-        System.out.println("Jugador local: " + this.homePlayer.getName());
-        System.out.println("Jugador visitante: " + this.visitingPlayer.getName());
+    public void show() {    // TODO: implementar para cualquier numero de jugadores
+                            // TODO: implementar usando Message enum ?
+        System.out.println(this.getPlayer(0).getName() + " vs " + this.getPlayer(1).getName());
     }
 
     public boolean contains(Player player) {
-        return this.homePlayer.equals(player) || this.visitingPlayer.equals(player);
+        return List.of(this.players).contains(player);
     }
 
     public boolean contains(String playerName) {
-        return this.homePlayer.getName().equals(playerName) || this.visitingPlayer.getName().equals(playerName);
+        return this.contains(new Player(playerName));
     }
 
     @Override
@@ -43,9 +44,15 @@ public class Match {
             return false;
         }
         Match match = (Match) object;
-        Player homePlayer = match.getHomePlayer();
-        Player visitingPlayer = match.getVisitingPlayer();
-        return this.homePlayer.equals(homePlayer) && this.visitingPlayer.equals(visitingPlayer) ||
-                this.homePlayer.equals(visitingPlayer) && this.visitingPlayer.equals(homePlayer);
+        Player[] players = match.getPlayers();
+        boolean result = false;
+        for (int i = 0; i < players.length && !result; i++) {   // FIXME: using for as while
+            for (Player player : players) {
+                if (players[i].getName().equals(player.getName())) {
+                    result = true;
+                }
+            }
+        }
+        return result;
     }
 }

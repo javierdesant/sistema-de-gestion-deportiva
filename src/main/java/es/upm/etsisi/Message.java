@@ -4,12 +4,13 @@ public enum Message {
     COMMAND_PROMPT("> "),
     INVALID_COMMAND("Comando no válido. (Escriba h o help para ver el listado de comandos)"),
     INVALID_ARGUMENTS("Argumentos no válidos"),
+    INVALID_INDEX("Índice no válido"),
     INVALID_NAME("Nombre no válido"),
     INVALID_NUMBER("Introduzca un número válido"),
     MATCHES_RANDOMIZED("Emparejamiento aleatorio realizado con éxito."),
     PLAYER_ADDED("Jugador añadido con éxito."),
     PLAYER_REMOVED("Jugador eliminado con éxito."),
-    PLAYERS_MATCHED("Los jugadores #homeplayer y #visitingplayer han sido emparejados correctamente."),
+    PLAYERS_MATCHED("Los jugadores #firstplayer y #secondplayer han sido emparejados correctamente."),
     NO_MATCHES("No hay emparejamientos"),
     NO_PLAYERS("No hay jugadores"),
     NULL_PLAYERLIST("La lista de jugadores no puede ser nula"),
@@ -28,6 +29,7 @@ public enum Message {
     HOME_PLAYER_NOT_EXIST("El jugador local no existe"),
     VISITING_PLAYER_NOT_EXIST("El jugador visitante no existe"),
     SCORE_OUT_OF_BOUNDS_ERROR("La puntuación supera los límites"),
+    SCORE_UPDATED("La puntuación de %s ahora es %.2f."),
     SAME_PLAYER_ERROR("Los jugadores no pueden ser el mismo"),
     PLAYERS_MATCHED_ERROR("Los jugadores deben estar sin emparejar"),
     PLAYER_ALREADY_EXISTS_ERROR("El jugador ya existe"),
@@ -54,18 +56,26 @@ public enum Message {
         this.message = message;
     }
 
-    void write() {
+    public void write() {
         System.out.print(this.message);
     }
 
-    void writeln() {
+    public void writeln() {
         System.out.println(this.message);
     }
 
-    void writeln(String homePlayerName, String visitingPlayerName) {
+    public void writeln(String playerName, double score) {
+        System.out.printf((this.message) + "%n", playerName, score);
+    }
+
+    public void write(String playerName, double score) {
+        System.out.printf(this.message, playerName, score);
+    }
+
+    public void writeln(String firstPlayerName, String secondPlayerName) {
         assert this == Message.PLAYERS_MATCHED;
 
-        System.out.println(this.message.replaceAll("#homeplayer", homePlayerName).replaceAll("#visitingplayer", visitingPlayerName));
+        System.out.println(this.message.replaceAll("#firstplayer", firstPlayerName).replaceAll("#secondplayer", secondPlayerName));
     }
 
     @Override

@@ -1,14 +1,16 @@
 package es.upm.etsisi;
 
+import es.upm.etsisi.commands.*;
+
 import java.util.Scanner;
 
-public class CommandManager {
+public class CommandManager extends Manager {
     private final Scanner scanner;
-    private Command command;
     private final PlayerList playerList;
     private final MatchList matchList;
 
     CommandManager(PlayerList playerList, MatchList matchList) {
+        super();
         assert playerList != null : Message.NULL_PLAYERLIST;
         assert matchList != null : Message.NULL_MATCHLIST;
 
@@ -17,80 +19,26 @@ public class CommandManager {
         this.matchList = matchList;
     }
 
-    private void setCommand(Command command) {
-        this.command = command;
+    @Override
+    protected void addItems() {
+        this.add(new CreateCommand(this.playerList));
+        this.add(new RemoveCommand(this.playerList, this.matchList, scanner));
+        this.add(new ShowCommand(this.playerList));
+        this.add(new RankCommand(this.playerList));
+        this.add(new ScoreCommand(this.playerList));
+        this.add(new ShowMatchmakeCommand(this.playerList, this.matchList));
+        this.add(new ClearMatchmakeCommand(this.matchList));
+        this.add(new MatchmakeCommand(this.playerList, this.matchList));
+        this.add(new RandomMatchmakeCommand(this.playerList, this.matchList, scanner));
+        this.add(new ExitCommand(this));
+        this.add(new HelpCommand());
     }
 
-    public boolean isOpen() {
-        return !this.command.getName().equals("exit");
-    }
-
-    public void chooseCommand() {
-        this.readCommand();
-
-        try {
-            switch (this.command.getName()) {
-                case "create":
-                    this.command.create();
-                    break;
-
-                case "remove":
-                    this.command.remove(scanner);
-                    break;
-
-                case "show":
-                    this.command.show();
-                    break;
-
-                case "rank":
-                    this.command.rank();
-                    break;
-
-                case "score":
-                    this.command.score();
-                    break;
-
-                case "show_matchmake":
-                    this.command.showMatchmake();
-                    break;
-
-                case "clear_matchmake":
-                    this.command.clearMatchmake();
-                    break;
-
-                case "matchmake":
-                    this.command.matchmake();
-                    break;
-
-                case "random_matchmake":
-                    this.command.randomMatchmake(scanner);
-                    break;
-
-                case "h":
-                case "help":
-                    this.command.help();
-                    break;
-
-                case "exit":
-                    this.command.exit();
-                    this.scanner.close();
-                    break;
-
-                default:
-                    Message.INVALID_COMMAND.writeln();
-            }
-        } catch (AssertionError error) {
-            System.out.println("ERROR: " + error.getMessage());
-        }
-    }
-
-    private void readCommand() {
+    @Override
+    protected String read() {
         System.out.println();
         Message.COMMAND_PROMPT.write();
 
-        String[] splitCommand = this.scanner.nextLine().trim().split(" ");
-        String name = splitCommand[0];
-        String[] arguments = splitCommand.length > 1 ? splitCommand[1].split(";") : new String[0];
-        this.setCommand(new Command(this.playerList, this.matchList, name, arguments));
+        return this.scanner.nextLine().trim();
     }
 }

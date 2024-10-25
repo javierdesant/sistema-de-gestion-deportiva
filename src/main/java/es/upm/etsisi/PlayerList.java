@@ -6,7 +6,7 @@ import java.util.LinkedList;
 public class PlayerList {
     private final LinkedList<Player> players;
 
-    PlayerList() {
+    public PlayerList() {
         this.players = new LinkedList<>();
     }
 

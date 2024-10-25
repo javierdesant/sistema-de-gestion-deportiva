@@ -7,7 +7,7 @@ import java.util.LinkedList;
 public class MatchList {
     private final LinkedList<Match> matches;
 
-    MatchList() {
+    public MatchList() {
         this.matches = new LinkedList<>();
     }
 
@@ -15,17 +15,17 @@ public class MatchList {
         return this.matches.isEmpty();
     }
 
-    public void add(Match newMatch) {
-        assert this.isValidMatch(newMatch) : Message.PLAYERS_MATCHED_ERROR;
+    public void add(Match match) {
+        assert this.isValidMatch(match) : Message.PLAYERS_MATCHED_ERROR;
 
-        this.matches.add(newMatch);
+        this.matches.add(match);
     }
 
     public void remove(String playerName) {
         for (Match match : this.matches) {
-            if (match.getHomePlayer().getName().equals(playerName)
-                    || match.getVisitingPlayer().getName().equals(playerName)) {
-                this.matches.remove(match);
+            for (Player player : match.getPlayers()) {
+                if (player.getName().equals(playerName))
+                    this.matches.remove(match);
             }
         }
     }
@@ -43,14 +43,15 @@ public class MatchList {
     }
 
     private boolean isValidMatch(Match match) {
-        Player homePlayer = match.getHomePlayer();
-        Player visitingPlayer = match.getVisitingPlayer();
         boolean isInvalidMatch = this.matches.contains(match);
 
         Iterator<Match> iterator = this.matches.iterator();
         while (iterator.hasNext() && !isInvalidMatch) {
             Match currentMatch = iterator.next();
-            isInvalidMatch = currentMatch.contains(homePlayer) || currentMatch.contains(visitingPlayer);
+            Player[] currentPlayers = currentMatch.getPlayers();
+            for (Player player : currentPlayers) {
+                isInvalidMatch = currentMatch.contains(player);
+            }
         }
         return !isInvalidMatch;
     }
