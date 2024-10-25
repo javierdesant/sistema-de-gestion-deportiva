@@ -9,6 +9,7 @@ public abstract class Manager {
 
     public Manager() {
         this.items = new LinkedList<>();
+        this.status = Status.CLOSED;
     }
 
     protected abstract void addItems();
@@ -20,7 +21,10 @@ public abstract class Manager {
     public void open() {
         assert !this.isOpen();
 
-        this.addItems();
+        if (this.isClosed()) {
+            this.addItems();
+        }
+
         this.status = Status.OPEN;
     }
 
@@ -41,8 +45,8 @@ public abstract class Manager {
         }
 
         do {
-            this.addItems();    // TODO: revisar
             String input = this.read();
+
             boolean commandMatch = false;
             Iterator<Item> iterator = items.iterator();
             while (iterator.hasNext() && !commandMatch) {
@@ -57,8 +61,10 @@ public abstract class Manager {
                     }
                 }
             }
-            if (!commandMatch)
+
+            if (!commandMatch) {
                 Message.INVALID_COMMAND.writeln();
+            }
         } while (this.isOpen());
     }
 
