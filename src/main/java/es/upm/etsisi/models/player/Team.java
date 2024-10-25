@@ -2,10 +2,10 @@ package es.upm.etsisi.models.player;
 
 import java.util.ArrayList;
 
-public class Composite implements Component {   // TODO: implement
+public class Team implements Component {   // TODO: implement
     private final ArrayList<Component> children;
 
-    public Composite() {
+    public Team() {
         this.children = new ArrayList<>();
     }
 

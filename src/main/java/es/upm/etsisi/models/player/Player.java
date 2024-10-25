@@ -1,6 +1,6 @@
 package es.upm.etsisi.models.player;
 
-public class Player {
+public class Player implements Component {  // TODO: implement
     private final String name;
     private double score;
 
@@ -47,5 +47,17 @@ public class Player {
         }
         Player player = (Player) object;
         return this.name.equals(player.getName());
+    }
+
+    @Override
+    public void add(Component c) {
+    }
+
+    @Override
+    public void remove(Component c) {
+    }
+
+    public Component getChild(int i) {
+        return null;
     }
 }

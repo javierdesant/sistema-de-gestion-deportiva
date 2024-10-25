@@ -1,10 +1,10 @@
 package es.upm.etsisi.service;
 
 import es.upm.etsisi.commands.TODO.*;
-import es.upm.etsisi.commands.admin.CreatePlayerCommand;
-import es.upm.etsisi.commands.admin.DeletePlayerCommand;
-import es.upm.etsisi.commands.admin.MatchmakeCommand;
-import es.upm.etsisi.commands.player.ShowCommand;
+import es.upm.etsisi.commands.admin.TODO.CreatePlayerCommand;
+import es.upm.etsisi.commands.admin.TODO.DeletePlayerCommand;
+import es.upm.etsisi.commands.admin.TODO.MatchmakeCommand;
+import es.upm.etsisi.commands.player.TODO.ShowCommand;
 import es.upm.etsisi.commands.user.ExitCommand;
 import es.upm.etsisi.commands.user.HelpCommand;
 import es.upm.etsisi.models.game.MatchList;
