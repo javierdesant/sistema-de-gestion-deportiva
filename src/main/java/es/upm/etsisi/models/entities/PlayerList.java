@@ -1,11 +1,11 @@
-package es.upm.etsisi.models.player;
+package es.upm.etsisi.models.entities;
 
 import es.upm.etsisi.utils.Message;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class PlayerList {
+public class PlayerList {   // TODO: replace with general entity list
     private final LinkedList<Player> players;
 
     public PlayerList() {

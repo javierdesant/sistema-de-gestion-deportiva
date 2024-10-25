@@ -1,7 +1,7 @@
 package es.upm.etsisi.models.game;
 
-import es.upm.etsisi.models.player.Player;
-import es.upm.etsisi.models.player.PlayerList;
+import es.upm.etsisi.models.entities.Player;
+import es.upm.etsisi.models.entities.PlayerList;
 import es.upm.etsisi.utils.Message;
 
 import java.util.Collections;

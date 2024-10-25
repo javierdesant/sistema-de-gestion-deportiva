@@ -1,6 +1,6 @@
-package es.upm.etsisi.models.player;
+package es.upm.etsisi.models.entities;
 
-public class Player implements Component {  // TODO: implement
+public class Player implements Entity {  // TODO: implement
     private final String name;
     private double score;
 
@@ -50,14 +50,14 @@ public class Player implements Component {  // TODO: implement
     }
 
     @Override
-    public void add(Component c) {
+    public void add(Entity entity) {
     }
 
     @Override
-    public void remove(Component c) {
+    public void remove(Entity entity) {
     }
 
-    public Component getChild(int i) {
+    public Entity getChild(int i) {
         return null;
     }
 }

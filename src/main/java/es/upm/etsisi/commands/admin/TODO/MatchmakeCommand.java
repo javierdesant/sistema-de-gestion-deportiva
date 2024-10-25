@@ -3,8 +3,8 @@ package es.upm.etsisi.commands.admin.TODO;
 import es.upm.etsisi.commands.Command;
 import es.upm.etsisi.models.game.Match;
 import es.upm.etsisi.models.game.MatchList;
-import es.upm.etsisi.models.player.Player;
-import es.upm.etsisi.models.player.PlayerList;
+import es.upm.etsisi.models.entities.Player;
+import es.upm.etsisi.models.entities.PlayerList;
 import es.upm.etsisi.utils.Message;
 
 public class MatchmakeCommand extends Command { // TODO: remake for 2.0.0

@@ -2,7 +2,7 @@ package es.upm.etsisi.commands.TODO;
 
 import es.upm.etsisi.commands.Command;
 import es.upm.etsisi.models.game.MatchList;
-import es.upm.etsisi.models.player.PlayerList;
+import es.upm.etsisi.models.entities.PlayerList;
 import es.upm.etsisi.utils.Message;
 
 import java.util.Scanner;
