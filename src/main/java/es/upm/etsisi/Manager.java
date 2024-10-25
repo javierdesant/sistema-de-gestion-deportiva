@@ -9,7 +9,6 @@ public abstract class Manager {
 
     public Manager() {
         this.items = new LinkedList<>();
-        this.open();
     }
 
     protected abstract void addItems();
@@ -19,14 +18,28 @@ public abstract class Manager {
     }
 
     public void open() {
+        assert !this.isOpen();
+
+        this.addItems();
         this.status = Status.OPEN;
     }
 
+    public boolean isClosed() {
+        return this.status == Status.CLOSED;
+    }
+
     public void close() {
+        assert !this.isClosed();
+
+        this.items.clear();
         this.status = Status.CLOSED;
     }
 
     protected void run() {
+        if (!this.isOpen()) {
+            this.open();
+        }
+
         do {
             this.addItems();    // TODO: revisar
             String input = this.read();
