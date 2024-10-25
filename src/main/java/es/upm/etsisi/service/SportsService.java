@@ -15,10 +15,9 @@ public class SportsService {
 
     public void addDefaults() {
         String[] defaultNames = {"Luisa", "Manuel", "Kurt", "Sofia", "Robert"};
-        double[] defaultScores = {4.5, 2.7, 4.0, 3.8, 3.8};
 
-        for (int i = 0; i < defaultNames.length; i++) {
-            this.playerList.add(new Player(defaultNames[i], defaultScores[i]));
+        for (String defaultName : defaultNames) {
+            this.playerList.add(new Player(defaultName));
         }
     }
 
