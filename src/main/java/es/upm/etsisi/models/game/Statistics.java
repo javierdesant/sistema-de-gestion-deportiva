@@ -25,4 +25,10 @@ public class Statistics {
     public EnumMap<Categories, Double> getAllStatistics() {
         return statistics;
     }
+
+    public void print() {
+        for (Categories category : Categories.values()) {
+            System.out.println(category + ": " + getStatistic(category));
+        }
+    }
 }
