@@ -1,8 +1,9 @@
-package es.upm.etsisi.commands;
+package es.upm.etsisi.commands.TODO;
 
 import es.upm.etsisi.MatchList;
 import es.upm.etsisi.Message;
 import es.upm.etsisi.PlayerList;
+import es.upm.etsisi.commands.Command;
 
 import java.util.Scanner;
 

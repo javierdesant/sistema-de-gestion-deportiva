@@ -1,6 +1,7 @@
-package es.upm.etsisi.commands;
+package es.upm.etsisi.commands.user;
 
 import es.upm.etsisi.Message;
+import es.upm.etsisi.commands.Command;
 
 public class HelpCommand extends Command {
     public HelpCommand() {

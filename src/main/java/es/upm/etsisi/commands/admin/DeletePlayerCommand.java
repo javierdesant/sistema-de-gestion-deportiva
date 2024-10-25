@@ -1,18 +1,19 @@
-package es.upm.etsisi.commands;
+package es.upm.etsisi.commands.admin;
 
 import es.upm.etsisi.MatchList;
 import es.upm.etsisi.Message;
 import es.upm.etsisi.Player;
 import es.upm.etsisi.PlayerList;
+import es.upm.etsisi.commands.Command;
 
 import java.util.Scanner;
 
-public class RemoveCommand extends Command {
+public class DeletePlayerCommand extends Command {  // TODO: remake for 2.0.0
     private final PlayerList playerList;
     private final MatchList matchList;
     private final Scanner scanner;
 
-    public RemoveCommand(PlayerList playerList, MatchList matchList, Scanner scanner) {
+    public DeletePlayerCommand(PlayerList playerList, MatchList matchList, Scanner scanner) {
         super("remove");
         this.playerList = playerList;
         this.matchList = matchList;

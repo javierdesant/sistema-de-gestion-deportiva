@@ -1,7 +1,8 @@
-package es.upm.etsisi.commands;
+package es.upm.etsisi.commands.user;
 
 import es.upm.etsisi.CommandManager;
 import es.upm.etsisi.Message;
+import es.upm.etsisi.commands.Command;
 
 public class ExitCommand extends Command {
     CommandManager manager;

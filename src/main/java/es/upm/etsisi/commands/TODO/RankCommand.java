@@ -1,7 +1,8 @@
-package es.upm.etsisi.commands;
+package es.upm.etsisi.commands.TODO;
 
 import es.upm.etsisi.Message;
 import es.upm.etsisi.PlayerList;
+import es.upm.etsisi.commands.Command;
 
 public class RankCommand extends Command {
     private final PlayerList playerList;
