@@ -16,16 +16,24 @@ public class Team implements Entity {   // TODO: implement
 
     @Override
     public void remove(Entity entity) {
-        this.children.add(entity);
+        this.children.remove(entity);
     }
 
     @Override
     public void show() {
-
+        for (Entity entity : this.children) {
+            entity.show();
+        }
     }
 
     @Override
-    public Entity getChild(int i) {
-        return this.children.get(i);
+    public Entity getChild(Entity entity) {
+        int index = this.children.indexOf(entity);
+
+        if (index == -1) {
+            return null;
+        } else {
+            return this.children.get(index);
+        }
     }
 }

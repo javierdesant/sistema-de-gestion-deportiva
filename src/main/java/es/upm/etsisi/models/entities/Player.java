@@ -1,40 +1,46 @@
 package es.upm.etsisi.models.entities;
 
-public class Player implements Entity {  // TODO: implement
-    private final String name;
-    private double score;
+import es.upm.etsisi.models.game.Categories;
+import es.upm.etsisi.models.game.Statistics;
 
-    public Player(String name, double score) {
+public class Player implements Entity {
+    private final String name;
+    private final Statistics statistics;
+
+    public Player(String name, Statistics statistics) {
         this.name = name;
-        this.score = score;
+        this.statistics = statistics;
     }
 
     public Player(String name) {
-        this(name, 0.0);
+        this(name, new Statistics());
     }
 
     public String getName() {
         return this.name;
     }
 
-    public double getScore() {
-        return this.score;
+    public void setStatistic(Categories category, double value) {
+        this.statistics.setStatistic(category, value);
     }
 
-    public void setScore(double newScore) {
-        this.score = newScore;
+    public double getStatistic(Categories category) {
+        return this.statistics.getStatistic(category);
     }
 
+    public Statistics getAllStatistics() {
+        return this.statistics;
+    }
+
+    @Override
     public void show() {
-        System.out.printf("Jugador: %s - Puntuación: %.2f\n", this.name, this.score);
+        System.out.println("Jugador: " + this.name);
+        System.out.println("Estadísticas: ");
+        this.statistics.writeln();
     }
 
     public void showPlayer() {
         System.out.println("Jugador: " + this.name);
-    }
-
-    public void showRank() {
-        System.out.printf("Puntuación: %.2f\n", this.score);
     }
 
     @Override
@@ -57,7 +63,8 @@ public class Player implements Entity {  // TODO: implement
     public void remove(Entity entity) {
     }
 
-    public Entity getChild(int i) {
+    @Override
+    public Entity getChild(Entity entity) {
         return null;
     }
 }
