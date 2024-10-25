@@ -2,9 +2,9 @@ package es.upm.etsisi;
 
 public class App {
     public static void main(String[] args) {
-        SportsManager sportsManager = new SportsManager();
+        SportsService sportsService = new SportsService();
 
-        sportsManager.addDefaults();
-        sportsManager.run();
+        sportsService.addDefaults();
+        sportsService.run();
     }
 }

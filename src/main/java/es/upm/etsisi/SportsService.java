@@ -1,10 +1,10 @@
 package es.upm.etsisi;
 
-public class SportsManager {
+public class SportsService {
     private final PlayerList playerList;
     private final MatchList matchList;
 
-    public SportsManager() {
+    public SportsService() {
         this.playerList = new PlayerList();
         this.matchList = new MatchList();
     }
