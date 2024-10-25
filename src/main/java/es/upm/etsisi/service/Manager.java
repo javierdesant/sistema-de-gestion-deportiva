@@ -1,4 +1,8 @@
-package es.upm.etsisi;
+package es.upm.etsisi.service;
+
+import es.upm.etsisi.models.Item;
+import es.upm.etsisi.utils.Message;
+import es.upm.etsisi.utils.Status;
 
 import java.util.Iterator;
 import java.util.LinkedList;

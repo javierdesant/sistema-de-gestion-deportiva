@@ -1,6 +1,15 @@
-package es.upm.etsisi;
+package es.upm.etsisi.service;
 
-import es.upm.etsisi.commands.*;
+import es.upm.etsisi.commands.TODO.*;
+import es.upm.etsisi.commands.admin.CreatePlayerCommand;
+import es.upm.etsisi.commands.admin.DeletePlayerCommand;
+import es.upm.etsisi.commands.admin.MatchmakeCommand;
+import es.upm.etsisi.commands.player.ShowCommand;
+import es.upm.etsisi.commands.user.ExitCommand;
+import es.upm.etsisi.commands.user.HelpCommand;
+import es.upm.etsisi.models.MatchList;
+import es.upm.etsisi.models.PlayerList;
+import es.upm.etsisi.utils.Message;
 
 import java.util.Scanner;
 
@@ -21,8 +30,8 @@ public class CommandManager extends Manager {
 
     @Override
     protected void addItems() {
-        this.add(new CreateCommand(this.playerList));
-        this.add(new RemoveCommand(this.playerList, this.matchList, scanner));
+        this.add(new CreatePlayerCommand(this.playerList));
+        this.add(new DeletePlayerCommand(this.playerList, this.matchList, scanner));
         this.add(new ShowCommand(this.playerList));
         this.add(new RankCommand(this.playerList));
         this.add(new ScoreCommand(this.playerList));

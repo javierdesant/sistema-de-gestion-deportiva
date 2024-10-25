@@ -1,4 +1,6 @@
-package es.upm.etsisi;
+package es.upm.etsisi.models;
+
+import es.upm.etsisi.utils.Message;
 
 import java.util.List;
 
@@ -23,7 +25,7 @@ public class Match {
     }
 
     public void show() {    // TODO: implementar para cualquier numero de jugadores
-                            // TODO: implementar usando Message enum ?
+        // TODO: implementar usando Message enum ?
         System.out.println(this.getPlayer(0).getName() + " vs " + this.getPlayer(1).getName());
     }
 
@@ -50,6 +52,7 @@ public class Match {
             for (Player player : players) {
                 if (players[i].getName().equals(player.getName())) {
                     result = true;
+                    break;
                 }
             }
         }

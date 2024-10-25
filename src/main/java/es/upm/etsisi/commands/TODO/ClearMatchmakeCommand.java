@@ -1,8 +1,8 @@
 package es.upm.etsisi.commands.TODO;
 
-import es.upm.etsisi.MatchList;
-import es.upm.etsisi.Message;
 import es.upm.etsisi.commands.Command;
+import es.upm.etsisi.models.MatchList;
+import es.upm.etsisi.utils.Message;
 
 public class ClearMatchmakeCommand extends Command {
     private final MatchList matchList;

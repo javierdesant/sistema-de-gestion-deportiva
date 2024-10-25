@@ -1,7 +1,11 @@
 package es.upm.etsisi.commands.admin;
 
-import es.upm.etsisi.*;
 import es.upm.etsisi.commands.Command;
+import es.upm.etsisi.models.Match;
+import es.upm.etsisi.models.MatchList;
+import es.upm.etsisi.models.Player;
+import es.upm.etsisi.models.PlayerList;
+import es.upm.etsisi.utils.Message;
 
 public class MatchmakeCommand extends Command { // TODO: remake for 2.0.0
     private final PlayerList playerList;

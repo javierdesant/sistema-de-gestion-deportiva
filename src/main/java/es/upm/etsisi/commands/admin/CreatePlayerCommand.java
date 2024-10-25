@@ -1,9 +1,9 @@
 package es.upm.etsisi.commands.admin;
 
-import es.upm.etsisi.Message;
-import es.upm.etsisi.Player;
-import es.upm.etsisi.PlayerList;
 import es.upm.etsisi.commands.Command;
+import es.upm.etsisi.models.Player;
+import es.upm.etsisi.models.PlayerList;
+import es.upm.etsisi.utils.Message;
 
 public class CreatePlayerCommand extends Command {  // TODO: remake for 2.0.0
     private final PlayerList playerList;

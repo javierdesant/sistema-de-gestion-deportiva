@@ -1,4 +1,6 @@
-package es.upm.etsisi;
+package es.upm.etsisi.models;
+
+import es.upm.etsisi.utils.Message;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

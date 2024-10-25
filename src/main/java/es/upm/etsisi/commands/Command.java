@@ -1,7 +1,7 @@
 package es.upm.etsisi.commands;
 
-import es.upm.etsisi.Item;
-import es.upm.etsisi.Message;
+import es.upm.etsisi.models.Item;
+import es.upm.etsisi.utils.Message;
 
 public abstract class Command implements Item {
     private final String name_;

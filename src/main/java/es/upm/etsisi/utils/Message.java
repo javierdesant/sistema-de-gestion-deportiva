@@ -1,4 +1,4 @@
-package es.upm.etsisi;
+package es.upm.etsisi.utils;
 
 public enum Message {
     COMMAND_PROMPT("> "),

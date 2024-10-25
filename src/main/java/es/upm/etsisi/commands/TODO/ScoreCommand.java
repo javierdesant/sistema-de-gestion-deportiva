@@ -1,8 +1,8 @@
 package es.upm.etsisi.commands.TODO;
 
-import es.upm.etsisi.Message;
-import es.upm.etsisi.PlayerList;
 import es.upm.etsisi.commands.Command;
+import es.upm.etsisi.models.PlayerList;
+import es.upm.etsisi.utils.Message;
 
 public class ScoreCommand extends Command {
     private final PlayerList playerList;
