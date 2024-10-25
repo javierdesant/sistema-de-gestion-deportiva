@@ -1,4 +1,4 @@
-package es.upm.etsisi.auth.TODO;
+package es.upm.etsisi.auth;
 
 public class Administrator implements User {
 }
