@@ -3,10 +3,17 @@ package es.upm.etsisi.models.entities;
 import java.util.ArrayList;
 
 public class Team implements Entity {   // TODO: implement
+    private String name;
     private final ArrayList<Entity> children;
 
-    public Team() {
+    public Team(String name) {
+        this.name = name;
         this.children = new ArrayList<>();
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
     }
 
     @Override

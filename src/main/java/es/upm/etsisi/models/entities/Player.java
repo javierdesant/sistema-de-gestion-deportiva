@@ -16,6 +16,7 @@ public class Player implements Entity {
         this(name, new Statistics());
     }
 
+    @Override
     public String getName() {
         return this.name;
     }
