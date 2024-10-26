@@ -1,7 +1,7 @@
 package es.upm.etsisi.models.entities;
 
 import es.upm.etsisi.auth.Administrator;
-import es.upm.etsisi.models.game.Categories;
+import es.upm.etsisi.models.game.Category;
 import es.upm.etsisi.models.game.Statistics;
 
 public class Player implements Entity {
@@ -32,11 +32,11 @@ public class Player implements Entity {
         return this.adminName;
     }
 
-    public void setStatistic(Categories category, double value) {
+    public void setStatistic(Category category, double value) {
         this.statistics.setStatistic(category, value);
     }
 
-    public double getStatistic(Categories category) {
+    public double getStatistic(Category category) {
         return this.statistics.getStatistic(category);
     }
 

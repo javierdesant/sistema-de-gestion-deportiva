@@ -1,6 +1,6 @@
 package es.upm.etsisi.models.game;
 
-public enum Categories {
+public enum Category {
     POINTS_SCORED("Points Scored"),
     MATCHES_WON("Matches Won"),
     ASSIST_POINTS("Assist Points"),
@@ -10,7 +10,7 @@ public enum Categories {
 
     private final String title;
 
-    Categories(String title) {
+    Category(String title) {
         this.title = title;
     }
 
