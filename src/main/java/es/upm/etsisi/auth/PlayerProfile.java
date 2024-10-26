@@ -1,22 +1,30 @@
 package es.upm.etsisi.auth;
 
+import es.upm.etsisi.utils.DNI;
+
 public class PlayerProfile implements User {
-    private String name;
+    private String userName;
+    private String firstName;
+    private String lastName;
+    private DNI dni;
     private String password;
 
-    public PlayerProfile(String name, String password) {
-        this.name = name;   // TODO: validate for upm email
+    public PlayerProfile(String userName, String firstName, String lastName, String dni, String password) {
+        this.userName = userName;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dni = new DNI(dni);
         this.password = password;
     }
 
     @Override
     public String getUsername() {
-        return this.name;
+        return this.userName;
     }
 
     @Override
     public void setUsername(String name) {
-        this.name = name;
+        this.userName = name;
     }
 
     @Override
@@ -26,5 +34,9 @@ public class PlayerProfile implements User {
         assert oldPassword.equals(this.password);   // TODO: add message
 
         this.password = newPassword;
+    }
+
+    public void writeln() {
+        System.out.println(firstName + " " + lastName);
     }
 }
