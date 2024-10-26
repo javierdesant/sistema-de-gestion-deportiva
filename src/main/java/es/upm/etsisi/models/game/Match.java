@@ -2,7 +2,6 @@ package es.upm.etsisi.models.game;
 
 import es.upm.etsisi.models.entities.Entity;
 import es.upm.etsisi.models.entities.EntityList;
-import es.upm.etsisi.models.entities.Player;
 import es.upm.etsisi.utils.Message;
 
 import java.util.*;
@@ -48,8 +47,13 @@ public class Match {
         return this.entities.contains(entity);
     }
 
-    public boolean contains(String playerName) {
-        return this.contains(new Player(playerName));
+    public boolean contains(String entityName) {
+        for (Entity entity : this.entities) {
+            if (entity.getName().equals(entityName)) {
+                return true;                                // FIXME: for break ?
+            }
+        }
+        return false;
     }
 
     @Override
