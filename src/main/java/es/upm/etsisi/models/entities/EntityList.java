@@ -28,6 +28,7 @@ public class EntityList {
         } else {
             for (Entity entity : this.entities) {
                 entity.show();
+                Message.FOOTER.writeln();
             }
         }
     }

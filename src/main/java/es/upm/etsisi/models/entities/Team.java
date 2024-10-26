@@ -1,9 +1,11 @@
 package es.upm.etsisi.models.entities;
 
+import es.upm.etsisi.utils.Message;
+
 import java.util.ArrayList;
 
 public class Team implements Entity {   // TODO: implement
-    private String name;
+    private final String name;
     private final ArrayList<Entity> children;
 
     public Team(String name) {
@@ -28,8 +30,10 @@ public class Team implements Entity {   // TODO: implement
 
     @Override
     public void show() {
+        System.out.println(this.name);
         for (Entity entity : this.children) {
             entity.show();
+            Message.FOOTER.writeln();
         }
     }
 

@@ -5,7 +5,8 @@ public enum Categories {
     MATCHES_WON("Matches Won"),
     ASSIST_POINTS("Assist Points"),
     TOURNAMENTS_WON("Tournaments Won"),
-    MONEY_GENERATED_IN_THE_TOURNAMENT("Money Generated In The Tournament"),;
+    MONEY_GENERATED_IN_THE_TOURNAMENT("Money Generated In The Tournament"),
+    ;
 
     private final String title;
 
