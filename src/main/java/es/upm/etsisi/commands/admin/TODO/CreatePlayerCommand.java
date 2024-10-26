@@ -2,15 +2,15 @@ package es.upm.etsisi.commands.admin.TODO;
 
 import es.upm.etsisi.commands.Command;
 import es.upm.etsisi.models.entities.Player;
-import es.upm.etsisi.models.entities.PlayerList;
+import es.upm.etsisi.models.entities.EntityList;
 import es.upm.etsisi.utils.Message;
 
 public class CreatePlayerCommand extends Command {  // TODO: remake for 2.0.0
-    private final PlayerList playerList;
+    private final EntityList entityList;
 
-    public CreatePlayerCommand(PlayerList playerList) {
+    public CreatePlayerCommand(EntityList entityList) {
         super("create");
-        this.playerList = playerList;
+        this.entityList = entityList;
     }
 
     @Override
@@ -19,7 +19,7 @@ public class CreatePlayerCommand extends Command {  // TODO: remake for 2.0.0
 
         assert playerName.matches("[a-zA-Z]+") : Message.INVALID_NAME;
 
-        this.playerList.add(new Player(playerName));
+        this.entityList.add(new Player(playerName));
         Message.PLAYER_ADDED.writeln();
     }
 }

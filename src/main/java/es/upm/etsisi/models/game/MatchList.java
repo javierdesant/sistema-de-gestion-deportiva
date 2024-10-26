@@ -1,9 +1,11 @@
 package es.upm.etsisi.models.game;
 
+import es.upm.etsisi.models.entities.Entity;
 import es.upm.etsisi.models.entities.Player;
-import es.upm.etsisi.models.entities.PlayerList;
+import es.upm.etsisi.models.entities.EntityList;
 import es.upm.etsisi.utils.Message;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -20,27 +22,27 @@ public class MatchList {
     }
 
     public void add(Match match) {
-        assert this.isValidMatch(match) : Message.PLAYERS_MATCHED_ERROR;
+        assert this.isValidMatch(match) : Message.PLAYERS_MATCHED_ERROR;    // TODO: update messages
 
         this.matches.add(match);
     }
 
-    public void remove(String playerName) {
+    public void remove(String name) {
         for (Match match : this.matches) {
-            for (Player player : match.getPlayers()) {
-                if (player.getName().equals(playerName))
+            for (Entity entity : match.getEntities()) {
+                if (entity.getName().equals(name))
                     this.matches.remove(match);
             }
         }
     }
 
-    public boolean contains(String playerName) {
+    public boolean contains(String name) {
         boolean isMatched = false;
 
         Iterator<Match> iterator = this.matches.iterator();
         while (iterator.hasNext() && !isMatched) {
             Match match = iterator.next();
-            isMatched = match.contains(playerName);
+            isMatched = match.contains(name);
         }
 
         return isMatched;
@@ -52,9 +54,8 @@ public class MatchList {
         Iterator<Match> iterator = this.matches.iterator();
         while (iterator.hasNext() && !isInvalidMatch) {
             Match currentMatch = iterator.next();
-            Player[] currentPlayers = currentMatch.getPlayers();
-            for (Player player : currentPlayers) {
-                isInvalidMatch = currentMatch.contains(player);
+            for (Entity entity : currentMatch.getEntities()) {
+                isInvalidMatch = currentMatch.contains(entity);
             }
         }
         return !isInvalidMatch;
@@ -74,16 +75,16 @@ public class MatchList {
         this.matches.clear();
     }
 
-    public void randomize(PlayerList playerList) {
-        assert !playerList.isEmpty() : Message.NO_PLAYERS;
+    public void randomize(EntityList entityList) {
+        assert !entityList.isEmpty() : Message.NO_PLAYERS;
         assert this.matches.isEmpty() : Message.NO_MATCHES;
 
-        LinkedList<Player> randomPlayers = new LinkedList<>(playerList.getPlayers());
-        assert randomPlayers.size() % 2 == 0 : Message.EVEN_PLAYERS_REQUIRED;
+        LinkedList<Entity> randomEntities = new LinkedList<>(entityList.getEntities());
+        assert randomEntities.size() % 2 == 0 : Message.EVEN_PLAYERS_REQUIRED;
 
-        Collections.shuffle(randomPlayers);
-        while (!randomPlayers.isEmpty()) {
-            this.matches.add(new Match(playerList, randomPlayers.pop(), randomPlayers.pop()));
+        Collections.shuffle(randomEntities);
+        while (!randomEntities.isEmpty()) {
+            this.matches.add(new Match(entityList, randomEntities.pop(), randomEntities.pop()));
         }
     }
 }

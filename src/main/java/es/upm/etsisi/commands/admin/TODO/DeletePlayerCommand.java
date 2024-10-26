@@ -3,19 +3,19 @@ package es.upm.etsisi.commands.admin.TODO;
 import es.upm.etsisi.commands.Command;
 import es.upm.etsisi.models.game.MatchList;
 import es.upm.etsisi.models.entities.Player;
-import es.upm.etsisi.models.entities.PlayerList;
+import es.upm.etsisi.models.entities.EntityList;
 import es.upm.etsisi.utils.Message;
 
 import java.util.Scanner;
 
 public class DeletePlayerCommand extends Command {  // TODO: remake for 2.0.0
-    private final PlayerList playerList;
+    private final EntityList entityList;
     private final MatchList matchList;
     private final Scanner scanner;
 
-    public DeletePlayerCommand(PlayerList playerList, MatchList matchList, Scanner scanner) {
+    public DeletePlayerCommand(EntityList entityList, MatchList matchList, Scanner scanner) {
         super("remove");
-        this.playerList = playerList;
+        this.entityList = entityList;
         this.matchList = matchList;
         this.scanner = scanner;
     }
@@ -30,7 +30,7 @@ public class DeletePlayerCommand extends Command {  // TODO: remake for 2.0.0
             switch (this.scanner.nextLine().toUpperCase()) {
                 case "S":
                     this.matchList.remove(playerName);
-                    this.playerList.remove(new Player(playerName));
+                    this.entityList.remove(new Player(playerName));
                     Message.PLAYER_REMOVED.writeln();
                     break;
                 case "N":
@@ -42,7 +42,7 @@ public class DeletePlayerCommand extends Command {  // TODO: remake for 2.0.0
                     break;
             }
         } else {
-            this.playerList.remove(new Player(playerName));
+            this.entityList.remove(new Player(playerName));
             Message.PLAYER_REMOVED.writeln();
         }
     }

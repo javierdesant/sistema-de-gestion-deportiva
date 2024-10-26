@@ -1,38 +1,51 @@
 package es.upm.etsisi.models.game;
 
+import es.upm.etsisi.models.entities.Entity;
 import es.upm.etsisi.models.entities.Player;
-import es.upm.etsisi.models.entities.PlayerList;
+import es.upm.etsisi.models.entities.EntityList;
 import es.upm.etsisi.utils.Message;
 
-import java.util.List;
+import java.util.*;
 
 public class Match {
-    private final Player[] players;
+    private final ArrayList<Entity> entities;
 
-    public Match(PlayerList playerList, Player firstPlayer, Player secondPlayer) {
-        assert playerList.contains(firstPlayer) : Message.HOME_PLAYER_NOT_EXIST;
-        assert playerList.contains(secondPlayer) : Message.VISITING_PLAYER_NOT_EXIST;
-        assert !firstPlayer.equals(secondPlayer) : Message.SAME_PLAYER_ERROR;
+    public Match(EntityList entityList, Collection<Entity> entities) {
+        assert entities != null;
+        assert entities.size() >= 2;                    // TODO: update messages
+        assert entityList.containsAll(entities);
+        for (Entity entity : entities) {
+            assert Collections.frequency(entities, entity) == 1;    // FIXME: for break ?
+        }                                                            // TODO: improve...
 
-        this.players = new Player[]{firstPlayer, secondPlayer};
+        this.entities = new ArrayList<>(entities);
     }
 
-    public Player[] getPlayers() {
-        return this.players;
+    public Match(EntityList entityList, Entity... entities) {
+        this(entityList, Arrays.asList(entities));  // FIXME: maybe is null ?
     }
 
-    public Player getPlayer(int index) {
-        assert 0 <= index && index < this.players.length : Message.INVALID_INDEX;
-        return this.players[index];
+    public ArrayList<Entity> getEntities() {
+        return this.entities;
     }
 
-    public void show() {    // TODO: implementar para cualquier numero de jugadores
-        // TODO: implementar usando Message enum ?
-        System.out.println(this.getPlayer(0).getName() + " vs " + this.getPlayer(1).getName());
+    public Entity getEntity(int index) {
+        assert 0 <= index && index < this.entities.size() : Message.INVALID_INDEX;
+        return this.entities.get(index);
     }
 
-    public boolean contains(Player player) {
-        return List.of(this.players).contains(player);
+    public void show() {
+        Iterator<Entity> iterator = this.entities.iterator();
+
+        iterator.next().show();
+        do {
+            System.out.println("vs");
+            iterator.next().show();
+        } while (iterator.hasNext());
+    }
+
+    public boolean contains(Entity entity) {
+        return this.entities.contains(entity);
     }
 
     public boolean contains(String playerName) {
@@ -48,16 +61,16 @@ public class Match {
             return false;
         }
         Match match = (Match) object;
-        Player[] players = match.getPlayers();
-        boolean result = false;
-        for (int i = 0; i < players.length && !result; i++) {   // FIXME: using for as while
-            for (Player player : players) {
-                if (players[i].getName().equals(player.getName())) {
-                    result = true;
-                    break;
-                }
-            }
+        ArrayList<Entity> entities = match.getEntities();
+
+        if (this.entities.size() != entities.size()) {
+            return false;
         }
-        return result;
+
+        for (Entity entity : this.entities) {
+            entities.remove(entity);
+        }
+
+        return entities.isEmpty();
     }
 }

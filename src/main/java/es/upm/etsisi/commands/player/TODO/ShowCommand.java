@@ -1,21 +1,21 @@
 package es.upm.etsisi.commands.player.TODO;
 
 import es.upm.etsisi.commands.Command;
-import es.upm.etsisi.models.entities.PlayerList;
+import es.upm.etsisi.models.entities.EntityList;
 import es.upm.etsisi.utils.Message;
 
 public class ShowCommand extends Command {  // TODO: remake for 2.0.0º
-    private final PlayerList playerList;
+    private final EntityList entityList;
 
-    public ShowCommand(PlayerList playerList) {
+    public ShowCommand(EntityList entityList) {
         super("show");
-        this.playerList = playerList;
+        this.entityList = entityList;
     }
 
     @Override
     public void execute() {
         Message.PLAYERLIST_HEADER.writeln();
-        this.playerList.show();
+        this.entityList.show();
         Message.FOOTER.writeln();
     }
 }
