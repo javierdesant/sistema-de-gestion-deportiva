@@ -20,6 +20,7 @@ public enum Message {
     RANKING_HEADER("---------- RANKING -----------"),
     MATCHMAKE_HEADER("------ EMPAREJAMIENTOS -------"),
     FOOTER("------------------------------"),
+    LIGHT_FOOTER(" - - - - - - - - - - - - - - - "),
     MATCHMAKE_CLEARED("Los emparejamientos han sido eliminados."),
     RANDOM_MATCHMAKE_WARNING("Esta opción creará emparejamientos aleatorios con todos los jugadores, eliminado los emparejamientos anteriores."),
     ERASE_MATCHED_PLAYER_WARNING("El jugador que intenta borrar se encuentra emparejado. Borrar a este jugador supone también borrar su emparejamiento."),
