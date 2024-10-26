@@ -1,6 +1,6 @@
 package es.upm.etsisi.models.game;
 
-public enum Sports {
+public enum Sport {
     SOCCER("Fútbol"),
     BASKETBALL("Baloncesto"),
     TENNIS("Tenis"),
@@ -44,7 +44,7 @@ public enum Sports {
 
     private final String name;
 
-    Sports(String name) {
+    Sport(String name) {
         this.name = name;
     }
 
