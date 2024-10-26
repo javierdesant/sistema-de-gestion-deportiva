@@ -1,24 +1,35 @@
 package es.upm.etsisi.models.entities;
 
+import es.upm.etsisi.auth.Administrator;
 import es.upm.etsisi.models.game.Categories;
 import es.upm.etsisi.models.game.Statistics;
 
 public class Player implements Entity {
     private final String name;
+    private final String adminName;
     private final Statistics statistics;
 
-    public Player(String name, Statistics statistics) {
+    public Player(String name, String adminName, Statistics statistics) {
         this.name = name;
+        this.adminName = adminName;
         this.statistics = statistics;
     }
 
-    public Player(String name) {
-        this(name, new Statistics());
+    public Player(String name, String adminName) {
+        this(name, adminName, new Statistics());
+    }
+
+    public Player(String name, Administrator administrator) {
+        this(name, administrator.getUsername());
     }
 
     @Override
     public String getName() {
         return this.name;
+    }
+
+    public String getAdminName() {
+        return this.adminName;
     }
 
     public void setStatistic(Categories category, double value) {
