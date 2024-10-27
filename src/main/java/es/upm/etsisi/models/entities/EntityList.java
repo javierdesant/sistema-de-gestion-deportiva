@@ -1,40 +1,35 @@
 package es.upm.etsisi.models.entities;
 
+import es.upm.etsisi.service.List;
 import es.upm.etsisi.utils.Message;
 
-import java.util.Collection;
-import java.util.LinkedList;
-
-public class EntityList {
-    private final LinkedList<Entity> entities;
-
+public class EntityList extends List<Entity> {
     public EntityList() {
-        this.entities = new LinkedList<>();
+        super();
     }
 
+    @Override
     public void add(Entity entity) {
-        assert !this.entities.contains(entity) : Message.PLAYER_ALREADY_EXISTS_ERROR;
-        this.entities.add(entity);
+        assert !this.contains(entity) : Message.PLAYER_ALREADY_EXISTS_ERROR;
+        this.addElement(entity);
     }
 
+    @Override
     public void remove(Entity player) {
-        boolean removed = this.entities.remove(player);
+        boolean removed = this.removeElement(player);
         assert removed : Message.PLAYER_DOES_NOT_EXIST_ERROR;
     }
 
+    @Override
     public void show() {
         if (this.isEmpty()) {
             Message.NO_PLAYERS.writeln();
         } else {
-            for (Entity entity : this.entities) {
+            for (Entity entity : this.getElements()) {
                 entity.show();
                 Message.FOOTER.writeln();
             }
         }
-    }
-
-    public LinkedList<Entity> getEntities() {
-        return this.entities;
     }
 
     public void score(String playerName, double score) {    // TODO
@@ -46,18 +41,6 @@ public class EntityList {
 
     private boolean isValidScore(double score) {
         return -999999.0 < score && score < 999999.0;
-    }
-
-    public boolean contains(Entity entity) {
-        return this.entities.contains(entity);
-    }
-
-    public boolean containsAll(Collection<Entity> entities) {
-        return this.entities.containsAll(entities);
-    }
-
-    public boolean isEmpty() {
-        return this.entities.isEmpty();
     }
 
     public void rank() {

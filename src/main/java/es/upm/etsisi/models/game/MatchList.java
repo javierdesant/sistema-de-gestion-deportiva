@@ -2,87 +2,95 @@ package es.upm.etsisi.models.game;
 
 import es.upm.etsisi.models.entities.Entity;
 import es.upm.etsisi.models.entities.EntityList;
+import es.upm.etsisi.service.List;
 import es.upm.etsisi.utils.Message;
 
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class MatchList {
-    private final LinkedList<Match> matches;
-
+public class MatchList extends List<Match> {
     public MatchList() {
-        this.matches = new LinkedList<>();
+        super();
     }
 
-    public boolean isEmpty() {
-        return this.matches.isEmpty();
-    }
-
+    @Override
     public void add(Match match) {
         assert this.isValidMatch(match) : Message.PLAYERS_MATCHED_ERROR;    // TODO: update messages
 
-        this.matches.add(match);
+        this.addElement(match);
+    }
+
+    @Override
+    public void remove(Match match) {
+        boolean removed = this.removeElement(match);
+        assert removed; // TODO: add message
     }
 
     public void remove(String name) {
-        for (Match match : this.matches) {
+        for (Match match : this.getElements()) {
             for (Entity entity : match.getEntities()) {
                 if (entity.getName().equals(name))
-                    this.matches.remove(match);
+                    this.remove(match);
             }
         }
     }
 
     public boolean contains(String name) {
-        boolean isMatched = false;
+        boolean found = false;
 
-        Iterator<Match> iterator = this.matches.iterator();
-        while (iterator.hasNext() && !isMatched) {
-            Match match = iterator.next();
-            isMatched = match.contains(name);
+        Iterator<Match> iterator = this.iterator();
+        while (iterator.hasNext() && !found) {
+            found = iterator.next().contains(name);
         }
 
-        return isMatched;
+        return found;
+    }
+
+    public boolean contains(Entity entity) {
+        boolean found = false;
+
+        Iterator<Match> iterator = this.iterator();
+        while (iterator.hasNext() && !found) {
+            found = iterator.next().contains(entity);
+        }
+
+        return found;
     }
 
     private boolean isValidMatch(Match match) {
-        boolean isInvalidMatch = this.matches.contains(match);
+        boolean isValid = !this.contains(match);
 
-        Iterator<Match> iterator = this.matches.iterator();
-        while (iterator.hasNext() && !isInvalidMatch) {
-            Match currentMatch = iterator.next();
-            for (Entity entity : currentMatch.getEntities()) {
-                isInvalidMatch = currentMatch.contains(entity);
-            }
+        Iterator<Entity> iterator = match.getEntities().iterator();
+        while (iterator.hasNext() && isValid) {
+            isValid = !this.contains(iterator.next());
         }
-        return !isInvalidMatch;
+
+        return isValid;
     }
 
+    @Override
     public void show() {
-        if (this.matches.isEmpty()) {
+        if (this.isEmpty()) {
             Message.NO_MATCHES.writeln();
         } else {
-            for (Match match : this.matches) {
+            for (Match match : this.getElements()) {
                 match.show();
             }
         }
     }
 
-    public void clear() {
-        this.matches.clear();
-    }
-
     public void randomize(EntityList entityList) {
-        assert !entityList.isEmpty() : Message.NO_PLAYERS;
-        assert this.matches.isEmpty() : Message.NO_MATCHES;
-
-        LinkedList<Entity> randomEntities = new LinkedList<>(entityList.getEntities());
-        assert randomEntities.size() % 2 == 0 : Message.EVEN_PLAYERS_REQUIRED;
-
-        Collections.shuffle(randomEntities);
-        while (!randomEntities.isEmpty()) {
-            this.matches.add(new Match(entityList, randomEntities.pop(), randomEntities.pop()));
-        }
+        // TODO
+//        assert !entityList.isEmpty() : Message.NO_PLAYERS;
+//        assert this.isEmpty() : Message.NO_MATCHES;
+//
+//        LinkedList<Entity> randomEntities = new LinkedList<>(entityList.getEntities());
+//        assert randomEntities.size() % 2 == 0 : Message.EVEN_PLAYERS_REQUIRED;
+//
+//        Collections.shuffle(randomEntities);
+//        while (!randomEntities.isEmpty()) {
+//            this.add(new Match(entityList, randomEntities.pop(), randomEntities.pop()));
+//        }
     }
 }
