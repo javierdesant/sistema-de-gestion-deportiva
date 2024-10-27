@@ -1,16 +1,19 @@
 package es.upm.etsisi.service;
 
+import es.upm.etsisi.models.game.Match;
+
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 public abstract class List<T> {
-    protected final LinkedList<T> elements;
+    private final LinkedList<T> elements;
 
     public List() {
         this.elements = new LinkedList<>();
     }
 
-    public LinkedList<T> getElements() {
+    protected LinkedList<T> getElements() {     // TODO: erase this method ?
         return this.elements;
     }
 
@@ -24,6 +27,22 @@ public abstract class List<T> {
 
     public boolean containsAll(Collection<T> elements) {
         return this.elements.containsAll(elements);
+    }
+
+    public void clear() {
+        this.elements.clear();
+    }
+
+    protected Iterator<T> iterator() {      // TODO: erase this method ?
+        return this.elements.iterator();
+    }
+
+    protected void addElement(T element) {
+        this.elements.add(element);
+    }
+
+    protected boolean removeElement(T element) {
+        return this.elements.remove(element);
     }
 
     public abstract void add(T element);
