@@ -48,12 +48,14 @@ public class Match {
     }
 
     public boolean contains(String entityName) {
-        for (Entity entity : this.entities) {
-            if (entity.getName().equals(entityName)) {
-                return true;                                // FIXME: for break ?
-            }
+        boolean found = false;
+
+        Iterator<Entity> iterator = this.entities.iterator();
+        while (iterator.hasNext() && !found) {
+            found = entityName.equals(iterator.next().getName());
         }
-        return false;
+
+        return found;
     }
 
     @Override
