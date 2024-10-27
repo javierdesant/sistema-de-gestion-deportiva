@@ -2,38 +2,20 @@ package es.upm.etsisi.auth;
 
 import es.upm.etsisi.utils.DNI;
 
-public class PlayerProfile implements User {
-    private String userName;
-    private String firstName;
-    private String lastName;
-    private DNI dni;
-    private String password;
+public class PlayerProfile extends User {
+    private final String firstName;
+    private final String lastName;
+    private final DNI dni;
 
-    public PlayerProfile(String userName, String firstName, String lastName, String dni, String password) {
-        this.userName = userName;
+    public PlayerProfile(String username, String password, String dni, String firstName, String lastName) {
+        super(username, password);
+        this.dni = new DNI(dni);
         this.firstName = firstName;
         this.lastName = lastName;
-        this.dni = new DNI(dni);
-        this.password = password;
     }
 
-    @Override
-    public String getUsername() {
-        return this.userName;
-    }
-
-    @Override
-    public void setUsername(String name) {
-        this.userName = name;
-    }
-
-    @Override
-    public void setPassword(String oldPassword, String newPassword) {
-        assert oldPassword != null;
-        assert newPassword != null;
-        assert oldPassword.equals(this.password);   // TODO: add message
-
-        this.password = newPassword;
+    public String getDni() {
+        return this.dni.getValue();
     }
 
     public void writeln() {
