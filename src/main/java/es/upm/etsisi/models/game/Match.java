@@ -65,7 +65,7 @@ public class Match {
             return false;
         }
         Match match = (Match) object;
-        ArrayList<Entity> entities = match.getEntities();
+        ArrayList<Entity> entities = new ArrayList<>(match.getEntities());
 
         if (this.entities.size() != entities.size()) {
             return false;
