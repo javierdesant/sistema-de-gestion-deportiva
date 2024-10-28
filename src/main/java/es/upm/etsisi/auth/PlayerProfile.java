@@ -18,7 +18,7 @@ public class PlayerProfile extends User {
         return this.dni.getValue();
     }
 
-    public void writeln() {
+    public void show() {
         System.out.println(firstName + " " + lastName);
     }
 }
