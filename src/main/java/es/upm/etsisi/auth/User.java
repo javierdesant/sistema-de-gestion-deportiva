@@ -27,14 +27,34 @@ public abstract class User {
     }
 
     public void setPassword(String oldPassword, String newPassword) {
-        assert oldPassword != null;
-        assert newPassword != null;
-        assert oldPassword.equals(this.password);   // TODO: add message
+        assert password != null;
+        assert !this.password.isBlank();
+
+        assert this.validate(oldPassword);  // TODO: add Message
 
         this.password = newPassword;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setPassword(String password) {
+        assert password != null;
+        assert this.password.isBlank();
+
+        this.password = password;
+    }
+
+    public boolean validate(String password) {
+        return this.password.equals(password);
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        User user = (User) object;
+        return this.username.equals(user.username);
     }
 }
