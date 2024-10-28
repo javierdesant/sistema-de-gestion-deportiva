@@ -1,5 +1,6 @@
 package es.upm.etsisi.service;
 
+import es.upm.etsisi.auth.Administrator;
 import es.upm.etsisi.models.game.MatchList;
 import es.upm.etsisi.models.entities.Player;
 import es.upm.etsisi.models.entities.EntityList;
@@ -17,7 +18,7 @@ public class SportsService {
         String[] defaultNames = {"Luisa", "Manuel", "Kurt", "Sofia", "Robert"};
 
         for (String defaultName : defaultNames) {
-            this.entityList.add(new Player(defaultName));
+            this.entityList.add(new Player(defaultName, new Administrator("default", "")));
         }
     }
 
