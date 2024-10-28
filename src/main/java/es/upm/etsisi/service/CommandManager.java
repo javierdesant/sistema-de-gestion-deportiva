@@ -1,5 +1,6 @@
 package es.upm.etsisi.service;
 
+import es.upm.etsisi.auth.User;
 import es.upm.etsisi.commands.TODO.*;
 import es.upm.etsisi.commands.admin.TODO.CreatePlayerCommand;
 import es.upm.etsisi.commands.admin.TODO.DeletePlayerCommand;
@@ -17,6 +18,7 @@ public class CommandManager extends Manager {
     private final Scanner scanner;
     private final EntityList entityList;
     private final MatchList matchList;
+    private User user;
 
     CommandManager(EntityList entityList, MatchList matchList) {
         super();
@@ -26,6 +28,7 @@ public class CommandManager extends Manager {
         this.scanner = new Scanner(System.in);
         this.entityList = entityList;
         this.matchList = matchList;
+        this.user = null;
     }
 
     @Override
