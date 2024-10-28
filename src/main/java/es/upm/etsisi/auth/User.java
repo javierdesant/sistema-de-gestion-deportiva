@@ -5,10 +5,17 @@ public abstract class User {
     private String password;
 
     public User(String username, String password) {
-        assert username != null;
-        assert password != null;
-        this.username = username;   // TODO: validate for upm email
+        assert this.isUpmEmail(username);   // TODO: add Message
+
+        this.username = username;
         this.password = password;
+    }
+
+    private boolean isUpmEmail(String email) {
+        if (email == null || !email.contains("@")) {
+            return false;
+        }
+        return email.endsWith("upm.es");
     }
 
     public String getUsername() {
