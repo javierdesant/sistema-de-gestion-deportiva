@@ -5,9 +5,7 @@ import es.upm.etsisi.models.entities.EntityList;
 import es.upm.etsisi.service.List;
 import es.upm.etsisi.utils.Message;
 
-import java.util.Collections;
 import java.util.Iterator;
-import java.util.LinkedList;
 
 public class MatchList extends List<Match> {
     public MatchList() {
@@ -39,7 +37,7 @@ public class MatchList extends List<Match> {
     public boolean contains(String name) {
         boolean found = false;
 
-        Iterator<Match> iterator = this.iterator();
+        Iterator<Match> iterator = this.getElements().iterator();
         while (iterator.hasNext() && !found) {
             found = iterator.next().contains(name);
         }
@@ -50,7 +48,7 @@ public class MatchList extends List<Match> {
     public boolean contains(Entity entity) {
         boolean found = false;
 
-        Iterator<Match> iterator = this.iterator();
+        Iterator<Match> iterator = this.getElements().iterator();
         while (iterator.hasNext() && !found) {
             found = iterator.next().contains(entity);
         }
