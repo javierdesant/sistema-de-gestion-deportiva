@@ -1,21 +1,38 @@
 package es.upm.etsisi.models.entities;
 
+import es.upm.etsisi.models.game.Category;
+import es.upm.etsisi.models.game.Statistics;
 import es.upm.etsisi.utils.Message;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 
 public class Team implements Entity {   // TODO: implement
     private final String name;
+    private final Statistics statistics;
     private final ArrayList<Entity> children;
 
-    public Team(String name) {
+    public Team(String name, Statistics statistics) {
         this.name = name;
+        this.statistics = statistics;
         this.children = new ArrayList<>();
+    }
+
+    public Team(String name) {
+        this(name, new Statistics());
     }
 
     @Override
     public String getName() {
         return this.name;
+    }
+
+    public EnumMap<Category, Double> getAllStatistics() {
+        return this.statistics.getAllStatistics();
+    }
+
+    public double getStatistic(Category category) {
+        return this.statistics.getStatistic(category);
     }
 
     @Override
@@ -38,13 +55,7 @@ public class Team implements Entity {   // TODO: implement
     }
 
     @Override
-    public Entity getChild(Entity entity) {
-        int index = this.children.indexOf(entity);
-
-        if (index == -1) {
-            return null;
-        } else {
-            return this.children.get(index);
-        }
+    public ArrayList<Entity> getChildren() {
+        return new ArrayList<>(this.children);
     }
 }
