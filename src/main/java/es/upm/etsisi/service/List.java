@@ -1,9 +1,6 @@
 package es.upm.etsisi.service;
 
-import es.upm.etsisi.models.game.Match;
-
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.LinkedList;
 
 public abstract class List<T> {
@@ -13,8 +10,8 @@ public abstract class List<T> {
         this.elements = new LinkedList<>();
     }
 
-    protected LinkedList<T> getElements() {     // TODO: erase this method ?
-        return this.elements;
+    protected LinkedList<T> getElements() {
+        return new LinkedList<>(this.elements);
     }
 
     public boolean isEmpty() {
@@ -31,10 +28,6 @@ public abstract class List<T> {
 
     public void clear() {
         this.elements.clear();
-    }
-
-    protected Iterator<T> iterator() {      // TODO: erase this method ?
-        return this.elements.iterator();
     }
 
     protected void addElement(T element) {
