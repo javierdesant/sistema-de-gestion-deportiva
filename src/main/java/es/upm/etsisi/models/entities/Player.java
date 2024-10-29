@@ -4,6 +4,9 @@ import es.upm.etsisi.auth.Administrator;
 import es.upm.etsisi.models.game.Category;
 import es.upm.etsisi.models.game.Statistics;
 
+import java.util.ArrayList;
+import java.util.EnumMap;
+
 public class Player implements Entity {
     private final String name;
     private final String adminName;
@@ -32,27 +35,16 @@ public class Player implements Entity {
         return this.adminName;
     }
 
-    public void setStatistic(Category category, double value) {
-        this.statistics.setStatistic(category, value);
+    public EnumMap<Category, Double> getAllStatistics() {
+        return this.statistics.getAllStatistics();
     }
 
     public double getStatistic(Category category) {
         return this.statistics.getStatistic(category);
     }
 
-    public Statistics getAllStatistics() {
-        return this.statistics;
-    }
-
-    @Override
-    public void show() {
-        System.out.println("Jugador: " + this.name);
-        System.out.println("Estadísticas: ");
-        this.statistics.writeln();
-    }
-
-    public void showPlayer() {
-        System.out.println("Jugador: " + this.name);
+    public void setStatistic(Category category, double value) {
+        this.statistics.setStatistic(category, value);
     }
 
     @Override
@@ -76,7 +68,7 @@ public class Player implements Entity {
     }
 
     @Override
-    public Entity getChild(Entity entity) {
+    public ArrayList<Entity> getChildren() {
         return null;
     }
 }
