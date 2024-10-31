@@ -5,7 +5,7 @@ public class DNI {
 
     public DNI(String dni) {
         assert dni != null;
-        assert !this.isValidDNI(dni) : "Invalid DNI format or checksum";    // TODO: add to Message enum
+        assert !DNI.isValidDNI(dni) : "Invalid DNI format or checksum";    // TODO: add to Message enum
 
         this.dni = dni;
     }
@@ -14,24 +14,20 @@ public class DNI {
         return this.dni;
     }
 
-    private boolean isValidDNI(String dni) {
+    public static boolean isValidDNI(String dni) {
         if (!dni.matches("\\d{8}[A-Z]")) {
             return false;
         }
 
         try {
+            String letters = "TRWAGMYFPDXBNJZSQVHLCKE";
             int number = Integer.parseInt(dni.substring(0, 8));
-            char expectedLetter = this.calculateDNILetter(number);
+            char expectedLetter = letters.charAt(number % 23);
 
             return dni.charAt(8) == expectedLetter;
         } catch (NumberFormatException e) {
             return false;
         }
-    }
-
-    private char calculateDNILetter(int number) {
-        String letters = "TRWAGMYFPDXBNJZSQVHLCKE";
-        return letters.charAt(number % 23);
     }
 
     @Override
