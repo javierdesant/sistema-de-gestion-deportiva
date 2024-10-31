@@ -7,9 +7,9 @@ public class PlayerProfile extends User {
     private final String lastName;
     private final DNI dni;
 
-    public PlayerProfile(String username, String password, String dni, String firstName, String lastName) {
+    public PlayerProfile(String username, String password, DNI dni, String firstName, String lastName) {
         super(username, password);
-        this.dni = new DNI(dni);
+        this.dni = dni;
         this.firstName = firstName;
         this.lastName = lastName;
     }
