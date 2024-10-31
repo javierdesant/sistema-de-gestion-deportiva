@@ -4,12 +4,16 @@ import es.upm.etsisi.models.entities.Entity;
 import es.upm.etsisi.models.entities.EntityList;
 import es.upm.etsisi.service.List;
 import es.upm.etsisi.utils.Message;
+import es.upm.etsisi.views.MatchListView;
 
 import java.util.Iterator;
 
 public class MatchList extends List<Match> {
+    private final MatchListView view;
+
     public MatchList() {
         super();
+        this.view = new MatchListView(this);
     }
 
     @Override
