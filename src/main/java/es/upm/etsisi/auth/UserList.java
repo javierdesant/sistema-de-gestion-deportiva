@@ -9,12 +9,6 @@ public class UserList extends List<User> {
         super();
     }
 
-    public User getUser(User user) {
-        int index = this.indexOf(user);
-        assert index >= 0;
-        return this.get(index);
-    }
-
     public User getByUsername(String username) {
         User user = null;
 
