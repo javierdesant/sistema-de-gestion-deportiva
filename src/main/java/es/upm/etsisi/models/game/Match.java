@@ -29,7 +29,7 @@ public class Match {
     }
 
     public ArrayList<Entity> getEntities() {
-        return this.entities;
+        return new ArrayList<>(this.entities);
     }
 
     public Entity getEntity(int index) {
