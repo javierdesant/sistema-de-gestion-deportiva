@@ -23,12 +23,12 @@ public class SportsService {
     }
 
     public void run() {
-        CommandManager commandManager = new CommandManager(this.entityList, this.matchList);
+        CLI CLI = new CLI(this.entityList, this.matchList);
 
         System.out.println("\n### Bienvenido al Gestor Deportivo ###\n");
 
         System.out.println("Introduzca un comando o escriba 'exit' para salir.");
 
-        commandManager.run();
+        CLI.run();
     }
 }

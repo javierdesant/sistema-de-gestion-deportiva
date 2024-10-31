@@ -1,21 +1,21 @@
 package es.upm.etsisi.commands.user;
 
 import es.upm.etsisi.commands.Command;
-import es.upm.etsisi.service.CommandManager;
+import es.upm.etsisi.service.CLI;
 import es.upm.etsisi.utils.Message;
 
 public class ExitCommand extends Command {
-    CommandManager manager;
+    CLI CLI;
 
-    public ExitCommand(CommandManager manager) {
+    public ExitCommand(CLI CLI) {
         super("exit");
-        this.manager = manager;
+        this.CLI = CLI;
     }
 
     @Override
     public void execute() {
         Message.EXIT_MESSAGE.writeln();
 
-        this.manager.close();
+        this.CLI.close();
     }
 }
