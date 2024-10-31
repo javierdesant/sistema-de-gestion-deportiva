@@ -9,7 +9,7 @@ public class LogoutCommand extends Command {
     private final CLI CLI;
 
     public LogoutCommand(AuthController authController, CLI CLI) {
-        super("login");
+        super("logout");
         this.authController = authController;
         this.CLI = CLI;
     }
