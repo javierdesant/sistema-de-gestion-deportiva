@@ -27,7 +27,7 @@ public class CLI {
         this.status = Status.CLOSED;
         this.commands = new LinkedList<>();
         this.authController = new AuthController();
-        this.commandView = new CommandView(this.commands, this.authController.getUser());
+        this.commandView = new CommandView(this.commands, this.authController);
         this.entityList = entityList;
         this.matchList = matchList;
     }

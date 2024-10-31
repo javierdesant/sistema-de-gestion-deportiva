@@ -2,6 +2,7 @@ package es.upm.etsisi.views;
 
 import es.upm.etsisi.auth.User;
 import es.upm.etsisi.commands.Command;
+import es.upm.etsisi.service.AuthController;
 import es.upm.etsisi.utils.Message;
 
 import java.util.Iterator;
@@ -11,12 +12,12 @@ import java.util.Scanner;
 public class CommandView {
     private final Scanner scanner;
     private final LinkedList<Command> commands;
-    private final User user;
+    private final AuthController authController;
 
-    public CommandView(LinkedList<Command> commands, User user) {
+    public CommandView(LinkedList<Command> commands, AuthController authController) {
         this.scanner = new Scanner(System.in);      // FIXME
         this.commands = commands;
-        this.user = user;
+        this.authController = authController;
     }
 
     public void displayError(Error error) {
@@ -24,8 +25,10 @@ public class CommandView {
     }
 
     public Command read() {
+        User user = authController.getUser();
+
         System.out.println();
-        System.out.print(this.user == null ? "" : this.user.toString());
+        System.out.print(user == null ? "" : user.toString());
         Message.COMMAND_PROMPT.write();
 
         String input = this.scanner.nextLine().trim();
