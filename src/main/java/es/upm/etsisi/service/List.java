@@ -10,7 +10,7 @@ public abstract class List<T> {
         this.elements = new LinkedList<>();
     }
 
-    protected LinkedList<T> getElements() {
+    public LinkedList<T> getElements() {
         return new LinkedList<>(this.elements);
     }
 
@@ -36,14 +36,6 @@ public abstract class List<T> {
 
     protected boolean removeElement(T element) {
         return this.elements.remove(element);
-    }
-
-    public T get(int index) {
-        return this.elements.get(index);
-    }
-
-    public int indexOf(T element) {
-        return this.elements.indexOf(element);
     }
 
     public abstract void add(T element);
