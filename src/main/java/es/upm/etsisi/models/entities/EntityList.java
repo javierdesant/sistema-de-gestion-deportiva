@@ -32,17 +32,6 @@ public class EntityList extends List<Entity> {
         }
     }
 
-    public void score(String playerName, double score) {    // TODO
-//        assert isValidScore(score) : Message.SCORE_OUT_OF_BOUNDS_ERROR;
-//        int index = this.entities.indexOf(new Player(playerName));
-//        assert index != -1 : Message.PLAYER_DOES_NOT_EXIST_ERROR;
-//        this.entities.get(index).setScore(score);
-    }
-
-    private boolean isValidScore(double score) {
-        return -999999.0 < score && score < 999999.0;
-    }
-
     public void rank() {
         this.show();    // TODO
     }
