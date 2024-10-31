@@ -1,11 +1,15 @@
 package es.upm.etsisi.models.game;
 
+import es.upm.etsisi.views.StatisticsView;
+
 import java.util.EnumMap;
 
 public class Statistics {
+    private final StatisticsView view;
     private final EnumMap<Category, Double> statistics;
 
     public Statistics() {
+        this.view = new StatisticsView(this);
         this.statistics = new EnumMap<>(Category.class);
         for (Category category : Category.values()) {
             this.statistics.put(category, 0.0);
@@ -22,13 +26,7 @@ public class Statistics {
         return this.statistics.get(category);
     }
 
-    public EnumMap<Category, Double> getAllStatistics() {
-        return this.statistics;
-    }
-
-    public void writeln() {
-        for (Category category : Category.values()) {
-            System.out.println(category + ": " + getStatistic(category));
-        }
+    public void show() {
+        this.view.display();
     }
 }
