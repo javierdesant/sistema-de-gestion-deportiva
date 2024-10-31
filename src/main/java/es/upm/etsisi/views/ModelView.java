@@ -1,5 +1,5 @@
 package es.upm.etsisi.views;
 
-public interface View {
+public interface ModelView {
     void display();
 }
