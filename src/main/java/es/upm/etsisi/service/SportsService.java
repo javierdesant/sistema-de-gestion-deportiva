@@ -18,7 +18,7 @@ public class SportsService {
         String[] defaultNames = {"Luisa", "Manuel", "Kurt", "Sofia", "Robert"};
 
         for (String defaultName : defaultNames) {
-            this.entityList.add(new Player(defaultName, new Administrator("default", "")));
+            this.entityList.add(new Player(defaultName, new Administrator("default@upm.es", "")));
         }
     }
 
