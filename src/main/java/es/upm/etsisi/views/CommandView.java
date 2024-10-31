@@ -25,7 +25,7 @@ public class CommandView {
 
     public Command read() {
         System.out.println();
-        System.out.print(this.user);
+        System.out.print(this.user == null ? "" : this.user.toString());
         Message.COMMAND_PROMPT.write();
 
         String input = this.scanner.nextLine().trim();
