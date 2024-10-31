@@ -4,7 +4,7 @@ import es.upm.etsisi.models.game.Statistics;
 
 import java.util.ArrayList;
 
-public class Team extends Entity {   // TODO: implement
+public class Team extends Entity {
     private final ArrayList<Entity> children;
 
     public Team(String name, Statistics statistics) {

@@ -21,7 +21,7 @@ public class Statistics {
     }
 
     public double get(Category category) {
-        assert this.statistics.containsKey(category) : "No se puede obtener el valor de la categoria";
+        assert this.statistics.containsKey(category) : "No se puede obtener el valor de la categoría";
 
         return this.statistics.get(category);
     }

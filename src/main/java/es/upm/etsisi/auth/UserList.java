@@ -24,7 +24,7 @@ public class UserList extends List<User> {
     }
 
     public void add(User user) {
-        assert !this.contains(user);    // TODO: add message
+        assert !this.contains(user) : "User already exists";    // TODO: add message
         this.addElement(user);
     }
 

@@ -5,7 +5,7 @@ public abstract class User {
     private String password;
 
     public User(String username, String password) {
-        assert this.isUpmEmail(username);   // TODO: add Message
+        assert this.isUpmEmail(username) : "Not valid email";   // TODO: add Message
 
         this.username = username;
         this.password = password;
@@ -30,7 +30,7 @@ public abstract class User {
         assert password != null;
         assert !this.password.isBlank();
 
-        assert this.validate(oldPassword);  // TODO: add Message
+        assert this.validate(oldPassword) : "Wrong password";  // TODO: add Message
 
         this.password = newPassword;
     }
