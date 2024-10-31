@@ -5,7 +5,7 @@ import es.upm.etsisi.models.game.Match;
 
 import java.util.Iterator;
 
-public class MatchView implements View {
+public class MatchView implements ModelView {
     private final Match match;
 
     public MatchView(Match match) {

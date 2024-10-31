@@ -2,7 +2,7 @@ package es.upm.etsisi.views;
 
 import es.upm.etsisi.models.entities.Entity;
 
-public class EntityView implements View {
+public class EntityView implements ModelView {
     private final Entity entity;
 
     public EntityView(Entity entity) {

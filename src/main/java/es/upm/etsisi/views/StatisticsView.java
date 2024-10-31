@@ -3,7 +3,7 @@ package es.upm.etsisi.views;
 import es.upm.etsisi.models.game.Category;
 import es.upm.etsisi.models.game.Statistics;
 
-public class StatisticsView implements View {
+public class StatisticsView implements ModelView {
     private final Statistics statistics;
 
     public StatisticsView(Statistics statistics) {

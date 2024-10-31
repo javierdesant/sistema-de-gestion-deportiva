@@ -2,7 +2,7 @@ package es.upm.etsisi.views;
 
 import es.upm.etsisi.models.game.MatchList;
 
-public class MatchListView implements View {
+public class MatchListView implements ModelView {
     private final MatchList matchList;
 
     public MatchListView(MatchList matchList) {

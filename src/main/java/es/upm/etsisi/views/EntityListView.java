@@ -4,7 +4,7 @@ import es.upm.etsisi.models.entities.Entity;
 import es.upm.etsisi.models.entities.EntityList;
 import es.upm.etsisi.utils.Message;
 
-public class EntityListView implements View {
+public class EntityListView implements ModelView {
     private final EntityList entityList;
 
     public EntityListView(EntityList entityList) {
