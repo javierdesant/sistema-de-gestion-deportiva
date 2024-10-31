@@ -1,16 +1,16 @@
 package es.upm.etsisi.service;
 
 import es.upm.etsisi.auth.Administrator;
-import es.upm.etsisi.models.game.MatchList;
-import es.upm.etsisi.models.entities.Player;
 import es.upm.etsisi.models.entities.EntityList;
+import es.upm.etsisi.models.entities.Player;
+import es.upm.etsisi.models.game.MatchList;
 import es.upm.etsisi.utils.Status;
 
 public class SportsService {
-    private Status status;
     private final EntityList entityList;
     private final MatchList matchList;
     private final CLI cli;
+    private Status status;
 
     public SportsService() {
         this.status = Status.CLOSED;

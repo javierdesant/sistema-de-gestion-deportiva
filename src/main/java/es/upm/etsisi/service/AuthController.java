@@ -1,16 +1,15 @@
 package es.upm.etsisi.service;
 
-import es.upm.etsisi.auth.Administrator;
 import es.upm.etsisi.auth.User;
 import es.upm.etsisi.auth.UserList;
 import es.upm.etsisi.views.AdministratorView;
 import es.upm.etsisi.views.PlayerProfileView;
 
 public class AuthController {
-    private User user;
     private final UserList userList;
     private final PlayerProfileView playerProfileView;
     private final AdministratorView administratorView;
+    private User user;
 
     public AuthController() {
         this.user = null;
@@ -39,7 +38,6 @@ public class AuthController {
     public void register(String username, String password) {
         assert this.userList.getByUsername(username) == null;   // TODO: add Message.USER_ALREADY_EXISTS
 
-        User user = null;
         if (username.endsWith("@alumnos.upm.es")) {
             user = this.playerProfileView.read(username, password);
         } else {

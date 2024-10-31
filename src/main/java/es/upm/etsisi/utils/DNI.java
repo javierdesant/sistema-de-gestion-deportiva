@@ -10,10 +10,6 @@ public class DNI {
         this.dni = dni;
     }
 
-    public String getValue() {
-        return this.dni;
-    }
-
     public static boolean isValidDNI(String dni) {
         if (!dni.matches("\\d{8}[A-Z]")) {
             return false;
@@ -28,6 +24,10 @@ public class DNI {
         } catch (NumberFormatException e) {
             return false;
         }
+    }
+
+    public String getValue() {
+        return this.dni;
     }
 
     @Override

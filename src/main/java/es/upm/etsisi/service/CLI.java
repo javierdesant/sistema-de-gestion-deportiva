@@ -2,12 +2,14 @@ package es.upm.etsisi.service;
 
 import es.upm.etsisi.auth.User;
 import es.upm.etsisi.commands.Command;
-import es.upm.etsisi.commands.user.TODO.*;
-import es.upm.etsisi.commands.user.*;
-import es.upm.etsisi.models.game.MatchList;
+import es.upm.etsisi.commands.user.ExitCommand;
+import es.upm.etsisi.commands.user.TODO.HelpCommand;
+import es.upm.etsisi.commands.user.TODO.LoginCommand;
+import es.upm.etsisi.commands.user.TODO.LogoutCommand;
+import es.upm.etsisi.commands.user.TODO.RegisterCommand;
 import es.upm.etsisi.models.entities.EntityList;
+import es.upm.etsisi.models.game.MatchList;
 import es.upm.etsisi.utils.Message;
-import es.upm.etsisi.utils.Status;
 import es.upm.etsisi.views.CommandView;
 
 import java.util.LinkedList;
