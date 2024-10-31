@@ -69,6 +69,6 @@ public class Player implements Entity {
 
     @Override
     public ArrayList<Entity> getChildren() {
-        return null;
+        return new ArrayList<>();
     }
 }
