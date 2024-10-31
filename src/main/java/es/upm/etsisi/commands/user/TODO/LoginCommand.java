@@ -1,30 +1,28 @@
 package es.upm.etsisi.commands.user.TODO;
 
-import es.upm.etsisi.auth.User;
-import es.upm.etsisi.auth.UserList;
 import es.upm.etsisi.commands.Command;
+import es.upm.etsisi.service.AuthController;
+import es.upm.etsisi.service.CLI;
 
 public class LoginCommand extends Command {
-    private User user;
-    private final UserList userList;
+    private final AuthController authController;
+    private final CLI CLI;
 
-    public LoginCommand(User user, UserList userList) {
+    public LoginCommand(AuthController authController, CLI CLI) {
         super("login");
-        this.user = user;
-        this.userList = userList;
+        this.authController = authController;
+        this.CLI = CLI;
     }
 
     @Override
     public void execute() {
-        assert this.user == null;   // TODO: add message
-
         String username = getArgument(0);
         String password = getArgument(1);
-        User user = this.userList.getByUsername(username);
 
-        assert user != null;
-        assert user.validate(password);
+        boolean success = this.authController.login(username, password);
 
-        this.user = user;
+        assert success; // TODO: add message
+
+        this.CLI.updateCommands();
     }
 }

@@ -1,20 +1,22 @@
 package es.upm.etsisi.commands.user.TODO;
 
-import es.upm.etsisi.auth.User;
 import es.upm.etsisi.commands.Command;
+import es.upm.etsisi.service.AuthController;
+import es.upm.etsisi.service.CLI;
 
 public class LogoutCommand extends Command {
-    private User user;
+    private final AuthController authController;
+    private final CLI CLI;
 
-    public LogoutCommand(User user) {
+    public LogoutCommand(AuthController authController, CLI CLI) {
         super("login");
-        this.user = user;
+        this.authController = authController;
+        this.CLI = CLI;
     }
 
     @Override
     public void execute() {
-        assert this.user != null;   // TODO: add Message
-
-        this.user = null;
+        this.authController.logout();
+        this.CLI.updateCommands();
     }
 }
