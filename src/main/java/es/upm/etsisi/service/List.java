@@ -38,14 +38,6 @@ public abstract class List<T> {
         return this.elements.remove(element);
     }
 
-    public T get(int index) {
-        return this.elements.get(index);
-    }
-
-    public int indexOf(T element) {
-        return this.elements.indexOf(element);
-    }
-
     public abstract void add(T element);
 
     public abstract void remove(T element);
