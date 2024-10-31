@@ -57,4 +57,9 @@ public abstract class User {
         User user = (User) object;
         return this.username.equals(user.username);
     }
+
+    @Override
+    public String toString() {
+        return this.username.split("@")[0];
+    }
 }
