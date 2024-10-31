@@ -13,48 +13,23 @@ import es.upm.etsisi.views.CommandView;
 import java.util.LinkedList;
 
 public class CLI {
-    private Status status;
+    private final SportsService service;
     private final LinkedList<Command> commands;
     private final AuthController authController;
     private final CommandView commandView;
     private final EntityList entityList;
     private final MatchList matchList;
 
-    CLI(EntityList entityList, MatchList matchList) {
+    CLI(EntityList entityList, MatchList matchList, SportsService service) {
         assert entityList != null : Message.NULL_PLAYERLIST;
         assert matchList != null : Message.NULL_MATCHLIST;
 
-        this.status = Status.CLOSED;
         this.commands = new LinkedList<>();
         this.authController = new AuthController();
         this.commandView = new CommandView(this.commands, this.authController);
         this.entityList = entityList;
         this.matchList = matchList;
-    }
-
-    public boolean isOpen() {
-        return this.status == Status.OPEN;
-    }
-
-    public void open() {
-        assert !this.isOpen();
-
-        if (this.isClosed()) {
-            this.updateCommands();
-        }
-
-        this.status = Status.OPEN;
-    }
-
-    public boolean isClosed() {
-        return this.status == Status.CLOSED;
-    }
-
-    public void close() {
-        assert !this.isClosed();
-
-        this.commands.clear();
-        this.status = Status.CLOSED;
+        this.service = service;
     }
 
     public void updateCommands() {
@@ -84,7 +59,7 @@ public class CLI {
         this.add(new LoginCommand(this.authController, this));
         this.add(new LogoutCommand(this.authController, this));
         this.add(new HelpCommand());
-        this.add(new ExitCommand(this));
+        this.add(new ExitCommand(this.service));
     }
 
     private void add(Command command) {
@@ -92,8 +67,8 @@ public class CLI {
     }
 
     protected void run() {
-        if (!this.isOpen()) {
-            this.open();
+        if (!this.service.isOpen()) {
+            this.service.open();
         }
 
         do {
@@ -107,6 +82,6 @@ public class CLI {
                 }
             }
 
-        } while (this.isOpen());
+        } while (this.service.isOpen());
     }
 }

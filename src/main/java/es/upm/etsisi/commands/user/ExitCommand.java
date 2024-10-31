@@ -2,20 +2,21 @@ package es.upm.etsisi.commands.user;
 
 import es.upm.etsisi.commands.Command;
 import es.upm.etsisi.service.CLI;
+import es.upm.etsisi.service.SportsService;
 import es.upm.etsisi.utils.Message;
 
 public class ExitCommand extends Command {
-    CLI CLI;
+    SportsService service;
 
-    public ExitCommand(CLI CLI) {
+    public ExitCommand(SportsService sportsService) {
         super("exit");
-        this.CLI = CLI;
+        this.service = sportsService;
     }
 
     @Override
     public void execute() {
         Message.EXIT_MESSAGE.writeln();
 
-        this.CLI.close();
+        this.service.close();
     }
 }
