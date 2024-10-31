@@ -20,7 +20,7 @@ public class Statistics {
         this.statistics.put(category, value);
     }
 
-    public double getStatistic(Category category) {
+    public double get(Category category) {
         assert this.statistics.containsKey(category) : "No se puede obtener el valor de la categoria";
 
         return this.statistics.get(category);
