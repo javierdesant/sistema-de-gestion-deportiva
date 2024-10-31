@@ -1,9 +1,8 @@
 package es.upm.etsisi.commands;
 
-import es.upm.etsisi.service.Item;
 import es.upm.etsisi.utils.Message;
 
-public abstract class Command implements Item {
+public abstract class Command {
     private final String name_;
     private String name;
     private String[] arguments;
@@ -22,7 +21,6 @@ public abstract class Command implements Item {
         return this.arguments[index];
     }
 
-    @Override
     public void validate(String input) {
         assert input != null;
 
@@ -35,8 +33,9 @@ public abstract class Command implements Item {
         }
     }
 
-    @Override
     public boolean isCalled() {
         return this.name.equals(this.name_);
     }
+
+    public abstract void execute();
 }
