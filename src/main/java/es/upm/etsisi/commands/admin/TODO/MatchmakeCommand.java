@@ -22,7 +22,7 @@ public class MatchmakeCommand extends Command { // TODO: remake for 2.0.0
         String homePlayerName = this.getArgument(0);
         String visitingPlayerName = this.getArgument(1);
 
-        this.matchList.add(new Match(this.entityList, new Player(homePlayerName), new Player(visitingPlayerName)));
+//        this.matchList.add(new Match(this.entityList, new Player(homePlayerName), new Player(visitingPlayerName)));       // FIXME
         Message.PLAYERS_MATCHED.writeln(homePlayerName, visitingPlayerName);
     }
 }

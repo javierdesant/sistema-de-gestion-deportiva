@@ -19,7 +19,7 @@ public class CreatePlayerCommand extends Command {  // TODO: remake for 2.0.0
 
         assert playerName.matches("[a-zA-Z]+") : Message.INVALID_NAME;
 
-        this.entityList.add(new Player(playerName));
+//        this.entityList.add(new Player(playerName));      // FIXME
         Message.PLAYER_ADDED.writeln();
     }
 }

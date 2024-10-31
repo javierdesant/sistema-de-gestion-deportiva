@@ -30,7 +30,7 @@ public class DeletePlayerCommand extends Command {  // TODO: remake for 2.0.0
             switch (this.scanner.nextLine().toUpperCase()) {
                 case "S":
                     this.matchList.remove(playerName);
-                    this.entityList.remove(new Player(playerName));
+//                    this.entityList.remove(new Player(playerName));       // FIXME
                     Message.PLAYER_REMOVED.writeln();
                     break;
                 case "N":
@@ -42,7 +42,7 @@ public class DeletePlayerCommand extends Command {  // TODO: remake for 2.0.0
                     break;
             }
         } else {
-            this.entityList.remove(new Player(playerName));
+//            this.entityList.remove(new Player(playerName));         // FIXME
             Message.PLAYER_REMOVED.writeln();
         }
     }
