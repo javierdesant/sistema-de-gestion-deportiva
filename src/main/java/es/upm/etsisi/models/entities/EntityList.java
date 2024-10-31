@@ -2,10 +2,14 @@ package es.upm.etsisi.models.entities;
 
 import es.upm.etsisi.service.List;
 import es.upm.etsisi.utils.Message;
+import es.upm.etsisi.views.EntityListView;
 
 public class EntityList extends List<Entity> {
+    private final EntityListView view;
+
     public EntityList() {
         super();
+        this.view = new EntityListView(this);
     }
 
     @Override
@@ -22,14 +26,7 @@ public class EntityList extends List<Entity> {
 
     @Override
     public void show() {
-        if (this.isEmpty()) {
-            Message.NO_PLAYERS.writeln();
-        } else {
-            for (Entity entity : this.getElements()) {
-                entity.show();
-                Message.FOOTER.writeln();
-            }
-        }
+        this.view.display();
     }
 
     public void rank() {
