@@ -14,8 +14,9 @@ public class UserList extends List<User> {
 
         Iterator<User> iterator = this.getElements().iterator();
         while (iterator.hasNext() && user == null) {
-            if (username.equals(iterator.next().getUsername())) {
-                user = iterator.next();
+            User next = iterator.next();
+            if (username.equals(next.getUsername())) {
+                user = next;
             }
         }
 
