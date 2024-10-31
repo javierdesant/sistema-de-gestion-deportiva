@@ -18,7 +18,7 @@ public class ScoreCommand extends Command {
             String playerName = this.getArgument(0);
 
             double score = Double.parseDouble(this.getArgument(1));
-            this.entityList.score(playerName, score);
+            // this.entityList.score(playerName, score);    // FIXME
             Message.SCORE_UPDATED.writeln(playerName, score);
         } catch (NumberFormatException e) {
             Message.INVALID_NUMBER.writeln();
