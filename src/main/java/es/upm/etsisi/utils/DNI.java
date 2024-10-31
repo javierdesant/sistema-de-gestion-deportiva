@@ -5,7 +5,7 @@ public class DNI {
 
     public DNI(String dni) {
         assert dni != null;
-        assert !DNI.isValidDNI(dni) : "Invalid DNI format or checksum";    // TODO: add to Message enum
+        assert DNI.isValidDNI(dni);
 
         this.dni = dni;
     }
