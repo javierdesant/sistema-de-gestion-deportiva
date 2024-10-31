@@ -10,7 +10,7 @@ public abstract class List<T> {
         this.elements = new LinkedList<>();
     }
 
-    protected LinkedList<T> getElements() {
+    public LinkedList<T> getElements() {
         return new LinkedList<>(this.elements);
     }
 
