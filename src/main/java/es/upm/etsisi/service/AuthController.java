@@ -38,6 +38,8 @@ public class AuthController {
     public void register(String username, String password) {
         assert this.userList.getByUsername(username) == null;   // TODO: add Message.USER_ALREADY_EXISTS
 
+        User user;
+
         if (username.endsWith("@alumnos.upm.es")) {
             user = this.playerProfileView.read(username, password);
         } else {
