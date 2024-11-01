@@ -69,6 +69,9 @@ public class CLI {
     }
 
     private void addPlayerCommands() {
+//        this.add(new EnrollCommand());
+//        this.add(new LeaveCommand());
+//        this.add(new ShowCommand());
         // add tournament related commands...       // TODO
         // this.add(new ShowStatsCommand());        // TODO
     }
