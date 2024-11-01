@@ -28,7 +28,7 @@ public class CommandView {
         User user = authController.getUser();
 
         System.out.println();
-        System.out.print(user == null ? "" : user.toString());
+        System.out.print(user == null ? "" : user + " # ");
         Message.COMMAND_PROMPT.write();
 
         String input = this.scanner.nextLine().trim();
