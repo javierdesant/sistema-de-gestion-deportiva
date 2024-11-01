@@ -6,17 +6,17 @@ import es.upm.etsisi.service.CLI;
 
 public class LogoutCommand extends Command {
     private final AuthController authController;
-    private final CLI CLI;
+    private final CLI cli;
 
-    public LogoutCommand(AuthController authController, CLI CLI) {
+    public LogoutCommand(AuthController authController, CLI cli) {
         super("logout");
         this.authController = authController;
-        this.CLI = CLI;
+        this.cli = cli;
     }
 
     @Override
     public void execute() {
         this.authController.logout();
-        this.CLI.updateCommands();
+        this.cli.updateCommands();
     }
 }

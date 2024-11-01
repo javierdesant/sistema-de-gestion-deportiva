@@ -1,21 +1,20 @@
 package es.upm.etsisi.commands.user.TODO;
 
 import es.upm.etsisi.commands.Command;
-
-import java.util.LinkedList;
+import es.upm.etsisi.service.CLI;
 
 public class HelpCommand extends Command {
-    private final LinkedList<Command> commands;
+    private final CLI cli;
 
-    public HelpCommand(LinkedList<Command> commands) {
+    public HelpCommand(CLI cli) {
         super("help");
-        this.commands = commands;
+        this.cli = cli;
     }
 
     @Override
     public void execute() {
         System.out.println("Commands:");    // TODO: add Message
-        for (Command command : commands) {
+        for (Command command : this.cli.getCommands()) {
             System.out.println(command.getName());
         }
     }

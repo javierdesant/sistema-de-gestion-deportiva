@@ -6,12 +6,12 @@ import es.upm.etsisi.service.CLI;
 
 public class LoginCommand extends Command {
     private final AuthController authController;
-    private final CLI CLI;
+    private final CLI cli;
 
-    public LoginCommand(AuthController authController, CLI CLI) {
+    public LoginCommand(AuthController authController, CLI cli) {
         super("login");
         this.authController = authController;
-        this.CLI = CLI;
+        this.cli = cli;
     }
 
     @Override
@@ -21,8 +21,8 @@ public class LoginCommand extends Command {
 
         boolean success = this.authController.login(username, password);
 
-        assert success; // TODO: add message
+        assert success : "login error"; // TODO: add message
 
-        this.CLI.updateCommands();
+        this.cli.updateCommands();
     }
 }

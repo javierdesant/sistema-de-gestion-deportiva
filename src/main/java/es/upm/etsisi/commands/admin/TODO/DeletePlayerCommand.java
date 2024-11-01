@@ -14,7 +14,7 @@ public class DeletePlayerCommand extends Command {  // TODO: remake for 2.0.0
     private final Scanner scanner;
 
     public DeletePlayerCommand(EntityList entityList, MatchList matchList, Scanner scanner) {
-        super("remove");
+        super("player-remove");
         this.entityList = entityList;
         this.matchList = matchList;
         this.scanner = scanner;

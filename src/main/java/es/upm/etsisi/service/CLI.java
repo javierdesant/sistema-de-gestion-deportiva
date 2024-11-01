@@ -1,7 +1,10 @@
 package es.upm.etsisi.service;
 
+import es.upm.etsisi.auth.Administrator;
+import es.upm.etsisi.auth.PlayerProfile;
 import es.upm.etsisi.auth.User;
 import es.upm.etsisi.commands.Command;
+import es.upm.etsisi.commands.admin.TODO.*;
 import es.upm.etsisi.commands.user.ExitCommand;
 import es.upm.etsisi.commands.user.TODO.HelpCommand;
 import es.upm.etsisi.commands.user.TODO.LoginCommand;
@@ -12,7 +15,9 @@ import es.upm.etsisi.models.game.MatchList;
 import es.upm.etsisi.utils.Message;
 import es.upm.etsisi.views.CommandView;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Scanner;
 
 public class CLI {
     private final SportsService service;
@@ -52,16 +57,27 @@ public class CLI {
     }
 
     private void addAdminCommands() {
+        this.add(new CreatePlayerCommand(this.entityList));
+        this.add(new CreateTeamCommand(this.entityList));
+        this.add(new DeletePlayerCommand(this.entityList, this.matchList, new Scanner(System.in)));     // FIXME
+        this.add(new DeleteTeamCommand(this.entityList));
+        this.add(new AddToTeamCommand(this.entityList));
+        this.add(new RemoveFromTeamCommand(this.entityList));
+        // this.add(new CreateTournamentCommand());    // TODO
+        // this.add(new DeleteTournamentCommand());     // TODO
+        // this.add(new TournamentMatchmakingCommand() or MatchmakeCommand());    // TODO
     }
 
     private void addPlayerCommands() {
+        // add tournament related commands...       // TODO
+        // this.add(new ShowStatsCommand());        // TODO
     }
 
-    private void addDefaultCommands() {
+    private void addPublicCommands() {
         this.add(new RegisterCommand(this.authController));
         this.add(new LoginCommand(this.authController, this));
         this.add(new LogoutCommand(this.authController, this));
-        this.add(new HelpCommand(this.commands));
+        this.add(new HelpCommand(this));
         this.add(new ExitCommand(this.service));
     }
 

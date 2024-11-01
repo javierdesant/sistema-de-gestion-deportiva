@@ -9,7 +9,7 @@ public class CreatePlayerCommand extends Command {  // TODO: remake for 2.0.0
     private final EntityList entityList;
 
     public CreatePlayerCommand(EntityList entityList) {
-        super("create");
+        super("player-create");
         this.entityList = entityList;
     }
 
