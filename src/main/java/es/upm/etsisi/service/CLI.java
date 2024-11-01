@@ -60,7 +60,7 @@ public class CLI {
         this.add(new RegisterCommand(this.authController));
         this.add(new LoginCommand(this.authController, this));
         this.add(new LogoutCommand(this.authController, this));
-        this.add(new HelpCommand());
+        this.add(new HelpCommand(this.commands));
         this.add(new ExitCommand(this.service));
     }
 
