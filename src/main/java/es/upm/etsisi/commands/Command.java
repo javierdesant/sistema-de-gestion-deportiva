@@ -12,7 +12,7 @@ public abstract class Command {
     }
 
     public String getName() {
-        return this.name;
+        return this.name_;
     }
 
     protected String getArgument(int index) {     // TODO: añadir un máximo de args dependiendo del comando
