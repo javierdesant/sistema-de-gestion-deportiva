@@ -36,17 +36,14 @@ public class CLI {
 
     public void updateCommands() {
         User user = this.authController.getUser();
-        String userClass = user == null ? "" : user.getClass().getSimpleName();
 
         this.commands.clear();
 
-        switch (userClass) {
-            case "Administrator":
-                this.addAdminCommands();
-            case "PlayerProfile":
-                this.addPlayerCommands();
-            default:
-                this.addDefaultCommands();
+        this.addPublicCommands();
+        if (user instanceof Administrator) {
+            this.addAdminCommands();
+        } else if (user instanceof PlayerProfile) {
+            this.addPlayerCommands();
         }
     }
 
