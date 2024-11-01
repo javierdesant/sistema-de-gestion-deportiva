@@ -34,6 +34,10 @@ public class CLI {
         this.service = service;
     }
 
+    public ArrayList<Command> getCommands() {
+        return new ArrayList<>(this.commands);
+    }
+
     public void updateCommands() {
         User user = this.authController.getUser();
 
