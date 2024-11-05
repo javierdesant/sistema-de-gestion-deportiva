@@ -36,10 +36,14 @@ public class Team extends Entity {
 
         for (Entity child : this.children) {
             for (Category category : Category.values()) {
-                stats.setStatistic(category, stats.get(category) + child.getStat(category));
+                stats.setStatistic(
+                        category, (stats.get(category) + child.getStats().get(category)) / this.children.size()
+                );
             }
         }
 
-        return stats;
+        this.setStats(stats);
+
+        return super.getStats();
     }
 }
