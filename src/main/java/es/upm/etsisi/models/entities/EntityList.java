@@ -19,9 +19,9 @@ public class EntityList extends List<Entity> {
     }
 
     @Override
-        assert removed : Message.PLAYER_DOES_NOT_EXIST_ERROR;
     public void remove(Entity entity) {
         boolean removed = this.removeElement(entity);
+        assert removed : Message.PLAYER_DOES_NOT_EXIST_ERROR;
     }
 
     @Override
