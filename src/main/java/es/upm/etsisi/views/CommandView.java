@@ -20,8 +20,12 @@ public class CommandView {
         this.authController = authController;
     }
 
-    public void displayError(Error error) {
-        System.out.println("Error: " + error.getMessage());
+    public void display(String message) {
+        System.out.println(message);
+    }
+
+    public void display(Exception exception) {
+        System.out.println("Error: " + exception.getMessage());
     }
 
     public Command read() {
