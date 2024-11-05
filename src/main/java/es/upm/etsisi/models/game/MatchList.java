@@ -73,13 +73,7 @@ public class MatchList extends List<Match> {
 
     @Override
     public void show() {
-        if (this.isEmpty()) {
-            Message.NO_MATCHES.writeln();
-        } else {
-            for (Match match : this.getElements()) {
-                match.show();
-            }
-        }
+        this.view.display();
     }
 
     public void randomize(EntityList entityList) {
