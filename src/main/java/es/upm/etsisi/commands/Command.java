@@ -12,10 +12,6 @@ public abstract class Command {
         this.maxArguments = maxArguments;
     }
 
-    public Command(String name) {
-        this(name, 0);
-    }
-
     public String getName() {
         return this.name;
     }
