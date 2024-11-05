@@ -12,10 +12,10 @@ public class AuthController {
     private User user;
 
     public AuthController() {
-        this.user = null;
         this.userList = new UserList();
         this.playerProfileView = new PlayerProfileView();
         this.administratorView = new AdministratorView();
+        this.user = null;
     }
 
     public User getUser() {
