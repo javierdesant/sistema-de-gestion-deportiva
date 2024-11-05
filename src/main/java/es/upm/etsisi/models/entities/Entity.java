@@ -9,11 +9,13 @@ public abstract class Entity {
     private final EntityView view;
     private final String name;
     private Statistics stats;
+    private String adminName;
 
-    public Entity(String name, Statistics stats) {
+    public Entity(String name, Statistics stats, String adminName) {
         this.view = new EntityView(this);
         this.name = name;
         this.stats = stats;
+        this.adminName = adminName;
     }
 
     public String getName() {

@@ -8,13 +8,13 @@ import java.util.ArrayList;
 public class Team extends Entity {
     private final ArrayList<Entity> children;
 
-    public Team(String name, Statistics statistics) {
-        super(name, statistics);
+    public Team(String name, Statistics statistics, String adminName) {
+        super(name, statistics, adminName);
         this.children = new ArrayList<>();
     }
 
-    public Team(String name) {
-        this(name, new Statistics());
+    public Team(String name, String adminName) {
+        this(name, new Statistics(), adminName);
     }
 
     public void add(Entity entity) {
