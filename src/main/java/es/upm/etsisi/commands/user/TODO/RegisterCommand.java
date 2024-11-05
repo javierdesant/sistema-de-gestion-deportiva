@@ -10,7 +10,7 @@ public class RegisterCommand extends Command {
     Scanner scanner;
 
     public RegisterCommand(AuthController authController) {
-        super("register");
+        super("register", 2);
         this.authController = authController;
         this.scanner = new Scanner(System.in);  // FIXME: resources leak
     }

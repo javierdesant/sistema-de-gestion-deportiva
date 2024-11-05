@@ -9,7 +9,7 @@ public class LoginCommand extends Command {
     private final CLI cli;
 
     public LoginCommand(AuthController authController, CLI cli) {
-        super("login");
+        super("login", 2);
         this.authController = authController;
         this.cli = cli;
     }
