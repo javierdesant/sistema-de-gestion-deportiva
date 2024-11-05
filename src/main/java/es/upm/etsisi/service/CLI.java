@@ -5,6 +5,7 @@ import es.upm.etsisi.auth.PlayerProfile;
 import es.upm.etsisi.auth.User;
 import es.upm.etsisi.commands.Command;
 import es.upm.etsisi.commands.admin.AddToTeamCommand;
+import es.upm.etsisi.commands.admin.CreateTeamCommand;
 import es.upm.etsisi.commands.admin.TODO.*;
 import es.upm.etsisi.commands.user.ExitCommand;
 import es.upm.etsisi.commands.user.TODO.HelpCommand;
@@ -59,7 +60,7 @@ public class CLI {
 
     private void addAdminCommands() {
         this.add(new CreatePlayerCommand(this.entityList));
-        this.add(new CreateTeamCommand(this.entityList));
+        this.add(new CreateTeamCommand(this.entityList, this.authController));
         this.add(new DeletePlayerCommand(this.entityList, this.matchList, new Scanner(System.in)));     // FIXME
         this.add(new DeleteTeamCommand(this.entityList));
         this.add(new AddToTeamCommand(this.entityList));
