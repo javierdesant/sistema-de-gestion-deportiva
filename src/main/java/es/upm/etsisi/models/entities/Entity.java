@@ -1,6 +1,5 @@
 package es.upm.etsisi.models.entities;
 
-import es.upm.etsisi.models.game.Category;
 import es.upm.etsisi.models.game.Statistics;
 import es.upm.etsisi.views.EntityView;
 
@@ -9,7 +8,7 @@ import java.util.ArrayList;
 public abstract class Entity {
     private final EntityView view;
     private final String name;
-    private final Statistics stats;
+    private Statistics stats;
 
     public Entity(String name, Statistics stats) {
         this.view = new EntityView(this);
@@ -25,11 +24,9 @@ public abstract class Entity {
         return this.stats;
     }
 
-    public double getStat(Category category) {
-        return this.stats.get(category);
+    public void setStats(Statistics stats) {
+        this.stats = stats;
     }
-
-    // TODO: setStats
 
     public void show() {
         this.view.display();
