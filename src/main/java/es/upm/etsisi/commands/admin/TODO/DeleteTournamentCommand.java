@@ -4,7 +4,7 @@ import es.upm.etsisi.commands.Command;
 
 public class DeleteTournamentCommand extends Command {
     public DeleteTournamentCommand() {
-        super("tournament-delete");
+        super("tournament-delete", 0);  // TODO: define Tournament and Match models
     }
 
     @Override

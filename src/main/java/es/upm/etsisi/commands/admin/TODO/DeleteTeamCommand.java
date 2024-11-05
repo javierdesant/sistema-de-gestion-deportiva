@@ -7,7 +7,7 @@ public class DeleteTeamCommand extends Command {
     private EntityList entityList;
 
     public DeleteTeamCommand(EntityList entityList) {
-        super("team-delete");
+        super("team-delete", 0);        // TODO: define Tournament and Match models
         this.entityList = entityList;
     }
 

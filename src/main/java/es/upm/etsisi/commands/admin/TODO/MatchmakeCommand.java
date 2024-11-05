@@ -12,7 +12,7 @@ public class MatchmakeCommand extends Command { // TODO: remake for 2.0.0
     private final MatchList matchList;
 
     public MatchmakeCommand(EntityList entityList, MatchList matchList) {
-        super("matchmake");
+        super("matchmake", 0);      // TODO: define Tournament and Match models
         this.entityList = entityList;
         this.matchList = matchList;
     }
