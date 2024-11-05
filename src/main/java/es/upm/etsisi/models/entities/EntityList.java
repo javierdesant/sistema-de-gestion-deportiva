@@ -4,6 +4,8 @@ import es.upm.etsisi.service.List;
 import es.upm.etsisi.utils.Message;
 import es.upm.etsisi.views.EntityListView;
 
+import java.util.Iterator;
+
 public class EntityList extends List<Entity> {
     private final EntityListView view;
 
@@ -31,5 +33,19 @@ public class EntityList extends List<Entity> {
 
     public void rank() {
         this.show();    // TODO
+    }
+
+    public Entity getByName(String name) {
+        Entity res = null;
+
+        Iterator<Entity> iterator = this.getElements().iterator();
+        while (iterator.hasNext() && res == null) {
+            Entity entity = iterator.next();
+            if (entity.getName().equals(name)) {
+                res = entity;
+            }
+        }
+
+        return res;
     }
 }
