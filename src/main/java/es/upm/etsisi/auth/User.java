@@ -1,8 +1,8 @@
 package es.upm.etsisi.auth;
 
 public abstract class User {
-    private String username;
-    private String password;
+    private final String username;
+    private final String password;
 
     public User(String username, String password) {
         assert this.isUpmEmail(username) : "Not valid email";   // TODO: add Message
@@ -20,26 +20,6 @@ public abstract class User {
 
     public String getUsername() {
         return this.username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setPassword(String oldPassword, String newPassword) {
-        assert password != null;
-        assert !this.password.isBlank();
-
-        assert this.validate(oldPassword) : "Wrong password";  // TODO: add Message
-
-        this.password = newPassword;
-    }
-
-    public void setPassword(String password) {
-        assert password != null;
-        assert this.password.isBlank();
-
-        this.password = password;
     }
 
     public boolean validate(String password) {
