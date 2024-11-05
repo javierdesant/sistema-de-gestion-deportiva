@@ -4,6 +4,7 @@ import es.upm.etsisi.auth.Administrator;
 import es.upm.etsisi.auth.PlayerProfile;
 import es.upm.etsisi.auth.User;
 import es.upm.etsisi.commands.Command;
+import es.upm.etsisi.commands.admin.AddToTeamCommand;
 import es.upm.etsisi.commands.admin.TODO.*;
 import es.upm.etsisi.commands.user.ExitCommand;
 import es.upm.etsisi.commands.user.TODO.HelpCommand;
@@ -100,7 +101,7 @@ public class CLI {
                 try {
                     command.execute();
                 } catch (AssertionError error) {
-                    this.commandView.displayError(error);
+                    this.commandView.display("Error: " + error.getMessage());
                 }
             }
 
