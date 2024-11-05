@@ -26,18 +26,6 @@ public class Player extends Entity {
     }
 
     @Override
-    public boolean equals(Object object) {
-        if (this == object) {
-            return true;
-        }
-        if (object == null || getClass() != object.getClass()) {
-            return false;
-        }
-        Player player = (Player) object;
-        return this.getName().equals(player.getName());
-    }
-
-    @Override
     public ArrayList<Entity> getChildren() {
         return new ArrayList<>();
     }

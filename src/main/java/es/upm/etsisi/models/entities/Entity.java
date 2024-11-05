@@ -32,5 +32,17 @@ public abstract class Entity {
         this.view.display();
     }
 
-    public abstract ArrayList<Entity> getChildren();    // should this be public ?
+    public abstract ArrayList<Entity> getChildren();
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        Entity entity = (Entity) object;
+        return this.getName().equals(entity.getName());
+    }
 }
