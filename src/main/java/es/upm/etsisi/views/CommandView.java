@@ -37,8 +37,8 @@ public class CommandView {
         Iterator<Command> iterator = this.commands.iterator();
         while (iterator.hasNext() && res == null) {
             Command command = iterator.next();
-            command.validate(input);
-            if (command.isCalled()) {
+            if (command.isCalled(input)) {
+                command.validate(input);
                 res = command;
             }
         }
