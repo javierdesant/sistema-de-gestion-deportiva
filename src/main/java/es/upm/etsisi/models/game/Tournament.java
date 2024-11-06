@@ -17,8 +17,7 @@ public class Tournament {
             LocalDate endDate,
             Sport sport,
             League league,
-            Category category,
-            MatchList matchList
+            Category category
     ) {
         assert startDate.isBefore(endDate);
 
@@ -28,7 +27,7 @@ public class Tournament {
         this.sport = sport;
         this.league = league;
         this.category = category;
-        this.matchList = matchList;
+        this.matchList = new MatchList();
     }
 
     public String getName() {
