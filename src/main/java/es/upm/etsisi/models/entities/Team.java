@@ -34,12 +34,15 @@ public class Team extends Entity {
     public Statistics getStats() {
         Statistics stats = new Statistics();
 
-        for (Entity child : this.children) {
-            for (Category category : Category.values()) {
-                stats.setStatistic(
-                        category, (stats.get(category) + child.getStats().get(category)) / this.children.size()
-                );
+        for (Category category : Category.values()) {
+            double product = 1.0;
+
+            for (Entity child : this.children) {
+                product *= child.getStats().get(category);
             }
+
+            double geometricMean = Math.pow(product, 1.0 / this.children.size());
+            stats.setStatistic(category, geometricMean);
         }
 
         this.setStats(stats);
