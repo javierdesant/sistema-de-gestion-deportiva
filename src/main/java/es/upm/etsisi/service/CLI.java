@@ -13,7 +13,7 @@ import es.upm.etsisi.commands.user.TODO.LoginCommand;
 import es.upm.etsisi.commands.user.TODO.LogoutCommand;
 import es.upm.etsisi.commands.user.TODO.RegisterCommand;
 import es.upm.etsisi.models.entities.EntityList;
-import es.upm.etsisi.models.game.MatchList;
+import es.upm.etsisi.models.game.TournamentList;
 import es.upm.etsisi.utils.Message;
 import es.upm.etsisi.views.CommandView;
 
@@ -27,17 +27,17 @@ public class CLI {
     private final AuthController authController;
     private final CommandView commandView;
     private final EntityList entityList;
-    private final MatchList matchList;
+    private final TournamentList tournamentList;
 
-    CLI(EntityList entityList, MatchList matchList, SportsService service) {
+    CLI(EntityList entityList, TournamentList tournamentList, SportsService service) {
         assert entityList != null : Message.NULL_PLAYERLIST;
-        assert matchList != null : Message.NULL_MATCHLIST;
+        assert tournamentList != null : Message.NULL_MATCHLIST;
 
         this.commands = new LinkedList<>();
         this.authController = new AuthController();
         this.commandView = new CommandView(this.commands, this.authController);
         this.entityList = entityList;
-        this.matchList = matchList;
+        this.tournamentList = tournamentList;
         this.service = service;
     }
 
@@ -61,7 +61,7 @@ public class CLI {
     private void addAdminCommands() {
         this.add(new CreatePlayerCommand(this.entityList));
         this.add(new CreateTeamCommand(this.entityList, this.authController));
-        this.add(new DeletePlayerCommand(this.entityList, this.matchList, new Scanner(System.in)));     // FIXME
+//        this.add(new DeletePlayerCommand(this.entityList, this.tournamentList, new Scanner(System.in)));     // FIXME
         this.add(new DeleteTeamCommand(this.entityList));
         this.add(new AddToTeamCommand(this.entityList));
         this.add(new RemoveFromTeamCommand(this.entityList));
