@@ -31,6 +31,30 @@ public class Tournament {
         this.matchList = matchList;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
+    public MatchList getMatches() {
+        return this.matchList;
+    }
+
+    public Sport getSport() {
+        return this.sport;
+    }
+
+    public League getLeague() {
+        return this.league;
+    }
+
+    public LocalDate getStartDate() {
+        return this.startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return this.endDate;
+    }
+
     public boolean isActive() {
         LocalDate now = LocalDate.now();
 
