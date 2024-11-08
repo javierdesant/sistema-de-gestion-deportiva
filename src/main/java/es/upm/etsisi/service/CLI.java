@@ -15,9 +15,9 @@ import es.upm.etsisi.commands.user.TODO.RegisterCommand;
 import es.upm.etsisi.models.entities.ParticipantList;
 import es.upm.etsisi.models.game.MatchList;
 import es.upm.etsisi.utils.Message;
-import es.upm.etsisi.views.CommandView;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -25,9 +25,9 @@ public class CLI {
     private final SportsService service;
     private final LinkedList<Command> commands;
     private final AuthController authController;
-    private final CommandView commandView;
     private final ParticipantList participantList;
     private final MatchList matchList;
+    private final Scanner scanner;
 
     CLI(ParticipantList participantList, MatchList matchList, SportsService service) {
         assert participantList != null : Message.NULL_PLAYERLIST;   // FIXME: wrong message
@@ -35,10 +35,10 @@ public class CLI {
 
         this.commands = new LinkedList<>();
         this.authController = new AuthController();
-        this.commandView = new CommandView(this.commands, this.authController);
         this.participantList = participantList;
         this.matchList = matchList;
         this.service = service;
+        this.scanner = new Scanner(System.in);
     }
 
     public ArrayList<Command> getCommands() {
@@ -96,16 +96,42 @@ public class CLI {
         }
 
         do {
-            Command command = this.commandView.read();
+            Command command = this.readCommand();
 
             if (command != null) {
                 try {
                     command.execute();
-                } catch (AssertionError error) {
-                    this.commandView.display("Error: " + error.getMessage());
+                } catch (AssertionError error) {    // FIXME
+                    System.out.println("Error: " + error.getMessage());
                 }
             }
 
         } while (this.service.isOpen());
+    }
+
+    public Command readCommand() {
+        User user = authController.getUser();
+
+        System.out.println();
+        System.out.print(user == null ? "" : user + " # ");
+        Message.COMMAND_PROMPT.write();
+
+        String input = this.scanner.nextLine().trim();
+
+        Command res = null;
+        Iterator<Command> iterator = this.commands.iterator();
+        while (iterator.hasNext() && res == null) {
+            Command command = iterator.next();
+            if (command.isCalled(input)) {
+                command.validate(input);
+                res = command;
+            }
+        }
+
+        if (res == null) {
+            Message.INVALID_COMMAND.writeln();
+        }
+
+        return res;
     }
 }
