@@ -1,21 +1,21 @@
 package es.upm.etsisi.commands.TODO;
 
 import es.upm.etsisi.commands.Command;
-import es.upm.etsisi.models.entities.EntityList;
+import es.upm.etsisi.models.entities.ParticipantList;
 import es.upm.etsisi.utils.Message;
 
 public class RankCommand extends Command {
-    private final EntityList entityList;
+    private final ParticipantList participantList;
 
-    public RankCommand(EntityList entityList) {
+    public RankCommand(ParticipantList participantList) {
         super("rank");
-        this.entityList = entityList;
+        this.participantList = participantList;
     }
 
     @Override
     public void execute() {
         Message.RANKING_HEADER.writeln();
-        this.entityList.rank();
+        this.participantList.rank();
         Message.FOOTER.writeln();
     }
 }

@@ -1,16 +1,15 @@
 package es.upm.etsisi.commands.admin.TODO;
 
 import es.upm.etsisi.commands.Command;
-import es.upm.etsisi.models.entities.Player;
-import es.upm.etsisi.models.entities.EntityList;
+import es.upm.etsisi.models.entities.ParticipantList;
 import es.upm.etsisi.utils.Message;
 
 public class CreatePlayerCommand extends Command {  // TODO: remake for 2.0.0
-    private final EntityList entityList;
+    private final ParticipantList participantList;
 
-    public CreatePlayerCommand(EntityList entityList) {
+    public CreatePlayerCommand(ParticipantList participantList) {
         super("player-create", 0);  // TODO!: pending player-playerprofile fix
-        this.entityList = entityList;
+        this.participantList = participantList;
     }
 
     @Override

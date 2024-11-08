@@ -1,16 +1,15 @@
 package es.upm.etsisi.models.entities;
 
 import es.upm.etsisi.models.game.Statistics;
-import es.upm.etsisi.views.EntityView;
 
 import java.util.ArrayList;
 
-public abstract class Entity {
+public abstract class Participant {
     private final String name;
     private Statistics stats;
     private String adminName;
 
-    public Entity(String name, Statistics stats, String adminName) {
+    public Participant(String name, Statistics stats, String adminName) {
         this.name = name;
         this.stats = stats;
         this.adminName = adminName;
@@ -28,7 +27,7 @@ public abstract class Entity {
         this.stats = stats;
     }
 
-    public abstract ArrayList<Entity> getChildren();
+    public abstract ArrayList<Participant> getChildren();
 
     @Override
     public boolean equals(Object object) {
@@ -38,7 +37,7 @@ public abstract class Entity {
         if (object == null || getClass() != object.getClass()) {
             return false;
         }
-        Entity entity = (Entity) object;
-        return this.getName().equals(entity.getName());
+        Participant participant = (Participant) object;
+        return this.getName().equals(participant.getName());
     }
 }

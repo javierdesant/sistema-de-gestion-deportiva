@@ -5,8 +5,8 @@ import es.upm.etsisi.models.game.Statistics;
 
 import java.util.ArrayList;
 
-public class Team extends Entity {
-    private final ArrayList<Entity> children;
+public class Team extends Participant {
+    private final ArrayList<Participant> children;
 
     public Team(String name, Statistics statistics, String adminName) {
         super(name, statistics, adminName);
@@ -17,16 +17,16 @@ public class Team extends Entity {
         this(name, new Statistics(), adminName);
     }
 
-    public void add(Entity entity) {
-        this.children.add(entity);
+    public void add(Participant participant) {
+        this.children.add(participant);
     }
 
-    public void remove(Entity entity) {
-        this.children.remove(entity);
+    public void remove(Participant participant) {
+        this.children.remove(participant);
     }
 
     @Override
-    public ArrayList<Entity> getChildren() {
+    public ArrayList<Participant> getChildren() {
         return new ArrayList<>(this.children);
     }
 
@@ -37,7 +37,7 @@ public class Team extends Entity {
         for (Category category : Category.values()) {
             double product = 1.0;
 
-            for (Entity child : this.children) {
+            for (Participant child : this.children) {
                 product *= child.getStats().get(category);
             }
 

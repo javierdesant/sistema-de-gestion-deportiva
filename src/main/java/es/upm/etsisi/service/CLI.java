@@ -12,7 +12,7 @@ import es.upm.etsisi.commands.user.TODO.HelpCommand;
 import es.upm.etsisi.commands.user.TODO.LoginCommand;
 import es.upm.etsisi.commands.user.TODO.LogoutCommand;
 import es.upm.etsisi.commands.user.TODO.RegisterCommand;
-import es.upm.etsisi.models.entities.EntityList;
+import es.upm.etsisi.models.entities.ParticipantList;
 import es.upm.etsisi.models.game.MatchList;
 import es.upm.etsisi.utils.Message;
 import es.upm.etsisi.views.CommandView;
@@ -26,17 +26,17 @@ public class CLI {
     private final LinkedList<Command> commands;
     private final AuthController authController;
     private final CommandView commandView;
-    private final EntityList entityList;
+    private final ParticipantList participantList;
     private final MatchList matchList;
 
-    CLI(EntityList entityList, MatchList matchList, SportsService service) {
-        assert entityList != null : Message.NULL_PLAYERLIST;
+    CLI(ParticipantList participantList, MatchList matchList, SportsService service) {
+        assert participantList != null : Message.NULL_PLAYERLIST;   // FIXME: wrong message
         assert matchList != null : Message.NULL_MATCHLIST;
 
         this.commands = new LinkedList<>();
         this.authController = new AuthController();
         this.commandView = new CommandView(this.commands, this.authController);
-        this.entityList = entityList;
+        this.participantList = participantList;
         this.matchList = matchList;
         this.service = service;
     }
@@ -59,12 +59,12 @@ public class CLI {
     }
 
     private void addAdminCommands() {
-        this.add(new CreatePlayerCommand(this.entityList));
-        this.add(new CreateTeamCommand(this.entityList, this.authController));
-        this.add(new DeletePlayerCommand(this.entityList, this.matchList, new Scanner(System.in)));     // FIXME
-        this.add(new DeleteTeamCommand(this.entityList));
-        this.add(new AddToTeamCommand(this.entityList));
-        this.add(new RemoveFromTeamCommand(this.entityList));
+        this.add(new CreatePlayerCommand(this.participantList));
+        this.add(new CreateTeamCommand(this.participantList, this.authController));
+        this.add(new DeletePlayerCommand(this.participantList, this.matchList, new Scanner(System.in)));     // FIXME
+        this.add(new DeleteTeamCommand(this.participantList));
+        this.add(new AddToTeamCommand(this.participantList));
+        this.add(new RemoveFromTeamCommand(this.participantList));
         // this.add(new CreateTournamentCommand());    // TODO
         // this.add(new DeleteTournamentCommand());     // TODO
         // this.add(new TournamentMatchmakingCommand() or MatchmakeCommand());    // TODO

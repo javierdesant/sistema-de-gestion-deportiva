@@ -1,6 +1,6 @@
 package es.upm.etsisi.views;
 
-import es.upm.etsisi.models.entities.Entity;
+import es.upm.etsisi.models.entities.Participant;
 import es.upm.etsisi.models.game.Match;
 import es.upm.etsisi.utils.Message;
 
@@ -15,7 +15,7 @@ public class MatchView implements ModelView {
 
     @Override
     public void display() {
-        Iterator<Entity> iterator = this.match.getEntities().iterator();
+        Iterator<Participant> iterator = this.match.getEntities().iterator();
 
         Message.LIGHT_FOOTER.writeln();
         iterator.next().show();

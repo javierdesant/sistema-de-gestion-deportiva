@@ -1,22 +1,22 @@
 package es.upm.etsisi.service;
 
 import es.upm.etsisi.auth.Administrator;
-import es.upm.etsisi.models.entities.EntityList;
+import es.upm.etsisi.models.entities.ParticipantList;
 import es.upm.etsisi.models.entities.Player;
 import es.upm.etsisi.models.game.MatchList;
 import es.upm.etsisi.utils.Status;
 
 public class SportsService {
-    private final EntityList entityList;
+    private final ParticipantList participantList;
     private final MatchList matchList;
     private final CLI cli;
     private Status status;
 
     public SportsService() {
         this.status = Status.CLOSED;
-        this.entityList = new EntityList();
+        this.participantList = new ParticipantList();
         this.matchList = new MatchList();
-        this.cli = new CLI(this.entityList, this.matchList, this);
+        this.cli = new CLI(this.participantList, this.matchList, this);
     }
 
     public boolean isOpen() {
@@ -47,7 +47,7 @@ public class SportsService {
         String[] defaultNames = {"Luisa", "Manuel", "Kurt", "Sofia", "Robert"};
 
         for (String defaultName : defaultNames) {
-            this.entityList.add(new Player(defaultName, new Administrator("default@upm.es", "")));
+            this.participantList.add(new Player(defaultName, new Administrator("default@upm.es", "")));
         }
     }
 
