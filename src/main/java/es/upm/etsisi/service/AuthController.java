@@ -1,7 +1,7 @@
 package es.upm.etsisi.service;
 
-import es.upm.etsisi.auth.User;
-import es.upm.etsisi.auth.UserList;
+import es.upm.etsisi.models.auth.User;
+import es.upm.etsisi.models.auth.UserList;
 
 public class AuthController {
     private final UserList userList;

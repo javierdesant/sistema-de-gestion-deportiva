@@ -1,6 +1,6 @@
 package es.upm.etsisi.models.entities;
 
-import es.upm.etsisi.auth.Administrator;
+import es.upm.etsisi.models.auth.Administrator;
 import es.upm.etsisi.models.game.Statistics;
 
 import java.util.ArrayList;

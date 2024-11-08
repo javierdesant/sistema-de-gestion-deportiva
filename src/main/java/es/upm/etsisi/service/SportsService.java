@@ -1,6 +1,6 @@
 package es.upm.etsisi.service;
 
-import es.upm.etsisi.auth.Administrator;
+import es.upm.etsisi.models.auth.Administrator;
 import es.upm.etsisi.models.entities.ParticipantList;
 import es.upm.etsisi.models.entities.Player;
 import es.upm.etsisi.models.game.MatchList;

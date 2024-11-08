@@ -1,4 +1,4 @@
-package es.upm.etsisi.auth;
+package es.upm.etsisi.models.auth;
 
 public abstract class User {
     private final String username;

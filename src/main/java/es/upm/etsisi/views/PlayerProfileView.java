@@ -1,6 +1,6 @@
 package es.upm.etsisi.views;
 
-import es.upm.etsisi.auth.PlayerProfile;
+import es.upm.etsisi.models.auth.PlayerProfile;
 import es.upm.etsisi.utils.DNI;
 
 import java.util.Scanner;

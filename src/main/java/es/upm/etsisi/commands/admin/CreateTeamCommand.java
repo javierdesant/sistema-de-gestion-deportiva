@@ -1,6 +1,6 @@
 package es.upm.etsisi.commands.admin;
 
-import es.upm.etsisi.auth.Administrator;
+import es.upm.etsisi.models.auth.Administrator;
 import es.upm.etsisi.commands.Command;
 import es.upm.etsisi.models.entities.ParticipantList;
 import es.upm.etsisi.models.entities.Team;

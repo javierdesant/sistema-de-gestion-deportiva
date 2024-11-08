@@ -1,8 +1,8 @@
 package es.upm.etsisi.service;
 
-import es.upm.etsisi.auth.Administrator;
-import es.upm.etsisi.auth.PlayerProfile;
-import es.upm.etsisi.auth.User;
+import es.upm.etsisi.models.auth.Administrator;
+import es.upm.etsisi.models.auth.PlayerProfile;
+import es.upm.etsisi.models.auth.User;
 import es.upm.etsisi.commands.Command;
 import es.upm.etsisi.commands.admin.AddToTeamCommand;
 import es.upm.etsisi.commands.admin.CreateTeamCommand;
