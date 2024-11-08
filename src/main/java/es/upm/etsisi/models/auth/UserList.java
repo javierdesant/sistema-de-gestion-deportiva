@@ -32,8 +32,4 @@ public class UserList extends List<User> {
         assert this.contains(user);
         this.removeElement(user);
     }
-
-    @Override
-    public void show() {
-    }
 }
