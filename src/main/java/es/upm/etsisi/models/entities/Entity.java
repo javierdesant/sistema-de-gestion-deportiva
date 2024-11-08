@@ -6,13 +6,11 @@ import es.upm.etsisi.views.EntityView;
 import java.util.ArrayList;
 
 public abstract class Entity {
-    private final EntityView view;
     private final String name;
     private Statistics stats;
     private String adminName;
 
     public Entity(String name, Statistics stats, String adminName) {
-        this.view = new EntityView(this);
         this.name = name;
         this.stats = stats;
         this.adminName = adminName;
@@ -28,10 +26,6 @@ public abstract class Entity {
 
     public void setStats(Statistics stats) {
         this.stats = stats;
-    }
-
-    public void show() {
-        this.view.display();
     }
 
     public abstract ArrayList<Entity> getChildren();

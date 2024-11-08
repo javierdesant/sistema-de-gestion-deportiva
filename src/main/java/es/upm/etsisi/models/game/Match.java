@@ -3,17 +3,13 @@ package es.upm.etsisi.models.game;
 import es.upm.etsisi.models.entities.Entity;
 import es.upm.etsisi.models.entities.EntityList;
 import es.upm.etsisi.utils.Message;
-import es.upm.etsisi.views.MatchView;
 
 import java.util.*;
 
 public class Match {
-    private final MatchView view;
     private final ArrayList<Entity> entities;
 
     public Match(EntityList entityList, Collection<Entity> entities) {
-        this.view = new MatchView(this);
-
         assert entities != null;
         assert entities.size() >= 2;                    // TODO: update messages
         assert entityList.containsAll(entities);
@@ -35,10 +31,6 @@ public class Match {
     public Entity getEntity(int index) {
         assert 0 <= index && index < this.entities.size() : Message.INVALID_INDEX;
         return this.entities.get(index);
-    }
-
-    public void show() {
-        this.view.display();
     }
 
     public boolean contains(Entity entity) {
