@@ -12,8 +12,8 @@ import es.upm.etsisi.commands.user.TODO.HelpCommand;
 import es.upm.etsisi.commands.user.TODO.LoginCommand;
 import es.upm.etsisi.commands.user.TODO.LogoutCommand;
 import es.upm.etsisi.commands.user.TODO.RegisterCommand;
+import es.upm.etsisi.models.game.TournamentList;
 import es.upm.etsisi.models.entities.ParticipantList;
-import es.upm.etsisi.models.game.MatchList;
 import es.upm.etsisi.utils.Message;
 
 import java.util.ArrayList;
@@ -26,17 +26,17 @@ public class CLI {
     private final LinkedList<Command> commands;
     private final AuthController authController;
     private final ParticipantList participantList;
-    private final MatchList matchList;
     private final Scanner scanner;
+    private final TournamentList tournamentList;
 
-    CLI(ParticipantList participantList, MatchList matchList, SportsService service) {
+    CLI(ParticipantList participantList, TournamentList tournamentList, SportsService service) {
         assert participantList != null : Message.NULL_PLAYERLIST;   // FIXME: wrong message
-        assert matchList != null : Message.NULL_MATCHLIST;
+        assert tournamentList != null : Message.NULL_MATCHLIST;
 
         this.commands = new LinkedList<>();
         this.authController = new AuthController();
         this.participantList = participantList;
-        this.matchList = matchList;
+        this.tournamentList = tournamentList;
         this.service = service;
         this.scanner = new Scanner(System.in);
     }
@@ -61,7 +61,7 @@ public class CLI {
     private void addAdminCommands() {
         this.add(new CreatePlayerCommand(this.participantList));
         this.add(new CreateTeamCommand(this.participantList, this.authController));
-        this.add(new DeletePlayerCommand(this.participantList, this.matchList, new Scanner(System.in)));     // FIXME
+//        this.add(new DeletePlayerCommand(this.participantList, this.tournamentList, new Scanner(System.in)));     // FIXME
         this.add(new DeleteTeamCommand(this.participantList));
         this.add(new AddToTeamCommand(this.participantList));
         this.add(new RemoveFromTeamCommand(this.participantList));
