@@ -5,6 +5,7 @@ import es.upm.etsisi.models.entities.Participant;
 import es.upm.etsisi.models.game.Match;
 import es.upm.etsisi.models.game.MatchList;
 import es.upm.etsisi.models.entities.ParticipantList;
+import es.upm.etsisi.service.DisplayService;
 import es.upm.etsisi.utils.Message;
 
 import java.util.Iterator;
@@ -25,25 +26,10 @@ public class ShowMatchmakeCommand extends Command {
             Message.NO_MATCHES.writeln();
         } else {
             for (Match match : this.matchList.getElements()) {
-                this.showMatch(match);
+                DisplayService.show(match);
             }
         }
 
         Message.FOOTER.writeln();
-    }
-
-    private void showMatch(Match match) {
-        assert match != null;
-        assert match.getParticipants().size() > 1;
-
-        Iterator<Participant> iterator = match.getParticipants().iterator();
-
-        Message.LIGHT_FOOTER.writeln();
-        System.out.println(iterator.next());
-        do {
-            System.out.println("vs");
-            System.out.println(iterator.next());
-        } while (iterator.hasNext());
-        Message.LIGHT_FOOTER.writeln();
     }
 }

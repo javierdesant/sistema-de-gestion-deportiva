@@ -1,7 +1,9 @@
 package es.upm.etsisi.commands.user.TODO;
 
 import es.upm.etsisi.commands.Command;
+import es.upm.etsisi.models.game.Tournament;
 import es.upm.etsisi.models.game.TournamentList;
+import es.upm.etsisi.service.DisplayService;
 
 public class ListTournamentsCommand extends Command {
     TournamentList tournaments;
@@ -13,6 +15,8 @@ public class ListTournamentsCommand extends Command {
 
     @Override
     public void execute() {
-        // TODO
+        for (Tournament tournament : this.tournaments.getElements()) {
+            DisplayService.show(tournament);
+        }
     }
 }
