@@ -7,7 +7,7 @@ public class HelpCommand extends Command {
     private final CLI cli;
 
     public HelpCommand(CLI cli) {
-        super("help");
+        super("help", 0);
         this.cli = cli;
     }
 
