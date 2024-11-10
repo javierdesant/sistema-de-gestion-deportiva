@@ -1,4 +1,4 @@
-package es.upm.etsisi.auth;
+package es.upm.etsisi.models.auth;
 
 import es.upm.etsisi.service.List;
 
@@ -31,9 +31,5 @@ public class UserList extends List<User> {
     public void remove(User user) {
         assert this.contains(user);
         this.removeElement(user);
-    }
-
-    @Override
-    public void show() {
     }
 }

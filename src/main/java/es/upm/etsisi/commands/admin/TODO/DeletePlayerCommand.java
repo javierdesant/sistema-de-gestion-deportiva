@@ -2,21 +2,20 @@ package es.upm.etsisi.commands.admin.TODO;
 
 import es.upm.etsisi.commands.Command;
 import es.upm.etsisi.models.game.MatchList;
-import es.upm.etsisi.models.entities.Player;
-import es.upm.etsisi.models.entities.EntityList;
+import es.upm.etsisi.models.entities.ParticipantList;
 import es.upm.etsisi.utils.Message;
 
 import java.util.Scanner;
 
 public class DeletePlayerCommand extends Command {  // TODO: remake for 2.0.0
-    private final EntityList entityList;
+    private final ParticipantList participantList;
     private final MatchList matchList;
     private final Scanner scanner;
 
-    public DeletePlayerCommand(EntityList entityList, MatchList matchList, Scanner scanner) {
+    public DeletePlayerCommand(ParticipantList participantList, MatchList matchList, Scanner scanner) {
         super("player-remove", 0);      // TODO!: pending player-playerprofile fix
                                                             // TODO: define Tournament and Match models
-        this.entityList = entityList;
+        this.participantList = participantList;
         this.matchList = matchList;
         this.scanner = scanner;
     }

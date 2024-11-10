@@ -1,14 +1,14 @@
 package es.upm.etsisi.commands.admin.TODO;
 
 import es.upm.etsisi.commands.Command;
-import es.upm.etsisi.models.entities.EntityList;
+import es.upm.etsisi.models.entities.ParticipantList;
 
 public class RemoveFromTeamCommand extends Command {
-    private EntityList entityList;
+    private ParticipantList participantList;
 
-    public RemoveFromTeamCommand(EntityList entityList) {
-        super("team-remove");
-        this.entityList = entityList;
+    public RemoveFromTeamCommand(ParticipantList participantList) {
+        super("team-remove", 2);
+        this.participantList = participantList;
     }
 
     @Override

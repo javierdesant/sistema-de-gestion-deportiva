@@ -1,14 +1,14 @@
 package es.upm.etsisi.commands.admin.TODO;
 
 import es.upm.etsisi.commands.Command;
-import es.upm.etsisi.models.entities.EntityList;
+import es.upm.etsisi.models.entities.ParticipantList;
 
 public class DeleteTeamCommand extends Command {
-    private EntityList entityList;
+    private ParticipantList participantList;
 
-    public DeleteTeamCommand(EntityList entityList) {
+    public DeleteTeamCommand(ParticipantList participantList) {
         super("team-delete", 0);        // TODO: define Tournament and Match models
-        this.entityList = entityList;
+        this.participantList = participantList;
     }
 
     @Override

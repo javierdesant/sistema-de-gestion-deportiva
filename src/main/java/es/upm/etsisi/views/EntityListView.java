@@ -1,24 +1,24 @@
 package es.upm.etsisi.views;
 
-import es.upm.etsisi.models.entities.Entity;
-import es.upm.etsisi.models.entities.EntityList;
+import es.upm.etsisi.models.entities.Participant;
+import es.upm.etsisi.models.entities.ParticipantList;
 import es.upm.etsisi.utils.Message;
 
 public class EntityListView implements ModelView {
-    private final EntityList entityList;
+    private final ParticipantList participantList;
 
-    public EntityListView(EntityList entityList) {
-        this.entityList = entityList;
+    public EntityListView(ParticipantList participantList) {
+        this.participantList = participantList;
     }
 
     @Override
     public void display() {
-        if (this.entityList.isEmpty()) {
+        if (this.participantList.isEmpty()) {
             Message.NO_PLAYERS.writeln();   // TODO: replace with NO_MEMBERS Message
         } else {
             // TODO: add header Message
-            for (Entity entity : this.entityList.getElements()) {
-                entity.show();
+            for (Participant participant : this.participantList.getElements()) {
+                participant.show();
                 Message.LIGHT_FOOTER.writeln();
             }
             Message.FOOTER.writeln();

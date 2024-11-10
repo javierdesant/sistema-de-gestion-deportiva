@@ -1,6 +1,6 @@
 package es.upm.etsisi.views;
 
-import es.upm.etsisi.auth.Administrator;
+import es.upm.etsisi.models.auth.Administrator;
 
 public class AdministratorView {
 

@@ -16,9 +16,9 @@ public abstract class Command {
         return this.name;
     }
 
-    protected String getArgument(int index) {     // TODO: añadir un máximo de args dependiendo del comando
-        assert this.arguments.length > index : Message.INVALID_ARGUMENTS;
-        assert index < this.maxArguments : Message.INVALID_ARGUMENTS;
+    protected String getArgument(int index) {
+        assert this.arguments.length > index : Message.INVALID_ARGUMENTS;       // TODO: add exceptions
+        assert index < this.maxArguments : Message.INVALID_ARGUMENTS;           // TODO: add exceptions
 
         return this.arguments[index];
     }
