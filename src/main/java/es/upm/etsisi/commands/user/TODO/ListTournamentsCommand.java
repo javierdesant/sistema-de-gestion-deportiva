@@ -7,7 +7,7 @@ public class ListTournamentsCommand extends Command {
     TournamentList tournaments;
 
     public ListTournamentsCommand(TournamentList tournaments) {
-        super("tournaments");
+        super("tournaments", 0);
         this.tournaments = tournaments;
     }
 
