@@ -7,7 +7,7 @@ public class RemoveFromTeamCommand extends Command {
     private ParticipantList participantList;
 
     public RemoveFromTeamCommand(ParticipantList participantList) {
-        super("team-remove");
+        super("team-remove", 2);
         this.participantList = participantList;
     }
 
