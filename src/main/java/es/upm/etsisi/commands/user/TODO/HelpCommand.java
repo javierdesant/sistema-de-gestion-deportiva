@@ -13,9 +13,9 @@ public class HelpCommand extends Command {
 
     @Override
     public void execute() {
-        System.out.println("Commands:");    // TODO: add Message
+        System.out.println("Commands:");    // TODO: add Message ?
         for (Command command : this.cli.getCommands()) {
-            System.out.println(command.getName());
+            System.out.println(" - " + command.getName());
         }
     }
 }
