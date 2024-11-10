@@ -40,4 +40,9 @@ public abstract class Participant {
         Participant participant = (Participant) object;
         return this.getName().equals(participant.getName());
     }
+
+    @Override
+    public String toString() {
+        return this.getName();
+    }
 }
