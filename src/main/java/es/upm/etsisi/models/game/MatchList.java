@@ -28,7 +28,7 @@ public class MatchList extends List<Match> {
 
     public void remove(String name) {
         for (Match match : this.getElements()) {
-            for (Participant participant : match.getEntities()) {
+            for (Participant participant : match.getParticipants()) {
                 if (participant.getName().equals(name))
                     this.remove(match);
             }
@@ -60,7 +60,7 @@ public class MatchList extends List<Match> {
     private boolean isValidMatch(Match match) {
         boolean isValid = !this.contains(match);
 
-        Iterator<Participant> iterator = match.getEntities().iterator();
+        Iterator<Participant> iterator = match.getParticipants().iterator();
         while (iterator.hasNext() && isValid) {
             isValid = !this.contains(iterator.next());
         }
