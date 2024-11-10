@@ -1,11 +1,8 @@
 package es.upm.etsisi.models.game;
 
-import es.upm.etsisi.views.TournamentView;
-
 import java.time.LocalDate;
 
 public class Tournament {
-    private final TournamentView view;
     private final String name;
     private final LocalDate startDate;
     private final LocalDate endDate;
@@ -24,7 +21,6 @@ public class Tournament {
     ) {
         assert startDate.isBefore(endDate);
 
-        this.view = new TournamentView(this);
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -32,6 +28,10 @@ public class Tournament {
         this.league = league;
         this.category = category;
         this.matchList = new MatchList();
+    }
+
+    public Category getCategory() {
+        return category;
     }
 
     public String getName() {
@@ -62,10 +62,6 @@ public class Tournament {
         LocalDate now = LocalDate.now();
 
         return this.startDate.isBefore(now) && this.endDate.isAfter(now);
-    }
-
-    public void show() {
-        this.view.display();
     }
 
     @Override
