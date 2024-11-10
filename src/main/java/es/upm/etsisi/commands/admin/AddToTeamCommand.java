@@ -19,8 +19,8 @@ public class AddToTeamCommand extends Command {
         String playerName = this.getArgument(0);
         String teamName = this.getArgument(1);
 
-        Participant participant1 = this.participantList.getByName(teamName);
-        Participant participant2 = this.participantList.getByName(playerName);
+        Participant participant1 = this.participantList.getByName(teamName);        // FIXME
+        Participant participant2 = this.participantList.getByName(playerName);      // FIXME
 
         if (participant1 instanceof Team team && participant2 instanceof Player player) {
             team.add(player);
