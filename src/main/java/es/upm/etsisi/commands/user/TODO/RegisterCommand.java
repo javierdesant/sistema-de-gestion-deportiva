@@ -1,17 +1,17 @@
 package es.upm.etsisi.commands.user.TODO;
 
 import es.upm.etsisi.commands.Command;
-import es.upm.etsisi.service.AuthController;
+import es.upm.etsisi.service.Controller;
 
 import java.util.Scanner;
 
 public class RegisterCommand extends Command {
-    private final AuthController authController;
+    private final Controller controller;
     Scanner scanner;
 
-    public RegisterCommand(AuthController authController) {
+    public RegisterCommand(Controller controller) {
         super("register", 2);
-        this.authController = authController;
+        this.controller = controller;
         this.scanner = new Scanner(System.in);  // FIXME: resources leak
     }
 
@@ -20,6 +20,6 @@ public class RegisterCommand extends Command {
         String username = this.getArgument(0);
         String password = this.getArgument(1);
 
-        this.authController.register(username, password);
+        this.controller.register(username, password);
     }
 }

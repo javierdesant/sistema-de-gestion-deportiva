@@ -24,7 +24,7 @@ import java.util.Scanner;
 public class CLI {
     private final SportsService service;
     private final LinkedList<Command> commands;
-    private final AuthController authController;
+    private final Controller controller;
     private final ParticipantList participantList;
     private final Scanner scanner;
     private final TournamentList tournamentList;
@@ -34,7 +34,7 @@ public class CLI {
         assert tournamentList != null : Message.NULL_MATCHLIST;
 
         this.commands = new LinkedList<>();
-        this.authController = new AuthController();
+        this.controller = new Controller();
         this.participantList = participantList;
         this.tournamentList = tournamentList;
         this.service = service;
@@ -46,7 +46,7 @@ public class CLI {
     }
 
     public void updateCommands() {
-        User user = this.authController.getUser();
+        User user = this.controller.getUser();
 
         this.commands.clear();
 
@@ -60,7 +60,7 @@ public class CLI {
 
     private void addAdminCommands() {
         this.add(new CreatePlayerCommand(this.participantList));
-        this.add(new CreateTeamCommand(this.participantList, this.authController));
+        this.add(new CreateTeamCommand(this.participantList, this.controller));
 //        this.add(new DeletePlayerCommand(this.participantList, this.tournamentList, new Scanner(System.in)));     // FIXME
         this.add(new DeleteTeamCommand(this.participantList));
         this.add(new AddToTeamCommand(this.participantList));
@@ -79,9 +79,9 @@ public class CLI {
     }
 
     private void addPublicCommands() {
-        this.add(new RegisterCommand(this.authController));
-        this.add(new LoginCommand(this.authController, this));
-        this.add(new LogoutCommand(this.authController, this));
+        this.add(new RegisterCommand(this.controller));
+        this.add(new LoginCommand(this.controller, this));
+        this.add(new LogoutCommand(this.controller, this));
         this.add(new HelpCommand(this));
         this.add(new ExitCommand(this.service));
     }
@@ -110,7 +110,7 @@ public class CLI {
     }
 
     public Command readCommand() {
-        User user = authController.getUser();
+        User user = controller.getUser();
 
         System.out.println();
         System.out.print(user == null ? "" : user + " # ");

@@ -41,6 +41,10 @@ public class Controller {
         this.userList.add(user);
     }
 
+    public User getUser() {
+        return this.user;
+    }
+
     public void createPlayer(String playerName) {
         Player newPlayer = new Player(playerName, new Statistics(), this.user.getUsername());
 

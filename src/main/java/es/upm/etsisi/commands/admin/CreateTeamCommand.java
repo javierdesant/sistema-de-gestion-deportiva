@@ -4,24 +4,24 @@ import es.upm.etsisi.models.auth.Administrator;
 import es.upm.etsisi.commands.Command;
 import es.upm.etsisi.models.entities.ParticipantList;
 import es.upm.etsisi.models.entities.Team;
-import es.upm.etsisi.service.AuthController;
+import es.upm.etsisi.service.Controller;
 
 public class CreateTeamCommand extends Command {
     private final ParticipantList participantList;
-    private final AuthController authController;
+    private final Controller controller;
 
-    public CreateTeamCommand(ParticipantList participantList, AuthController authController) {
+    public CreateTeamCommand(ParticipantList participantList, Controller controller) {
         super("team-create", 1);
         this.participantList = participantList;
-        this.authController = authController;
+        this.controller = controller;
     }
 
     @Override
     public void execute() {
-        assert this.authController.getUser() instanceof Administrator;
+        assert this.controller.getUser() instanceof Administrator;
 
         String teamName = this.getArgument(0);
-        Administrator admin = (Administrator) this.authController.getUser();
+        Administrator admin = (Administrator) this.controller.getUser();
 
             // should we use !(this.entityList.getByName(teamName) instanceof Team) ?
         if (this.participantList.getByName(teamName) == null) {
