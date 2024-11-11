@@ -7,9 +7,9 @@ import java.util.ArrayList;
 
 public class Team implements Participant {
     private final String name;
-    private Statistics stats;
     private final String adminName;
     private final ArrayList<Participant> children;
+    private Statistics stats;
 
     public Team(String name, Statistics statistics, String adminName) {
         this.name = name;

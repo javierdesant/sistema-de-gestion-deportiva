@@ -1,17 +1,15 @@
 package es.upm.etsisi.service;
 
-import es.upm.etsisi.commands.admin.*;
-import es.upm.etsisi.models.auth.Administrator;
-import es.upm.etsisi.models.auth.Role;
-import es.upm.etsisi.models.auth.User;
 import es.upm.etsisi.commands.Command;
+import es.upm.etsisi.commands.admin.*;
 import es.upm.etsisi.commands.user.ExitCommand;
 import es.upm.etsisi.commands.user.HelpCommand;
 import es.upm.etsisi.commands.user.LoginCommand;
 import es.upm.etsisi.commands.user.LogoutCommand;
-import es.upm.etsisi.commands.user.RegisterCommand;
-import es.upm.etsisi.models.game.TournamentList;
+import es.upm.etsisi.models.auth.Role;
+import es.upm.etsisi.models.auth.User;
 import es.upm.etsisi.models.entities.ParticipantList;
+import es.upm.etsisi.models.game.TournamentList;
 import es.upm.etsisi.utils.Message;
 
 import java.util.ArrayList;

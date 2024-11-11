@@ -2,8 +2,6 @@ package es.upm.etsisi.service;
 
 import es.upm.etsisi.models.auth.Administrator;
 import es.upm.etsisi.models.entities.ParticipantList;
-import es.upm.etsisi.models.entities.Player;
-import es.upm.etsisi.models.game.Statistics;
 import es.upm.etsisi.models.game.TournamentList;
 import es.upm.etsisi.utils.Status;
 

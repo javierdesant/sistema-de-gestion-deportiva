@@ -1,8 +1,8 @@
 package es.upm.etsisi.commands.admin;
 
 import es.upm.etsisi.commands.Command;
-import es.upm.etsisi.models.game.MatchList;
 import es.upm.etsisi.models.entities.ParticipantList;
+import es.upm.etsisi.models.game.MatchList;
 import es.upm.etsisi.utils.Message;
 
 import java.util.Scanner;
@@ -14,7 +14,7 @@ public class DeletePlayerCommand extends Command {  // TODO: remake for 2.0.0
 
     public DeletePlayerCommand(ParticipantList participantList, MatchList matchList, Scanner scanner) {
         super("player-remove", 0);      // TODO!: pending player-playerprofile fix
-                                                            // TODO: define Tournament and Match models
+        // TODO: define Tournament and Match models
         this.participantList = participantList;
         this.matchList = matchList;
         this.scanner = scanner;

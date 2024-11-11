@@ -1,6 +1,5 @@
 package es.upm.etsisi.models.entities;
 
-import es.upm.etsisi.models.auth.Administrator;
 import es.upm.etsisi.models.auth.Role;
 import es.upm.etsisi.models.auth.User;
 import es.upm.etsisi.models.game.Statistics;
@@ -12,8 +11,8 @@ public class Player extends User implements Participant {
     private final String firstName;
     private final String lastName;
     private final DNI dni;
-    private Statistics stats;
     private final String adminName;
+    private Statistics stats;
 
     public Player(String username,
                   String password,

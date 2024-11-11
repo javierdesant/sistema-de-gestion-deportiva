@@ -1,7 +1,7 @@
 package es.upm.etsisi.commands.admin;
 
-import es.upm.etsisi.models.auth.Administrator;
 import es.upm.etsisi.commands.Command;
+import es.upm.etsisi.models.auth.Administrator;
 import es.upm.etsisi.models.entities.ParticipantList;
 import es.upm.etsisi.models.entities.Team;
 import es.upm.etsisi.service.Controller;
@@ -23,7 +23,7 @@ public class CreateTeamCommand extends Command {
         String teamName = this.getArgument(0);
         Administrator admin = (Administrator) this.controller.getUser();
 
-            // should we use !(this.entityList.getByName(teamName) instanceof Team) ?
+        // should we use !(this.entityList.getByName(teamName) instanceof Team) ?
         if (this.participantList.getByName(teamName) == null) {
             this.participantList.add(new Team(teamName, admin.getUsername()));
         } else {

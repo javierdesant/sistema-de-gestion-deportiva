@@ -1,8 +1,8 @@
 package es.upm.etsisi.commands.user;
 
 import es.upm.etsisi.commands.Command;
-import es.upm.etsisi.service.Controller;
 import es.upm.etsisi.service.CLI;
+import es.upm.etsisi.service.Controller;
 
 public class LoginCommand extends Command {
     private final Controller controller;

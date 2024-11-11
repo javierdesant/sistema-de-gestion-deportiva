@@ -1,7 +1,6 @@
 package es.upm.etsisi.models.game;
 
 import es.upm.etsisi.service.List;
-import es.upm.etsisi.utils.Message;
 
 public class TournamentList extends List<Tournament> {
     public TournamentList() {

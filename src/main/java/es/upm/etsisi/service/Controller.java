@@ -7,15 +7,15 @@ import es.upm.etsisi.models.entities.ParticipantList;
 import es.upm.etsisi.models.entities.Player;
 import es.upm.etsisi.models.entities.Team;
 import es.upm.etsisi.models.game.*;
-
-import java.time.LocalDate;
 import es.upm.etsisi.utils.DNI;
 
+import java.time.LocalDate;
+
 public class Controller {
-    private User user;
     private final UserList userList;
     private final ParticipantList participantList;
     private final TournamentList tournamentList;
+    private User user;
 
     public Controller() {
         this.user = null;
@@ -111,7 +111,7 @@ public class Controller {
 
     }
 
-    public void tournamentMatchmake(String tournamentName, String ...playerNames) {
+    public void tournamentMatchmake(String tournamentName, String... playerNames) {
 
     }
 
