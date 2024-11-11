@@ -1,7 +1,7 @@
 package es.upm.etsisi.service;
 
 import es.upm.etsisi.models.auth.Administrator;
-import es.upm.etsisi.models.auth.PlayerProfile;
+import es.upm.etsisi.models.auth.Role;
 import es.upm.etsisi.models.auth.User;
 import es.upm.etsisi.commands.Command;
 import es.upm.etsisi.commands.admin.AddToTeamCommand;
@@ -50,9 +50,9 @@ public class CLI {
         this.commands.clear();
 
         this.addPublicCommands();
-        if (user instanceof Administrator) {
+        if (user.getRole() == Role.ADMIN) {
             this.addAdminCommands();
-        } else if (user instanceof PlayerProfile) {
+        } else if (user.getRole() == Role.PLAYER) {
             this.addPlayerCommands();
         }
     }
