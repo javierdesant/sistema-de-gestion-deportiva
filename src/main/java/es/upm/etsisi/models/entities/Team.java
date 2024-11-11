@@ -5,11 +5,16 @@ import es.upm.etsisi.models.game.Statistics;
 
 import java.util.ArrayList;
 
-public class Team extends Participant {
+public class Team implements Participant {
+    private final String name;
+    private Statistics stats;
+    private final String adminName;
     private final ArrayList<Participant> children;
 
     public Team(String name, Statistics statistics, String adminName) {
-        super(name, statistics, adminName);
+        this.name = name;
+        this.stats = statistics;
+        this.adminName = adminName;
         this.children = new ArrayList<>();
     }
 
@@ -26,8 +31,8 @@ public class Team extends Participant {
     }
 
     @Override
-    public ArrayList<Participant> getChildren() {
-        return new ArrayList<>(this.children);
+    public String getName() {
+        return this.name;
     }
 
     @Override
@@ -46,7 +51,21 @@ public class Team extends Participant {
         }
 
         this.setStats(stats);
+        return this.stats;
+    }
 
-        return super.getStats();
+    @Override
+    public void setStats(Statistics stats) {
+        this.stats = stats;
+    }
+
+    @Override
+    public ArrayList<Participant> getChildren() {
+        return new ArrayList<>(this.children);
+    }
+
+    @Override
+    public String toString() {
+        return this.getName();
     }
 }
