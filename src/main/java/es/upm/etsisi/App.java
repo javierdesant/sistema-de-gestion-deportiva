@@ -1,12 +1,11 @@
 package es.upm.etsisi;
 
-import es.upm.etsisi.service.SportsService;
+import es.upm.etsisi.service.SportsManager;
 
 public class App {
     public static void main(String[] args) {
-        SportsService sportsService = new SportsService();
+        SportsManager sportsManager = new SportsManager();
 
-        sportsService.addDefaults();
-        sportsService.run();
+        sportsManager.run();
     }
 }

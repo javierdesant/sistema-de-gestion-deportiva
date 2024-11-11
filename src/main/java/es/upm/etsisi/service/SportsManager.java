@@ -5,13 +5,13 @@ import es.upm.etsisi.models.entities.ParticipantList;
 import es.upm.etsisi.models.game.TournamentList;
 import es.upm.etsisi.utils.Status;
 
-public class SportsService {
+public class SportsManager {
     private final ParticipantList participantList;
     private final TournamentList tournamentList;
     private final CLI cli;
     private Status status;
 
-    public SportsService() {
+    public SportsManager() {
         this.status = Status.CLOSED;
         this.participantList = new ParticipantList();
         this.tournamentList = new TournamentList();

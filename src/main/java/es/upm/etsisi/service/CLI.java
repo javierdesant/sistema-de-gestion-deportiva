@@ -18,14 +18,14 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class CLI {
-    private final SportsService service;
+    private final SportsManager sportsManager;
     private final LinkedList<Command> commands;
     private final Controller controller;
     private final ParticipantList participantList;
     private final Scanner scanner;
     private final TournamentList tournamentList;
 
-    CLI(ParticipantList participantList, TournamentList tournamentList, SportsService service) {
+    CLI(ParticipantList participantList, TournamentList tournamentList, SportsManager sportsManager) {
         assert participantList != null : Message.NULL_PLAYERLIST;   // FIXME: wrong message
         assert tournamentList != null : Message.NULL_MATCHLIST;
 
@@ -33,7 +33,7 @@ public class CLI {
         this.controller = new Controller();
         this.participantList = participantList;
         this.tournamentList = tournamentList;
-        this.service = service;
+        this.sportsManager = sportsManager;
         this.scanner = new Scanner(System.in);
     }
 
@@ -78,7 +78,7 @@ public class CLI {
         this.add(new LoginCommand(this.controller, this));
         this.add(new LogoutCommand(this.controller, this));
         this.add(new HelpCommand(this));
-        this.add(new ExitCommand(this.service));
+        this.add(new ExitCommand(this.sportsManager));
     }
 
     private void add(Command command) {
@@ -86,8 +86,8 @@ public class CLI {
     }
 
     protected void run() {
-        if (!this.service.isOpen()) {
-            this.service.open();
+        if (!this.sportsManager.isOpen()) {
+            this.sportsManager.open();
         }
 
         do {
@@ -101,7 +101,7 @@ public class CLI {
                 }
             }
 
-        } while (this.service.isOpen());
+        } while (this.sportsManager.isOpen());
     }
 
     public Command readCommand() {
