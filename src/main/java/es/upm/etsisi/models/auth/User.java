@@ -3,12 +3,19 @@ package es.upm.etsisi.models.auth;
 public abstract class User {
     private final String username;
     private final String password;
+    private final Role role;
 
-    public User(String username, String password) {
-        assert this.isUpmEmail(username) : "Not valid email";   // TODO: add Message
+    public User(String username, String password, Role role) {
+        assert this.isUpmEmail(username) : "Not valid email";   // TODO: add Message, replace with an exception
+        assert role != null;
 
         this.username = username;
         this.password = password;
+        this.role = role;
+    }
+
+    public Role getRole() {
+        return this.role;
     }
 
     private boolean isUpmEmail(String email) {
