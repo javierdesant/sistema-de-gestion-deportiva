@@ -1,6 +1,7 @@
 package es.upm.etsisi.models.game;
 
 import es.upm.etsisi.service.List;
+import es.upm.etsisi.utils.Message;
 
 public class TournamentList extends List<Tournament> {
     public TournamentList() {
@@ -8,12 +9,16 @@ public class TournamentList extends List<Tournament> {
     }
 
     @Override
-    public void add(Tournament element) {
+    public void add(Tournament tournament) {
+        assert !this.contains(tournament);    // TODO: use exceptions
 
+        this.addElement(tournament);
     }
 
     @Override
-    public void remove(Tournament element) {
+    public void remove(Tournament tournament) {
+        assert this.contains(tournament);
 
+        this.removeElement(tournament);
     }
 }
