@@ -45,12 +45,11 @@ public class Controller {
         return this.user;
     }
 
-    public void createPlayer(String playerName) {
-        Player newPlayer = new Player(playerName, new Statistics(), this.user.getUsername());
+    public void createPlayer(String username, String password, String firstName, String lastName, DNI dni, String playerName) {
+        Player player = new Player(username, password, firstName, lastName, dni, this.user);
 
-        // TODO: make players and users the same thing
-        //  this.register(newPlayer);
-        this.participantList.add(newPlayer);
+        this.userList.add(player);
+        this.participantList.add(player);
     }
 
     public void createTeam(String teamName) {
