@@ -1,4 +1,4 @@
-package es.upm.etsisi.commands.admin.TODO;
+package es.upm.etsisi.commands.admin;
 
 import es.upm.etsisi.commands.Command;
 import es.upm.etsisi.models.entities.ParticipantList;

@@ -1,28 +1,24 @@
 package es.upm.etsisi.models.game;
 
 import es.upm.etsisi.service.List;
-import es.upm.etsisi.views.TournamentListView;
+import es.upm.etsisi.utils.Message;
 
 public class TournamentList extends List<Tournament> {
-    private final TournamentListView view;
-
     public TournamentList() {
         super();
-        this.view = new TournamentListView(this);
     }
 
     @Override
-    public void add(Tournament element) {
+    public void add(Tournament tournament) {
+        assert !this.contains(tournament);    // TODO: use exceptions
 
+        this.addElement(tournament);
     }
 
     @Override
-    public void remove(Tournament element) {
+    public void remove(Tournament tournament) {
+        assert this.contains(tournament);
 
-    }
-
-    @Override
-    public void show() {
-        this.view.display();
+        this.removeElement(tournament);
     }
 }

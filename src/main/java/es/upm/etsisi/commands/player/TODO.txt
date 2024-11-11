@@ -1,3 +1,0 @@
-Comandos pendientes de implementar/revisar...
-
-Mover las clases terminadas fuera de su paquete TODO

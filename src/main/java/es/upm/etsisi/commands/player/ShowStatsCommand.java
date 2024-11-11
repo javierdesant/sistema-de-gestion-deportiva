@@ -1,4 +1,4 @@
-package es.upm.etsisi.commands.player.TODO;
+package es.upm.etsisi.commands.player;
 
 import es.upm.etsisi.commands.Command;
 import es.upm.etsisi.models.entities.Participant;
