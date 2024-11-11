@@ -11,7 +11,6 @@ import es.upm.etsisi.commands.user.ExitCommand;
 import es.upm.etsisi.commands.user.TODO.HelpCommand;
 import es.upm.etsisi.commands.user.TODO.LoginCommand;
 import es.upm.etsisi.commands.user.TODO.LogoutCommand;
-import es.upm.etsisi.commands.user.TODO.RegisterCommand;
 import es.upm.etsisi.models.game.TournamentList;
 import es.upm.etsisi.models.entities.ParticipantList;
 import es.upm.etsisi.utils.Message;
@@ -79,7 +78,6 @@ public class CLI {
     }
 
     private void addPublicCommands() {
-        this.add(new RegisterCommand(this.controller));
         this.add(new LoginCommand(this.controller, this));
         this.add(new LogoutCommand(this.controller, this));
         this.add(new HelpCommand(this));
