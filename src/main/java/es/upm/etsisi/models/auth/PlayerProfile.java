@@ -1,4 +1,4 @@
-package es.upm.etsisi.auth;
+package es.upm.etsisi.models.auth;
 
 import es.upm.etsisi.models.entities.Player;
 import es.upm.etsisi.models.game.Statistics;

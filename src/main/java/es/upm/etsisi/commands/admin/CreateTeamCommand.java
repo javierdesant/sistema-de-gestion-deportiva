@@ -1,18 +1,18 @@
 package es.upm.etsisi.commands.admin;
 
-import es.upm.etsisi.auth.Administrator;
+import es.upm.etsisi.models.auth.Administrator;
 import es.upm.etsisi.commands.Command;
-import es.upm.etsisi.models.entities.EntityList;
+import es.upm.etsisi.models.entities.ParticipantList;
 import es.upm.etsisi.models.entities.Team;
 import es.upm.etsisi.service.AuthController;
 
 public class CreateTeamCommand extends Command {
-    private final EntityList entityList;
+    private final ParticipantList participantList;
     private final AuthController authController;
 
-    public CreateTeamCommand(EntityList entityList, AuthController authController) {
+    public CreateTeamCommand(ParticipantList participantList, AuthController authController) {
         super("team-create", 1);
-        this.entityList = entityList;
+        this.participantList = participantList;
         this.authController = authController;
     }
 
@@ -24,8 +24,8 @@ public class CreateTeamCommand extends Command {
         Administrator admin = (Administrator) this.authController.getUser();
 
             // should we use !(this.entityList.getByName(teamName) instanceof Team) ?
-        if (this.entityList.getByName(teamName) == null) {
-            this.entityList.add(new Team(teamName, admin.getUsername()));
+        if (this.participantList.getByName(teamName) == null) {
+            this.participantList.add(new Team(teamName, admin.getUsername()));
         } else {
             System.out.println("error: the team already exists");
         }

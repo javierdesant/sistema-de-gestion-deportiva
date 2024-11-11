@@ -1,15 +1,15 @@
 package es.upm.etsisi.commands.TODO;
 
 import es.upm.etsisi.commands.Command;
-import es.upm.etsisi.models.entities.EntityList;
+import es.upm.etsisi.models.entities.ParticipantList;
 import es.upm.etsisi.utils.Message;
 
 public class ScoreCommand extends Command {
-    private final EntityList entityList;
+    private final ParticipantList participantList;
 
-    public ScoreCommand(EntityList entityList) {
+    public ScoreCommand(ParticipantList participantList) {
         super("score");
-        this.entityList = entityList;
+        this.participantList = participantList;
     }
 
     @Override

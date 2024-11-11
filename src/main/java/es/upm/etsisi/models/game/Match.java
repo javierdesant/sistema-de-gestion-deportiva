@@ -1,54 +1,46 @@
 package es.upm.etsisi.models.game;
 
-import es.upm.etsisi.models.entities.Entity;
-import es.upm.etsisi.models.entities.EntityList;
+import es.upm.etsisi.models.entities.Participant;
+import es.upm.etsisi.models.entities.ParticipantList;
 import es.upm.etsisi.utils.Message;
-import es.upm.etsisi.views.MatchView;
 
 import java.util.*;
 
 public class Match {
-    private final MatchView view;
-    private final ArrayList<Entity> entities;
+    private final ArrayList<Participant> participants;
 
-    public Match(EntityList entityList, Collection<Entity> entities) {
-        this.view = new MatchView(this);
-
-        assert entities != null;
-        assert entities.size() >= 2;                    // TODO: update messages
-        assert entityList.containsAll(entities);
-        for (Entity entity : entities) {
-            assert Collections.frequency(entities, entity) == 1;    // FIXME: for break ?
+    public Match(ParticipantList participantList, Collection<Participant> participants) {
+        assert participants != null;
+        assert participants.size() >= 2;                    // TODO: update messages
+        assert participantList.containsAll(participants);
+        for (Participant participant : participants) {
+            assert Collections.frequency(participants, participant) == 1;    // FIXME: for break ?
         }                                                            // TODO: improve...
 
-        this.entities = new ArrayList<>(entities);
+        this.participants = new ArrayList<>(participants);
     }
 
-    public Match(EntityList entityList, Entity... entities) {
-        this(entityList, Arrays.asList(entities));  // FIXME: maybe is null ?
+    public Match(ParticipantList participantList, Participant... participants) {
+        this(participantList, Arrays.asList(participants));  // FIXME: maybe is null ?
     }
 
-    public ArrayList<Entity> getEntities() {
-        return new ArrayList<>(this.entities);
+    public ArrayList<Participant> getParticipants() {
+        return new ArrayList<>(this.participants);
     }
 
-    public Entity getEntity(int index) {
-        assert 0 <= index && index < this.entities.size() : Message.INVALID_INDEX;
-        return this.entities.get(index);
+    public Participant getParticipant(int index) {
+        assert 0 <= index && index < this.participants.size() : Message.INVALID_INDEX;
+        return this.participants.get(index);
     }
 
-    public void show() {
-        this.view.display();
-    }
-
-    public boolean contains(Entity entity) {
-        return this.entities.contains(entity);
+    public boolean contains(Participant participant) {
+        return this.participants.contains(participant);
     }
 
     public boolean contains(String entityName) {
         boolean found = false;
 
-        Iterator<Entity> iterator = this.entities.iterator();
+        Iterator<Participant> iterator = this.participants.iterator();
         while (iterator.hasNext() && !found) {
             found = entityName.equals(iterator.next().getName());
         }
@@ -65,16 +57,16 @@ public class Match {
             return false;
         }
         Match match = (Match) object;
-        ArrayList<Entity> entities = new ArrayList<>(match.getEntities());
+        ArrayList<Participant> participants = new ArrayList<>(match.getParticipants());
 
-        if (this.entities.size() != entities.size()) {
+        if (this.participants.size() != participants.size()) {
             return false;
         }
 
-        for (Entity entity : this.entities) {
-            entities.remove(entity);
+        for (Participant participant : this.participants) {
+            participants.remove(participant);
         }
 
-        return entities.isEmpty();
+        return participants.isEmpty();
     }
 }

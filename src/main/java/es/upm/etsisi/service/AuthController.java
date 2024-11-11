@@ -1,20 +1,14 @@
 package es.upm.etsisi.service;
 
-import es.upm.etsisi.auth.User;
-import es.upm.etsisi.auth.UserList;
-import es.upm.etsisi.views.AdministratorView;
-import es.upm.etsisi.views.PlayerProfileView;
+import es.upm.etsisi.models.auth.User;
+import es.upm.etsisi.models.auth.UserList;
 
 public class AuthController {
     private final UserList userList;
-    private final PlayerProfileView playerProfileView;
-    private final AdministratorView administratorView;
     private User user;
 
     public AuthController() {
         this.userList = new UserList();
-        this.playerProfileView = new PlayerProfileView();
-        this.administratorView = new AdministratorView();
         this.user = null;
     }
 
@@ -36,17 +30,17 @@ public class AuthController {
     }
 
     public void register(String username, String password) {
-        assert this.userList.getByUsername(username) == null;   // TODO: add Message.USER_ALREADY_EXISTS
-
-        User user;
-
-        if (username.endsWith("@alumnos.upm.es")) {
-            user = this.playerProfileView.read(username, password);
-        } else {
-            user = this.administratorView.read(username, password);
-        }
-
-        assert user != null;
-        this.userList.add(user);
+//        assert this.userList.getByUsername(username) == null;   // TODO: add Message.USER_ALREADY_EXISTS
+//
+//        User user;
+//
+//        if (username.endsWith("@alumnos.upm.es")) {
+////            user = this.playerProfileView.read(username, password);   // FIXME
+//        } else {
+////            user = this.administratorView.read(username, password);   // FIXME
+//        }
+//
+//        assert user != null;
+//        this.userList.add(user);
     }
 }

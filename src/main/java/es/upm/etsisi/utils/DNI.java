@@ -15,15 +15,11 @@ public class DNI {
             return false;
         }
 
-        try {
-            String letters = "TRWAGMYFPDXBNJZSQVHLCKE";
-            int number = Integer.parseInt(dni.substring(0, 8));
-            char expectedLetter = letters.charAt(number % 23);
+        String letters = "TRWAGMYFPDXBNJZSQVHLCKE";
+        int number = Integer.parseInt(dni.substring(0, 8));
+        char expectedLetter = letters.charAt(number % 23);
 
-            return dni.charAt(8) == expectedLetter;
-        } catch (NumberFormatException e) {
-            return false;
-        }
+        return dni.charAt(8) == expectedLetter;
     }
 
     public String getValue() {

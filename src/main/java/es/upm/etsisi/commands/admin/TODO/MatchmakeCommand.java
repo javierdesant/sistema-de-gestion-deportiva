@@ -1,19 +1,17 @@
 package es.upm.etsisi.commands.admin.TODO;
 
 import es.upm.etsisi.commands.Command;
-import es.upm.etsisi.models.game.Match;
 import es.upm.etsisi.models.game.MatchList;
-import es.upm.etsisi.models.entities.Player;
-import es.upm.etsisi.models.entities.EntityList;
+import es.upm.etsisi.models.entities.ParticipantList;
 import es.upm.etsisi.utils.Message;
 
 public class MatchmakeCommand extends Command { // TODO: remake for 2.0.0
-    private final EntityList entityList;
+    private final ParticipantList participantList;
     private final MatchList matchList;
 
-    public MatchmakeCommand(EntityList entityList, MatchList matchList) {
-        super("matchmake");
-        this.entityList = entityList;
+    public MatchmakeCommand(ParticipantList participantList, MatchList matchList) {
+        super("matchmake", 0);      // TODO: define Tournament and Match models
+        this.participantList = participantList;
         this.matchList = matchList;
     }
 

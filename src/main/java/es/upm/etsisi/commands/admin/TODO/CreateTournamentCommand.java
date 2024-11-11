@@ -4,7 +4,7 @@ import es.upm.etsisi.commands.Command;
 
 public class CreateTournamentCommand extends Command {  // TODO: finish pending Tournament model
     public CreateTournamentCommand() {
-        super("createTournament");
+        super("createTournament", 0);
     }
 
     @Override

@@ -41,6 +41,4 @@ public abstract class List<T> {
     public abstract void add(T element);
 
     public abstract void remove(T element);
-
-    public abstract void show();
 }

@@ -1,19 +1,16 @@
 package es.upm.etsisi.models.game;
 
-import es.upm.etsisi.models.entities.Entity;
-import es.upm.etsisi.models.entities.EntityList;
+import es.upm.etsisi.models.entities.Participant;
+import es.upm.etsisi.models.entities.ParticipantList;
 import es.upm.etsisi.service.List;
 import es.upm.etsisi.utils.Message;
-import es.upm.etsisi.views.MatchListView;
 
 import java.util.Iterator;
 
 public class MatchList extends List<Match> {
-    private final MatchListView view;
 
     public MatchList() {
         super();
-        this.view = new MatchListView(this);
     }
 
     @Override
@@ -31,8 +28,8 @@ public class MatchList extends List<Match> {
 
     public void remove(String name) {
         for (Match match : this.getElements()) {
-            for (Entity entity : match.getEntities()) {
-                if (entity.getName().equals(name))
+            for (Participant participant : match.getParticipants()) {
+                if (participant.getName().equals(name))
                     this.remove(match);
             }
         }
@@ -49,12 +46,12 @@ public class MatchList extends List<Match> {
         return found;
     }
 
-    public boolean contains(Entity entity) {
+    public boolean contains(Participant participant) {
         boolean found = false;
 
         Iterator<Match> iterator = this.getElements().iterator();
         while (iterator.hasNext() && !found) {
-            found = iterator.next().contains(entity);
+            found = iterator.next().contains(participant);
         }
 
         return found;
@@ -63,7 +60,7 @@ public class MatchList extends List<Match> {
     private boolean isValidMatch(Match match) {
         boolean isValid = !this.contains(match);
 
-        Iterator<Entity> iterator = match.getEntities().iterator();
+        Iterator<Participant> iterator = match.getParticipants().iterator();
         while (iterator.hasNext() && isValid) {
             isValid = !this.contains(iterator.next());
         }
@@ -71,12 +68,7 @@ public class MatchList extends List<Match> {
         return isValid;
     }
 
-    @Override
-    public void show() {
-        this.view.display();
-    }
-
-    public void randomize(EntityList entityList) {
+    public void randomize(ParticipantList participantList) {
         // TODO
 //        assert !entityList.isEmpty() : Message.NO_PLAYERS;
 //        assert this.isEmpty() : Message.NO_MATCHES;

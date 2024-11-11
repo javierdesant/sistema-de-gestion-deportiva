@@ -1,7 +1,6 @@
 package es.upm.etsisi.views;
 
-import es.upm.etsisi.auth.PlayerProfile;
-import es.upm.etsisi.models.entities.Player;
+import es.upm.etsisi.models.auth.PlayerProfile;
 import es.upm.etsisi.utils.DNI;
 
 import java.util.Scanner;
@@ -19,8 +18,7 @@ public class PlayerProfileView {
         String firstName = this.readFirstName();
         String lastName = this.readLastName();
 
-        return new PlayerProfile(username, password, dni, firstName, lastName,
-                new Player(firstName + " " + lastName, "TODO")); // TODO
+        return new PlayerProfile(username, password, dni, firstName, lastName);
     }
 
     private DNI readDNI() {
