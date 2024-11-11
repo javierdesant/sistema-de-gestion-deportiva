@@ -8,6 +8,7 @@ import es.upm.etsisi.models.entities.Player;
 import es.upm.etsisi.models.entities.Team;
 import es.upm.etsisi.models.game.Statistics;
 import es.upm.etsisi.models.game.TournamentList;
+import es.upm.etsisi.utils.DNI;
 
 public class Controller {
     private User user;
@@ -41,12 +42,15 @@ public class Controller {
         this.userList.add(user);
     }
 
-    public void createPlayer(String playerName) {
-        Player newPlayer = new Player(playerName, new Statistics(), this.user.getUsername());
+    public User getUser() {
+        return this.user;
+    }
 
-        // TODO: make players and users the same thing
-        //  this.register(newPlayer);
-        this.participantList.add(newPlayer);
+    public void createPlayer(String username, String password, String firstName, String lastName, DNI dni, String playerName) {
+        Player player = new Player(username, password, firstName, lastName, dni, this.user);
+
+        this.userList.add(player);
+        this.participantList.add(player);
     }
 
     public void createTeam(String teamName) {
@@ -58,10 +62,10 @@ public class Controller {
         if (participant == null) {
             return;     // TODO: add exceptions
         }
+        // TODO: if player remove also from userList
         // TODO: check if the participant or its team
         //  is playing in an active tournament
-        // TODO: delete Players account also
-        // TODO: on team deletion, delete players also ?
+        // TODO: on team deletion, delete players/subteams also ?
         this.participantList.remove(participant);
     }
 
@@ -69,7 +73,7 @@ public class Controller {
         Participant team = this.participantList.getByName(teamName);
         Participant player = this.participantList.getByName(playerName);
 
-        // FIXME: get rid of instanceof (somehow)
+        // FIXME: get rid of instanceof (somehow) ?
         if (team instanceof Team && player instanceof Player) {
             ((Team) team).add(player);
         } else {
@@ -81,7 +85,7 @@ public class Controller {
         Participant team = this.participantList.getByName(teamName);
         Participant player = this.participantList.getByName(playerName);
 
-        // FIXME: get rid of instanceof
+        // FIXME: get rid of instanceof (somehow) ?
         if (team instanceof Team && player instanceof Player) {
             ((Team) team).remove(player);
         } else {

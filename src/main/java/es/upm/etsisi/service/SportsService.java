@@ -3,6 +3,7 @@ package es.upm.etsisi.service;
 import es.upm.etsisi.models.auth.Administrator;
 import es.upm.etsisi.models.entities.ParticipantList;
 import es.upm.etsisi.models.entities.Player;
+import es.upm.etsisi.models.game.Statistics;
 import es.upm.etsisi.models.game.TournamentList;
 import es.upm.etsisi.utils.Status;
 
@@ -43,16 +44,9 @@ public class SportsService {
         this.status = Status.CLOSED;
     }
 
-    public void addDefaults() {
-        String[] defaultNames = {"Luisa", "Manuel", "Kurt", "Sofia", "Robert"};
-
-        for (String defaultName : defaultNames) {
-            this.participantList.add(new Player(defaultName, new Administrator("default@upm.es", "")));
-                // TODO: fix test auth
-        }
-    }
-
     public void run() {
+        String[] defaultNames = {"Luisa", "Manuel", "Kurt", "Sofia", "Robert"};     // TODO: implement
+        Administrator administrator = new Administrator("admin@upm.es", "admin");   // TODO: implement
 
         System.out.println("\n### Bienvenido al Gestor Deportivo ###\n");
 

@@ -2,11 +2,9 @@ package es.upm.etsisi.commands.player.TODO;
 
 import es.upm.etsisi.commands.Command;
 import es.upm.etsisi.models.entities.Participant;
-import es.upm.etsisi.models.entities.ParticipantList;
 import es.upm.etsisi.models.game.Category;
 import es.upm.etsisi.models.game.Statistics;
 import es.upm.etsisi.service.Controller;
-import es.upm.etsisi.utils.Message;
 
 public class ShowStatsCommand extends Command {
     private final Controller controller;

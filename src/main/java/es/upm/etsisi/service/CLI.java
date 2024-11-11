@@ -1,7 +1,7 @@
 package es.upm.etsisi.service;
 
 import es.upm.etsisi.models.auth.Administrator;
-import es.upm.etsisi.models.auth.PlayerProfile;
+import es.upm.etsisi.models.auth.Role;
 import es.upm.etsisi.models.auth.User;
 import es.upm.etsisi.commands.Command;
 import es.upm.etsisi.commands.admin.AddToTeamCommand;
@@ -11,7 +11,6 @@ import es.upm.etsisi.commands.user.ExitCommand;
 import es.upm.etsisi.commands.user.TODO.HelpCommand;
 import es.upm.etsisi.commands.user.TODO.LoginCommand;
 import es.upm.etsisi.commands.user.TODO.LogoutCommand;
-import es.upm.etsisi.commands.user.TODO.RegisterCommand;
 import es.upm.etsisi.models.game.TournamentList;
 import es.upm.etsisi.models.entities.ParticipantList;
 import es.upm.etsisi.utils.Message;
@@ -24,7 +23,7 @@ import java.util.Scanner;
 public class CLI {
     private final SportsService service;
     private final LinkedList<Command> commands;
-    private final AuthController authController;
+    private final Controller controller;
     private final ParticipantList participantList;
     private final Scanner scanner;
     private final TournamentList tournamentList;
@@ -34,7 +33,7 @@ public class CLI {
         assert tournamentList != null : Message.NULL_MATCHLIST;
 
         this.commands = new LinkedList<>();
-        this.authController = new AuthController();
+        this.controller = new Controller();
         this.participantList = participantList;
         this.tournamentList = tournamentList;
         this.service = service;
@@ -46,21 +45,21 @@ public class CLI {
     }
 
     public void updateCommands() {
-        User user = this.authController.getUser();
+        User user = this.controller.getUser();
 
         this.commands.clear();
 
         this.addPublicCommands();
-        if (user instanceof Administrator) {
+        if (user.getRole() == Role.ADMIN) {
             this.addAdminCommands();
-        } else if (user instanceof PlayerProfile) {
+        } else if (user.getRole() == Role.PLAYER) {
             this.addPlayerCommands();
         }
     }
 
     private void addAdminCommands() {
         this.add(new CreatePlayerCommand(this.participantList));
-        this.add(new CreateTeamCommand(this.participantList, this.authController));
+        this.add(new CreateTeamCommand(this.participantList, this.controller));
 //        this.add(new DeletePlayerCommand(this.participantList, this.tournamentList, new Scanner(System.in)));     // FIXME
         this.add(new DeleteTeamCommand(this.participantList));
         this.add(new AddToTeamCommand(this.participantList));
@@ -79,9 +78,8 @@ public class CLI {
     }
 
     private void addPublicCommands() {
-        this.add(new RegisterCommand(this.authController));
-        this.add(new LoginCommand(this.authController, this));
-        this.add(new LogoutCommand(this.authController, this));
+        this.add(new LoginCommand(this.controller, this));
+        this.add(new LogoutCommand(this.controller, this));
         this.add(new HelpCommand(this));
         this.add(new ExitCommand(this.service));
     }
@@ -110,7 +108,7 @@ public class CLI {
     }
 
     public Command readCommand() {
-        User user = authController.getUser();
+        User user = controller.getUser();
 
         System.out.println();
         System.out.print(user == null ? "" : user + " # ");
