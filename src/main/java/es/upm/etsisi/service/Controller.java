@@ -6,8 +6,9 @@ import es.upm.etsisi.models.entities.Participant;
 import es.upm.etsisi.models.entities.ParticipantList;
 import es.upm.etsisi.models.entities.Player;
 import es.upm.etsisi.models.entities.Team;
-import es.upm.etsisi.models.game.Statistics;
-import es.upm.etsisi.models.game.TournamentList;
+import es.upm.etsisi.models.game.*;
+
+import java.time.LocalDate;
 
 public class Controller {
     private User user;
@@ -89,8 +90,17 @@ public class Controller {
         }
     }
 
-    public void createTournament(String tournamentName) {
-        // TODO: define tournament list
+    public void createTournament(String tournamentName,
+                                 LocalDate startDate,
+                                 LocalDate endDate,
+                                 Sport sport,
+                                 League league,
+                                 Category category) {
+
+        Tournament tournament = new Tournament(tournamentName, startDate, endDate, sport, league, category);
+        assert !this.tournamentList.getElements().contains(tournament);  // FIXME: replace with exception
+
+        this.tournamentList.add(tournament);
     }
 
     public void deleteTournament(String tournamentName) {
