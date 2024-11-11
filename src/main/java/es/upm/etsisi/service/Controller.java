@@ -8,6 +8,7 @@ import es.upm.etsisi.models.entities.Player;
 import es.upm.etsisi.models.entities.Team;
 import es.upm.etsisi.models.game.Statistics;
 import es.upm.etsisi.models.game.TournamentList;
+import es.upm.etsisi.utils.DNI;
 
 public class Controller {
     private User user;
@@ -61,10 +62,10 @@ public class Controller {
         if (participant == null) {
             return;     // TODO: add exceptions
         }
+        // TODO: if player remove also from userList
         // TODO: check if the participant or its team
         //  is playing in an active tournament
-        // TODO: delete Players account also
-        // TODO: on team deletion, delete players also ?
+        // TODO: on team deletion, delete players/subteams also ?
         this.participantList.remove(participant);
     }
 
@@ -72,7 +73,7 @@ public class Controller {
         Participant team = this.participantList.getByName(teamName);
         Participant player = this.participantList.getByName(playerName);
 
-        // FIXME: get rid of instanceof (somehow)
+        // FIXME: get rid of instanceof (somehow) ?
         if (team instanceof Team && player instanceof Player) {
             ((Team) team).add(player);
         } else {
@@ -84,7 +85,7 @@ public class Controller {
         Participant team = this.participantList.getByName(teamName);
         Participant player = this.participantList.getByName(playerName);
 
-        // FIXME: get rid of instanceof
+        // FIXME: get rid of instanceof (somehow) ?
         if (team instanceof Team && player instanceof Player) {
             ((Team) team).remove(player);
         } else {
