@@ -22,7 +22,6 @@ public class Player extends User implements Participant {
                   DNI dni,
                   Statistics statistics,
                   User admin) {
-
         super(username, password, Role.PLAYER);
 
         assert admin.getRole() == Role.ADMIN;
@@ -32,6 +31,15 @@ public class Player extends User implements Participant {
         this.dni = dni;
         this.stats = statistics;
         this.adminName = admin.getUsername();
+    }
+
+    public Player(String username,
+                  String password,
+                  String firstName,
+                  String lastName,
+                  DNI dni,
+                  User admin) {
+        this(username, password, firstName, lastName, dni, new Statistics(), admin);
     }
 
     @Override
