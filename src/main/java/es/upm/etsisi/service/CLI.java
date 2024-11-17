@@ -1,15 +1,14 @@
 package es.upm.etsisi.service;
 
+import es.upm.etsisi.SportsManager;
+import es.upm.etsisi.commands.AddToTeamCommand;
 import es.upm.etsisi.commands.Command;
-import es.upm.etsisi.commands.admin.*;
-import es.upm.etsisi.commands.user.ExitCommand;
-import es.upm.etsisi.commands.user.HelpCommand;
-import es.upm.etsisi.commands.user.LoginCommand;
-import es.upm.etsisi.commands.user.LogoutCommand;
-import es.upm.etsisi.models.auth.Role;
-import es.upm.etsisi.models.auth.User;
-import es.upm.etsisi.models.entities.ParticipantList;
-import es.upm.etsisi.models.game.TournamentList;
+import es.upm.etsisi.commands.ExitCommand;
+import es.upm.etsisi.commands.HelpCommand;
+import es.upm.etsisi.commands.LoginCommand;
+import es.upm.etsisi.commands.LogoutCommand;
+import es.upm.etsisi.models.Role;
+import es.upm.etsisi.models.User;
 import es.upm.etsisi.utils.Message;
 
 import java.util.ArrayList;
@@ -18,21 +17,14 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class CLI {
-    private final SportsManager sportsManager;
+    private final SportsManager sportsManager;      // move status to the CLI ?
     private final LinkedList<Command> commands;
     private final Controller controller;
-    private final ParticipantList participantList;
     private final Scanner scanner;
-    private final TournamentList tournamentList;
 
-    CLI(ParticipantList participantList, TournamentList tournamentList, SportsManager sportsManager) {
-        assert participantList != null : Message.NULL_PLAYERLIST;   // FIXME: wrong message
-        assert tournamentList != null : Message.NULL_MATCHLIST;
-
+    public CLI(SportsManager sportsManager) {      // erase manager param ?
         this.commands = new LinkedList<>();
         this.controller = new Controller();
-        this.participantList = participantList;
-        this.tournamentList = tournamentList;
         this.sportsManager = sportsManager;
         this.scanner = new Scanner(System.in);
     }
@@ -47,20 +39,22 @@ public class CLI {
         this.commands.clear();
 
         this.addPublicCommands();
-        if (user.getRole() == Role.ADMIN) {
-            this.addAdminCommands();
-        } else if (user.getRole() == Role.PLAYER) {
-            this.addPlayerCommands();
+        if (user != null) {
+            if (user.getRole() == Role.ADMIN) {
+                this.addAdminCommands();
+            } else if (user.getRole() == Role.PLAYER) {
+                this.addPlayerCommands();
+            }
         }
     }
 
     private void addAdminCommands() {
-        this.add(new CreatePlayerCommand(this.participantList));
-        this.add(new CreateTeamCommand(this.participantList, this.controller));
-//        this.add(new DeletePlayerCommand(this.participantList, this.tournamentList, new Scanner(System.in)));     // FIXME
-        this.add(new DeleteTeamCommand(this.participantList));
-        this.add(new AddToTeamCommand(this.participantList));
-        this.add(new RemoveFromTeamCommand(this.participantList));
+//        this.add(new CreatePlayerCommand(this.controller));
+//        this.add(new CreateTeamCommand(this.controller));
+//        this.add(new DeletePlayerCommand(this.controller, this.tournamentList, new Scanner(System.in)));     // FIXME
+//        this.add(new DeleteTeamCommand(this.controller));
+        this.add(new AddToTeamCommand(this.controller));
+//        this.add(new RemoveFromTeamCommand(this.controller));
         // this.add(new CreateTournamentCommand());    // TODO
         // this.add(new DeleteTournamentCommand());     // TODO
         // this.add(new TournamentMatchmakingCommand() or MatchmakeCommand());    // TODO
@@ -85,7 +79,7 @@ public class CLI {
         this.commands.add(command);
     }
 
-    protected void run() {
+    public void run() {
         if (!this.sportsManager.isOpen()) {
             this.sportsManager.open();
         }
@@ -104,7 +98,7 @@ public class CLI {
         } while (this.sportsManager.isOpen());
     }
 
-    public Command readCommand() {
+    private Command readCommand() {
         User user = this.controller.getUser();
 
         System.out.println();

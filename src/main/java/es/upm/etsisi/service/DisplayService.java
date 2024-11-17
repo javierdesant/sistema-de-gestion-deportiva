@@ -1,10 +1,10 @@
 package es.upm.etsisi.service;
 
-import es.upm.etsisi.models.entities.Participant;
-import es.upm.etsisi.models.game.Category;
-import es.upm.etsisi.models.game.Match;
-import es.upm.etsisi.models.game.Statistics;
-import es.upm.etsisi.models.game.Tournament;
+import es.upm.etsisi.models.Participant;
+import es.upm.etsisi.models.Category;
+import es.upm.etsisi.models.Match;
+import es.upm.etsisi.models.Statistics;
+import es.upm.etsisi.models.Tournament;
 import es.upm.etsisi.utils.Message;
 
 import java.util.Iterator;

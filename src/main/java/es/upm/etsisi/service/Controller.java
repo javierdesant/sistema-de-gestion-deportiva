@@ -1,12 +1,6 @@
 package es.upm.etsisi.service;
 
-import es.upm.etsisi.models.auth.User;
-import es.upm.etsisi.models.auth.UserList;
-import es.upm.etsisi.models.entities.Participant;
-import es.upm.etsisi.models.entities.ParticipantList;
-import es.upm.etsisi.models.entities.Player;
-import es.upm.etsisi.models.entities.Team;
-import es.upm.etsisi.models.game.*;
+import es.upm.etsisi.models.*;
 import es.upm.etsisi.utils.DNI;
 
 import java.time.LocalDate;
@@ -58,6 +52,14 @@ public class Controller {
         this.participantList.add(new Team(teamName, new Statistics(), this.user.getUsername()));
     }
 
+    public ParticipantList getParticipantList() {
+        return this.participantList;
+    }
+
+    public TournamentList getTournamentList() {
+        return this.tournamentList;
+    }
+
     public void deleteParticipant(String name) {
         Participant participant = this.participantList.getByName(name);
         if (participant == null) {
@@ -70,9 +72,9 @@ public class Controller {
         this.participantList.remove(participant);
     }
 
-    public void addToTeam(String teamName, String playerName) {
-        Participant team = this.participantList.getByName(teamName);
+    public void addToTeam(String playerName, String teamName) {
         Participant player = this.participantList.getByName(playerName);
+        Participant team = this.participantList.getByName(teamName);
 
         // FIXME: get rid of instanceof (somehow) ?
         if (team instanceof Team && player instanceof Player) {
