@@ -1,11 +1,11 @@
 package es.upm.etsisi.models;
 
 public enum Category {
-    POINTS_SCORED("Points Scored"),
-    MATCHES_WON("Matches Won"),
-    ASSIST_POINTS("Assist Points"),
-    TOURNAMENTS_WON("Tournaments Won"),
-    MONEY_GENERATED_IN_THE_TOURNAMENT("Money Generated In The Tournament");
+    POINTS_SCORED("Puntos marcados"),
+    MATCHES_WON("Partidos ganados"),
+    ASSIST_POINTS("Asistencias"),
+    TOURNAMENTS_WON("Torneos ganados"),
+    MONEY_GENERATED_IN_THE_TOURNAMENT("Dinero generado en el torneo");
 
     private final String title;
 
