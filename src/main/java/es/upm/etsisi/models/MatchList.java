@@ -1,7 +1,5 @@
 package es.upm.etsisi.models;
 
-import es.upm.etsisi.utils.Message;
-
 import java.util.Iterator;
 
 public class MatchList extends List<Match> {
@@ -12,15 +10,9 @@ public class MatchList extends List<Match> {
 
     @Override
     public void add(Match match) {
-        assert this.isValidMatch(match) : Message.PLAYERS_MATCHED_ERROR;    // TODO: update messages
+        assert this.isValidMatch(match);    // TODO: use exception
 
         this.addElement(match);
-    }
-
-    @Override
-    public void remove(Match match) {
-        boolean removed = this.removeElement(match);
-        assert removed; // TODO: add message
     }
 
     public void remove(String name) {

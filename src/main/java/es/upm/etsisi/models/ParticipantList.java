@@ -16,12 +16,6 @@ public class ParticipantList extends List<Participant> {
         this.addElement(participant);
     }
 
-    @Override
-    public void remove(Participant participant) {
-        boolean removed = this.removeElement(participant);
-        assert removed : Message.PLAYER_DOES_NOT_EXIST_ERROR;
-    }
-
     public Participant getByName(String name) {
         Participant res = null;
 

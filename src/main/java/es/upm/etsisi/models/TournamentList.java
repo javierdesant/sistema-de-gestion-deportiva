@@ -11,11 +11,4 @@ public class TournamentList extends List<Tournament> {
 
         this.addElement(tournament);
     }
-
-    @Override
-    public void remove(Tournament tournament) {
-        assert this.contains(tournament);
-
-        this.removeElement(tournament);
-    }
 }

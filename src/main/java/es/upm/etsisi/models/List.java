@@ -30,15 +30,13 @@ public abstract class List<T> {
         this.elements.clear();
     }
 
+    public boolean remove(T element) {
+        return this.elements.remove(element);
+    }
+
     protected void addElement(T element) {
         this.elements.add(element);
     }
 
-    protected boolean removeElement(T element) {
-        return this.elements.remove(element);
-    }
-
     public abstract void add(T element);
-
-    public abstract void remove(T element);
 }
