@@ -105,11 +105,10 @@ package models {
     }
 
     class Match {
-        - ArrayList<Participant> participants
+        - HashSet<Participant> participants
         + Match(ParticipantList participantList, Collection<Participant> participants)
         + Match(ParticipantList participantList, Participant... participants)
-        + getParticipants(): ArrayList<Participant>
-        + getParticipant(int index): Participant
+        + getParticipants(): HashSet<Participant>
         + contains(Participant participant): boolean
         + contains(String entityName): boolean
         + equals(Object object): boolean
