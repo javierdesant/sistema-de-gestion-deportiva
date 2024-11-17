@@ -1,0 +1,266 @@
+@startuml
+skinparam groupInheritance 4
+
+package models {
+    class User {
+        - String username
+        - String password
+        - Role role
+        + User(String username, String password, Role role)
+        + getUsername(): String
+        + getPassword(): String
+        + getRole(): Role
+        + validate(String password): boolean
+        + isUpmEmail(String email): boolean
+        + equals(Object object): boolean
+        + toString(): String
+    }
+
+    class Administrator extends User {
+        + Administrator(String username, String password)
+    }
+
+    enum Role {
+        ADMIN,
+        PLAYER
+    }
+
+    class Player extends User implements Participant {
+        - String firstName
+        - String lastName
+        - DNI dni
+        - String adminName
+        - Statistics stats
+        + Player(String username, String password, String firstName,
+        String lastName, DNI dni, User admin)
+        + getName(): String
+        + getDni(): DNI
+        + getStats(): Statistics
+        + setStats(Statistics stats)
+        + getChildren(): ArrayList<Participant>
+        + toString(): String
+    }
+
+    class Team implements Participant {
+        - String name
+        - String adminName
+        - ArrayList<Participant> children
+        - Statistics stats
+        + Team(String name, Statistics statistics, String adminName)
+        + Team(String name, String adminName)
+        + add(Participant participant)
+        + remove(Participant participant)
+        + getName(): String
+        + getStats(): Statistics
+        + setStats(Statistics stats)
+        + getChildren(): ArrayList<Participant>
+        + toString(): String
+    }
+
+    interface Participant {
+        + getName(): String
+        + getStats(): Statistics
+        + setStats(Statistics stats)
+        + getChildren(): ArrayList<Participant>
+    }
+
+    class Statistics {
+        - EnumMap<Category, Double> statistics
+        + Statistics()
+        + setStatistic(Category category, double value)
+        + get(Category category): double
+    }
+
+    enum Category {
+        POINTS_SCORED,
+        MATCHES_WON,
+        ASSIST_POINTS,
+        TOURNAMENTS_WON,
+        MONEY_GENERATED_IN_THE_TOURNAMENT
+    }
+
+    enum Sport
+
+    enum League
+
+    class Tournament {
+        - String name
+        - LocalDate startDate
+        - LocalDate endDate
+        - Sport sport
+        - League league
+        - Category category
+        - MatchList matchList
+        + Tournament(String name, LocalDate startDate, LocalDate endDate,
+        Sport sport, League league, Category category)
+        + getCategory(): Category
+        + getName(): String
+        + getMatches(): MatchList
+        + getSport(): Sport
+        + getLeague(): League
+        + getStartDate(): LocalDate
+        + getEndDate(): LocalDate
+        + isActive(): boolean
+        + equals(Object object): boolean
+    }
+
+    class Match {
+        - ArrayList<Participant> participants
+        + Match(ParticipantList participantList, Collection<Participant> participants)
+        + Match(ParticipantList participantList, Participant... participants)
+        + getParticipants(): ArrayList<Participant>
+        + getParticipant(int index): Participant
+        + contains(Participant participant): boolean
+        + contains(String entityName): boolean
+        + equals(Object object): boolean
+    }
+
+    abstract class List<T> {
+        - LinkedList<T> elements
+        + List()
+        + LinkedList<T> getElements()
+        + isEmpty(): boolean
+        + contains(T element): boolean
+        + containsAll(Collection<T> elements): boolean
+        + clear()
+        # addElement(T element)
+        # removeElement(T element): boolean
+        + {abstract} add(T element)
+        + {abstract} remove(T element)
+    }
+
+    class UserList extends List {
+        + UserList()
+        + getByUsername(String username): User
+        + add(User user)
+        + remove(User user)
+    }
+
+    class ParticipantList extends List {
+        + ParticipantList()
+        + add(Participant participant)
+        + remove(Participant participant)
+        + getByName(String name): Participant
+    }
+
+    class MatchList extends List {
+        + MatchList()
+        + add(Match match)
+        + remove(Match match)
+        + remove(String name)
+        + contains(String name): boolean
+        + contains(Participant participant): boolean
+        + randomize(ParticipantList participantList)
+    }
+
+    class TournamentList extends List {
+        + TournamentList()
+        + add(Tournament tournament)
+        + remove(Tournament tournament)
+    }
+
+    User "1" --> "1" Role
+    Player "1" --> "1" Statistics
+    Team "1" o-- "0..*" Participant
+    Match "0..1" o-- "2..*" Participant
+    Tournament "1" o-- "0..1" MatchList
+    Statistics "1" ..> "0..*" Category
+    Tournament "1" --> "1" Category
+    Tournament "1" --> "1" League
+    Tournament "1" --> "1" Sport
+    TournamentList "1" o-- "0..*" Tournament
+    ParticipantList "1" o-- "0..*" Participant
+    MatchList "1" o-- "0..*" Match
+    UserList "1" o-- "0..*" User
+}
+
+package service {
+    class CLI {
+        - SportsManager sportsManager
+        - LinkedList<Command> commands
+        - Controller controller
+        - Scanner scanner
+        + CLI(SportsManager sportsManager)
+        + getCommands(): ArrayList<Command>
+        + updateCommands()
+        + run()
+        + addPublicCommands()
+        + add(Command command)
+        + readCommand(): Command
+    }
+
+    class Controller {
+        - UserList userList
+        - ParticipantList participantList
+        - TournamentList tournamentList
+        - User user
+        + Controller()
+        + getUser(): User
+        + getParticipantList(): ParticipantList
+        + getTournamentList(): TournamentList
+        + login(String username, String password): boolean
+        + logout()
+        + createPlayer(String username, String password, String firstName, String lastName, DNI dni, String playerName)
+        + createTeam(String teamName)
+        + deleteParticipant(String name)
+        + addToTeam(String playerName, String teamName)
+        + removeFromTeam(String teamName, String playerName)
+        + createTournament(String tournamentName, LocalDate startDate, LocalDate endDate, Sport sport, League league, Category category)
+        + deleteTournament(String tournamentName)
+        + tournamentMatchmake(String tournamentName, String... playerNames)
+        + tournamentRandomMatchmake(String tournamentName)
+        + addToTournament(String tournamentName, Player player)
+        + removeFromTournament(String tournamentName, Player player)
+        + getParticipantStats(Participant participant): Statistics
+        + getTournaments(): TournamentList
+    }
+
+'   FIXME
+'    class DisplayService {
+'        + {static} show(Tournament tournament)
+'        + {static} show(Match match)
+'        + {static} show(Participant participant)
+'    }
+}
+
+package commands {
+    abstract class Command {
+        - String name
+        - int maxArguments
+        - String[] arguments
+        + Command(String name, int maxArguments)
+        + getName(): String
+        + getArgument(int index): String
+        + validate(String input)
+        + isCalled(String input): boolean
+        + {abstract} execute()
+    }
+
+'TODO: fill up commands attributes and methods
+
+Command <|-- LoginCommand
+Command <|-- LogoutCommand
+Command <|-- HelpCommand
+Command <|-- ExitCommand
+Command <|-- CreatePlayerCommand
+Command <|-- AddToTeamCommand
+Command <|-- RemoveFromTeamCommand
+Command <|-- CreateTournamentCommand
+Command <|-- DeleteTournamentCommand
+Command <|-- TournamentMatchmakeCommand
+Command <|-- TournamentRandomMatchmakeCommand
+Command <|-- AddToTournamentCommand
+Command <|-- RemoveFromTournamentCommand
+Command <|-- ShowParticipantStatsCommand
+Command <|-- ShowTournamentCommand
+Command <|-- ShowMatchCommand
+
+}
+
+'TODO: add utils package
+
+CLI "1..*" o-- "0..*" Command
+Command ..> Controller
+Controller ..> models
+
+@enduml
