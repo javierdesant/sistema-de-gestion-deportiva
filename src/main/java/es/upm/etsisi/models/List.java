@@ -1,5 +1,7 @@
 package es.upm.etsisi.models;
 
+import es.upm.etsisi.exceptions.DuplicateElementException;
+
 import java.util.Collection;
 import java.util.LinkedList;
 
@@ -30,13 +32,14 @@ public abstract class List<T> {
         this.elements.clear();
     }
 
-    public boolean remove(T element) {
-        return this.elements.remove(element);
-    }
-
-    protected void addElement(T element) {
+    public void add(T element) throws DuplicateElementException {
+        if (!this.contains(element)) {
+            throw new DuplicateElementException(element.toString());
+        }
         this.elements.add(element);
     }
 
-    public abstract void add(T element);
+    public boolean remove(T element) {
+        return this.elements.remove(element);
+    }
 }

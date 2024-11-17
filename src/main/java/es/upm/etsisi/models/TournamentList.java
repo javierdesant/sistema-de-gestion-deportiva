@@ -1,14 +1,23 @@
 package es.upm.etsisi.models;
 
+import java.util.Iterator;
+
 public class TournamentList extends List<Tournament> {
     public TournamentList() {
         super();
     }
 
-    @Override
-    public void add(Tournament tournament) {
-        assert !this.contains(tournament);    // TODO: use exceptions
+    public Tournament getByName(String name) {
+        Tournament res = null;
 
-        this.addElement(tournament);
+        Iterator<Tournament> iterator = this.getElements().iterator();
+        while (iterator.hasNext() && res == null) {
+            Tournament next = iterator.next();
+            if (name.equals(next.getName())) {
+                res = next;
+            }
+        }
+
+        return res;
     }
 }

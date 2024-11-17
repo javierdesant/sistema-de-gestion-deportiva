@@ -20,10 +20,4 @@ public class UserList extends List<User> {
 
         return user;
     }
-
-    @Override
-    public void add(User user) {
-        assert !this.contains(user) : "User already exists";    // TODO: add message, replace with an exception
-        this.addElement(user);
-    }
 }

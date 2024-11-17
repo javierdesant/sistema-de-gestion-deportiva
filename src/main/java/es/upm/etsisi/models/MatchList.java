@@ -1,5 +1,7 @@
 package es.upm.etsisi.models;
 
+import es.upm.etsisi.exceptions.DuplicateElementException;
+
 import java.util.Iterator;
 
 public class MatchList extends List<Match> {
@@ -9,10 +11,26 @@ public class MatchList extends List<Match> {
     }
 
     @Override
-    public void add(Match match) {
-        assert this.isValidMatch(match);    // TODO: use exception
+    public void add(Match match) throws DuplicateElementException {
+        Participant duplicate = null;
 
-        this.addElement(match);
+        Iterator<Participant> iterator = match.getParticipants().iterator();
+        while (iterator.hasNext() && duplicate == null) {
+            Participant next = iterator.next();
+            if (this.contains(next)) {
+                duplicate = next;
+            }
+        }
+
+        if (duplicate == null) {
+            super.add(match);
+        } else {
+            if (this.contains(match)) {
+                throw new DuplicateElementException(match.toString());
+            } else {
+                throw new DuplicateElementException(duplicate.getName());
+            }
+        }
     }
 
     public void remove(String name) {
@@ -44,16 +62,5 @@ public class MatchList extends List<Match> {
         }
 
         return found;
-    }
-
-    private boolean isValidMatch(Match match) {
-        boolean isValid = !this.contains(match);
-
-        Iterator<Participant> iterator = match.getParticipants().iterator();
-        while (iterator.hasNext() && isValid) {
-            isValid = !this.contains(iterator.next());
-        }
-
-        return isValid;
     }
 }
