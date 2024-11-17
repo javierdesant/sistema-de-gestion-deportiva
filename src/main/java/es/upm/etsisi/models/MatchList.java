@@ -56,18 +56,4 @@ public class MatchList extends List<Match> {
 
         return isValid;
     }
-
-    public void randomize(ParticipantList participantList) {
-        // TODO
-//        assert !entityList.isEmpty() : Message.NO_PLAYERS;
-//        assert this.isEmpty() : Message.NO_MATCHES;
-//
-//        LinkedList<Entity> randomEntities = new LinkedList<>(entityList.getEntities());
-//        assert randomEntities.size() % 2 == 0 : Message.EVEN_PLAYERS_REQUIRED;
-//
-//        Collections.shuffle(randomEntities);
-//        while (!randomEntities.isEmpty()) {
-//            this.add(new Match(entityList, randomEntities.pop(), randomEntities.pop()));
-//        }
-    }
 }
