@@ -5,30 +5,30 @@ import es.upm.etsisi.utils.Message;
 import java.util.*;
 
 public class Match {
-    private final ArrayList<Participant> participants;
+    private final HashSet<Participant> participants;
 
     public Match(ParticipantList participantList, Collection<Participant> participants) {
         assert participants != null;
-        assert participants.size() >= 2;                    // TODO: update messages
-        assert participantList.containsAll(participants);
-        for (Participant participant : participants) {
-            assert Collections.frequency(participants, participant) == 1;    // FIXME: for break ?
-        }                                                            // TODO: improve...
+        assert participants.size() > 1;
 
-        this.participants = new ArrayList<>(participants);
+        if (!participantList.containsAll(participants)) {
+            throw new IllegalArgumentException("El participante no existe en la lista.");
+        }
+
+        HashSet<Participant> participantSet = new HashSet<>(participants);
+        if (participantSet.size() == participants.size()) {
+            this.participants = participantSet;
+        } else {
+            throw new IllegalArgumentException("La lista de participantes contiene duplicados.");
+        }
     }
 
     public Match(ParticipantList participantList, Participant... participants) {
-        this(participantList, Arrays.asList(participants));  // FIXME: maybe is null ?
+        this(participantList, Arrays.asList(participants));
     }
 
     public ArrayList<Participant> getParticipants() {
         return new ArrayList<>(this.participants);
-    }
-
-    public Participant getParticipant(int index) {
-        assert 0 <= index && index < this.participants.size() : Message.INVALID_INDEX;
-        return this.participants.get(index);
     }
 
     public boolean contains(Participant participant) {
