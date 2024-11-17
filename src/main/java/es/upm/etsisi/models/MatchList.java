@@ -54,13 +54,6 @@ public class MatchList extends List<Match> {
     }
 
     public boolean contains(Participant participant) {
-        boolean found = false;
-
-        Iterator<Match> iterator = this.getElements().iterator();
-        while (iterator.hasNext() && !found) {
-            found = iterator.next().contains(participant);
-        }
-
-        return found;
+        return this.contains(participant.getName());
     }
 }
