@@ -9,7 +9,7 @@ import es.upm.etsisi.utils.Message;
 
 import java.util.Iterator;
 
-public class DisplayService {
+public class DisplayService {       // FIXME: this class is ugly, we should delete it
     public static void show(Tournament tournament) {
         Message.FOOTER.writeln();
 
