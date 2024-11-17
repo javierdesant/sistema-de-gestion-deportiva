@@ -27,8 +27,8 @@ public class Match {
         this(participantList, Arrays.asList(participants));
     }
 
-    public ArrayList<Participant> getParticipants() {
-        return new ArrayList<>(this.participants);
+    public HashSet<Participant> getParticipants() {
+        return new HashSet<>(this.participants);
     }
 
     public boolean contains(Participant participant) {
@@ -55,16 +55,6 @@ public class Match {
             return false;
         }
         Match match = (Match) object;
-        ArrayList<Participant> participants = new ArrayList<>(match.getParticipants());
-
-        if (this.participants.size() != participants.size()) {
-            return false;
-        }
-
-        for (Participant participant : this.participants) {
-            participants.remove(participant);
-        }
-
-        return participants.isEmpty();
+        return this.participants.equals(match.getParticipants());
     }
 }
