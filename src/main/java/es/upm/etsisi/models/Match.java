@@ -1,7 +1,5 @@
 package es.upm.etsisi.models;
 
-import es.upm.etsisi.utils.Message;
-
 import java.util.*;
 
 public class Match {
@@ -56,5 +54,18 @@ public class Match {
         }
         Match match = (Match) object;
         return this.participants.equals(match.getParticipants());
+    }
+
+    @Override
+    public String toString() {
+        Iterator<Participant> iterator = this.getParticipants().iterator();
+
+        StringBuilder res = new StringBuilder(iterator.next().getName());
+        do {
+            res.append(" vs ");
+            res.append(iterator.next().getName());
+        } while (iterator.hasNext());
+
+        return res.toString();
     }
 }
