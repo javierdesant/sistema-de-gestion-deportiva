@@ -1,5 +1,6 @@
 package es.upm.etsisi.service;
 
+import es.upm.etsisi.exceptions.NonExistElement;
 import es.upm.etsisi.models.*;
 import es.upm.etsisi.utils.DNI;
 
@@ -110,7 +111,13 @@ public class Controller {
     }
 
     public void deleteTournament(String tournamentName) {
-
+        try {
+            this.tournamentList.remove(this.tournamentList.getByName(tournamentName));
+        } catch (NonExistElement e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            // TODO: handle possibles bugs with teams and players of the removed tournament
+        }
     }
 
     public void tournamentMatchmake(String tournamentName, String... playerNames) {
