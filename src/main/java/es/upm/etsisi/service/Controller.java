@@ -4,6 +4,7 @@ import es.upm.etsisi.exceptions.DuplicateElementException;
 import es.upm.etsisi.exceptions.DuplicatePlayerException;
 import es.upm.etsisi.exceptions.DuplicateTeamException;
 import es.upm.etsisi.exceptions.DuplicateUserException;
+import es.upm.etsisi.exceptions.NonExistElement;
 import es.upm.etsisi.models.*;
 import es.upm.etsisi.utils.DNI;
 
@@ -91,16 +92,25 @@ public class Controller {
         return this.tournamentList;
     }
 
-    public void deleteParticipant(String name) {
-        Participant participant = this.participantList.getByName(name);
-        if (participant == null) {
-            return;     // TODO: add exceptions
+    public void deleteParticipant(String name) throws NonExistElement {
+        try {
+            Participant participant = this.participantList.getByName(name);
+            if (participant == null) {  
+                throw new NonExistElement(name);
+            } else {
+                if (participant.getChildren() == null){
+                    this.userList.remove(this.userList.getByUsername(name));
+                }
+                this.participantList.remove(participant);
+            }
+        } catch (NonExistElement exception) {
+            exception.toString();
+            exception.printStackTrace();
         }
-        // TODO: if player remove also from userList
         // TODO: check if the participant or its team
         //  is playing in an active tournament
-        // TODO: on team deletion, delete players/subteams also ?
-        this.participantList.remove(participant);
+
+        //To do that, TournamentList has to be iterable, to check every tournament
     }
 
     public void addToTeam(String playerName, String teamName) {
