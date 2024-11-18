@@ -2,6 +2,7 @@ package es.upm.etsisi.service;
 
 import es.upm.etsisi.exceptions.DuplicateElementException;
 import es.upm.etsisi.exceptions.DuplicatePlayerException;
+import es.upm.etsisi.exceptions.DuplicateTeamException;
 import es.upm.etsisi.exceptions.DuplicateUserException;
 import es.upm.etsisi.models.*;
 import es.upm.etsisi.utils.DNI;
@@ -68,8 +69,18 @@ public class Controller {
         }
     }
 
-    public void createTeam(String teamName) {
-        this.participantList.add(new Team(teamName, new Statistics(), this.user.getUsername()));
+    public void createTeam(String teamName) throws DuplicateElementException{
+        try {
+            Team team = new Team(teamName, new Statistics(), this.user.getUsername());
+            if(participantList.contains(team)){
+                throw new DuplicateTeamException(teamName);
+            } else {
+                this.participantList.add(team);
+            }
+        } catch (DuplicateTeamException exception) {
+            exception.toString();
+            exception.printStackTrace();
+        }
     }
 
     public ParticipantList getParticipantList() {
