@@ -10,6 +10,7 @@ public enum Message {
     MATCHES_RANDOMIZED("Emparejamiento aleatorio realizado con éxito."),
     PLAYER_ADDED("Jugador añadido con éxito."),
     PLAYER_REMOVED("Jugador eliminado con éxito."),
+    TEAM_ADDED("Equipo añadido con éxito"),
     PLAYERS_MATCHED("Los jugadores #firstplayer y #secondplayer han sido emparejados correctamente."),
     NO_MATCHES("No hay emparejamientos"),
     NO_PLAYERS("No hay jugadores"),
