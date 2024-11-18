@@ -1,6 +1,7 @@
 package es.upm.etsisi.commands;
 
 import es.upm.etsisi.exceptions.DuplicateElementException;
+import es.upm.etsisi.exceptions.NonExistElement;
 import es.upm.etsisi.utils.Message;
 
 public abstract class Command {
@@ -43,5 +44,5 @@ public abstract class Command {
         return name.equals(this.name);
     }
 
-    public abstract void execute() throws DuplicateElementException;
+    public abstract void execute() throws DuplicateElementException, NonExistElement;
 }
