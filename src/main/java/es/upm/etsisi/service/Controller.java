@@ -1,6 +1,8 @@
 package es.upm.etsisi.service;
 
-import es.upm.etsisi.exceptions.NonExistElement;
+import es.upm.etsisi.exceptions.DuplicateElementException;
+import es.upm.etsisi.exceptions.DuplicatePlayerException;
+import es.upm.etsisi.exceptions.DuplicateUserException;
 import es.upm.etsisi.models.*;
 import es.upm.etsisi.utils.DNI;
 
@@ -34,19 +36,36 @@ public class Controller {
         this.user = null;
     }
 
-    private void register(User user) {
-        this.userList.add(user);
+    private void register(User user) throws DuplicateElementException {
+        try {
+            if (this.userList.contains(user)) {
+                throw new DuplicateUserException(user.getUsername());
+            } else{
+                this.userList.add(user);
+            }
+        } catch (DuplicateUserException exception) {
+            exception.toString();
+            exception.printStackTrace();
+        }
     }
 
     public User getUser() {
         return this.user;
     }
 
-    public void createPlayer(String username, String password, String firstName, String lastName, DNI dni, String playerName) {
-        Player player = new Player(username, password, firstName, lastName, dni, this.user);
-
-        this.userList.add(player);
-        this.participantList.add(player);
+    public void createPlayer(String username, String password, String firstName, String lastName, DNI dni) throws DuplicateElementException {
+        try {
+            Player player = new Player(username, password, firstName, lastName, dni, this.user);
+            if (this.participantList.contains(player)){
+                throw new DuplicatePlayerException(player.getName());
+            } else {
+                this.participantList.add(player);
+                register(player);
+            }
+        } catch (DuplicatePlayerException exception) {
+            exception.toString();
+            exception.printStackTrace();
+        }
     }
 
     public void createTeam(String teamName) {
@@ -111,13 +130,7 @@ public class Controller {
     }
 
     public void deleteTournament(String tournamentName) {
-        try {
-            this.tournamentList.remove(this.tournamentList.getByName(tournamentName));
-        } catch (NonExistElement e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-            // TODO: handle possibles bugs with teams and players of the removed tournament
-        }
+
     }
 
     public void tournamentMatchmake(String tournamentName, String... playerNames) {
