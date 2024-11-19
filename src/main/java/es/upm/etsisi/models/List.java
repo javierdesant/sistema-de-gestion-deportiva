@@ -12,6 +12,14 @@ public abstract class List<T> {
         this.elements = new LinkedList<>();
     }
 
+    public List(Collection<T> elements) {
+        this.elements = new LinkedList<>(elements);
+    }
+
+    public List(List<T> elements) {
+        this(elements.getElements());
+    }
+
     public LinkedList<T> getElements() {
         return new LinkedList<>(this.elements);
     }
