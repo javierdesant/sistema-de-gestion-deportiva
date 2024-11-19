@@ -81,7 +81,7 @@ public class Controller {
         assert removed;
     }
 
-    public void addToTeam(String playerName, String teamName) throws DifferingTypeException {
+    public void addToTeam(String playerName, String teamName) throws DifferingTypeException, DuplicateElementException {
         Participant player = this.participantList.getByName(playerName);
         Participant team = this.participantList.getByName(teamName);
 
