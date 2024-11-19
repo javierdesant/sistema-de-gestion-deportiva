@@ -2,14 +2,12 @@ package es.upm.etsisi.models;
 
 import java.util.Iterator;
 
-import es.upm.etsisi.exceptions.NonExistElement;
-
 public class TournamentList extends List<Tournament> {
     public TournamentList() {
         super();
     }
 
-    public Tournament getByName(String name) throws NonExistElement {
+    public Tournament getByName(String name) {
         Tournament res = null;
 
         Iterator<Tournament> iterator = this.getElements().iterator();
@@ -19,6 +17,7 @@ public class TournamentList extends List<Tournament> {
                 res = next;
             }
         }
+
         return res;
     }
 }
