@@ -103,7 +103,8 @@ public class Controller {
         }
     }
 
-    public void removeFromTeam(String teamName, String playerName) throws ElementNotFoundException, DifferingTypeException{
+    public void removeFromTeam(String teamName, String playerName)
+            throws ElementNotFoundException, DifferingTypeException {
         Participant team = this.participantList.getByName(teamName);
         Participant player = this.participantList.getByName(playerName);
 
@@ -120,6 +121,7 @@ public class Controller {
             } else if (team.getChildren().isEmpty()) {
                 throw new DifferingTeamException(teamName);
             }
+        }
     }
 
     public void createTournament(String tournamentName,
