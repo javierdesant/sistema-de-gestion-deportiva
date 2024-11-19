@@ -1,8 +1,8 @@
 package es.upm.etsisi.commands;
 
-import es.upm.etsisi.models.Role;
-import es.upm.etsisi.models.Player;
 import es.upm.etsisi.models.Category;
+import es.upm.etsisi.models.Player;
+import es.upm.etsisi.models.Role;
 import es.upm.etsisi.models.Statistics;
 import es.upm.etsisi.service.Controller;
 

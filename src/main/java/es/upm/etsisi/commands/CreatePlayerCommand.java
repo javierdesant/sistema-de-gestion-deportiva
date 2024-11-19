@@ -14,13 +14,13 @@ public class CreatePlayerCommand extends Command {
     }
 
     @Override
-    public void execute() throws DuplicateElementException{
+    public void execute() throws DuplicateElementException {
         String username = this.getArgument(0);
         String password = this.getArgument(1);
         String playerName = this.getArgument(2);
         String playerLastName = this.getArgument(3);
         DNI dni = new DNI(this.getArgument(4));
-        
+
         assert playerName.matches("[a-zA-Z]+") : Message.INVALID_NAME;
 
         this.controller.createPlayer(username, password, playerLastName, playerLastName, dni);

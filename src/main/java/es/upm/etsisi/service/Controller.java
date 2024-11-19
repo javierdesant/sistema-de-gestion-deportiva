@@ -1,14 +1,6 @@
 package es.upm.etsisi.service;
 
-import es.upm.etsisi.exceptions.DuplicateElementException;
-import es.upm.etsisi.exceptions.DuplicatePlayerException;
-import es.upm.etsisi.exceptions.DuplicateTeamException;
-import es.upm.etsisi.exceptions.DuplicateUserException;
-import es.upm.etsisi.exceptions.DifferingTypeException;
-import es.upm.etsisi.exceptions.DifferingPlayerException;
-import es.upm.etsisi.exceptions.DifferingTeamException;
-import es.upm.etsisi.exceptions.DuplicateElementException;
-import es.upm.etsisi.exceptions.ElementNotFoundException;
+import es.upm.etsisi.exceptions.*;
 import es.upm.etsisi.models.*;
 import es.upm.etsisi.utils.DNI;
 
@@ -45,9 +37,9 @@ public class Controller {
     private void register(User user) throws DuplicateElementException {
         if (this.userList.contains(user)) {
             throw new DuplicateUserException(user.getUsername());
-        } else {
-            this.userList.add(user);
         }
+
+        this.userList.add(user);
     }
 
     public User getUser() {
@@ -96,9 +88,9 @@ public class Controller {
         if (player.getChildren().isEmpty() && !team.getChildren().isEmpty()) {
             ((Team) team).add(player);
         } else {
-            if (!player.getChildren().isEmpty()){
+            if (!player.getChildren().isEmpty()) {
                 throw new DifferingPlayerException(playerName);
-            } else if (team.getChildren().isEmpty()){
+            } else if (team.getChildren().isEmpty()) {
                 throw new DifferingTeamException(teamName);
             }
         }

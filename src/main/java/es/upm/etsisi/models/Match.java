@@ -1,6 +1,9 @@
 package es.upm.etsisi.models;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
 
 public class Match {
     private final HashSet<Participant> participants;

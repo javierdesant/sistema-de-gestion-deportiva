@@ -1,12 +1,7 @@
 package es.upm.etsisi.service;
 
 import es.upm.etsisi.SportsManager;
-import es.upm.etsisi.commands.AddToTeamCommand;
-import es.upm.etsisi.commands.Command;
-import es.upm.etsisi.commands.ExitCommand;
-import es.upm.etsisi.commands.HelpCommand;
-import es.upm.etsisi.commands.LoginCommand;
-import es.upm.etsisi.commands.LogoutCommand;
+import es.upm.etsisi.commands.*;
 import es.upm.etsisi.models.Role;
 import es.upm.etsisi.models.User;
 import es.upm.etsisi.utils.Message;

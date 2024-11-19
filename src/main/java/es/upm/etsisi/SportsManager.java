@@ -13,6 +13,12 @@ public class SportsManager {
         this.cli = new CLI(this);
     }
 
+    public static void main(String[] args) {
+        SportsManager sportsManager = new SportsManager();
+
+        sportsManager.run();
+    }
+
     public boolean isOpen() {
         return this.status == Status.OPEN;
     }
@@ -46,11 +52,5 @@ public class SportsManager {
         System.out.println("Introduzca un comando o escriba 'exit' para salir.");
 
         this.cli.run();
-    }
-
-    public static void main(String[] args) {
-        SportsManager sportsManager = new SportsManager();
-
-        sportsManager.run();
     }
 }

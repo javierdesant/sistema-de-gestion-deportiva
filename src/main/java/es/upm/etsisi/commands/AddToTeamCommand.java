@@ -13,7 +13,7 @@ public class AddToTeamCommand extends Command {
     }
 
     @Override
-    public void execute() throws DifferingTypeException{
+    public void execute() throws DifferingTypeException {
         String playerName = this.getArgument(0);
         String teamName = this.getArgument(1);
 
