@@ -4,6 +4,9 @@ import es.upm.etsisi.exceptions.DuplicateElementException;
 import es.upm.etsisi.exceptions.DuplicatePlayerException;
 import es.upm.etsisi.exceptions.DuplicateTeamException;
 import es.upm.etsisi.exceptions.DuplicateUserException;
+import es.upm.etsisi.exceptions.DifferingTypeException;
+import es.upm.etsisi.exceptions.DifferingPlayerException;
+import es.upm.etsisi.exceptions.DifferingTeamException;
 import es.upm.etsisi.exceptions.NonExistElement;
 import es.upm.etsisi.models.*;
 import es.upm.etsisi.utils.DNI;
@@ -94,15 +97,18 @@ public class Controller {
         // To do that, TournamentList has to be iterable, to check every tournament
     }
 
-    public void addToTeam(String playerName, String teamName) {
+    public void addToTeam(String playerName, String teamName) throws DifferingTypeException {
         Participant player = this.participantList.getByName(playerName);
         Participant team = this.participantList.getByName(teamName);
 
-        // FIXME: get rid of instanceof (somehow) ?
-        if (team instanceof Team && player instanceof Player) {
+        if (player.getChildren().isEmpty() && !team.getChildren().isEmpty()) {
             ((Team) team).add(player);
         } else {
-            // TODO: add exceptions
+            if (!player.getChildren().isEmpty()){
+                throw new DifferingPlayerException(playerName);
+            } else if (team.getChildren().isEmpty()){
+                throw new DifferingTeamException(teamName);
+            }
         }
     }
 
