@@ -165,10 +165,10 @@ package models {
     Tournament "1" --> "1" Category
     Tournament "1" --> "1" League
     Tournament "1" --> "1" Sport
-    TournamentList "1" *--> "0..*" Tournament
-    ParticipantList "1" *--> "0..*" Participant
-    MatchList "1" *--> "0..*" Match
-    UserList "1" *--> "0..*" User
+    TournamentList "1" o--> "0..*" Tournament
+    ParticipantList "1" o--> "0..*" Participant
+    MatchList "1" o--> "0..*" Match
+    UserList "1" o--> "0..*" User
 }
 
 package service {
