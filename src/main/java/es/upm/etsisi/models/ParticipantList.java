@@ -3,9 +3,12 @@ package es.upm.etsisi.models;
 import java.util.Iterator;
 
 public class ParticipantList extends List<Participant> {
-
     public ParticipantList() {
         super();
+    }
+
+    public ParticipantList(ParticipantList participants) {
+        super(participants);
     }
 
     public Participant getByName(String name) {
