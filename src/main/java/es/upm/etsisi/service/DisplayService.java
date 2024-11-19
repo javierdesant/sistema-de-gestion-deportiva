@@ -44,7 +44,7 @@ public class DisplayService {       // FIXME: this class is ugly, we should dele
             System.out.println(" - " + category + ": " + stats.get(category));
         }
 
-        for (Participant child : participant.getChildren()) {
+        for (Participant child : participant.getChildren().getElements()) {
             show(child);
         }
     }
