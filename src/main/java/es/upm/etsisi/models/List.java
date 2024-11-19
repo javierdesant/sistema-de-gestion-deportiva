@@ -1,7 +1,6 @@
 package es.upm.etsisi.models;
 
 import es.upm.etsisi.exceptions.DuplicateElementException;
-import es.upm.etsisi.exceptions.NonExistElement;
 
 import java.util.Collection;
 import java.util.LinkedList;
@@ -40,7 +39,7 @@ public abstract class List<T> {
         this.elements.add(element);
     }
 
-    public boolean remove(T element) throws NonExistElement {
+    public boolean remove(T element) {
         return this.elements.remove(element);
     }
 }
