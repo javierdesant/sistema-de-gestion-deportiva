@@ -45,5 +45,5 @@ public abstract class Command {
         return name.equals(this.name);
     }
 
-    public abstract void execute() throws DuplicateElementException, NonExistElement, DifferingTypeException;
+    public abstract void execute() throws DuplicateElementException, DifferingTypeException, ElementNotFoundException;
 }

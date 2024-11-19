@@ -1,6 +1,6 @@
 package es.upm.etsisi.commands;
 
-import es.upm.etsisi.exceptions.NonExistElement;
+import es.upm.etsisi.exceptions.ElementNotFoundException;
 import es.upm.etsisi.service.Controller;
 import es.upm.etsisi.utils.Message;
 
@@ -13,7 +13,7 @@ public class DeletePlayerCommand extends Command {
     }
 
     @Override
-    public void execute() throws NonExistElement {
+    public void execute() throws ElementNotFoundException {
         String playerName = this.getArgument(0);
 
         this.controller.deleteParticipant(playerName);
