@@ -39,15 +39,10 @@ public class Controller {
     }
 
     private void register(User user) throws DuplicateElementException {
-        try {
-            if (this.userList.contains(user)) {
-                throw new DuplicateUserException(user.getUsername());
-            } else{
-                this.userList.add(user);
-            }
-        } catch (DuplicateUserException exception) {
-            exception.toString();
-            exception.printStackTrace();
+        if (this.userList.contains(user)) {
+            throw new DuplicateUserException(user.getUsername());
+        } else {
+            this.userList.add(user);
         }
     }
 
@@ -55,32 +50,23 @@ public class Controller {
         return this.user;
     }
 
-    public void createPlayer(String username, String password, String firstName, String lastName, DNI dni) throws DuplicateElementException {
-        try {
-            Player player = new Player(username, password, firstName, lastName, dni, this.user);
-            if (this.participantList.contains(player)){
-                throw new DuplicatePlayerException(player.getName());
-            } else {
-                this.participantList.add(player);
-                register(player);
-            }
-        } catch (DuplicatePlayerException exception) {
-            exception.toString();
-            exception.printStackTrace();
+    public void createPlayer(String username, String password, String firstName, String lastName, DNI dni)
+            throws DuplicateElementException {
+        Player player = new Player(username, password, firstName, lastName, dni, this.user);
+        if (this.participantList.contains(player)) {
+            throw new DuplicatePlayerException(player.getName());
+        } else {
+            this.participantList.add(player);
+            register(player);
         }
     }
 
-    public void createTeam(String teamName) throws DuplicateElementException{
-        try {
-            Team team = new Team(teamName, new Statistics(), this.user.getUsername());
-            if(participantList.contains(team)){
-                throw new DuplicateTeamException(teamName);
-            } else {
-                this.participantList.add(team);
-            }
-        } catch (DuplicateTeamException exception) {
-            exception.toString();
-            exception.printStackTrace();
+    public void createTeam(String teamName) throws DuplicateElementException {
+        Team team = new Team(teamName, new Statistics(), this.user.getUsername());
+        if (participantList.contains(team)) {
+            throw new DuplicateTeamException(teamName);
+        } else {
+            this.participantList.add(team);
         }
     }
 
@@ -93,24 +79,19 @@ public class Controller {
     }
 
     public void deleteParticipant(String name) throws NonExistElement {
-        try {
-            Participant participant = this.participantList.getByName(name);
-            if (participant == null) {  
-                throw new NonExistElement(name);
-            } else {
-                if (participant.getChildren() == null){
-                    this.userList.remove(this.userList.getByUsername(name));
-                }
-                this.participantList.remove(participant);
+        Participant participant = this.participantList.getByName(name);
+        if (participant == null) {
+            throw new NonExistElement(name);
+        } else {
+            if (participant.getChildren() == null) {
+                this.userList.remove(this.userList.getByUsername(name));
             }
-        } catch (NonExistElement exception) {
-            exception.toString();
-            exception.printStackTrace();
+            this.participantList.remove(participant);
         }
         // TODO: check if the participant or its team
-        //  is playing in an active tournament
+        // is playing in an active tournament
 
-        //To do that, TournamentList has to be iterable, to check every tournament
+        // To do that, TournamentList has to be iterable, to check every tournament
     }
 
     public void addToTeam(String playerName, String teamName) {
@@ -138,14 +119,14 @@ public class Controller {
     }
 
     public void createTournament(String tournamentName,
-                                 LocalDate startDate,
-                                 LocalDate endDate,
-                                 Sport sport,
-                                 League league,
-                                 Category category) {
+            LocalDate startDate,
+            LocalDate endDate,
+            Sport sport,
+            League league,
+            Category category) {
 
         Tournament tournament = new Tournament(tournamentName, startDate, endDate, sport, league, category);
-        assert !this.tournamentList.getElements().contains(tournament);  // FIXME: replace with exception
+        assert !this.tournamentList.getElements().contains(tournament); // FIXME: replace with exception
 
         this.tournamentList.add(tournament);
     }
