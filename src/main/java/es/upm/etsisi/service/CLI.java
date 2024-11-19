@@ -17,12 +17,12 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class CLI {
-    private final SportsManager sportsManager;      // move status to the CLI ?
+    private final SportsManager sportsManager; // move status to the CLI ?
     private final LinkedList<Command> commands;
     private final Controller controller;
     private final Scanner scanner;
 
-    public CLI(SportsManager sportsManager) {      // erase manager param ?
+    public CLI(SportsManager sportsManager) { // erase manager param ?
         this.commands = new LinkedList<>();
         this.controller = new Controller();
         this.sportsManager = sportsManager;
@@ -49,23 +49,24 @@ public class CLI {
     }
 
     private void addAdminCommands() {
-//        this.add(new CreatePlayerCommand(this.controller));
-//        this.add(new CreateTeamCommand(this.controller));
-//        this.add(new DeletePlayerCommand(this.controller, this.tournamentList, new Scanner(System.in)));     // FIXME
-//        this.add(new DeleteTeamCommand(this.controller));
+        // this.add(new CreatePlayerCommand(this.controller));
+        // this.add(new CreateTeamCommand(this.controller));
+        // this.add(new DeletePlayerCommand(this.controller, this.tournamentList, new
+        // Scanner(System.in))); // FIXME
+        // this.add(new DeleteTeamCommand(this.controller));
         this.add(new AddToTeamCommand(this.controller));
-//        this.add(new RemoveFromTeamCommand(this.controller));
-        // this.add(new CreateTournamentCommand());    // TODO
-        // this.add(new DeleteTournamentCommand());     // TODO
-        // this.add(new TournamentMatchmakingCommand() or MatchmakeCommand());    // TODO
+        // this.add(new RemoveFromTeamCommand(this.controller));
+        // this.add(new CreateTournamentCommand()); // TODO
+        // this.add(new DeleteTournamentCommand()); // TODO
+        // this.add(new TournamentMatchmakingCommand() or MatchmakeCommand()); // TODO
     }
 
     private void addPlayerCommands() {
-//        this.add(new EnrollCommand());
-//        this.add(new LeaveCommand());
-//        this.add(new ShowCommand());
-        // add tournament related commands...       // TODO
-        // this.add(new ShowStatsCommand());        // TODO
+        // this.add(new EnrollCommand());
+        // this.add(new LeaveCommand());
+        // this.add(new ShowCommand());
+        // add tournament related commands... // TODO
+        // this.add(new ShowStatsCommand()); // TODO
     }
 
     private void addPublicCommands() {
@@ -83,18 +84,19 @@ public class CLI {
         if (!this.sportsManager.isOpen()) {
             this.sportsManager.open();
         }
-
         do {
             Command command = this.readCommand();
 
             if (command != null) {
                 try {
                     command.execute();
-                } catch (AssertionError error) {    // FIXME
+                } catch (AssertionError error) { // FIXME
                     System.out.println("Error: " + error.getMessage());
+                } catch (Exception exception) {
+                    exception.toString();
+                    exception.printStackTrace();
                 }
             }
-
         } while (this.sportsManager.isOpen());
     }
 

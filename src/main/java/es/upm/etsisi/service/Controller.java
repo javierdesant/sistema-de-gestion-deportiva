@@ -1,6 +1,13 @@
 package es.upm.etsisi.service;
 
 import es.upm.etsisi.exceptions.DuplicateElementException;
+import es.upm.etsisi.exceptions.DuplicatePlayerException;
+import es.upm.etsisi.exceptions.DuplicateTeamException;
+import es.upm.etsisi.exceptions.DuplicateUserException;
+import es.upm.etsisi.exceptions.DifferingTypeException;
+import es.upm.etsisi.exceptions.DifferingPlayerException;
+import es.upm.etsisi.exceptions.DifferingTeamException;
+import es.upm.etsisi.exceptions.DuplicateElementException;
 import es.upm.etsisi.exceptions.ElementNotFoundException;
 import es.upm.etsisi.models.*;
 import es.upm.etsisi.utils.DNI;
@@ -36,7 +43,11 @@ public class Controller {
     }
 
     private void register(User user) throws DuplicateElementException {
-        this.userList.add(user);
+        if (this.userList.contains(user)) {
+            throw new DuplicateUserException(user.getUsername());
+        } else {
+            this.userList.add(user);
+        }
     }
 
     public User getUser() {
@@ -46,12 +57,14 @@ public class Controller {
     public void createPlayer(String username, String password, String firstName, String lastName, DNI dni, String playerName) throws DuplicateElementException {
         Player player = new Player(username, password, firstName, lastName, dni, this.user);
 
-        this.userList.add(player);
         this.participantList.add(player);
+        this.register(player);
     }
 
     public void createTeam(String teamName) throws DuplicateElementException {
-        this.participantList.add(new Team(teamName, new Statistics(), this.user.getUsername()));
+        Team team = new Team(teamName, new Statistics(), this.user.getUsername());
+
+        this.participantList.add(team);
     }
 
     public ParticipantList getParticipantList() {
@@ -70,20 +83,24 @@ public class Controller {
         // TODO: if player remove also from userList
         // TODO: check if the participant or its team
         //  is playing in an active tournament
+        //  To do that, TournamentList has to be iterable, to check every tournament
         // TODO: on team deletion, delete players/subteams also ?
         boolean removed = this.participantList.remove(participant);
         assert removed;
     }
 
-    public void addToTeam(String playerName, String teamName) {
+    public void addToTeam(String playerName, String teamName) throws DifferingTypeException {
         Participant player = this.participantList.getByName(playerName);
         Participant team = this.participantList.getByName(teamName);
 
-        // FIXME: get rid of instanceof (somehow) ?
-        if (team instanceof Team && player instanceof Player) {
+        if (player.getChildren().isEmpty() && !team.getChildren().isEmpty()) {
             ((Team) team).add(player);
         } else {
-            // TODO: add exceptions
+            if (!player.getChildren().isEmpty()){
+                throw new DifferingPlayerException(playerName);
+            } else if (team.getChildren().isEmpty()){
+                throw new DifferingTeamException(teamName);
+            }
         }
     }
 

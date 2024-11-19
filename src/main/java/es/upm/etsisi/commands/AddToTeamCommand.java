@@ -1,6 +1,8 @@
 package es.upm.etsisi.commands;
 
+import es.upm.etsisi.exceptions.DifferingTypeException;
 import es.upm.etsisi.service.Controller;
+import es.upm.etsisi.utils.Message;
 
 public class AddToTeamCommand extends Command {
     private final Controller controller;
@@ -11,10 +13,12 @@ public class AddToTeamCommand extends Command {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws DifferingTypeException{
         String playerName = this.getArgument(0);
         String teamName = this.getArgument(1);
 
         this.controller.addToTeam(playerName, teamName);
+
+        Message.PLAYER_ADDED_TO_TEAM.writeln(playerName, teamName);
     }
 }

@@ -10,6 +10,9 @@ public enum Message {
     MATCHES_RANDOMIZED("Emparejamiento aleatorio realizado con éxito."),
     PLAYER_ADDED("Jugador añadido con éxito."),
     PLAYER_REMOVED("Jugador eliminado con éxito."),
+    TEAM_ADDED("Equipo añadido con éxito"),
+    TEAM_REMOVED("Equipo eliminado con éxito"),
+    PLAYER_ADDED_TO_TEAM("Jugador #player añadido al equipo #team con éxito"),
     PLAYERS_MATCHED("Los jugadores #firstplayer y #secondplayer han sido emparejados correctamente."),
     NO_MATCHES("No hay emparejamientos"),
     NO_PLAYERS("No hay jugadores"),
@@ -73,10 +76,10 @@ public enum Message {
         System.out.printf(this.message, playerName, score);
     }
 
-    public void writeln(String firstPlayerName, String secondPlayerName) {
-        assert this == Message.PLAYERS_MATCHED;
+    public void writeln(String player, String team) {
+        assert this == Message.PLAYER_ADDED_TO_TEAM;
 
-        System.out.println(this.message.replaceAll("#firstplayer", firstPlayerName).replaceAll("#secondplayer", secondPlayerName));
+        System.out.println(this.message.replaceAll("#player", player).replaceAll("#team", team));
     }
 
     @Override
