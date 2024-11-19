@@ -96,15 +96,19 @@ public class Controller {
         }
     }
 
-    public void removeFromTeam(String teamName, String playerName) {
+    public void removeFromTeam(String teamName, String playerName) throws DifferingTypeException {
         Participant team = this.participantList.getByName(teamName);
         Participant player = this.participantList.getByName(playerName);
 
-        // FIXME: get rid of instanceof (somehow) ?
-        if (team instanceof Team && player instanceof Player) {
-            ((Team) team).remove(player);
+        if (player.getChildren().isEmpty() && !team.getChildren().isEmpty()) {
+            boolean removed = ((Team) team).remove(player);
+            assert removed;
         } else {
-            // TODO: add exceptions
+            if (!player.getChildren().isEmpty()) {
+                throw new DifferingPlayerException(playerName);
+            } else if (team.getChildren().isEmpty()) {
+                throw new DifferingTeamException(teamName);
+            }
         }
     }
 
