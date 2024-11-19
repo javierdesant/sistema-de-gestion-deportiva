@@ -34,14 +34,6 @@ public class Controller {
         this.user = null;
     }
 
-    private void register(User user) throws DuplicateElementException {
-        if (this.userList.contains(user)) {
-            throw new DuplicateUserException(user.getUsername());
-        }
-
-        this.userList.add(user);
-    }
-
     public User getUser() {
         return this.user;
     }
@@ -51,7 +43,7 @@ public class Controller {
         Player player = new Player(username, password, firstName, lastName, dni, this.user);
 
         this.participantList.add(player);
-        this.register(player);
+        this.userList.add(player);
     }
 
     public void createTeam(String teamName) throws DuplicateElementException {
