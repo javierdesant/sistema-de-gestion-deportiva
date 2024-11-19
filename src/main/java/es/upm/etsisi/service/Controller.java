@@ -46,7 +46,8 @@ public class Controller {
         return this.user;
     }
 
-    public void createPlayer(String username, String password, String firstName, String lastName, DNI dni) throws DuplicateElementException {
+    public void createPlayer(String username, String password, String firstName, String lastName, DNI dni)
+            throws DuplicateElementException {
         Player player = new Player(username, password, firstName, lastName, dni, this.user);
 
         this.participantList.add(player);
@@ -72,19 +73,25 @@ public class Controller {
         if (participant == null) {
             throw new ElementNotFoundException(name);
         }
-        // TODO: if player remove also from userList
-        // TODO: check if the participant or its team
-        //  is playing in an active tournament
-        //  To do that, TournamentList has to be iterable, to check every tournament
-        // TODO: on team deletion, delete players/subteams also ?
-        boolean removed = this.participantList.remove(participant);
-        assert removed;
+        if (participant.getChildren().isEmpty()) {
+            this.userList.remove(this.userList.getByUsername(name));
+        }
+        this.participantList.remove(participant);
     }
+    // TODO: check if the participant or its team
+    // is playing in an active tournament
+    // To do that, TournamentList has to be iterable, to check every tournament
+    // TODO: on team deletion, delete players/subteams also
 
-    public void addToTeam(String playerName, String teamName) throws DifferingTypeException {
+    public void addToTeam(String playerName, String teamName) throws ElementNotFoundException, DifferingTypeException {
         Participant player = this.participantList.getByName(playerName);
         Participant team = this.participantList.getByName(teamName);
 
+        if (player == null) {
+            throw new ElementNotFoundException(playerName);
+        } else if (team == null) {
+            throw new ElementNotFoundException(teamName);
+        }
         if (player.getChildren().isEmpty() && !team.getChildren().isEmpty()) {
             ((Team) team).add(player);
         } else {
@@ -96,24 +103,31 @@ public class Controller {
         }
     }
 
-    public void removeFromTeam(String teamName, String playerName) {
+    public void removeFromTeam(String teamName, String playerName) throws ElementNotFoundException, DifferingTypeException{
         Participant team = this.participantList.getByName(teamName);
         Participant player = this.participantList.getByName(playerName);
 
-        // FIXME: get rid of instanceof (somehow) ?
-        if (team instanceof Team && player instanceof Player) {
+        if (player == null) {
+            throw new ElementNotFoundException(playerName);
+        } else if (team == null) {
+            throw new ElementNotFoundException(teamName);
+        }
+        if (player.getChildren().isEmpty() && !team.getChildren().isEmpty()) {
             ((Team) team).remove(player);
         } else {
-            // TODO: add exceptions
-        }
+            if (!player.getChildren().isEmpty()) {
+                throw new DifferingPlayerException(playerName);
+            } else if (team.getChildren().isEmpty()) {
+                throw new DifferingTeamException(teamName);
+            }
     }
 
     public void createTournament(String tournamentName,
-                                 LocalDate startDate,
-                                 LocalDate endDate,
-                                 Sport sport,
-                                 League league,
-                                 Category category) throws DuplicateElementException {
+            LocalDate startDate,
+            LocalDate endDate,
+            Sport sport,
+            League league,
+            Category category) throws DuplicateElementException {
 
         Tournament tournament = new Tournament(tournamentName, startDate, endDate, sport, league, category);
         this.tournamentList.add(tournament);
