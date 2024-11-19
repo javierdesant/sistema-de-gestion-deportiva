@@ -46,7 +46,8 @@ public class Controller {
         return this.user;
     }
 
-    public void createPlayer(String username, String password, String firstName, String lastName, DNI dni) throws DuplicateElementException {
+    public void createPlayer(String username, String password, String firstName, String lastName, DNI dni)
+            throws DuplicateElementException {
         Player player = new Player(username, password, firstName, lastName, dni, this.user);
 
         this.participantList.add(player);
@@ -72,18 +73,28 @@ public class Controller {
         if (participant == null) {
             throw new ElementNotFoundException(name);
         }
-        // TODO: if player remove also from userList
+
         // TODO: check if the participant or its team
         //  is playing in an active tournament
         //  To do that, TournamentList has to be iterable, to check every tournament
         // TODO: on team deletion, delete players/subteams also ?
+
+        if (participant.getChildren().isEmpty()) {
+            this.userList.remove(this.userList.getByUsername(name));
+        }
         boolean removed = this.participantList.remove(participant);
         assert removed;
     }
 
-    public void addToTeam(String playerName, String teamName) throws DifferingTypeException, DuplicateElementException {
+    public void addToTeam(String playerName, String teamName) throws ListException, DifferingTypeException {
         Participant player = this.participantList.getByName(playerName);
         Participant team = this.participantList.getByName(teamName);
+
+        if (player == null) {
+            throw new ElementNotFoundException(playerName);
+        } else if (team == null) {
+            throw new ElementNotFoundException(teamName);
+        }
 
         if (player.getChildren().isEmpty() && !team.getChildren().isEmpty()) {
             ((Team) team).add(player);
@@ -96,9 +107,16 @@ public class Controller {
         }
     }
 
-    public void removeFromTeam(String teamName, String playerName) throws DifferingTypeException {
+    public void removeFromTeam(String teamName, String playerName)
+            throws ElementNotFoundException, DifferingTypeException {
         Participant team = this.participantList.getByName(teamName);
         Participant player = this.participantList.getByName(playerName);
+
+        if (player == null) {
+            throw new ElementNotFoundException(playerName);
+        } else if (team == null) {
+            throw new ElementNotFoundException(teamName);
+        }
 
         if (player.getChildren().isEmpty() && !team.getChildren().isEmpty()) {
             boolean removed = ((Team) team).remove(player);

@@ -41,7 +41,7 @@ public abstract class List<T> {
     }
 
     public void add(T element) throws DuplicateElementException {
-        if (!this.contains(element)) {
+        if (this.contains(element)) {
             throw new DuplicateElementException(element.toString());
         }
         this.elements.add(element);

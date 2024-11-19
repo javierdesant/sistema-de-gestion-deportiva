@@ -13,6 +13,7 @@ public enum Message {
     TEAM_ADDED("Equipo añadido con éxito"),
     TEAM_REMOVED("Equipo eliminado con éxito"),
     PLAYER_ADDED_TO_TEAM("Jugador #player añadido al equipo #team con éxito"),
+    PLAYER_REMOVED_FROM_TEAM("Jugador #player borrado del equipo #team con éxito"),
     PLAYERS_MATCHED("Los jugadores #firstplayer y #secondplayer han sido emparejados correctamente."),
     NO_MATCHES("No hay emparejamientos"),
     NO_PLAYERS("No hay jugadores"),
