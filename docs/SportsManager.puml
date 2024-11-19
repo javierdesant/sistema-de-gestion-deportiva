@@ -123,8 +123,7 @@ package models {
         + containsAll(Collection<T> elements): boolean
         + clear()
         + remove(T element)
-        # addElement(T element)
-        + {abstract} add(T element)
+        + add(T element)
     }
 
     class UserList extends List {
