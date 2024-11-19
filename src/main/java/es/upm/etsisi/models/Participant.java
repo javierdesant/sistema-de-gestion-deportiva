@@ -1,7 +1,5 @@
 package es.upm.etsisi.models;
 
-import java.util.ArrayList;
-
 public interface Participant {
     String getName();
 
@@ -9,5 +7,5 @@ public interface Participant {
 
     void setStats(Statistics stats);
 
-    ArrayList<Participant> getChildren();
+    ParticipantList getChildren();
 }

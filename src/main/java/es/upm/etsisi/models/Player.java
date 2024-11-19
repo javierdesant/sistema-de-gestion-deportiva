@@ -58,8 +58,8 @@ public class Player extends User implements Participant {
     }
 
     @Override
-    public ArrayList<Participant> getChildren() {
-        return new ArrayList<>();
+    public ParticipantList getChildren() {
+        return new ParticipantList();
     }
 
     @Override
