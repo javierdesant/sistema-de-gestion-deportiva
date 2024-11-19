@@ -1,7 +1,6 @@
 package es.upm.etsisi.commands;
 
 import es.upm.etsisi.exceptions.DuplicateElementException;
-import es.upm.etsisi.exceptions.DuplicateTeamException;
 import es.upm.etsisi.service.Controller;
 import es.upm.etsisi.utils.Message;
 
@@ -19,12 +18,7 @@ public class CreateTeamCommand extends Command {
 
         assert teamName.matches("[a-zA-Z]+") : Message.INVALID_NAME;
 
-        try {
-            this.controller.createTeam(teamName);
-        } catch (DuplicateTeamException exception) {
-            exception.toString();
-            exception.printStackTrace();
-        }
+        this.controller.createTeam(teamName);
 
         Message.TEAM_ADDED.writeln();
     }

@@ -1,7 +1,6 @@
 package es.upm.etsisi.commands;
 
 import es.upm.etsisi.exceptions.DuplicateElementException;
-import es.upm.etsisi.exceptions.DuplicatePlayerException;
 import es.upm.etsisi.service.Controller;
 import es.upm.etsisi.utils.DNI;
 import es.upm.etsisi.utils.Message;
@@ -24,12 +23,7 @@ public class CreatePlayerCommand extends Command {
         
         assert playerName.matches("[a-zA-Z]+") : Message.INVALID_NAME;
 
-        try {
-            this.controller.createPlayer(username, password, playerLastName, playerLastName, dni);
-        } catch (DuplicatePlayerException exception) {
-            exception.toString();
-            exception.printStackTrace();
-        }
+        this.controller.createPlayer(username, password, playerLastName, playerLastName, dni);
 
         Message.PLAYER_ADDED.writeln();
     }

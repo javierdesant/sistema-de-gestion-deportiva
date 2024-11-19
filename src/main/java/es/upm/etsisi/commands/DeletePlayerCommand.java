@@ -2,6 +2,7 @@ package es.upm.etsisi.commands;
 
 import es.upm.etsisi.exceptions.NonExistElement;
 import es.upm.etsisi.service.Controller;
+import es.upm.etsisi.utils.Message;
 
 public class DeletePlayerCommand extends Command {
     private final Controller controller;
@@ -15,11 +16,8 @@ public class DeletePlayerCommand extends Command {
     public void execute() throws NonExistElement {
         String playerName = this.getArgument(0);
 
-        try {
-            this.controller.deleteParticipant(playerName);
-        } catch (NonExistElement exception) {
-            exception.toString();
-            exception.printStackTrace();
-        }
+        this.controller.deleteParticipant(playerName);
+
+        Message.PLAYER_REMOVED.writeln();
     }
 }
