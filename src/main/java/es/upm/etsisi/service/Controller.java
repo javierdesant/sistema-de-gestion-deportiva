@@ -54,7 +54,7 @@ public class Controller {
         return this.user;
     }
 
-    public void createPlayer(String username, String password, String firstName, String lastName, DNI dni, String playerName) throws DuplicateElementException {
+    public void createPlayer(String username, String password, String firstName, String lastName, DNI dni) throws DuplicateElementException {
         Player player = new Player(username, password, firstName, lastName, dni, this.user);
 
         this.participantList.add(player);
