@@ -105,10 +105,10 @@ package models {
     }
 
     class Match {
-        - HashSet<Participant> participants
+        - ParticipantList participants
         + Match(ParticipantList participantList, Collection<Participant> participants)
         + Match(ParticipantList participantList, Participant... participants)
-        + getParticipants(): HashSet<Participant>
+        + getParticipants(): ParticipantList
         + contains(Participant participant): boolean
         + contains(String entityName): boolean
         + equals(Object object): boolean
@@ -156,15 +156,15 @@ package models {
         + remove(Tournament tournament)
     }
 
-    User "1" --> "1" Role
-    Player "1" --> "1" Statistics
-    Team "1" o--> "0..*" Participant
-    Match "0..1" *--> "2..*" Participant
-    Tournament "1" *--> "0..1" MatchList
+    User --> Role
+    Player --> Statistics
+    Team "0..1" o--> "1..*" Participant
+    Match *--> ParticipantList
+    Tournament *--> MatchList
     Statistics "1" ..> "0..*" Category
-    Tournament "1" --> "1" Category
-    Tournament "1" --> "1" League
-    Tournament "1" --> "1" Sport
+    Tournament --> Category
+    Tournament --> League
+    Tournament --> Sport
     TournamentList "1" o--> "0..*" Tournament
     ParticipantList "1" o--> "0..*" Participant
     MatchList "1" o--> "0..*" Match
@@ -254,7 +254,7 @@ Command <|-- ShowMatchCommand
 
 }
 
-'TODO: add utils package
+'TODO: add utils package ?
 
 CLI "1..*" *--> "0..*" Command
 Command ..> Controller
