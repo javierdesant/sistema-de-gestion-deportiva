@@ -25,6 +25,13 @@ package models {
         PLAYER
     }
 
+    class DNI {
+        - String dni
+        + getValue(): String
+        + {static} isValidDNI(dni): boolean
+        + toString(): String
+    }
+
     class Player extends User implements Participant {
         - String firstName
         - String lastName
@@ -158,6 +165,7 @@ package models {
 
     User --> Role
     Player --> Statistics
+    Player --> DNI
     Team "0..1" o--> "1..*" Participant
     Match *--> ParticipantList
     Tournament *--> MatchList
@@ -256,7 +264,7 @@ Command <|-- ShowMatchCommand
 
 'TODO: add utils package ?
 
-CLI "1..*" *--> "0..*" Command
+CLI "1..*" o--> "0..*" Command
 Command ..> Controller
 Controller ..> models
 
