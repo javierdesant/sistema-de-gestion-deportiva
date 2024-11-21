@@ -238,7 +238,7 @@ package commands {
         + getArgument(int index): String
         + validate(String input)
         + isCalled(String input): boolean
-        + {abstract} execute()
+        + {abstract} execute(Controller controller)
     }
 
 'TODO: fill up commands attributes and methods
