@@ -124,31 +124,28 @@ public class Controller {
         return participant != null && !participant.hasChildren();
     }
 
-    public void removeFromTeam(String teamName, String playerName)
-            throws ElementNotFoundException, DifferingTypeException {
-        Participant team = this.participantList.getByName(teamName);
     private boolean isValidTeam(Participant participant) {
         return participant != null && participant.hasChildren();
     }
 
+    public Error removeFromTeam(String teamName, String playerName) {
+        Error error;
+
         Participant player = this.participantList.getByName(playerName);
+        Participant team = this.participantList.getByName(teamName);
 
-        if (player == null) {
-            throw new ElementNotFoundException(playerName);
-        } else if (team == null) {
-            throw new ElementNotFoundException(teamName);
-        }
-
-        if (player.getChildren().isEmpty() && !team.getChildren().isEmpty()) {
-            boolean removed = ((Team) team).remove(player);
-            assert removed;
-        } else {
-            if (!player.getChildren().isEmpty()) {
-                throw new DifferingPlayerException(playerName);
-            } else if (team.getChildren().isEmpty()) {
-                throw new DifferingTeamException(teamName);
+        if (isValidPlayer(player) && isValidTeam(team)) {
+            boolean removed = ((Team) team).remove((Player) player);
+            if (removed) {
+                error = null;
+            } else {
+                error = Error.PLAYER_NOT_IN_TEAM;
             }
+        } else {
+            error = Error.ELEMENT_NOT_FOUND;
         }
+
+        return error;
     }
 
     public void createTournament(String tournamentName,
