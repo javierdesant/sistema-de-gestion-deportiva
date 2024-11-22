@@ -10,6 +10,10 @@ public class MatchList extends List<Match> {
         super();
     }
 
+    public MatchList(MatchList matchList) {
+        super(matchList);
+    }
+
     @Override
     public Error add(Match match) {
         Error error;
