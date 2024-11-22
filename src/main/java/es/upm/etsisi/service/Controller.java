@@ -100,25 +100,21 @@ public class Controller {
         assert removed;
     }
 
-    public void addToTeam(String playerName, String teamName) throws ListException, DifferingTypeException {
+    public Error addToTeam(String playerName, String teamName) {
+        Error error;
+
         Participant player = this.participantList.getByName(playerName);
         Participant team = this.participantList.getByName(teamName);
 
-        if (player == null) {
-            throw new ElementNotFoundException(playerName);
-        } else if (team == null) {
-            throw new ElementNotFoundException(teamName);
+        if (isValidPlayer(player) && isValidTeam(team)) {
+            error = ((Team) team).add((Player) player);
+        } else if (!isValidPlayer(player)) {
+            error = Error.PLAYER_NOT_FOUND;
+        } else {
+            error = Error.TEAM_NOT_FOUND;
         }
 
-        if (player.getChildren().isEmpty() && !team.getChildren().isEmpty()) {
-            ((Team) team).add(player);
-        } else {
-            if (!player.getChildren().isEmpty()) {
-                throw new DifferingPlayerException(playerName);
-            } else if (team.getChildren().isEmpty()) {
-                throw new DifferingTeamException(teamName);
-            }
-        }
+        return error;
     }
 
     private boolean isValidPlayer(Participant participant) {
