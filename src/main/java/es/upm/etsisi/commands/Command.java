@@ -1,7 +1,6 @@
 package es.upm.etsisi.commands;
 
-import es.upm.etsisi.exceptions.DifferingTypeException;
-import es.upm.etsisi.exceptions.ListException;
+import es.upm.etsisi.service.Error;
 import es.upm.etsisi.utils.Message;
 
 public abstract class Command {
@@ -44,5 +43,5 @@ public abstract class Command {
         return name.equals(this.name);
     }
 
-    public abstract void execute() throws ListException, DifferingTypeException;
+    public abstract Error execute();
 }
