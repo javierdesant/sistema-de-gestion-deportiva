@@ -43,12 +43,18 @@ public class Controller {
         return this.user;
     }
 
-    public void createPlayer(String username, String password, String firstName, String lastName, DNI dni)
-            throws DuplicateElementException {
+    public Error createPlayer(String username, String password, String firstName, String lastName, DNI dni) {
+        Error error;
+
         Player player = new Player(username, password, firstName, lastName, dni, this.user);
 
-        this.participantList.add(player);
-        this.userList.add(player);
+        error = this.participantList.add(player);
+        if (error == null) {
+            error = this.userList.add(player);
+            assert error == null;
+        }
+
+        return error;
     }
 
     public void createTeam(String teamName) throws DuplicateElementException {
