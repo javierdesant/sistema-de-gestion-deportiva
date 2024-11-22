@@ -76,21 +76,23 @@ public class CLI {
     }
 
     public void run() {
+        Error error;
+
         if (!this.sportsManager.isOpen()) {
             this.sportsManager.open();
         }
+
         do {
             Command command = this.readCommand();
 
             if (command != null) {
-                try {
-                    command.execute();
-                } catch (AssertionError error) { // FIXME
-                    System.out.println("Error: " + error.getMessage());
-                } catch (Exception exception) {
-                    exception.toString();
-                    exception.printStackTrace();
-                }
+                error = command.execute();
+            } else {
+                error = Error.INVALID_COMMAND;
+            }
+
+            if (error != null) {
+                new ErrorView(error).writeln();
             }
         } while (this.sportsManager.isOpen());
     }
@@ -112,10 +114,6 @@ public class CLI {
                 command.validate(input);
                 res = command;
             }
-        }
-
-        if (res == null) {
-            Message.INVALID_COMMAND.writeln();
         }
 
         return res;
