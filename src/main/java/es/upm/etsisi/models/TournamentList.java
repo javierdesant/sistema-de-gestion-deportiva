@@ -22,7 +22,7 @@ public class TournamentList extends List<Tournament> {
     public Tournament find(String name) {
         Tournament res = null;
 
-        Iterator<Tournament> iterator = this.getElements().iterator();
+        Iterator<Tournament> iterator = this.iterator();
         while (iterator.hasNext() && res == null) {
             Tournament next = iterator.next();
             if (name.equals(next.getName())) {
