@@ -18,15 +18,21 @@ public class Controller {
         this.tournamentList = new TournamentList();
     }
 
-    public boolean login(String username, String password) {
+    public Error login(String username, String password) {
+        Error error;
+
         User user = this.userList.getByUsername(username);
 
         if (user != null && user.validate(password)) {
             this.user = user;
-            return true;
+            error = null;
+        } else if (user == null) {
+            error = Error.USER_NOT_FOUND;
         } else {
-            return false;
+            error = Error.WRONG_PASSWORD;
         }
+
+        return error;
     }
 
     public void logout() {
