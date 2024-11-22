@@ -8,11 +8,9 @@ import java.util.Iterator;
 public class Match {
     private final HashSet<Participant> participants;
 
-    public Match(ParticipantList participantList, Collection<Participant> participants) {
-        assert participantList != null;
+    public Match(Collection<Participant> participants) {
         assert participants != null;
         assert participants.size() > 1;
-        assert participantList.containsAll(participants);
 
         HashSet<Participant> participantSet = new HashSet<>(participants);
         assert participantSet.size() == participants.size();
@@ -20,8 +18,8 @@ public class Match {
         this.participants = participantSet;
     }
 
-    public Match(ParticipantList participantList, Participant... participants) {
-        this(participantList, Arrays.asList(participants));
+    public Match(Participant... participants) {
+        this(Arrays.asList(participants));
     }
 
     public HashSet<Participant> getParticipants() {
