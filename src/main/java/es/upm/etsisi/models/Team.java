@@ -1,6 +1,6 @@
 package es.upm.etsisi.models;
 
-import es.upm.etsisi.exceptions.DuplicateElementException;
+import es.upm.etsisi.service.Error;
 
 import java.util.LinkedList;
 
@@ -21,8 +21,8 @@ public class Team implements Participant {
         this(name, new Statistics(), adminName);
     }
 
-    public void add(Participant participant) throws DuplicateElementException {
-        this.children.add(participant);
+    public Error add(Participant participant) {
+        return this.children.add(participant);
     }
 
     public boolean remove(Participant participant) {
