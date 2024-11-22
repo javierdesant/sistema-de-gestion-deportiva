@@ -32,4 +32,16 @@ public class TournamentList extends List<Tournament> {
 
         return res;
     }
+
+    public boolean isPlaying(Participant participant) {
+        boolean res = false;
+
+        Iterator<Tournament> iterator = this.iterator();
+        while (iterator.hasNext() && !res) {
+            Tournament next = iterator.next();
+            res = next.contains(participant) && next.isActive();
+        }
+
+        return res;
+    }
 }
