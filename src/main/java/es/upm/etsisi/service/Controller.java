@@ -148,15 +148,15 @@ public class Controller {
         return error;
     }
 
-    public void createTournament(String tournamentName,
-                                 LocalDate startDate,
-                                 LocalDate endDate,
-                                 Sport sport,
-                                 League league,
-                                 Category category) throws DuplicateElementException {
+    public Error createTournament(String tournamentName,
+                                  LocalDate startDate,
+                                  LocalDate endDate,
+                                  Sport sport,
+                                  League league,
+                                  Category category) {
 
         Tournament tournament = new Tournament(tournamentName, startDate, endDate, sport, league, category);
-        this.tournamentList.add(tournament);
+        return this.tournamentList.add(tournament);
     }
 
     public void deleteTournament(String tournamentName) throws ElementNotFoundException {
