@@ -32,12 +32,12 @@ public class Match {
         return this.participants.contains(participant);
     }
 
-    public boolean contains(String entityName) {
+    public boolean contains(String name) {
         boolean found = false;
 
         Iterator<Participant> iterator = this.participants.iterator();
         while (iterator.hasNext() && !found) {
-            found = entityName.equals(iterator.next().getName());
+            found = name.equals(iterator.next().getName());
         }
 
         return found;
