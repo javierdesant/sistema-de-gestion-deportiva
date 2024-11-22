@@ -9,19 +9,15 @@ public class Match {
     private final HashSet<Participant> participants;
 
     public Match(ParticipantList participantList, Collection<Participant> participants) {
+        assert participantList != null;
         assert participants != null;
         assert participants.size() > 1;
-
-        if (!participantList.containsAll(participants)) {
-            throw new IllegalArgumentException("El participante no existe en la lista.");
-        }
+        assert participantList.containsAll(participants);
 
         HashSet<Participant> participantSet = new HashSet<>(participants);
-        if (participantSet.size() == participants.size()) {
-            this.participants = participantSet;
-        } else {
-            throw new IllegalArgumentException("La lista de participantes contiene duplicados.");
-        }
+        assert participantSet.size() == participants.size();
+
+        this.participants = participantSet;
     }
 
     public Match(ParticipantList participantList, Participant... participants) {
