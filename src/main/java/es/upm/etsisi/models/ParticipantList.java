@@ -33,7 +33,7 @@ public class ParticipantList extends List<Participant> {
     public Participant find(String name) {
         Participant res = null;
 
-        Iterator<Participant> iterator = this.getElements().iterator();
+        Iterator<Participant> iterator = this.iterator();
         while (iterator.hasNext() && res == null) {
             Participant participant = iterator.next();
             if (participant.getName().equals(name)) {
