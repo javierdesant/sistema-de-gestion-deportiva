@@ -120,9 +120,17 @@ public class Controller {
         }
     }
 
+    private boolean isValidPlayer(Participant participant) {
+        return participant != null && !participant.hasChildren();
+    }
+
     public void removeFromTeam(String teamName, String playerName)
             throws ElementNotFoundException, DifferingTypeException {
         Participant team = this.participantList.getByName(teamName);
+    private boolean isValidTeam(Participant participant) {
+        return participant != null && participant.hasChildren();
+    }
+
         Participant player = this.participantList.getByName(playerName);
 
         if (player == null) {
