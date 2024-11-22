@@ -3,6 +3,7 @@ package es.upm.etsisi.models;
 import es.upm.etsisi.service.Error;
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 public abstract class List<T> {
@@ -22,6 +23,10 @@ public abstract class List<T> {
 
     public LinkedList<T> getElements() {
         return new LinkedList<>(this.elements);
+    }
+
+    public Iterator<T> iterator() {
+        return new LinkedList<>(this.elements).iterator();
     }
 
     public boolean isEmpty() {
