@@ -63,6 +63,11 @@ public class Player extends User implements Participant {
     }
 
     @Override
+    public boolean hasChildren() {
+        return false;
+    }
+
+    @Override
     public String toString() {
         return this.getName();
     }

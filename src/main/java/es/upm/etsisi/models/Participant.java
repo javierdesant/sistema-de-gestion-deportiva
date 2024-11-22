@@ -8,4 +8,6 @@ public interface Participant {
     void setStats(Statistics stats);
 
     ParticipantList getChildren();
+
+    boolean hasChildren();
 }

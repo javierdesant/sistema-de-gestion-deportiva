@@ -65,6 +65,11 @@ public class Team implements Participant {
     }
 
     @Override
+    public boolean hasChildren() {
+        return !this.children.isEmpty();
+    }
+
+    @Override
     public String toString() {
         return this.getName();
     }
