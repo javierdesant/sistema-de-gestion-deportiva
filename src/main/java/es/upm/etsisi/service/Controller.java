@@ -61,7 +61,7 @@ public class Controller {
     public Error createTeam(String teamName, String playerName) {
         Error error;
 
-        Participant player = this.participantList.getByName(playerName);
+        Participant player = this.participantList.find(playerName);
 
         if (this.isValidPlayer(player)) {
             assert this.user.getRole() == Role.ADMIN;
@@ -103,8 +103,8 @@ public class Controller {
     public Error addToTeam(String playerName, String teamName) {
         Error error;
 
-        Participant player = this.participantList.getByName(playerName);
-        Participant team = this.participantList.getByName(teamName);
+        Participant player = this.participantList.find(playerName);
+        Participant team = this.participantList.find(teamName);
 
         if (isValidPlayer(player) && isValidTeam(team)) {
             error = ((Team) team).add((Player) player);
@@ -128,8 +128,8 @@ public class Controller {
     public Error removeFromTeam(String teamName, String playerName) {
         Error error;
 
-        Participant player = this.participantList.getByName(playerName);
-        Participant team = this.participantList.getByName(teamName);
+        Participant player = this.participantList.find(playerName);
+        Participant team = this.participantList.find(teamName);
 
         if (isValidPlayer(player) && isValidTeam(team)) {
             boolean removed = ((Team) team).remove((Player) player);

@@ -11,7 +11,7 @@ public class ParticipantList extends List<Participant> {
         super(participants);
     }
 
-    public Participant getByName(String name) {
+    public Participant find(String name) {
         Participant res = null;
 
         Iterator<Participant> iterator = this.getElements().iterator();

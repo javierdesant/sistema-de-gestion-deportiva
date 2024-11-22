@@ -19,7 +19,7 @@ public class TournamentList extends List<Tournament> {
         return error;
     }
 
-    public Tournament getByName(String name) {
+    public Tournament find(String name) {
         Tournament res = null;
 
         Iterator<Tournament> iterator = this.getElements().iterator();
