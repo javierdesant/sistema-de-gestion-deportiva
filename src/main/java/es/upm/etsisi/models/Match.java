@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 public class Match {
-    private final HashSet<Participant> participants;
+    private final ParticipantList participants;
 
     public Match(Collection<Participant> participants) {
         assert participants != null;
@@ -15,15 +15,15 @@ public class Match {
         HashSet<Participant> participantSet = new HashSet<>(participants);
         assert participantSet.size() == participants.size();
 
-        this.participants = participantSet;
+        this.participants = new ParticipantList(participants);
     }
 
     public Match(Participant... participants) {
         this(Arrays.asList(participants));
     }
 
-    public HashSet<Participant> getParticipants() {
-        return new HashSet<>(this.participants);
+    public ParticipantList getParticipants() {
+        return new ParticipantList(this.participants);
     }
 
     public boolean contains(Participant participant) {
@@ -44,7 +44,7 @@ public class Match {
 
     @Override
     public String toString() {
-        Iterator<Participant> iterator = this.getParticipants().iterator();
+        Iterator<Participant> iterator = this.participants.iterator();
 
         StringBuilder res = new StringBuilder(iterator.next().getName());
         do {

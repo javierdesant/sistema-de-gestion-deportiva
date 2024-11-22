@@ -45,7 +45,7 @@ public class MatchList extends List<Match> {
 
     public void remove(String name) {
         for (Match match : this.getElements()) {
-            for (Participant participant : match.getParticipants()) {
+            for (Participant participant : match.getParticipants().getElements()) {
                 if (participant.getName().equals(name))
                     this.remove(match);
             }
@@ -53,9 +53,13 @@ public class MatchList extends List<Match> {
     }
 
     public boolean contains(Participant participant) {
-        if (participant == null) {
-            return false;
+        boolean found = false;
+
+        Iterator<Match> iterator = this.iterator();
+        while (iterator.hasNext() && !found) {
+            found = iterator.next().contains(participant);
         }
-        return this.contains(participant.getName());
+
+        return found;
     }
 }
