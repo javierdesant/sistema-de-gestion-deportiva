@@ -36,6 +36,7 @@ public class Controller {
     }
 
     public void logout() {
+        assert this.user != null;
         this.user = null;
     }
 
