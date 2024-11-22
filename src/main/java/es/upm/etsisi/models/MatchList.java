@@ -64,6 +64,9 @@ public class MatchList extends List<Match> {
     }
 
     public boolean contains(Participant participant) {
+        if (participant == null) {
+            return false;
+        }
         return this.contains(participant.getName());
     }
 }
