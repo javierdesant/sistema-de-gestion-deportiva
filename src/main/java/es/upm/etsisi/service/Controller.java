@@ -156,16 +156,20 @@ public class Controller {
         return this.tournamentList.add(tournament);
     }
 
-    public void deleteTournament(String tournamentName) throws ElementNotFoundException {
-        Tournament tournament = this.tournamentList.getByName(tournamentName);
+    public Error deleteTournament(String tournamentName) {
+        Error error;
 
-        if (tournament == null) {
-            throw new ElementNotFoundException(tournamentName);
+        Tournament tournament = this.tournamentList.find(tournamentName);
+
+        if (tournament != null) {
+            boolean removed = this.tournamentList.remove(tournament);
+            assert removed;
+            error = null;
+        } else {
+            error = Error.TOURNAMENT_NOT_FOUND;
         }
 
-        boolean removed = this.tournamentList.remove(tournament);
-        assert removed;
-        // TODO: handle possibles bugs with teams and players of the removed tournament
+        return error;
     }
 
     public void tournamentMatchmake(String tournamentName, String... playerNames) {
