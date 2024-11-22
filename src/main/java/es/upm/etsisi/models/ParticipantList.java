@@ -1,5 +1,6 @@
 package es.upm.etsisi.models;
 
+import java.util.Collection;
 import java.util.Iterator;
 
 public class ParticipantList extends List<Participant> {
@@ -8,6 +9,10 @@ public class ParticipantList extends List<Participant> {
     }
 
     public ParticipantList(ParticipantList participants) {
+        super(participants);
+    }
+
+    public ParticipantList(Collection<Participant> participants) {
         super(participants);
     }
 
