@@ -18,6 +18,7 @@ public class ErrorView {
         MESSAGES.put(Error.PLAYER_NOT_IN_TEAM, "El jugador no pertenece al equipo");
         MESSAGES.put(Error.USER_NOT_FOUND, "El usuario no existe");
         MESSAGES.put(Error.PLAYER_NOT_FOUND, "Jugador no encontrado");
+        MESSAGES.put(Error.TEAM_NOT_FOUND, "Equipo no encontrado");
         MESSAGES.put(Error.WRONG_PASSWORD, "Contraseña incorrecta");
         MESSAGES.put(Error.PLAYER_IN_GAME_ERROR, "El jugador se encuentra en un torneo activo");
         MESSAGES.put(Error.INVALID_COMMAND, "Comando no válido");
