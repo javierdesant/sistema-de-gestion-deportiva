@@ -39,7 +39,7 @@ public class Tournament {
     }
 
     public MatchList getMatches() {
-        return this.matchList;
+        return new MatchList(this.matchList);
     }
 
     public Sport getSport() {
