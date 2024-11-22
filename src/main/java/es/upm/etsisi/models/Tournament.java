@@ -64,6 +64,10 @@ public class Tournament {
         return this.startDate.isBefore(now) && this.endDate.isAfter(now);
     }
 
+    public boolean contains(Participant participant) {
+        return this.matchList.contains(participant);
+    }
+
     @Override
     public boolean equals(Object object) {
         if (this == object) {
