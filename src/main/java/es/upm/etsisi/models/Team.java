@@ -2,31 +2,34 @@ package es.upm.etsisi.models;
 
 import es.upm.etsisi.service.Error;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 
 public class Team implements Participant {
     private final String name;
-    private final String adminName;
-    private final ParticipantList children;
-    private Statistics stats;
+    private final Administrator admin;
+    private final HashSet<Player> children;
 
-    public Team(String name, Statistics statistics, String adminName) {
+    public Team(String name, Administrator admin, Player player) {
+        assert admin.getRole() == Role.ADMIN;
+
         this.name = name;
-        this.stats = statistics;
-        this.adminName = adminName;
-        this.children = new ParticipantList();
+        this.admin = admin;
+        this.children = new HashSet<>();
+        this.children.add(player);
     }
 
-    public Team(String name, String adminName) {
-        this(name, new Statistics(), adminName);
+    public Error add(Player player) {
+        boolean added = this.children.add(player);
+
+        if (!added) {
+            return Error.PLAYER_ALREADY_IN_TEAM_ERROR;
+        }
+        return null;
     }
 
-    public Error add(Participant participant) {
-        return this.children.add(participant);
-    }
-
-    public boolean remove(Participant participant) {
-        return this.children.remove(participant);
+    public boolean remove(Player player) {
+        return this.children.remove(player);
     }
 
     @Override
@@ -37,36 +40,30 @@ public class Team implements Participant {
     @Override
     public Statistics getStats() {
         Statistics stats = new Statistics();
-        LinkedList<Participant> children = this.children.getElements();
 
         for (Category category : Category.values()) {
             double product = 1.0;
 
-            for (Participant child : children) {
+            for (Player child : this.children) {
                 product *= child.getStats().get(category);
             }
 
-            double geometricMean = Math.pow(product, 1.0 / children.size());
+            double geometricMean = Math.pow(product, 1.0 / this.children.size());
             stats.setStatistic(category, geometricMean);
         }
 
-        this.setStats(stats);
-        return this.stats;
+        return stats;
     }
 
     @Override
-    public void setStats(Statistics stats) {
-        this.stats = stats;
-    }
-
-    @Override
-    public ParticipantList getChildren() {
-        return new ParticipantList(this.children);
+    public LinkedList<Player> getChildren() {
+        return new LinkedList<>(this.children);
     }
 
     @Override
     public boolean hasChildren() {
-        return !this.children.isEmpty();
+        assert !this.children.isEmpty();
+        return true;
     }
 
     @Override

@@ -2,7 +2,7 @@ package es.upm.etsisi.models;
 
 import es.upm.etsisi.utils.DNI;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Player extends User implements Participant {
     private final String firstName;
@@ -52,14 +52,13 @@ public class Player extends User implements Participant {
         return this.stats;
     }
 
-    @Override
     public void setStats(Statistics stats) {
         this.stats = stats;
     }
 
     @Override
-    public ParticipantList getChildren() {
-        return new ParticipantList();
+    public LinkedList<Player> getChildren() {
+        return new LinkedList<>();
     }
 
     @Override

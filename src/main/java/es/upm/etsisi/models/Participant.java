@@ -1,13 +1,13 @@
 package es.upm.etsisi.models;
 
+import java.util.LinkedList;
+
 public interface Participant {
     String getName();
 
     Statistics getStats();
 
-    void setStats(Statistics stats);
-
-    ParticipantList getChildren();
+    LinkedList<Player> getChildren();
 
     boolean hasChildren();
 }
