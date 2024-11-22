@@ -57,10 +57,20 @@ public class Controller {
         return error;
     }
 
-    public void createTeam(String teamName) throws DuplicateElementException {
-        Team team = new Team(teamName, new Statistics(), this.user.getUsername());
+    public Error createTeam(String teamName, String playerName) {
+        Error error;
 
-        this.participantList.add(team);
+        Participant player = this.participantList.getByName(playerName);
+
+        if (this.isValidPlayer(player)) {
+            assert this.user.getRole() == Role.ADMIN;
+            Team team = new Team(teamName, (Administrator) this.user, (Player) player);
+            error = this.participantList.add(team);
+        } else {
+            error = Error.PLAYER_NOT_FOUND;
+        }
+
+        return error;
     }
 
     public ParticipantList getParticipantList() {
