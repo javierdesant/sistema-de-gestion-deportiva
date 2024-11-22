@@ -8,7 +8,7 @@ public class Player extends User implements Participant {
     private final String firstName;
     private final String lastName;
     private final DNI dni;
-    private final String adminName;
+    private final Administrator admin;
     private Statistics stats;
 
     public Player(String username,
@@ -26,7 +26,7 @@ public class Player extends User implements Participant {
         this.lastName = lastName;
         this.dni = dni;
         this.stats = statistics;
-        this.adminName = admin.getUsername();
+        this.admin = (Administrator) admin;
     }
 
     public Player(String username,
