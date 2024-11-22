@@ -61,6 +61,11 @@ public class Team implements Participant {
     }
 
     @Override
+    public boolean contains(Player player) {
+        return this.children.contains(player);
+    }
+
+    @Override
     public boolean hasChildren() {
         assert !this.children.isEmpty();
         return true;

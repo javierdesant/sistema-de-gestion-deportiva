@@ -52,6 +52,11 @@ public class Player extends User implements Participant {
         return this.stats;
     }
 
+    @Override
+    public boolean contains(Player player) {
+        return false;
+    }
+
     public void setStats(Statistics stats) {
         this.stats = stats;
     }

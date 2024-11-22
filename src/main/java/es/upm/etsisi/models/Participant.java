@@ -10,4 +10,6 @@ public interface Participant {
     LinkedList<Player> getChildren();
 
     boolean hasChildren();
+
+    boolean contains(Player player);
 }
