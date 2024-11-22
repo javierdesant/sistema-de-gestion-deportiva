@@ -1,6 +1,6 @@
 package es.upm.etsisi.models;
 
-import es.upm.etsisi.exceptions.DuplicateElementException;
+import es.upm.etsisi.service.Error;
 
 import java.util.Iterator;
 
@@ -11,26 +11,32 @@ public class MatchList extends List<Match> {
     }
 
     @Override
-    public void add(Match match) throws DuplicateElementException {
-        Participant duplicate = null;
+    public Error add(Match match) {
+        Error error;
 
-        Iterator<Participant> iterator = match.getParticipants().iterator();
-        while (iterator.hasNext() && duplicate == null) {
-            Participant next = iterator.next();
-            if (this.contains(next)) {
-                duplicate = next;
-            }
-        }
-
-        if (duplicate == null) {
-            super.add(match);
+        if (this.canAdd(match)) {
+            error = super.add(match);
+            assert error == null;
         } else {
             if (this.contains(match)) {
-                throw new DuplicateElementException(match.toString());
+                error = Error.DUPLICATE_MATCH_ERROR;
             } else {
-                throw new DuplicateElementException(duplicate.getName());
+                error = Error.PLAYER_ALREADY_IN_MATCH_ERROR;
             }
         }
+
+        return error;
+    }
+
+    private boolean canAdd(Match match) {
+        boolean hasDuplicate = false;
+
+        Iterator<Participant> iterator = match.getParticipants().iterator();
+        while (iterator.hasNext() && !hasDuplicate) {
+            hasDuplicate = this.contains(iterator.next());
+        }
+
+        return !hasDuplicate;
     }
 
     public void remove(String name) {
