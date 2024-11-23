@@ -62,6 +62,8 @@ public class Tournament {
 
         if (participants.size() < 2) {
             error = Error.INVALID_MATCH;
+        } else if (!this.participantList.containsAll(participants)) {
+            error = Error.PARTICIPANT_NOT_ENROLLED;
         } else if (this.hasRepeatedParticipants(participants)) {
             error = Error.PARTICIPANT_ALREADY_ASSIGNED_ERROR;
         } else {
