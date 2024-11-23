@@ -195,11 +195,11 @@ public class Controller {
 
     }
 
-    public void addToTournament(String tournamentName, Player player) {
-        // TODO: we need the players to know their team
+    public void addToTournament(String tournamentName, String playerName) {
+
     }
 
-    public void removeFromTournament(String tournamentName, Player player) {
+    public void removeFromTournament(String tournamentName, String playerName) {
 
     }
 
