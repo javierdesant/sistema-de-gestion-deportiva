@@ -29,6 +29,28 @@ public class ParticipantList extends List<Participant> {
         return found;
     }
 
+    @Override
+    public boolean remove(Participant participant) {
+        boolean removed = super.remove(participant);
+        Player player = (Player) participant;
+
+        Iterator<Participant> iterator = this.iterator();
+        while (iterator.hasNext() && !removed) {
+            Participant next = iterator.next();
+            if (next.contains(player)) {
+                Team team = (Team) next;
+                if (team.size() < 2) {
+                    removed = super.remove(team);
+                } else {
+                    removed = team.remove(player);
+                }
+                assert removed;
+            }
+        }
+
+        return removed;
+    }
+
     public Participant find(String name) {
         Participant res = null;
 
