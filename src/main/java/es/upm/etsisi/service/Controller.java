@@ -21,7 +21,7 @@ public class Controller {
     public Error login(String username, String password) {
         Error error;
 
-        User user = this.userList.getByUsername(username);
+        User user = this.userList.findByUsername(username);
 
         if (user != null && user.validate(password)) {
             this.user = user;
