@@ -18,8 +18,9 @@ public abstract class Command {
     }
 
     protected String getArgument(int index) {
-        assert this.arguments.length > index : Message.INVALID_ARGUMENTS;       // TODO: add exceptions
-        assert index < this.maxArguments : Message.INVALID_ARGUMENTS;           // TODO: add exceptions
+        // TODO: check for invalid arguments before calling
+        assert this.arguments.length > index;
+        assert index < this.maxArguments;
 
         return this.arguments[index];
     }
