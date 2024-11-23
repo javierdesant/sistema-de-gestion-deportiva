@@ -82,22 +82,27 @@ public class Controller {
         return this.tournamentList;
     }
 
-    public void deleteParticipant(String name) throws ElementNotFoundException {
-        Participant participant = this.participantList.getByName(name);
-        if (participant == null) {
-            throw new ElementNotFoundException(name);
+    public Error deletePlayer(String name) {
+        Error error;
+
+        Participant participant = this.participantList.find(name);
+
+        if (!this.isValidPlayer(participant)) {
+            error = Error.ELEMENT_NOT_FOUND;
+        } else if (this.tournamentList.isPlaying(participant)) {
+            error = Error.PLAYER_IN_GAME_ERROR;
+        } else {
+            if (!participant.hasChildren()) {
+                boolean userRemoved = this.userList.remove(this.userList.getByUsername(name));
+                assert userRemoved;
+            }
+            boolean participantRemoved = this.participantList.remove(participant);
+            assert participantRemoved;
+
+            error = null;
         }
 
-        // TODO: check if the participant or its team
-        //  is playing in an active tournament
-        //  To do that, TournamentList has to be iterable, to check every tournament
-        // TODO: on team deletion, delete players/subteams also ?
-
-        if (participant.getChildren().isEmpty()) {
-            this.userList.remove(this.userList.getByUsername(name));
-        }
-        boolean removed = this.participantList.remove(participant);
-        assert removed;
+        return error;
     }
 
     public Error addToTeam(String playerName, String teamName) {
