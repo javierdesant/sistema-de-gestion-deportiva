@@ -19,12 +19,11 @@ public class ParticipantList extends List<Participant> {
     @Override
     public boolean contains(Participant participant) {
         boolean found = super.contains(participant);
+        Player player = (Player) participant;
 
-        if (!participant.hasChildren() && !found) {
-            Iterator<Participant> iterator = this.iterator();
-            while (iterator.hasNext() && !found) {
-                found = iterator.next().contains((Player) participant);
-            }
+        Iterator<Participant> iterator = this.iterator();
+        while (iterator.hasNext() && !found) {
+            found = iterator.next().contains(player);
         }
 
         return found;
