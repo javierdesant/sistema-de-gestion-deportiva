@@ -1,5 +1,7 @@
 package es.upm.etsisi.models;
 
+import es.upm.etsisi.service.Error;
+
 import java.util.Collection;
 import java.util.Iterator;
 
