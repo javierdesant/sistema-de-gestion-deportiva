@@ -21,7 +21,8 @@ public class ErrorView {
         MESSAGES.put(Error.TEAM_NOT_FOUND, "Equipo no encontrado");
         MESSAGES.put(Error.TOURNAMENT_NOT_FOUND, "Torneo no encontrado");
         MESSAGES.put(Error.WRONG_PASSWORD, "Contraseña incorrecta");
-        MESSAGES.put(Error.PLAYER_IN_GAME_ERROR, "El jugador se encuentra en un torneo activo");
+        MESSAGES.put(Error.PLAYER_IN_GAME_ERROR, "El jugador participa en un torneo activo");
+        MESSAGES.put(Error.TEAM_IN_GAME_ERROR, "El equipo participa en un torneo activo");
         MESSAGES.put(Error.INVALID_COMMAND, "Comando no válido");
     }
 
