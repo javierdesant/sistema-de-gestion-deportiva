@@ -17,7 +17,7 @@ public class UserList extends List<User> {
         this(Arrays.asList(users));
     }
 
-    public User getByUsername(String username) {
+    public User findByUsername(String username) {
         User user = null;
 
         Iterator<User> iterator = this.getElements().iterator();
