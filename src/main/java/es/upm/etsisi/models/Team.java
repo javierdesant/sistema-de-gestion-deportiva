@@ -29,6 +29,7 @@ public class Team implements Participant {
     }
 
     public boolean remove(Player player) {
+        assert this.size() > 1;
         return this.children.remove(player);
     }
 
