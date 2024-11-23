@@ -81,21 +81,18 @@ public class Controller {
     public Error deletePlayer(String name) {
         Error error;
 
-        Participant participant = this.participantList.find(name);
+        Participant player = this.participantList.find(name);
 
-        if (!this.isValidPlayer(participant)) {
-            error = Error.ELEMENT_NOT_FOUND;
-        } else if (this.tournamentList.isPlaying(participant)) {
-            error = Error.PLAYER_IN_GAME_ERROR;
-        } else {
-            if (!participant.hasChildren()) {
-                boolean userRemoved = this.userList.remove(this.userList.getByUsername(name));
-                assert userRemoved;
-            }
-            boolean participantRemoved = this.participantList.remove(participant);
-            assert participantRemoved;
+        if (this.isValidPlayer(player) && !this.tournamentList.isPlaying(player)) {
+            boolean userRemoved = this.userList.remove(this.userList.findByPlayerName(name));
+            boolean participantRemoved = this.participantList.remove(player);
+            assert userRemoved && participantRemoved;
 
             error = null;
+        } else if (!this.isValidPlayer(player)) {
+            error = Error.PLAYER_NOT_FOUND;
+        } else {
+            error = Error.PLAYER_IN_GAME_ERROR;
         }
 
         return error;
