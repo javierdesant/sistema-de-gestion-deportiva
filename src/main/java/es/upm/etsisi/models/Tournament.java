@@ -1,6 +1,9 @@
 package es.upm.etsisi.models;
 
+import es.upm.etsisi.service.Error;
+
 import java.time.LocalDate;
+import java.util.*;
 
 public class Tournament {
     private final String name;
@@ -66,6 +69,42 @@ public class Tournament {
 
     public boolean contains(Participant participant) {
         return this.matchList.contains(participant);
+    }
+
+    public Error matchmake(Collection<Participant> participants) {
+        if (this.hasRepeatedParticipants(participants)) {
+            return Error.PARTICIPANT_ALREADY_ASSIGNED_ERROR;
+        }
+        return null;
+    }
+
+    private boolean hasRepeatedParticipants(Collection<Participant> participants) {
+        Set<Participant> seenParticipants = new HashSet<>();
+        boolean repeated = false;
+
+        Iterator<Participant> iterator = participants.iterator();
+        while (iterator.hasNext() && !repeated) {
+            Participant next = iterator.next();
+            repeated = !seenParticipants.add(next) || this.matchList.contains(next);
+            if (next.hasChildren() && !repeated) {
+                repeated = this.hasRepeatedChildren(next);
+            }
+        }
+
+        return repeated;
+    }
+
+    private boolean hasRepeatedChildren(Participant participant) {
+        Set<Player> seenPlayers = new HashSet<>();
+        boolean repeated = false;
+
+        Iterator<Player> iterator = participant.getChildren().iterator();
+        while (iterator.hasNext() && !repeated) {
+            Player next = iterator.next();
+            repeated = !seenPlayers.add(next) || this.matchList.contains(next);
+        }
+
+        return repeated;
     }
 
     @Override
