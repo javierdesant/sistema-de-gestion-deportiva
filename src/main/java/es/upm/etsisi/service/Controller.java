@@ -87,12 +87,29 @@ public class Controller {
             boolean userRemoved = this.userList.remove(this.userList.findByPlayerName(name));
             boolean participantRemoved = this.participantList.remove(player);
             assert userRemoved && participantRemoved;
-
             error = null;
         } else if (!this.isValidPlayer(player)) {
             error = Error.PLAYER_NOT_FOUND;
         } else {
             error = Error.PLAYER_IN_GAME_ERROR;
+        }
+
+        return error;
+    }
+
+    public Error deleteTeam(String name) {
+        Error error;
+
+        Participant team = this.participantList.find(name);
+
+        if (this.isValidTeam(team) && !this.tournamentList.isPlaying(team)) {
+            boolean removed = this.participantList.remove(team);
+            assert removed;
+            error = null;
+        } else if (!this.isValidTeam(team)) {
+            error = Error.TEAM_NOT_FOUND;
+        } else {
+            error = Error.TEAM_IN_GAME_ERROR;
         }
 
         return error;
