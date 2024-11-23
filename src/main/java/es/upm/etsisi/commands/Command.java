@@ -27,7 +27,7 @@ public abstract class Command {
     public void validate(String input) {
         assert this.isCalled(input);
 
-        String[] split = input.trim().split(" ");
+        String[] split = this.split(input);
 
         if (split.length > 1) {
             this.arguments = split[1].split(";");
@@ -39,8 +39,12 @@ public abstract class Command {
     public boolean isCalled(String input) {
         assert input != null;
 
-        String name = input.trim().split(" ")[0];
+        String name = this.split(input)[0];
         return name.equals(this.name);
+    }
+
+    private String[] split(String input) {
+        return input.trim().split(" ", 2);
     }
 
     public abstract Error execute();
