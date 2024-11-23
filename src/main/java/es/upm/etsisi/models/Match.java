@@ -18,10 +18,6 @@ public class Match {
         this.participants = new ParticipantList(participants);
     }
 
-    public Match(Participant... participants) {
-        this(Arrays.asList(participants));
-    }
-
     public ParticipantList getParticipants() {
         return new ParticipantList(this.participants);
     }
