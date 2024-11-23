@@ -32,23 +32,39 @@ public class ParticipantList extends List<Participant> {
     @Override
     public boolean remove(Participant participant) {
         boolean removed = super.remove(participant);
-        Player player = (Player) participant;
+        if (removed) {
+            for (Player child : participant.getChildren()) {
+                Error error = this.add(child);
+                assert error == null;
+            }
+        } else if (!participant.hasChildren()) {
+            removed = this.removeFromTeam((Player) participant);
+        }
+
+        return removed;
+    }
+
+    private boolean removeFromTeam(Player player) {
+        boolean removed = false;
 
         Iterator<Participant> iterator = this.iterator();
         while (iterator.hasNext() && !removed) {
             Participant next = iterator.next();
             if (next.contains(player)) {
-                Team team = (Team) next;
-                if (team.size() < 2) {
-                    removed = super.remove(team);
-                } else {
-                    removed = team.remove(player);
-                }
+                removed = this.removeFromTeam(player, (Team) next);
                 assert removed;
             }
         }
 
         return removed;
+    }
+
+    private boolean removeFromTeam(Player player, Team team) {
+        if (team.size() < 2) {
+            return super.remove(team);
+        } else {
+            return team.remove(player);
+        }
     }
 
     public Participant find(String name) {
