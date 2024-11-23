@@ -67,6 +67,10 @@ public class Controller {
             assert this.user.getRole() == Role.ADMIN;
             Team team = new Team(teamName, (Administrator) this.user, (Player) player);
             error = this.participantList.add(team);
+            if (error == null) {
+                boolean removed = this.participantList.remove(player);
+                assert removed;
+            }
         } else {
             error = Error.PLAYER_NOT_FOUND;
         }
