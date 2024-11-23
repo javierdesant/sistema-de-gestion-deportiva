@@ -20,7 +20,7 @@ public class UserList extends List<User> {
     public User findByUsername(String username) {
         User user = null;
 
-        Iterator<User> iterator = this.getElements().iterator();
+        Iterator<User> iterator = this.iterator();
         while (iterator.hasNext() && user == null) {
             User next = iterator.next();
             if (username.equals(next.getUsername())) {
