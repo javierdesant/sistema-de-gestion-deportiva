@@ -4,6 +4,7 @@ import es.upm.etsisi.models.*;
 import es.upm.etsisi.utils.DNI;
 
 import java.time.LocalDate;
+import java.util.*;
 
 public class Controller {
     private final UserList userList;
@@ -181,8 +182,27 @@ public class Controller {
         return error;
     }
 
-    public void tournamentMatchmake(String tournamentName, String... playerNames) {
+    public Error tournamentMatchmake(String tournamentName, Collection<String> participantNames) {
+        Error error;
+        ArrayList<Participant> participants;
 
+        Tournament tournament = this.tournamentList.find(tournamentName);
+        if (tournament != null) {
+            participants = this.participantList.findAll(participantNames);
+            if (participants != null) {
+                error = tournament.matchmake(participants);
+            } else {
+                error = Error.PARTICIPANT_NOT_FOUND;
+            }
+        } else {
+            error = Error.TOURNAMENT_NOT_FOUND;
+        }
+
+        return error;
+    }
+
+    public Error tournamentMatchmake(String tournamentName, String... participantNames) {
+        return this.tournamentMatchmake(tournamentName, Arrays.asList(participantNames));
     }
 
     public void tournamentRandomMatchmake(String tournamentName) {
