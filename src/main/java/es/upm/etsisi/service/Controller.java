@@ -74,14 +74,6 @@ public class Controller {
         return error;
     }
 
-    public ParticipantList getParticipantList() {
-        return this.participantList;
-    }
-
-    public TournamentList getTournamentList() {
-        return this.tournamentList;
-    }
-
     public Error deletePlayer(String name) {
         Error error;
 
