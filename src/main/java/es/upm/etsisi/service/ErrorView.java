@@ -3,9 +3,6 @@ package es.upm.etsisi.service;
 import java.util.EnumMap;
 
 public class ErrorView {
-    private final Console console;
-    private final Error error;
-
     private static final EnumMap<Error, String> MESSAGES = new EnumMap<>(Error.class);
 
     static {
@@ -28,6 +25,9 @@ public class ErrorView {
         MESSAGES.put(Error.INVALID_COMMAND, "Comando no válido");
         MESSAGES.put(Error.INVALID_MATCH, "Los partidos deben tener al menos dos jugadores");
     }
+
+    private final Console console;
+    private final Error error;
 
     public ErrorView(Error error) {
         this.console = new Console();

@@ -3,7 +3,10 @@ package es.upm.etsisi.models;
 import es.upm.etsisi.service.Error;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 public class Tournament {
     private final String name;

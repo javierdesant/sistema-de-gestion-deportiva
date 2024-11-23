@@ -4,7 +4,9 @@ import es.upm.etsisi.models.*;
 import es.upm.etsisi.utils.DNI;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 
 public class Controller {
     private final UserList userList;
