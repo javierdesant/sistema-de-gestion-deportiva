@@ -3,7 +3,6 @@ package es.upm.etsisi.service;
 import es.upm.etsisi.models.*;
 import es.upm.etsisi.utils.DNI;
 
-import java.time.LocalDate;
 import java.util.*;
 
 public class Controller {
@@ -156,15 +155,8 @@ public class Controller {
         return error;
     }
 
-    public Error createTournament(String tournamentName,
-                                  LocalDate startDate,
-                                  LocalDate endDate,
-                                  Sport sport,
-                                  League league,
-                                  Category category) {
-
-        Tournament tournament = new Tournament(tournamentName, startDate, endDate, sport, league, category);
-        return this.tournamentList.add(tournament);
+    public Error createTournament(TournamentInfo tournamentInfo, TimeFrame timeFrame) {
+        return this.tournamentList.add(new Tournament(tournamentInfo, timeFrame));
     }
 
     public Error deleteTournament(String tournamentName) {

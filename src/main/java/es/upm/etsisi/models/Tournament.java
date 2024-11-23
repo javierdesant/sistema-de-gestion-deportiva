@@ -9,39 +9,24 @@ import java.util.Iterator;
 import java.util.Set;
 
 public class Tournament {
-    private final String name;
-    private final LocalDate startDate;
-    private final LocalDate endDate;
-    private final Sport sport;
-    private final League league;
-    private final Category category;
+    private final TournamentInfo info;
+    private final TimeFrame timeFrame;
+    private final ParticipantList participantList;
     private final MatchList matchList;
 
-    public Tournament(
-            String name,
-            LocalDate startDate,
-            LocalDate endDate,
-            Sport sport,
-            League league,
-            Category category
-    ) {
-        assert startDate.isBefore(endDate);
-
-        this.name = name;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.sport = sport;
-        this.league = league;
-        this.category = category;
+    public Tournament(TournamentInfo info, TimeFrame timeFrame) {
+        this.info = info;
+        this.timeFrame = timeFrame;
+        this.participantList = new ParticipantList();
         this.matchList = new MatchList();
     }
 
     public Category getCategory() {
-        return category;
+        return this.info.category();
     }
 
     public String getName() {
-        return this.name;
+        return this.info.name();
     }
 
     public MatchList getMatches() {
@@ -49,25 +34,23 @@ public class Tournament {
     }
 
     public Sport getSport() {
-        return this.sport;
+        return this.info.sport();
     }
 
     public League getLeague() {
-        return this.league;
+        return this.info.league();
     }
 
     public LocalDate getStartDate() {
-        return this.startDate;
+        return this.timeFrame.startDate();
     }
 
     public LocalDate getEndDate() {
-        return this.endDate;
+        return this.timeFrame.endDate();
     }
 
     public boolean isActive() {
-        LocalDate now = LocalDate.now();
-
-        return this.startDate.isBefore(now) && this.endDate.isAfter(now);
+        return this.timeFrame.includesNow();
     }
 
     public boolean contains(Participant participant) {
