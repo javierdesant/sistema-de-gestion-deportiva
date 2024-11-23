@@ -190,11 +190,15 @@ public class Controller {
 
         Tournament tournament = this.tournamentList.find(tournamentName);
         if (tournament != null) {
-            participants = this.participantList.findAll(participantNames);
-            if (participants != null) {
-                error = tournament.matchmake(participants);
+            if (tournament.isActive()) {
+                participants = this.participantList.findAll(participantNames);
+                if (participants != null) {
+                    error = tournament.matchmake(participants);
+                } else {
+                    error = Error.PARTICIPANT_NOT_FOUND;
+                }
             } else {
-                error = Error.PARTICIPANT_NOT_FOUND;
+                error = Error.TOURNAMENT_NOT_ACTIVE;
             }
         } else {
             error = Error.TOURNAMENT_NOT_FOUND;
@@ -207,7 +211,7 @@ public class Controller {
         return this.tournamentMatchmake(tournamentName, Arrays.asList(participantNames));
     }
 
-    public void tournamentRandomMatchmake(String tournamentName) {
+    public void tournamentRandomMatchmake(String tournamentName, int groupSize) {
 
     }
 
