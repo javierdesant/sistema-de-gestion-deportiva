@@ -37,6 +37,10 @@ public abstract class List<T> {
         return this.elements.contains(element);
     }
 
+    public boolean containsAll(Collection<T> elements) {
+        return this.elements.containsAll(elements);
+    }
+
     public void clear() {
         this.elements.clear();
     }
