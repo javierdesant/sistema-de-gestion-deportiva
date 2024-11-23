@@ -85,8 +85,8 @@ public class ParticipantList extends List<Participant> {
         return res;
     }
 
-    private Participant findPlayerInTeam(String name, Team team) {
-        Participant res = null;
+    private Player findPlayerInTeam(String name, Team team) {
+        Player res = null;
 
         Iterator<Player> iterator = team.getChildren().iterator();
         while (iterator.hasNext() && res == null) {
