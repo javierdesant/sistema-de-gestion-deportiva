@@ -2,6 +2,7 @@ package es.upm.etsisi.models;
 
 import es.upm.etsisi.service.Error;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -93,6 +94,22 @@ public class ParticipantList extends List<Participant> {
             Player next = iterator.next();
             if (name.equals(next.getName())) {
                 res = next;
+            }
+        }
+
+        return res;
+    }
+
+    public ArrayList<Participant> findAll(Collection<String> names) {
+        ArrayList<Participant> res = new ArrayList<>();
+
+        Iterator<String> iterator = names.iterator();
+        while (iterator.hasNext() && res != null) {
+            Participant participant = this.find(iterator.next());
+            if (participant != null) {
+                res.add(participant);
+            } else {
+                res = null;
             }
         }
 
