@@ -72,10 +72,13 @@ public class Tournament {
     }
 
     public Error matchmake(Collection<Participant> participants) {
-        if (this.hasRepeatedParticipants(participants)) {
+        if (participants.size() < 2) {
+            return Error.INVALID_MATCH;
+        } else if (this.hasRepeatedParticipants(participants)) {
             return Error.PARTICIPANT_ALREADY_ASSIGNED_ERROR;
+        } else {
+            return null;
         }
-        return null;
     }
 
     private boolean hasRepeatedParticipants(Collection<Participant> participants) {
