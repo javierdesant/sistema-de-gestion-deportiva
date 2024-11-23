@@ -32,6 +32,10 @@ public class Team implements Participant {
         return this.children.remove(player);
     }
 
+    public int size() {
+        return this.children.size();
+    }
+
     @Override
     public String getName() {
         return this.name;
