@@ -4,9 +4,7 @@ import es.upm.etsisi.models.*;
 import es.upm.etsisi.utils.DNI;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
+import java.util.*;
 
 public class Controller {
     private final UserList userList;
@@ -204,8 +202,30 @@ public class Controller {
         return this.tournamentMatchmake(tournamentName, Arrays.asList(participantNames));
     }
 
-    public void tournamentRandomMatchmake(String tournamentName, int groupSize) {
+    public Error tournamentRandomMatchmake(String tournamentName, int groupSize) {
 
+        // TODO!: tournaments have their own participants list, this is wrong
+
+        Tournament tournament = this.tournamentList.find(tournamentName);
+        if (tournament == null) {
+            return Error.TOURNAMENT_NOT_FOUND;
+        } else if (!tournament.isActive()) {
+            return Error.TOURNAMENT_NOT_ACTIVE;
+        }
+
+        LinkedList<Participant> participants = this.participantList.getElements();
+        Collections.shuffle(participants);
+        Error error = null;
+        for (int i = participants.size() - 1; i < groupSize; i -= groupSize) {
+            LinkedList<Participant> group = new LinkedList<>();
+            for (int j = 0; j < groupSize; j++) {
+                group.add(participants.remove(i));
+            }
+            error = tournament.matchmake(group);
+            assert error == null;
+        }
+
+        return error;
     }
 
     public void addToTournament(String tournamentName, String playerName) {
