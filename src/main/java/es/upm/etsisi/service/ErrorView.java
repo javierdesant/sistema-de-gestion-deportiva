@@ -26,6 +26,7 @@ public class ErrorView {
         MESSAGES.put(Error.PLAYER_IN_GAME_ERROR, "El jugador participa en un torneo activo");
         MESSAGES.put(Error.TEAM_IN_GAME_ERROR, "El equipo participa en un torneo activo");
         MESSAGES.put(Error.INVALID_COMMAND, "Comando no válido");
+        MESSAGES.put(Error.INVALID_MATCH, "Los partidos deben tener al menos dos jugadores");
     }
 
     public ErrorView(Error error) {
