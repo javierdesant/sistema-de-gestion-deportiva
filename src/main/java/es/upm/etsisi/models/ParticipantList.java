@@ -82,4 +82,18 @@ public class ParticipantList extends List<Participant> {
 
         return res;
     }
+
+    public Team findTeam(Player player) {
+        Team team = null;
+
+        Iterator<Participant> iterator = this.iterator();
+        while (iterator.hasNext() && team == null) {
+            Participant next = iterator.next();
+            if (next.contains(player)) {
+                team = (Team) next;
+            }
+        }
+
+        return team;
+    }
 }
