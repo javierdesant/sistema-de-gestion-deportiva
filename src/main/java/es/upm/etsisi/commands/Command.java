@@ -3,7 +3,6 @@ package es.upm.etsisi.commands;
 import es.upm.etsisi.service.CommandArguments;
 import es.upm.etsisi.service.ErrorType;
 
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -38,12 +37,12 @@ public abstract class Command {
         return !areValid;
     }
 
-    public ErrorType execute(Collection<String> args) {
-        if (args.size() > this.maxArguments) {
+    public ErrorType execute(String[] args) {
+        if (args.length > this.maxArguments) {
             return ErrorType.INVALID_ARGUMENTS;
         }
 
-        return this.execute(new CommandArguments(args));
+        return this.execute(new CommandArguments(List.of(args)));
     }
 
     protected abstract ErrorType execute(CommandArguments args);
