@@ -1,12 +1,15 @@
 package es.upm.etsisi.commands;
 
-import es.upm.etsisi.service.Error;
-import es.upm.etsisi.utils.Message;
+import es.upm.etsisi.service.ErrorType;
+import es.upm.etsisi.service.CommandArguments;
+
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 
 public abstract class Command {
     private final String name;
     private final int maxArguments;
-    private String[] arguments;
 
     public Command(String name, int maxArguments) {
         this.name = name;
@@ -17,36 +20,31 @@ public abstract class Command {
         return this.name;
     }
 
-    protected String getArgument(int index) {
-        // TODO: check for invalid arguments before calling
-        assert this.arguments.length > index;
-        assert index < this.maxArguments;
-
-        return this.arguments[index];
+    public boolean isCalled(String title) {
+        return title.equals(this.name);
     }
 
-    public void validate(String input) {
-        assert this.isCalled(input);
+    protected boolean areInvalidTokens(String... tokens) {
+        assert tokens.length > 0;
+        boolean areValid = true;
+        List<String> tokensList = List.of(tokens);
 
-        String[] split = this.split(input);
-
-        if (split.length > 1) {
-            this.arguments = split[1].split(";");
-        } else {
-            this.arguments = new String[0];
+        Iterator<String> iterator = tokensList.iterator();
+        while (iterator.hasNext() && areValid) {
+            String token = iterator.next();
+            areValid = token != null && !token.trim().isEmpty();
         }
+
+        return !areValid;
     }
 
-    public boolean isCalled(String input) {
-        assert input != null;
+    public ErrorType execute(Collection<String> args) {
+        if (args.size() > this.maxArguments) {
+            return ErrorType.INVALID_ARGUMENTS;
+        }
 
-        String name = this.split(input)[0];
-        return name.equals(this.name);
+        return this.execute(new CommandArguments(args));
     }
 
-    private String[] split(String input) {
-        return input.trim().split(" ", 2);
-    }
-
-    public abstract Error execute();
+    protected abstract ErrorType execute(CommandArguments args);
 }
