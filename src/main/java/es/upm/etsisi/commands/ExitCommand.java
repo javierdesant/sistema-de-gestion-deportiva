@@ -1,6 +1,8 @@
 package es.upm.etsisi.commands;
 
 import es.upm.etsisi.SportsManager;
+import es.upm.etsisi.service.CommandArguments;
+import es.upm.etsisi.service.ErrorType;
 import es.upm.etsisi.utils.Message;
 
 public class ExitCommand extends Command {
@@ -12,9 +14,10 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void execute() {
-        Message.EXIT_MESSAGE.writeln();
-
+    protected ErrorType execute(CommandArguments args) {
         this.sportsManager.close();
+
+        Message.EXIT_MESSAGE.writeln();
+        return null;
     }
 }
