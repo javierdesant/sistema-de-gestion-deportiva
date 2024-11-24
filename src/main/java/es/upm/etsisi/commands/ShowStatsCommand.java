@@ -12,7 +12,7 @@ public class ShowStatsCommand extends Command {
     private final Controller controller;
 
     public ShowStatsCommand(Controller controller) {
-        super("statistics-show", 1);
+        super("statistics-show", 0);
         this.controller = controller;
     }
 
