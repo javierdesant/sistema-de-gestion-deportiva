@@ -1,10 +1,8 @@
 package es.upm.etsisi.commands;
 
-import es.upm.etsisi.models.Tournament;
 import es.upm.etsisi.models.TournamentList;
 import es.upm.etsisi.service.CommandArguments;
 import es.upm.etsisi.service.Controller;
-import es.upm.etsisi.service.DisplayService;
 import es.upm.etsisi.service.ErrorType;
 
 public class ListTournamentsCommand extends Command {
