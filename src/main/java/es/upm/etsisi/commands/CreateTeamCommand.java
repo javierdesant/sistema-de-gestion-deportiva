@@ -1,25 +1,33 @@
 package es.upm.etsisi.commands;
 
-import es.upm.etsisi.exceptions.DuplicateElementException;
+import es.upm.etsisi.service.CommandArguments;
 import es.upm.etsisi.service.Controller;
+import es.upm.etsisi.service.ErrorType;
 import es.upm.etsisi.utils.Message;
 
 public class CreateTeamCommand extends Command {
     private final Controller controller;
 
     public CreateTeamCommand(Controller controller) {
-        super("team-create", 1);
+        super("team-create", 2);
         this.controller = controller;
     }
 
     @Override
-    public void execute() throws DuplicateElementException {
-        String teamName = this.getArgument(0);
+    protected ErrorType execute(CommandArguments args) {
+        ErrorType error;
+        String teamName = args.pollToken();
+        String playerName = args.pollToken();
 
-        assert teamName.matches("[a-zA-Z]+") : Message.INVALID_NAME;
+        if (this.areInvalidTokens(teamName, playerName)) {
+            return ErrorType.INVALID_ARGUMENTS;
+        } else if (!teamName.matches("[a-zA-Z]+")) {
+            return ErrorType.NAME_FORMAT_ERROR;
+        }
 
-        this.controller.createTeam(teamName);
+        error = this.controller.createTeam(teamName, playerName);
 
         Message.TEAM_ADDED.writeln();
+        return error;
     }
 }
