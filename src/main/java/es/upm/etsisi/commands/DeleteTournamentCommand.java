@@ -8,7 +8,7 @@ public class DeleteTournamentCommand extends Command {
     private final Controller controller;
 
     public DeleteTournamentCommand(Controller controller) {
-        super("tournament-delete", 0);  // TODO: define Tournament and Match models
+        super("tournament-delete", 1);
         this.controller = controller;
     }
 
