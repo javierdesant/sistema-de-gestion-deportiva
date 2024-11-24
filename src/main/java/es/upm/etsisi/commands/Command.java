@@ -24,16 +24,12 @@ public abstract class Command {
 
     protected boolean areInvalidTokens(String... tokens) {
         assert tokens.length > 0;
-        boolean areValid = true;
-        List<String> tokensList = List.of(tokens);
-
-        Iterator<String> iterator = tokensList.iterator();
-        while (iterator.hasNext() && areValid) {
-            String token = iterator.next();
-            areValid = token != null && !token.trim().isEmpty();
+        for (String token : tokens) {
+            if (token == null || token.trim().isEmpty()) {
+                return true;
+            }
         }
-
-        return !areValid;
+        return false;
     }
 
     public ErrorType execute(String[] args) {
