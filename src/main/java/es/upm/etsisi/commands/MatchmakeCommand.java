@@ -1,25 +1,47 @@
 package es.upm.etsisi.commands;
 
-import es.upm.etsisi.models.MatchList;
-import es.upm.etsisi.models.ParticipantList;
+import es.upm.etsisi.service.CommandArguments;
+import es.upm.etsisi.service.Controller;
+import es.upm.etsisi.service.ErrorType;
 import es.upm.etsisi.utils.Message;
 
-public class MatchmakeCommand extends Command { // TODO: remake for 2.0.0
-    private final ParticipantList participantList;
-    private final MatchList matchList;
+import java.util.LinkedList;
 
-    public MatchmakeCommand(ParticipantList participantList, MatchList matchList) {
-        super("matchmake", 0);      // TODO: define Tournament and Match models
-        this.participantList = participantList;
-        this.matchList = matchList;
+public class MatchmakeCommand extends Command {
+    private final Controller controller;
+
+    public MatchmakeCommand(Controller controller) {
+        super("matchmake", 10);      // TODO: revisar el numero de argumentos para match ? grupos ?
+        this.controller = controller;
     }
 
     @Override
-    public void execute() {
-        String homePlayerName = this.getArgument(0);
-        String visitingPlayerName = this.getArgument(1);
+    protected ErrorType execute(CommandArguments args) {
+        ErrorType error = null;
+        String tournamentName = args.pollToken();
 
-//        this.matchList.add(new Match(this.entityList, new Player(homePlayerName), new Player(visitingPlayerName)));       // FIXME
-        Message.PLAYERS_MATCHED.writeln(homePlayerName, visitingPlayerName);
+        if (this.areInvalidTokens(tournamentName)) {
+            return ErrorType.INVALID_ARGUMENTS;
+        }
+
+        LinkedList<String> players = new LinkedList<>();
+        while (args.hasToken() && error == null) {
+            String token = args.pollToken();
+            if (this.areInvalidTokens(token)) {
+                error = ErrorType.INVALID_ARGUMENTS;
+            }
+            players.add(token);
+        }
+
+        if (error != null) {
+            return error;
+        }
+
+        error = this.controller.tournamentMatchmake(tournamentName, players);
+
+        if (error != null) {
+            // TODO: add message
+        }
+        return error;
     }
 }
