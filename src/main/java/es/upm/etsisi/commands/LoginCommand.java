@@ -1,27 +1,36 @@
 package es.upm.etsisi.commands;
 
 import es.upm.etsisi.service.CLI;
+import es.upm.etsisi.service.CommandArguments;
 import es.upm.etsisi.service.Controller;
+import es.upm.etsisi.service.ErrorType;
+import es.upm.etsisi.utils.Message;
 
 public class LoginCommand extends Command {
     private final Controller controller;
-    private final CLI cli;
 
-    public LoginCommand(Controller controller, CLI cli) {
+    public LoginCommand(Controller controller) {
         super("login", 2);
         this.controller = controller;
-        this.cli = cli;
     }
 
     @Override
-    public void execute() {
-        String username = getArgument(0);
-        String password = getArgument(1);
+    protected ErrorType execute(CommandArguments args) {
+        ErrorType error;
+        String username = args.pollToken();
+        String password = args.pollToken();
 
-        boolean success = this.controller.login(username, password);
+        if (this.areInvalidTokens(username)) {
+            return ErrorType.INVALID_ARGUMENTS;
+        } else if (password == null) {
+            return ErrorType.INVALID_ARGUMENTS;
+        }
 
-        assert success : "login error"; // TODO: add message
+        error = this.controller.login(username, password);
 
-        this.cli.updateCommands();
+        if (error == null) {
+            // TODO: add message
+        }
+        return error;
     }
 }
