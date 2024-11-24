@@ -27,7 +27,9 @@ public class CreateTeamCommand extends Command {
 
         error = this.controller.createTeam(teamName, playerName);
 
-        Message.TEAM_ADDED.writeln();
+        if (error == null) {
+            Message.TEAM_ADDED.writeln();
+        }
         return error;
     }
 }

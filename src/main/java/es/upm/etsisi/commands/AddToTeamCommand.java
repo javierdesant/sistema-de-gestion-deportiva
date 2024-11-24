@@ -25,7 +25,9 @@ public class AddToTeamCommand extends Command {
 
         error = this.controller.addToTeam(playerName, teamName);
 
-        Message.PLAYER_ADDED_TO_TEAM.writeln(playerName, teamName);
+        if (error == null) {
+            Message.PLAYER_ADDED_TO_TEAM.writeln(playerName, teamName);
+        }
         return error;
     }
 }
