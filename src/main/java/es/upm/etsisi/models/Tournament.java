@@ -83,18 +83,18 @@ public class Tournament {
             Participant next = iterator.next();
             repeated = !seenParticipants.add(next) || this.matchList.contains(next);
             if (next.hasChildren() && !repeated) {
-                repeated = this.hasRepeatedChildren(next);
+                repeated = this.hasRepeatedChildren((Team) next);
             }
         }
 
         return repeated;
     }
 
-    private boolean hasRepeatedChildren(Participant participant) {
+    private boolean hasRepeatedChildren(Team team) {
         Set<Player> seenPlayers = new HashSet<>();
         boolean repeated = false;
 
-        Iterator<Player> iterator = participant.getChildren().iterator();
+        Iterator<Player> iterator = team.getChildren().iterator();
         while (iterator.hasNext() && !repeated) {
             Player next = iterator.next();
             repeated = !seenPlayers.add(next) || this.matchList.contains(next);
