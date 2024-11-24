@@ -1,8 +1,8 @@
 package es.upm.etsisi.commands;
 
-import es.upm.etsisi.exceptions.DifferingTypeException;
-import es.upm.etsisi.exceptions.ElementNotFoundException;
+import es.upm.etsisi.service.CommandArguments;
 import es.upm.etsisi.service.Controller;
+import es.upm.etsisi.service.ErrorType;
 import es.upm.etsisi.utils.Message;
 
 public class RemoveFromTeamCommand extends Command {
@@ -14,13 +14,20 @@ public class RemoveFromTeamCommand extends Command {
     }
 
     @Override
-    public void execute() throws ElementNotFoundException, DifferingTypeException {
-        String teamName = this.getArgument(0);
-        String playerName = this.getArgument(1);
+    protected ErrorType execute(CommandArguments args) {
+        ErrorType error;
+        String teamName = args.pollToken();
+        String playerName = args.pollToken();
 
-        this.controller.removeFromTeam(teamName, playerName);
+        if (this.areInvalidTokens(teamName, playerName)) {
+            return ErrorType.INVALID_ARGUMENTS;
+        }
 
-        Message.PLAYER_REMOVED_FROM_TEAM.writeln(playerName, teamName);
+        error = this.controller.removeFromTeam(teamName, playerName);
 
+        if (error == null) {
+            Message.PLAYER_REMOVED_FROM_TEAM.writeln(playerName, teamName);
+        }
+        return error;
     }
 }
