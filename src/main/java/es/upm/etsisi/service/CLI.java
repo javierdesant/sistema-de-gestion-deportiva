@@ -23,15 +23,20 @@ public class CLI {
     public void run() {
         ErrorType error;
 
-        if (!this.sportsManager.isOpen()) {
+        if (!this.sportsManager.isOpen()) {     // FIXME ?
             this.sportsManager.open();
         }
 
         do {
-            Command command = this.readCommand();
+            User user = this.controller.getUser();
+            String input = this.readInput();
+            String[] split = input.trim().split(" ", 2);
+            String title = split[0];
+            String[] arguments = split.length > 1 ? split[1].split(";") : new String[0];
 
+            Command command = this.commandFactory.getCommand(user != null ? user.getRole() : null, title);
             if (command != null) {
-                error = command.execute();
+                error = command.execute(arguments);
             } else {
                 error = ErrorType.INVALID_COMMAND;
             }
@@ -42,16 +47,13 @@ public class CLI {
         } while (this.sportsManager.isOpen());
     }
 
-    private Command readCommand() {
+    private String readInput() {
         User user = this.controller.getUser();
 
         System.out.println();
         System.out.print(user != null ? user + " # " : "");
         Message.COMMAND_PROMPT.write();
 
-        String input = this.scanner.nextLine().trim();
-        String[] tokens = input.split(" ", 2);
-
-        return this.commandFactory.getCommand(user != null ? user.getRole() : null, tokens[0]);
+        return this.scanner.nextLine();
     }
 }
