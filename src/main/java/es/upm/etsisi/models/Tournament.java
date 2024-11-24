@@ -103,6 +103,27 @@ public class Tournament {
         return repeated;
     }
 
+    public Error randomMatchmake(int groupSize) {
+        Error error = null;
+        LinkedList<Participant> participants = new LinkedList<>(this.participantList.getElements());
+
+        if (participants.size() < 2) {
+            error = Error.INVALID_MATCH;
+        }
+
+        Collections.shuffle(participants);
+        for (int i = participants.size() - 1; i < groupSize; i -= groupSize) {
+            LinkedList<Participant> group = new LinkedList<>();
+            for (int j = 0; j < groupSize; j++) {
+                group.add(participants.remove(i));
+            }
+            error = this.matchmake(group);
+            assert error == null;
+        }
+
+        return error;
+    }
+
     @Override
     public boolean equals(Object object) {
         if (this == object) {
