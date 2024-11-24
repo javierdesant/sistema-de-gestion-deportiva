@@ -1,6 +1,8 @@
 package es.upm.etsisi.commands;
 
 import es.upm.etsisi.service.CLI;
+import es.upm.etsisi.service.CommandArguments;
+import es.upm.etsisi.service.ErrorType;
 
 public class HelpCommand extends Command {
     private final CLI cli;
@@ -11,10 +13,8 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public void execute() {
-        System.out.println("Commands:");    // TODO: add Message ?
-        for (Command command : this.cli.getCommands()) {
-            System.out.println(" - " + command.getName());
-        }
+    protected ErrorType execute(CommandArguments args) {
+        // TODO
+        return null;
     }
 }

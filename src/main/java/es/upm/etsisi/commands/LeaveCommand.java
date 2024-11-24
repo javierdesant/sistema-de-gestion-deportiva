@@ -1,6 +1,8 @@
 package es.upm.etsisi.commands;
 
+import es.upm.etsisi.service.CommandArguments;
 import es.upm.etsisi.service.Controller;
+import es.upm.etsisi.service.ErrorType;
 
 public class LeaveCommand extends Command {
     private final Controller controller;
@@ -11,7 +13,8 @@ public class LeaveCommand extends Command {
     }
 
     @Override
-    public void execute() {
+    protected ErrorType execute(CommandArguments args) {
         // TODO
+        return null;
     }
 }
