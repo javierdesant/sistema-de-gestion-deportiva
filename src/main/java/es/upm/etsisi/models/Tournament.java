@@ -54,7 +54,7 @@ public class Tournament {
         return this.matchList.contains(participant);
     }
 
-    public Error matchmake(Collection<Participant> participants) {
+    public Error matchmake(Collection<Participant> participants) {  // TODO: fix match class
         Error error;
 
         if (participants.size() < 2) {
@@ -100,7 +100,7 @@ public class Tournament {
         return repeated;
     }
 
-    public Error randomMatchmake(int groupSize) {
+    public Error randomMatchmake(int groupSize) {   // TODO: fix match class, maybe group has to be group*2 ?
         Error error = null;
         LinkedList<Participant> participants = new LinkedList<>(this.participantList.getElements());
 
