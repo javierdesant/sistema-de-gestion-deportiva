@@ -1,7 +1,8 @@
 package es.upm.etsisi.commands;
 
-import es.upm.etsisi.exceptions.DuplicateElementException;
+import es.upm.etsisi.service.CommandArguments;
 import es.upm.etsisi.service.Controller;
+import es.upm.etsisi.service.ErrorType;
 import es.upm.etsisi.utils.DNI;
 import es.upm.etsisi.utils.Message;
 
@@ -14,17 +15,36 @@ public class CreatePlayerCommand extends Command {
     }
 
     @Override
-    public void execute() throws DuplicateElementException {
-        String username = this.getArgument(0);
-        String password = this.getArgument(1);
-        String playerName = this.getArgument(2);
-        String playerLastName = this.getArgument(3);
-        DNI dni = new DNI(this.getArgument(4));
+    protected ErrorType execute(CommandArguments args) {
+        ErrorType error;
+        String username = args.pollToken();
+        String password = args.pollToken();
+        String playerName = args.pollToken();
+        String playerLastName = args.pollToken();
+        String dni = args.pollToken();
 
-        assert playerName.matches("[a-zA-Z]+") : Message.INVALID_NAME;
+        error = this.validate(username, password, playerName, playerLastName, dni);
+        if (error != null) {
+            return error;
+        }
 
-        this.controller.createPlayer(username, password, playerLastName, playerLastName, dni);
+        error = this.controller.createPlayer(username, password, playerLastName, playerLastName, new DNI(dni));
 
         Message.PLAYER_ADDED.writeln();
+        return error;
+    }
+
+    private ErrorType validate(String username, String password, String playerName, String playerLastName, String dni) {
+        if (this.areInvalidTokens(username, playerName, playerLastName, dni)) {
+            return ErrorType.INVALID_ARGUMENTS;
+        } else if (password == null) {
+            return ErrorType.INVALID_ARGUMENTS;
+        } else if (!playerName.matches("[a-zA-Z]+")) {
+            return ErrorType.NAME_FORMAT_ERROR;
+        } else if (!DNI.isValidDNI(dni)) {
+            return ErrorType.INVALID_DNI_ERROR;
+        } else {
+            return null;
+        }
     }
 }
