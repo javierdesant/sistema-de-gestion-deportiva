@@ -1,7 +1,7 @@
-package es.upm.etsisi.service;
+package es.upm.etsisi.commands;
 
-import es.upm.etsisi.commands.*;
 import es.upm.etsisi.models.Role;
+import es.upm.etsisi.service.Controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,7 +1,6 @@
 package es.upm.etsisi.commands;
 
 import es.upm.etsisi.service.CLI;
-import es.upm.etsisi.service.CommandArguments;
 import es.upm.etsisi.service.ErrorType;
 
 public class HelpCommand extends Command {

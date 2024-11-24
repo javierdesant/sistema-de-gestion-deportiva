@@ -1,6 +1,5 @@
 package es.upm.etsisi.commands;
 
-import es.upm.etsisi.service.CommandArguments;
 import es.upm.etsisi.service.Controller;
 import es.upm.etsisi.service.ErrorType;
 import es.upm.etsisi.utils.Message;

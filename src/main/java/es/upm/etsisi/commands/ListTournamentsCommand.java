@@ -1,7 +1,6 @@
 package es.upm.etsisi.commands;
 
 import es.upm.etsisi.models.TournamentList;
-import es.upm.etsisi.service.CommandArguments;
 import es.upm.etsisi.service.Controller;
 import es.upm.etsisi.service.ErrorType;
 
