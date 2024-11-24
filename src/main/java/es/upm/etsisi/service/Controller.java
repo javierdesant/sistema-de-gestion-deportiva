@@ -13,7 +13,7 @@ public class Controller {
 
     public Controller() {
         this.user = null;
-        this.userList = new UserList(new Administrator("admin", "admin"));
+        this.userList = new UserList(new Administrator("admin@upm.es", "admin"));
         this.participantList = new ParticipantList();
         this.tournamentList = new TournamentList();
     }
