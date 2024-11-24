@@ -2,7 +2,6 @@ package es.upm.etsisi.commands;
 
 import es.upm.etsisi.service.ErrorType;
 
-import java.util.Iterator;
 import java.util.List;
 
 public abstract class Command {

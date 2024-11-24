@@ -1,7 +1,8 @@
 package es.upm.etsisi.service;
 
 import es.upm.etsisi.SportsManager;
-import es.upm.etsisi.commands.*;
+import es.upm.etsisi.commands.Command;
+import es.upm.etsisi.commands.CommandFactory;
 import es.upm.etsisi.models.User;
 import es.upm.etsisi.utils.Message;
 
