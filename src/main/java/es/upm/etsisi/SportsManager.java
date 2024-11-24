@@ -26,10 +26,6 @@ public class SportsManager {
     public void open() {
         assert !this.isOpen();
 
-        if (this.isClosed()) {
-            this.cli.updateCommands();
-        }
-
         this.status = Status.OPEN;
     }
 
