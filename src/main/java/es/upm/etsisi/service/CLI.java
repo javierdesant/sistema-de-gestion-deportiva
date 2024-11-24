@@ -15,7 +15,7 @@ public class CLI {
     private final SportsManager sportsManager; // move status to the CLI ?
     private final LinkedList<Command> commands;
     private final Controller controller;
-    private final Scanner scanner;
+    private final Scanner scanner;  // TODO: replace with console
 
     public CLI(SportsManager sportsManager) { // erase manager param ?
         this.commands = new LinkedList<>();
