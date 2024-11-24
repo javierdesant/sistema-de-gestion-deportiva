@@ -1,8 +1,8 @@
 package es.upm.etsisi.commands;
 
-import es.upm.etsisi.exceptions.DifferingTypeException;
-import es.upm.etsisi.exceptions.ListException;
+import es.upm.etsisi.service.CommandArguments;
 import es.upm.etsisi.service.Controller;
+import es.upm.etsisi.service.ErrorType;
 import es.upm.etsisi.utils.Message;
 
 public class AddToTeamCommand extends Command {
@@ -14,12 +14,18 @@ public class AddToTeamCommand extends Command {
     }
 
     @Override
-    public void execute() throws ListException, DifferingTypeException {
-        String playerName = this.getArgument(0);
-        String teamName = this.getArgument(1);
+    protected ErrorType execute(CommandArguments args) {
+        ErrorType error;
+        String playerName = args.pollToken();
+        String teamName = args.pollToken();
 
-        this.controller.addToTeam(playerName, teamName);
+        if (this.areInvalidTokens(playerName, teamName)) {
+            return ErrorType.INVALID_ARGUMENTS;
+        }
+
+        error = this.controller.addToTeam(playerName, teamName);
 
         Message.PLAYER_ADDED_TO_TEAM.writeln(playerName, teamName);
+        return error;
     }
 }
