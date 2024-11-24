@@ -76,7 +76,7 @@ public class CLI {
     }
 
     public void run() {
-        Error error;
+        ErrorType error;
 
         if (!this.sportsManager.isOpen()) {
             this.sportsManager.open();
@@ -88,7 +88,7 @@ public class CLI {
             if (command != null) {
                 error = command.execute();
             } else {
-                error = Error.INVALID_COMMAND;
+                error = ErrorType.INVALID_COMMAND;
             }
 
             if (error != null) {

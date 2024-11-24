@@ -1,6 +1,6 @@
 package es.upm.etsisi.models;
 
-import es.upm.etsisi.service.Error;
+import es.upm.etsisi.service.ErrorType;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -45,13 +45,13 @@ public abstract class List<T> {
         this.elements.clear();
     }
 
-    public Error add(T element) {
-        Error error = null;
+    public ErrorType add(T element) {
+        ErrorType error = null;
 
         if (!this.contains(element)) {
             this.elements.add(element);
         } else {
-            error = Error.DUPLICATE_ELEMENT_ERROR;
+            error = ErrorType.DUPLICATE_ELEMENT_ERROR;
         }
 
         return error;

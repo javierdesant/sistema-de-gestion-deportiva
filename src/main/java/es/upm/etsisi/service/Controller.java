@@ -18,17 +18,17 @@ public class Controller {
         this.tournamentList = new TournamentList();
     }
 
-    public Error login(String username, String password) {
-        Error error;
+    public ErrorType login(String username, String password) {
+        ErrorType error;
 
         User user = this.userList.findByUsername(username);
         if (user != null && user.validate(password)) {
             this.user = user;
             error = null;
         } else if (user == null) {
-            error = Error.USER_NOT_FOUND;
+            error = ErrorType.USER_NOT_FOUND;
         } else {
-            error = Error.WRONG_PASSWORD;
+            error = ErrorType.WRONG_PASSWORD;
         }
 
         return error;
@@ -43,8 +43,8 @@ public class Controller {
         return this.user;
     }
 
-    public Error createPlayer(String username, String password, String firstName, String lastName, DNI dni) {
-        Error error;
+    public ErrorType createPlayer(String username, String password, String firstName, String lastName, DNI dni) {
+        ErrorType error;
 
         Player player = new Player(username, password, firstName, lastName, dni, this.user);
 
@@ -57,8 +57,8 @@ public class Controller {
         return error;
     }
 
-    public Error createTeam(String teamName, String playerName) {
-        Error error;
+    public ErrorType createTeam(String teamName, String playerName) {
+        ErrorType error;
 
         Participant player = this.participantList.find(playerName);
         if (this.isValidPlayer(player)) {
@@ -70,14 +70,14 @@ public class Controller {
                 assert removed;
             }
         } else {
-            error = Error.PLAYER_NOT_FOUND;
+            error = ErrorType.PLAYER_NOT_FOUND;
         }
 
         return error;
     }
 
-    public Error deletePlayer(String name) {
-        Error error;
+    public ErrorType deletePlayer(String name) {
+        ErrorType error;
 
         Participant player = this.participantList.find(name);
         if (this.isValidPlayer(player) && !this.tournamentList.isPlaying(player)) {
@@ -87,16 +87,16 @@ public class Controller {
             assert participantRemoved;
             error = null;
         } else if (!this.isValidPlayer(player)) {
-            error = Error.PLAYER_NOT_FOUND;
+            error = ErrorType.PLAYER_NOT_FOUND;
         } else {
-            error = Error.PLAYER_IN_GAME_ERROR;
+            error = ErrorType.PLAYER_IN_GAME_ERROR;
         }
 
         return error;
     }
 
-    public Error deleteTeam(String name) {
-        Error error;
+    public ErrorType deleteTeam(String name) {
+        ErrorType error;
 
         Participant team = this.participantList.find(name);
         if (this.isValidTeam(team) && !this.tournamentList.isPlaying(team)) {
@@ -104,25 +104,25 @@ public class Controller {
             assert removed;
             error = null;
         } else if (!this.isValidTeam(team)) {
-            error = Error.TEAM_NOT_FOUND;
+            error = ErrorType.TEAM_NOT_FOUND;
         } else {
-            error = Error.TEAM_IN_GAME_ERROR;
+            error = ErrorType.TEAM_IN_GAME_ERROR;
         }
 
         return error;
     }
 
-    public Error addToTeam(String playerName, String teamName) {
-        Error error;
+    public ErrorType addToTeam(String playerName, String teamName) {
+        ErrorType error;
 
         Participant player = this.participantList.find(playerName);
         Participant team = this.participantList.find(teamName);
         if (this.isValidPlayer(player) && this.isValidTeam(team)) {
             error = ((Team) team).add((Player) player);
         } else if (!this.isValidPlayer(player)) {
-            error = Error.PLAYER_NOT_FOUND;
+            error = ErrorType.PLAYER_NOT_FOUND;
         } else {
-            error = Error.TEAM_NOT_FOUND;
+            error = ErrorType.TEAM_NOT_FOUND;
         }
 
         return error;
@@ -136,8 +136,8 @@ public class Controller {
         return participant != null && participant.hasChildren();
     }
 
-    public Error removeFromTeam(String teamName, String playerName) {
-        Error error;
+    public ErrorType removeFromTeam(String teamName, String playerName) {
+        ErrorType error;
 
         Participant player = this.participantList.find(playerName);
         Participant team = this.participantList.find(teamName);
@@ -146,21 +146,21 @@ public class Controller {
             if (removed) {
                 error = null;
             } else {
-                error = Error.PLAYER_NOT_IN_TEAM;
+                error = ErrorType.PLAYER_NOT_IN_TEAM;
             }
         } else {
-            error = Error.ELEMENT_NOT_FOUND;
+            error = ErrorType.ELEMENT_NOT_FOUND;
         }
 
         return error;
     }
 
-    public Error createTournament(TournamentInfo tournamentInfo, TimeFrame timeFrame) {
+    public ErrorType createTournament(TournamentInfo tournamentInfo, TimeFrame timeFrame) {
         return this.tournamentList.add(new Tournament(tournamentInfo, timeFrame));
     }
 
-    public Error deleteTournament(String tournamentName) {
-        Error error;
+    public ErrorType deleteTournament(String tournamentName) {
+        ErrorType error;
 
         Tournament tournament = this.tournamentList.find(tournamentName);
         if (tournament != null) {
@@ -168,38 +168,38 @@ public class Controller {
             assert removed;
             error = null;
         } else {
-            error = Error.TOURNAMENT_NOT_FOUND;
+            error = ErrorType.TOURNAMENT_NOT_FOUND;
         }
 
         return error;
     }
 
-    public Error tournamentMatchmake(String tournamentName, Collection<String> participantNames) {
+    public ErrorType tournamentMatchmake(String tournamentName, Collection<String> participantNames) {
         Tournament tournament = this.tournamentList.find(tournamentName);
         if (tournament == null) {
-            return Error.TOURNAMENT_NOT_FOUND;
+            return ErrorType.TOURNAMENT_NOT_FOUND;
         } else if (!tournament.isActive()) {
-            return Error.TOURNAMENT_NOT_ACTIVE;
+            return ErrorType.TOURNAMENT_NOT_ACTIVE;
         }
 
         ArrayList<Participant> participants = this.participantList.findAll(participantNames);
         if (participants == null) {
-            return Error.PARTICIPANT_NOT_FOUND;
+            return ErrorType.PARTICIPANT_NOT_FOUND;
         }
 
         return tournament.matchmake(participants);
     }
 
-    public Error tournamentMatchmake(String tournamentName, String... participantNames) {
+    public ErrorType tournamentMatchmake(String tournamentName, String... participantNames) {
         return this.tournamentMatchmake(tournamentName, Arrays.asList(participantNames));
     }
 
-    public Error tournamentRandomMatchmake(String tournamentName, int groupSize) {  // TODO: check groupSize here ?
+    public ErrorType tournamentRandomMatchmake(String tournamentName, int groupSize) {  // TODO: check groupSize here ?
         Tournament tournament = this.tournamentList.find(tournamentName);
         if (tournament == null) {
-            return Error.TOURNAMENT_NOT_FOUND;
+            return ErrorType.TOURNAMENT_NOT_FOUND;
         } else if (!tournament.isActive()) {
-            return Error.TOURNAMENT_NOT_ACTIVE;
+            return ErrorType.TOURNAMENT_NOT_ACTIVE;
         }
 
         return tournament.randomMatchmake(groupSize);

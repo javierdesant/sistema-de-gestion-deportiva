@@ -1,6 +1,6 @@
 package es.upm.etsisi.service;
 
-public enum Error {
+public enum ErrorType {
     DUPLICATE_ELEMENT_ERROR,
     DUPLICATE_TOURNAMENT_ERROR,
     DUPLICATE_MATCH_ERROR,

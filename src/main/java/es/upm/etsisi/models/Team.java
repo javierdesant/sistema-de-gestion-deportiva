@@ -1,6 +1,6 @@
 package es.upm.etsisi.models;
 
-import es.upm.etsisi.service.Error;
+import es.upm.etsisi.service.ErrorType;
 
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -19,11 +19,11 @@ public class Team implements Participant {
         this.children.add(player);
     }
 
-    public Error add(Player player) {
+    public ErrorType add(Player player) {
         boolean added = this.children.add(player);
 
         if (!added) {
-            return Error.PLAYER_ALREADY_IN_TEAM_ERROR;
+            return ErrorType.PLAYER_ALREADY_IN_TEAM_ERROR;
         }
         return null;
     }

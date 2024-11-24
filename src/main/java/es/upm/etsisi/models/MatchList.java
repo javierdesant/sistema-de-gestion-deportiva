@@ -1,6 +1,6 @@
 package es.upm.etsisi.models;
 
-import es.upm.etsisi.service.Error;
+import es.upm.etsisi.service.ErrorType;
 
 import java.util.Iterator;
 
@@ -15,17 +15,17 @@ public class MatchList extends List<Match> {
     }
 
     @Override
-    public Error add(Match match) {
-        Error error;
+    public ErrorType add(Match match) {
+        ErrorType error;
 
         if (this.canAdd(match)) {
             error = super.add(match);
             assert error == null;
         } else {
             if (this.contains(match)) {
-                error = Error.DUPLICATE_MATCH_ERROR;
+                error = ErrorType.DUPLICATE_MATCH_ERROR;
             } else {
-                error = Error.PLAYER_ALREADY_IN_MATCH_ERROR;
+                error = ErrorType.PLAYER_ALREADY_IN_MATCH_ERROR;
             }
         }
 

@@ -1,6 +1,6 @@
 package es.upm.etsisi.models;
 
-import es.upm.etsisi.service.Error;
+import es.upm.etsisi.service.ErrorType;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -54,15 +54,15 @@ public class Tournament {
         return this.matchList.contains(participant);
     }
 
-    public Error matchmake(Collection<Participant> participants) {  // TODO: fix match class
-        Error error;
+    public ErrorType matchmake(Collection<Participant> participants) {  // TODO: fix match class
+        ErrorType error;
 
         if (participants.size() < 2) {
-            error = Error.INVALID_MATCH;
+            error = ErrorType.INVALID_MATCH;
         } else if (!this.participantList.containsAll(participants)) {
-            error = Error.PARTICIPANT_NOT_ENROLLED;
+            error = ErrorType.PARTICIPANT_NOT_ENROLLED;
         } else if (this.hasRepeatedParticipants(participants)) {
-            error = Error.PARTICIPANT_ALREADY_ASSIGNED_ERROR;
+            error = ErrorType.PARTICIPANT_ALREADY_ASSIGNED_ERROR;
         } else {
             error = this.matchList.add(new Match(participants));
             assert error == null;
@@ -100,12 +100,12 @@ public class Tournament {
         return repeated;
     }
 
-    public Error randomMatchmake(int groupSize) {   // TODO: fix match class, maybe group has to be group*2 ?
-        Error error = null;
+    public ErrorType randomMatchmake(int groupSize) {   // TODO: fix match class, maybe group has to be group*2 ?
+        ErrorType error = null;
         LinkedList<Participant> participants = new LinkedList<>(this.participantList.getElements());
 
         if (participants.size() < 2) {
-            error = Error.INVALID_MATCH;
+            error = ErrorType.INVALID_MATCH;
         }
 
         Collections.shuffle(participants);

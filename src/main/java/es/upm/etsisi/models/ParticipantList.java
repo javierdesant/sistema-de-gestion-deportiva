@@ -1,6 +1,6 @@
 package es.upm.etsisi.models;
 
-import es.upm.etsisi.service.Error;
+import es.upm.etsisi.service.ErrorType;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -37,7 +37,7 @@ public class ParticipantList extends List<Participant> {
         boolean removed = super.remove(participant);
         if (removed) {
             for (Player child : participant.getChildren()) {
-                Error error = this.add(child);
+                ErrorType error = this.add(child);
                 assert error == null;
             }
         } else if (!participant.hasChildren()) {
