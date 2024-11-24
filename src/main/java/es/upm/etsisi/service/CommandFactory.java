@@ -45,8 +45,8 @@ public class CommandFactory {
     private void initializePublicCommands() {
         this.publicCommands.add(new LoginCommand(this.controller));
         this.publicCommands.add(new LogoutCommand(this.controller));
-        this.publicCommands.add(new HelpCommand(this.controller));
-        this.publicCommands.add(new ExitCommand(this.controller));
+//        this.publicCommands.add(new HelpCommand(this.controller));
+//        this.publicCommands.add(new ExitCommand(this.controller));
     }
 
     private ArrayList<Command> createCommands(Command... specificCommands) {
