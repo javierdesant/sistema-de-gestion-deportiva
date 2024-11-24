@@ -32,8 +32,11 @@ public class CommandArguments {
         return this.flags.contains(flag);
     }
 
+    public boolean hasToken() {
+        return !this.tokens.isEmpty();
+    }
+
     public String pollToken() {
         return this.tokens.poll();
     }
-
 }
