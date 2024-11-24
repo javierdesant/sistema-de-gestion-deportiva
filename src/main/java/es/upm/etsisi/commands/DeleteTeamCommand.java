@@ -1,7 +1,8 @@
 package es.upm.etsisi.commands;
 
-import es.upm.etsisi.exceptions.ElementNotFoundException;
+import es.upm.etsisi.service.CommandArguments;
 import es.upm.etsisi.service.Controller;
+import es.upm.etsisi.service.ErrorType;
 import es.upm.etsisi.utils.Message;
 
 public class DeleteTeamCommand extends Command {
@@ -13,11 +14,19 @@ public class DeleteTeamCommand extends Command {
     }
 
     @Override
-    public void execute() throws ElementNotFoundException {
-        String teamName = this.getArgument(0);
+    protected ErrorType execute(CommandArguments args) {
+        ErrorType error;
+        String teamName = args.pollToken();
 
-        this.controller.deleteParticipant(teamName);
+        if (this.areInvalidTokens(teamName)) {
+            return ErrorType.INVALID_ARGUMENTS;
+        }
 
-        Message.TEAM_REMOVED.writeln();
+        error = this.controller.deleteTeam(teamName);
+
+        if (error == null) {
+            Message.TEAM_REMOVED.writeln();
+        }
+        return error;
     }
 }
