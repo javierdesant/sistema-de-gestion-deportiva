@@ -26,7 +26,7 @@ public class ErrorView {
         MESSAGES.put(ErrorType.INVALID_ARGUMENTS, "Argumentos no válidos");
         MESSAGES.put(ErrorType.PARTICIPANT_NOT_ENROLLED, "El participante no está inscrito en el torneo");
         MESSAGES.put(ErrorType.INVALID_DNI_ERROR, "El DNI no es válido");
-        MESSAGES.put(ErrorType.TOURNAMENT_NOT_ACTIVE, "El torneo debe no se encuentra en curso");
+        MESSAGES.put(ErrorType.TOURNAMENT_NOT_ACTIVE, "El torneo no se encuentra en curso");
         MESSAGES.put(ErrorType.PLAYER_IN_GAME_ERROR, "El jugador participa en un torneo activo");
         MESSAGES.put(ErrorType.TEAM_IN_GAME_ERROR, "El equipo participa en un torneo activo");
         MESSAGES.put(ErrorType.INVALID_COMMAND, "Comando no válido");
