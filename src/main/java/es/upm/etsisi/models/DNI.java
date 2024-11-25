@@ -1,4 +1,4 @@
-package es.upm.etsisi.utils;
+package es.upm.etsisi.models;
 
 public class DNI {
     private final String dni;

@@ -1,7 +1,5 @@
 package es.upm.etsisi.models;
 
-import es.upm.etsisi.utils.DNI;
-
 import java.util.LinkedList;
 
 public class Player extends User implements Participant {
