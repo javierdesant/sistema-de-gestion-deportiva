@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class Console {
-
     private static final Console instance = new Console();
     private final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
