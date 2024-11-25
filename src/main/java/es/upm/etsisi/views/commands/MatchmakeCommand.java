@@ -8,7 +8,7 @@ import java.util.LinkedList;
 public class MatchmakeCommand extends Command {
     private final Controller controller;
 
-    public MatchmakeCommand(Controller controller) {
+    MatchmakeCommand(Controller controller) {
         super("matchmake", 10);      // TODO: revisar el numero de argumentos para match ? grupos ?
         this.controller = controller;
     }

@@ -6,7 +6,7 @@ import es.upm.etsisi.service.ErrorType;
 public class HelpCommand extends Command {
     private final CLI cli;
 
-    public HelpCommand(CLI cli) {
+    HelpCommand(CLI cli) {
         super("help", 0);
         this.cli = cli;
     }

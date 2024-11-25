@@ -6,7 +6,7 @@ import es.upm.etsisi.service.ErrorType;
 public class LogoutCommand extends Command {
     private final Controller controller;
 
-    public LogoutCommand(Controller controller) {
+    LogoutCommand(Controller controller) {
         super("logout", 0);
         this.controller = controller;
     }

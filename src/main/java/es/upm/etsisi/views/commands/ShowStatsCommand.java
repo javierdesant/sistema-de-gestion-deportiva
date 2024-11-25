@@ -10,7 +10,7 @@ import es.upm.etsisi.service.ErrorType;
 public class ShowStatsCommand extends Command {
     private final Controller controller;
 
-    public ShowStatsCommand(Controller controller) {
+    ShowStatsCommand(Controller controller) {
         super("statistics-show", 0);
         this.controller = controller;
     }

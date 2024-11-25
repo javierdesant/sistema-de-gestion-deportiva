@@ -6,7 +6,7 @@ import es.upm.etsisi.service.ErrorType;
 public class LoginCommand extends Command {
     private final Controller controller;
 
-    public LoginCommand(Controller controller) {
+    LoginCommand(Controller controller) {
         super("login", 2);
         this.controller = controller;
     }

@@ -7,7 +7,7 @@ import es.upm.etsisi.service.ErrorType;
 public class ListTournamentsCommand extends Command {
     private final Controller controller;
 
-    public ListTournamentsCommand(Controller controller) {
+    ListTournamentsCommand(Controller controller) {
         super("tournaments", 0);
         this.controller = controller;
     }

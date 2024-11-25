@@ -7,7 +7,7 @@ import es.upm.etsisi.utils.Message;
 public class DeletePlayerCommand extends Command {
     private final Controller controller;
 
-    public DeletePlayerCommand(Controller controller) {
+    DeletePlayerCommand(Controller controller) {
         super("player-remove", 1);
         this.controller = controller;
     }

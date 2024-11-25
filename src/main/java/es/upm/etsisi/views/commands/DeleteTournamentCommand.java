@@ -6,7 +6,7 @@ import es.upm.etsisi.service.ErrorType;
 public class DeleteTournamentCommand extends Command {
     private final Controller controller;
 
-    public DeleteTournamentCommand(Controller controller) {
+    DeleteTournamentCommand(Controller controller) {
         super("tournament-delete", 1);
         this.controller = controller;
     }

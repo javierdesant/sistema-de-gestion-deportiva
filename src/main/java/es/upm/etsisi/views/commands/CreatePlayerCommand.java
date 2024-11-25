@@ -8,7 +8,7 @@ import es.upm.etsisi.utils.Message;
 public class CreatePlayerCommand extends Command {
     private final Controller controller;
 
-    public CreatePlayerCommand(Controller controller) {
+    CreatePlayerCommand(Controller controller) {
         super("player-create", 5);
         this.controller = controller;
     }

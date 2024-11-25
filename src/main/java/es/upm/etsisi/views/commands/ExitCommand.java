@@ -7,7 +7,7 @@ import es.upm.etsisi.utils.Message;
 public class ExitCommand extends Command {
     private final SportsManager sportsManager;
 
-    public ExitCommand(SportsManager sportsManager) {
+    ExitCommand(SportsManager sportsManager) {
         super("exit", 0);
         this.sportsManager = sportsManager;
     }

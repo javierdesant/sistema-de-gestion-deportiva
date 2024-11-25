@@ -6,7 +6,7 @@ import es.upm.etsisi.service.ErrorType;
 public class EnrollCommand extends Command {
     private final Controller controller;
 
-    public EnrollCommand(Controller controller) {
+    EnrollCommand(Controller controller) {
         super("tournament-add", 0);
         this.controller = controller;
     }

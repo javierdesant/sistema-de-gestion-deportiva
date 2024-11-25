@@ -8,7 +8,7 @@ public abstract class Command {
     private final String name;
     private final int maxArguments;
 
-    public Command(String name, int maxArguments) {
+    Command(String name, int maxArguments) {
         this.name = name;
         this.maxArguments = maxArguments;
     }

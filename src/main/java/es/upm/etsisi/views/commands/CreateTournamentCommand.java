@@ -6,7 +6,7 @@ import es.upm.etsisi.service.ErrorType;
 public class CreateTournamentCommand extends Command {  // TODO: finish pending Tournament model
     private final Controller controller;
 
-    public CreateTournamentCommand(Controller controller) {
+    CreateTournamentCommand(Controller controller) {
         super("createTournament", 0);
         this.controller = controller;
     }

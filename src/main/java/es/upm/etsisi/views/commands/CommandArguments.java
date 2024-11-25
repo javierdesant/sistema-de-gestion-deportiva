@@ -7,7 +7,7 @@ public class CommandArguments {
     LinkedList<String> tokens;
     LinkedList<String> flags;
 
-    public CommandArguments(Collection<String> arguments) {
+    CommandArguments(Collection<String> arguments) {
         this.tokens = new LinkedList<>(arguments);
         this.flags = new LinkedList<>();
         this.separateFlags();

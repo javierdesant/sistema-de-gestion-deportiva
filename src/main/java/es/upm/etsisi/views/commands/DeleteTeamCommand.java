@@ -7,7 +7,7 @@ import es.upm.etsisi.utils.Message;
 public class DeleteTeamCommand extends Command {
     private final Controller controller;
 
-    public DeleteTeamCommand(Controller controller) {
+    DeleteTeamCommand(Controller controller) {
         super("team-delete", 1);
         this.controller = controller;
     }

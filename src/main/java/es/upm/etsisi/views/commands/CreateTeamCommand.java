@@ -7,7 +7,7 @@ import es.upm.etsisi.utils.Message;
 public class CreateTeamCommand extends Command {
     private final Controller controller;
 
-    public CreateTeamCommand(Controller controller) {
+    CreateTeamCommand(Controller controller) {
         super("team-create", 2);
         this.controller = controller;
     }
