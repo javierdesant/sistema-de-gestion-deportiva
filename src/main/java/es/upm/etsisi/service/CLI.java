@@ -1,25 +1,23 @@
 package es.upm.etsisi.service;
 
+import es.upm.etsisi.utils.Console;
+import es.upm.etsisi.utils.Message;
 import es.upm.etsisi.utils.Status;
 import es.upm.etsisi.views.ErrorView;
 import es.upm.etsisi.views.commands.Command;
 import es.upm.etsisi.views.commands.CommandFactory;
 import es.upm.etsisi.models.User;
-import es.upm.etsisi.utils.Message;
 
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class CLI {
     private final Controller controller;
     private final CommandFactory commandFactory;
-    private final Scanner scanner;  // TODO: replace with console
     private Status status;
 
     public CLI() {
         this.controller = new Controller();
         this.commandFactory = new CommandFactory(this.controller);
-        this.scanner = new Scanner(System.in);
         this.status = Status.OPEN;
     }
 
@@ -54,13 +52,13 @@ public class CLI {
     }
 
     private String readInput() {
+        Console console = Console.getInstance();
         User user = this.controller.getUser();
 
-        System.out.println();
-        System.out.print(user != null ? user + " # " : "");
-        Message.COMMAND_PROMPT.write();
+        console.writeln();
+        console.write(user != null ? user + " " : "");
 
-        return this.scanner.nextLine();
+        return console.readString(Message.COMMAND_PROMPT.toString());
     }
 
     private String[] splitInput(String input) {

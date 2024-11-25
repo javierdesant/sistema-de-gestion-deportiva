@@ -37,7 +37,7 @@ public class ErrorView {
     private final ErrorType error;
 
     public ErrorView(ErrorType error) {
-        this.console = new Console();
+        this.console = Console.getInstance();
         this.error = error;
     }
 
