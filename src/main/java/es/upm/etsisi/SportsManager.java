@@ -1,7 +1,7 @@
 package es.upm.etsisi;
 
 import es.upm.etsisi.models.Administrator;
-import es.upm.etsisi.service.CLI;
+import es.upm.etsisi.views.CLI;
 
 public class SportsManager {
     private final CLI cli;

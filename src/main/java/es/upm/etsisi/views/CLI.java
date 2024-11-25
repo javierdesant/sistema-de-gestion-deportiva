@@ -1,9 +1,10 @@
-package es.upm.etsisi.service;
+package es.upm.etsisi.views;
 
+import es.upm.etsisi.service.Controller;
+import es.upm.etsisi.service.ErrorType;
 import es.upm.etsisi.utils.Console;
 import es.upm.etsisi.utils.Message;
 import es.upm.etsisi.utils.Status;
-import es.upm.etsisi.views.ErrorView;
 import es.upm.etsisi.views.commands.Command;
 import es.upm.etsisi.views.commands.CommandFactory;
 import es.upm.etsisi.models.User;

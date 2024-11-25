@@ -1,6 +1,6 @@
 package es.upm.etsisi.views.commands;
 
-import es.upm.etsisi.service.CLI;
+import es.upm.etsisi.views.CLI;
 import es.upm.etsisi.service.ErrorType;
 import es.upm.etsisi.utils.Message;
 
