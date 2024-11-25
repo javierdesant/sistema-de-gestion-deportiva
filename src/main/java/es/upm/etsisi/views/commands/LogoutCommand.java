@@ -1,19 +1,20 @@
-package es.upm.etsisi.commands;
+package es.upm.etsisi.views.commands;
 
 import es.upm.etsisi.service.Controller;
 import es.upm.etsisi.service.ErrorType;
 
-public class EnrollCommand extends Command {
+public class LogoutCommand extends Command {
     private final Controller controller;
 
-    public EnrollCommand(Controller controller) {
-        super("tournament-add", 0);
+    public LogoutCommand(Controller controller) {
+        super("logout", 0);
         this.controller = controller;
     }
 
     @Override
     protected ErrorType execute(CommandArguments args) {
-        // TODO
+        this.controller.logout();
+
         return null;
     }
 }

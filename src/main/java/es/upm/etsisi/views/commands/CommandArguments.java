@@ -1,4 +1,4 @@
-package es.upm.etsisi.commands;
+package es.upm.etsisi.views.commands;
 
 import java.util.Collection;
 import java.util.LinkedList;

@@ -1,31 +1,30 @@
-package es.upm.etsisi.commands;
+package es.upm.etsisi.views.commands;
 
 import es.upm.etsisi.service.Controller;
 import es.upm.etsisi.service.ErrorType;
 import es.upm.etsisi.utils.Message;
 
-public class AddToTeamCommand extends Command {
+public class DeleteTeamCommand extends Command {
     private final Controller controller;
 
-    public AddToTeamCommand(Controller controller) {
-        super("team-add", 2);
+    public DeleteTeamCommand(Controller controller) {
+        super("team-delete", 1);
         this.controller = controller;
     }
 
     @Override
     protected ErrorType execute(CommandArguments args) {
         ErrorType error;
-        String playerName = args.pollToken();
         String teamName = args.pollToken();
 
-        if (this.areInvalidTokens(playerName, teamName)) {
+        if (this.areInvalidTokens(teamName)) {
             return ErrorType.INVALID_ARGUMENTS;
         }
 
-        error = this.controller.addToTeam(playerName, teamName);
+        error = this.controller.deleteTeam(teamName);
 
         if (error == null) {
-            Message.PLAYER_ADDED_TO_TEAM.writeln(playerName, teamName);
+            Message.TEAM_REMOVED.writeln();
         }
         return error;
     }

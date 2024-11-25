@@ -1,14 +1,14 @@
-package es.upm.etsisi.commands;
+package es.upm.etsisi.views.commands;
 
 import es.upm.etsisi.service.Controller;
 import es.upm.etsisi.service.ErrorType;
 import es.upm.etsisi.utils.Message;
 
-public class DeletePlayerCommand extends Command {
+public class AddToTeamCommand extends Command {
     private final Controller controller;
 
-    public DeletePlayerCommand(Controller controller) {
-        super("player-remove", 1);
+    AddToTeamCommand(Controller controller) {
+        super("team-add", 2);
         this.controller = controller;
     }
 
@@ -16,15 +16,16 @@ public class DeletePlayerCommand extends Command {
     protected ErrorType execute(CommandArguments args) {
         ErrorType error;
         String playerName = args.pollToken();
+        String teamName = args.pollToken();
 
-        if (this.areInvalidTokens(playerName)) {
+        if (this.areInvalidTokens(playerName, teamName)) {
             return ErrorType.INVALID_ARGUMENTS;
         }
 
-        error = this.controller.deletePlayer(playerName);
+        error = this.controller.addToTeam(playerName, teamName);
 
-        if (error != null) {
-            Message.PLAYER_REMOVED.writeln();
+        if (error == null) {
+            Message.PLAYER_ADDED_TO_TEAM.writeln(playerName, teamName);
         }
         return error;
     }

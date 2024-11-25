@@ -2,6 +2,7 @@ package es.upm.etsisi.service;
 
 import es.upm.etsisi.models.*;
 import es.upm.etsisi.utils.DNI;
+import es.upm.etsisi.utils.TimeFrame;
 
 import java.util.ArrayList;
 import java.util.Arrays;

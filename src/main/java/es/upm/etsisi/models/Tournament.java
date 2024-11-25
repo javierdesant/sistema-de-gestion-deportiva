@@ -1,6 +1,7 @@
 package es.upm.etsisi.models;
 
 import es.upm.etsisi.service.ErrorType;
+import es.upm.etsisi.utils.TimeFrame;
 
 import java.time.LocalDate;
 import java.util.*;

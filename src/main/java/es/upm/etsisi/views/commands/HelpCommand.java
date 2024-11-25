@@ -1,4 +1,4 @@
-package es.upm.etsisi.commands;
+package es.upm.etsisi.views.commands;
 
 import es.upm.etsisi.service.CLI;
 import es.upm.etsisi.service.ErrorType;

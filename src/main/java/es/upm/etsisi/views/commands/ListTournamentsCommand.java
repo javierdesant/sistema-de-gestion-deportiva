@@ -1,4 +1,4 @@
-package es.upm.etsisi.commands;
+package es.upm.etsisi.views.commands;
 
 import es.upm.etsisi.models.TournamentList;
 import es.upm.etsisi.service.Controller;

@@ -1,4 +1,7 @@
-package es.upm.etsisi.service;
+package es.upm.etsisi.views;
+
+import es.upm.etsisi.service.ErrorType;
+import es.upm.etsisi.utils.Console;
 
 import java.util.EnumMap;
 

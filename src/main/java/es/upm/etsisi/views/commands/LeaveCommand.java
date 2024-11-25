@@ -1,13 +1,13 @@
-package es.upm.etsisi.commands;
+package es.upm.etsisi.views.commands;
 
 import es.upm.etsisi.service.Controller;
 import es.upm.etsisi.service.ErrorType;
 
-public class CreateTournamentCommand extends Command {  // TODO: finish pending Tournament model
+public class LeaveCommand extends Command {
     private final Controller controller;
 
-    public CreateTournamentCommand(Controller controller) {
-        super("createTournament", 0);
+    public LeaveCommand(Controller controller) {
+        super("tournament-remove", 0);
         this.controller = controller;
     }
 
