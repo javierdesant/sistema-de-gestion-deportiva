@@ -1,6 +1,6 @@
 package es.upm.etsisi.service;
 
-import es.upm.etsisi.SportsManager;
+import es.upm.etsisi.utils.Status;
 import es.upm.etsisi.views.ErrorView;
 import es.upm.etsisi.views.commands.Command;
 import es.upm.etsisi.views.commands.CommandFactory;
@@ -10,24 +10,29 @@ import es.upm.etsisi.utils.Message;
 import java.util.Scanner;
 
 public class CLI {
-    private final SportsManager sportsManager; // move status to the CLI ?
     private final Controller controller;
     private final CommandFactory commandFactory;
     private final Scanner scanner;  // TODO: replace with console
+    private Status status;
 
-    public CLI(SportsManager sportsManager) { // erase manager param ?
-        this.sportsManager = sportsManager;
+    public CLI() {
         this.controller = new Controller();
         this.commandFactory = new CommandFactory(this.controller);
         this.scanner = new Scanner(System.in);
+        this.status = Status.OPEN;
+    }
+
+    public boolean isOpen() {
+        return this.status == Status.OPEN;
+    }
+
+    public void close() {
+        assert this.isOpen();
+        this.status = Status.CLOSED;
     }
 
     public void run() {
         ErrorType error;
-
-        if (!this.sportsManager.isOpen()) {     // FIXME ?
-            this.sportsManager.open();
-        }
 
         do {
             User user = this.controller.getUser();
@@ -46,7 +51,7 @@ public class CLI {
             if (error != null) {
                 new ErrorView(error).writeln();
             }
-        } while (this.sportsManager.isOpen());
+        } while (this.isOpen());
     }
 
     private String readInput() {

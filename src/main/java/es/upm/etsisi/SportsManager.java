@@ -2,41 +2,18 @@ package es.upm.etsisi;
 
 import es.upm.etsisi.models.Administrator;
 import es.upm.etsisi.service.CLI;
-import es.upm.etsisi.utils.Status;
 
 public class SportsManager {
     private final CLI cli;
-    private Status status;
 
     public SportsManager() {
-        this.status = Status.CLOSED;
-        this.cli = new CLI(this);
+        this.cli = new CLI();
     }
 
     public static void main(String[] args) {
         SportsManager sportsManager = new SportsManager();
 
         sportsManager.run();
-    }
-
-    public boolean isOpen() {
-        return this.status == Status.OPEN;
-    }
-
-    public void open() {
-        assert !this.isOpen();
-
-        this.status = Status.OPEN;
-    }
-
-    public boolean isClosed() {
-        return this.status == Status.CLOSED;
-    }
-
-    public void close() {
-        assert !this.isClosed();
-
-        this.status = Status.CLOSED;
     }
 
     public void run() {
