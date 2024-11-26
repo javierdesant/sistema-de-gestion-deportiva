@@ -28,7 +28,7 @@ package models {
     class DNI {
         - String dni
         + getValue(): String
-        + {static} isValidDNI(dni): boolean
+        + {static} isValidDNI(String dni): boolean
         + toString(): String
     }
 
@@ -86,20 +86,12 @@ package models {
         MONEY_GENERATED_IN_THE_TOURNAMENT
     }
 
-    enum Sport
-
-    enum League
-
     class Tournament {
-        - String name
-        - LocalDate startDate
-        - LocalDate endDate
-        - Sport sport
-        - League league
-        - Category category
+        - TournamentInfo info
+        - TimeFrame timeFrame
+        - ParticipantList participantList
         - MatchList matchList
-        + Tournament(String name, LocalDate startDate, LocalDate endDate,
-        Sport sport, League league, Category category)
+        + Tournament(TournamentInfo info, TimeFrame timeFrame)
         + getCategory(): Category
         + getName(): String
         + getMatches(): MatchList
@@ -109,6 +101,7 @@ package models {
         + getEndDate(): LocalDate
         + isActive(): boolean
         + equals(Object object): boolean
+        + contains(Participant participant): boolean
     }
 
     class Match {
@@ -163,6 +156,20 @@ package models {
         + remove(Tournament tournament)
     }
 
+    class TournamentInfo <<(R,yellow)>> {
+        - String name
+        - Sport sport
+        - League league
+        - Category category
+    }
+
+    class TimeFrame <<(R,yellow)>> {
+        - LocalDate startDate
+        - LocalDate endDate
+        + includes(LocalDate date): boolean
+        + includesNow(): boolean
+    }
+
     User --> Role
     Player --> Statistics
     Player --> DNI
@@ -170,9 +177,12 @@ package models {
     Match *--> ParticipantList
     Tournament *--> MatchList
     Statistics "1" ..> "0..*" Category
-    Tournament --> Category
-    Tournament --> League
-    Tournament --> Sport
+    Tournament *--> ParticipantList
+    Tournament --> TimeFrame
+    Tournament --> TournamentInfo
+    TournamentInfo --> Category
+    TournamentInfo --> League
+    TournamentInfo --> Sport
     TournamentList "1" o--> "0..*" Tournament
     ParticipantList "1" o--> "0..*" Participant
     MatchList "1" o--> "0..*" Match
