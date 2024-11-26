@@ -4,8 +4,8 @@ import es.upm.etsisi.service.ErrorType;
 import es.upm.etsisi.utils.Message;
 
 public class ExitCommand extends Command {
-        super("exit", 0);
     ExitCommand() {
+        super("exit", 0);
     }
 
     @Override
