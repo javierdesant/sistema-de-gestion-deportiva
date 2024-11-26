@@ -60,6 +60,18 @@ public class Controller {
         return error;
     }
 
+    public ErrorType createPlayer(Player player) {
+        ErrorType error;
+
+        error = this.participantList.add(player);
+        if (error.isNull()) {
+            error = this.userList.add(player);
+            assert error.isNull();
+        }
+
+        return error;
+    }
+
     public ErrorType createTeam(String teamName, String playerName) {
         ErrorType error;
 
@@ -76,6 +88,15 @@ public class Controller {
             error = ErrorType.PLAYER_NOT_FOUND;
         }
 
+        return error;
+    }
+
+    public ErrorType createTeam(Team team) {
+        ErrorType error;
+
+        error = this.participantList.add(team);
+        assert error.isNull();
+        
         return error;
     }
 
@@ -197,7 +218,7 @@ public class Controller {
         return this.tournamentMatchmake(tournamentName, Arrays.asList(participantNames));
     }
 
-    public ErrorType tournamentRandomMatchmake(String tournamentName, int groupSize) {  // TODO: check groupSize here ?
+    public ErrorType tournamentRandomMatchmake(String tournamentName, int groupSize) { // TODO: check groupSize here ?
         Tournament tournament = this.tournamentList.find(tournamentName);
         if (tournament == null) {
             return ErrorType.TOURNAMENT_NOT_FOUND;
