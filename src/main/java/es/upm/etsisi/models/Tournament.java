@@ -39,11 +39,11 @@ public class Tournament {
     }
 
     public LocalDate getStartDate() {
-        return this.timeFrame.startDate();
+        return this.timeFrame.getStartDate();
     }
 
     public LocalDate getEndDate() {
-        return this.timeFrame.endDate();
+        return this.timeFrame.getEndDate();
     }
 
     public boolean isActive() {
