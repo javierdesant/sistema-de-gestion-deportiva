@@ -1,0 +1,82 @@
+@startuml
+skinparam groupInheritance 4
+
+package models {
+    class User
+    class Administrator extends User
+    enum Role
+    class DNI
+    class Player extends User implements Participant
+    class Team implements Participant
+    interface Participant
+    class Statistics
+    enum Category
+    class Tournament
+    class Match
+    abstract class List<T>
+    class UserList extends List
+    class ParticipantList extends List
+    class MatchList extends List
+    class TournamentList extends List
+    class TournamentInfo <<(R,yellow)>>
+    class TimeFrame <<(R,yellow)>>
+
+    User --> Role
+    Player --> Statistics
+    Player --> DNI
+    Team "0..1" o--> "1..*" Participant
+    Match *--> ParticipantList
+    Tournament *--> MatchList
+    Statistics "1" ..> "0..*" Category
+    Tournament *--> ParticipantList
+    Tournament --> TimeFrame
+    Tournament --> TournamentInfo
+    TournamentInfo --> Category
+    TournamentInfo --> League
+    TournamentInfo --> Sport
+    TournamentList "1" o--> "0..*" Tournament
+    ParticipantList "1" o--> "0..*" Participant
+    MatchList "1" o--> "0..*" Match
+    UserList "1" o--> "0..*" User
+}
+
+package service {
+    class Controller
+    enum ErrorType
+
+    Controller --> User
+    Controller *--> List
+}
+
+package views {
+    class CLI
+    class ErrorView
+    class TournamentView
+
+    package commands {
+        abstract class Command
+        class CommandFactory
+        class CommandArguments
+        CommandFactory --> Command
+        Command .right.> CommandArguments
+        Command <|-- SubCommandA
+        Command <|-- SubCommandB
+        Command <|-- SubCommandC
+        SubCommandA ..> Controller
+        SubCommandB ..> Controller
+        SubCommandC ..> Controller
+    }
+
+    CLI --> CommandFactory
+    CLI ..> Command
+}
+
+package utils {
+    class Console
+
+}
+
+class SportsManager
+
+SportsManager --> CLI
+@enduml
