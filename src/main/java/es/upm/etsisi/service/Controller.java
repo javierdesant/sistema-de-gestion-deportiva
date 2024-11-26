@@ -27,7 +27,7 @@ public class Controller {
         User user = this.userList.findByUsername(username);
         if (user != null && user.validate(password)) {
             this.user = user;
-            error = null;
+            error = ErrorType.NULL;
         } else if (user == null) {
             error = ErrorType.USER_NOT_FOUND;
         } else {
@@ -52,9 +52,9 @@ public class Controller {
         Player player = new Player(username, password, firstName, lastName, dni, this.user);
 
         error = this.participantList.add(player);
-        if (error == null) {
+        if (error.isNull()) {
             error = this.userList.add(player);
-            assert error == null;
+            assert error.isNull();
         }
 
         return error;
@@ -68,7 +68,7 @@ public class Controller {
             assert this.user.getRole() == Role.ADMIN;
             Team team = new Team(teamName, (Administrator) this.user, (Player) player);
             error = this.participantList.add(team);
-            if (error == null) {
+            if (error.isNull()) {
                 boolean removed = this.participantList.remove(player);
                 assert removed;
             }
@@ -88,7 +88,7 @@ public class Controller {
             assert userRemoved;
             boolean participantRemoved = this.participantList.remove(player);
             assert participantRemoved;
-            error = null;
+            error = ErrorType.NULL;
         } else if (!this.isValidPlayer(player)) {
             error = ErrorType.PLAYER_NOT_FOUND;
         } else {
@@ -105,7 +105,7 @@ public class Controller {
         if (this.isValidTeam(team) && this.tournamentList.isFree(team)) {
             boolean removed = this.participantList.remove(team);
             assert removed;
-            error = null;
+            error = ErrorType.NULL;
         } else if (!this.isValidTeam(team)) {
             error = ErrorType.TEAM_NOT_FOUND;
         } else {
@@ -147,7 +147,7 @@ public class Controller {
         if (this.isValidPlayer(player) && this.isValidTeam(team)) {
             boolean removed = ((Team) team).remove((Player) player);
             if (removed) {
-                error = null;
+                error = ErrorType.NULL;
             } else {
                 error = ErrorType.PLAYER_NOT_IN_TEAM;
             }
@@ -169,7 +169,7 @@ public class Controller {
         if (tournament != null) {
             boolean removed = this.tournamentList.remove(tournament);
             assert removed;
-            error = null;
+            error = ErrorType.NULL;
         } else {
             error = ErrorType.TOURNAMENT_NOT_FOUND;
         }

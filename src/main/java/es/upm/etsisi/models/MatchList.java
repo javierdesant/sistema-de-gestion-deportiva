@@ -20,7 +20,7 @@ public class MatchList extends List<Match> {
 
         if (this.canAdd(match)) {
             error = super.add(match);
-            assert error == null;
+            assert error.isNull();
         } else {
             if (this.contains(match)) {
                 error = ErrorType.DUPLICATE_MATCH_ERROR;

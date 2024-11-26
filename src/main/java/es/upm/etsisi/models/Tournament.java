@@ -65,7 +65,7 @@ public class Tournament {
             error = ErrorType.PARTICIPANT_ALREADY_ASSIGNED_ERROR;
         } else {
             error = this.matchList.add(new Match(participants));
-            assert error == null;
+            assert error.isNull();
         }
 
         return error;
@@ -101,11 +101,11 @@ public class Tournament {
     }
 
     public ErrorType randomMatchmake(int groupSize) {   // TODO: fix match class, maybe group has to be group*2 ?
-        ErrorType error = null;
+        ErrorType error;
         LinkedList<Participant> participants = new LinkedList<>(this.participantList.getElements());
 
         if (participants.size() < 2) {
-            error = ErrorType.INVALID_MATCH;
+            return ErrorType.INVALID_MATCH;
         }
 
         Collections.shuffle(participants);
@@ -115,10 +115,10 @@ public class Tournament {
                 group.add(participants.remove(i));
             }
             error = this.matchmake(group);
-            assert error == null;
+            assert error.isNull();
         }
 
-        return error;
+        return ErrorType.NULL;
     }
 
     @Override
