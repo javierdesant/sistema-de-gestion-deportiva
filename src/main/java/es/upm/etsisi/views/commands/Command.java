@@ -7,14 +7,20 @@ import java.util.List;
 public abstract class Command {
     private final String name;
     private final int maxArguments;
+    private final String description;
 
-    Command(String name, int maxArguments) {
+    Command(String name, int maxArguments, String description) {
         this.name = name;
         this.maxArguments = maxArguments;
+        this.description = description;
     }
 
     public String getName() {
         return this.name;
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 
     public boolean isCalled(String title) {

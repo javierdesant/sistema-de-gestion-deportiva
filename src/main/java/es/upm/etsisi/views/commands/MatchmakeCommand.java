@@ -9,7 +9,8 @@ public class MatchmakeCommand extends Command {
     private final Controller controller;
 
     MatchmakeCommand(Controller controller) {
-        super("matchmake", 10);      // TODO: revisar el numero de argumentos para match ? grupos ?
+        super("tournament-matchmaking", 10, "Genera emparejamientos para el torneo especificado, permitiendo emparejamiento manual (-m) o automático aleatorio (-a).");
+        // TODO: revisar el numero de argumentos para match ? grupos ?
         this.controller = controller;
     }
 

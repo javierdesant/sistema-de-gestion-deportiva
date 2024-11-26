@@ -11,7 +11,7 @@ public class ShowStatsCommand extends Command {
     private final Controller controller;
 
     ShowStatsCommand(Controller controller) {
-        super("statistics-show", 0);
+        super("statistics-show", 0, "Muestra las estadísticas del jugador autenticado. Con la opción -csv, se presentan en formato tabla; con -json, en formato clave-valor.");
         this.controller = controller;
     }
 

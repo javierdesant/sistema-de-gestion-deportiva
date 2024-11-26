@@ -8,7 +8,7 @@ public class RemoveFromTeamCommand extends Command {
     private final Controller controller;
 
     RemoveFromTeamCommand(Controller controller) {
-        super("team-remove", 2);
+        super("team-remove", 2, "Elimina al jugador de un equipo.");
         this.controller = controller;
     }
 

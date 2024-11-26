@@ -7,7 +7,7 @@ public class DeleteTournamentCommand extends Command {
     private final Controller controller;
 
     DeleteTournamentCommand(Controller controller) {
-        super("tournament-delete", 1);
+        super("tournament-delete", 1, "Elimina un torneo del sistema, incluso si está en curso.");
         this.controller = controller;
     }
 

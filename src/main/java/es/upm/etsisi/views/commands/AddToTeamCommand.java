@@ -8,7 +8,7 @@ public class AddToTeamCommand extends Command {
     private final Controller controller;
 
     AddToTeamCommand(Controller controller) {
-        super("team-add", 2);
+        super("team-add", 2, "Añade al jugador indicado a un equipo.");
         this.controller = controller;
     }
 

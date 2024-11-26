@@ -5,7 +5,7 @@ import es.upm.etsisi.utils.Message;
 
 public class ExitCommand extends Command {
     ExitCommand() {
-        super("exit", 0);
+        super("exit", 0, "Cierra el programa en curso.");
     }
 
     @Override

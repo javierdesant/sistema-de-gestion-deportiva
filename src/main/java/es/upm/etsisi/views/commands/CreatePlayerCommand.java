@@ -9,7 +9,7 @@ public class CreatePlayerCommand extends Command {
     private final Controller controller;
 
     CreatePlayerCommand(Controller controller) {
-        super("player-create", 5);
+        super("player-create", 5, "Registra un nuevo jugador en el sistema.");
         this.controller = controller;
     }
 

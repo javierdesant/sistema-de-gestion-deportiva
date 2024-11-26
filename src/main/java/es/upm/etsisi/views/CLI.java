@@ -8,6 +8,7 @@ import es.upm.etsisi.views.commands.Command;
 import es.upm.etsisi.views.commands.CommandFactory;
 import es.upm.etsisi.models.User;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class CLI {
@@ -36,6 +37,9 @@ public class CLI {
             Command command = this.commandFactory.getCommand(user != null ? user.getRole() : null, commandTitle);
             if (command != null) {
                 error = command.execute(Arrays.copyOfRange(parsedInput, 1, parsedInput.length));
+                if (commandTitle.equals("help")) {      // FIXME: i dont like this
+                    this.displayHelp();
+                }
             } else {
                 error = ErrorType.INVALID_COMMAND;
             }
@@ -66,5 +70,16 @@ public class CLI {
         System.arraycopy(arguments, 0, result, 1, arguments.length);
 
         return result;
+    }
+
+    private void displayHelp() {
+        Console console = Console.getInstance();
+        User user = this.controller.getUser();
+
+        console.writeln("Comandos disponibles:");
+        ArrayList<Command> commands = this.commandFactory.getAllCommands(user != null ? user.getRole() : null);
+        for (Command command : commands) {
+            console.writeln(" - " + command.getName() + ": " + command.getDescription());
+        }
     }
 }

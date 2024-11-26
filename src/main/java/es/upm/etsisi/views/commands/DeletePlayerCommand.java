@@ -8,7 +8,7 @@ public class DeletePlayerCommand extends Command {
     private final Controller controller;
 
     DeletePlayerCommand(Controller controller) {
-        super("player-remove", 1);
+        super("player-remove", 1, "Elimina del sistema a un jugador, siempre que no participe en un torneo en curso ni pertenezca a un equipo que esté participando en uno.");
         this.controller = controller;
     }
 

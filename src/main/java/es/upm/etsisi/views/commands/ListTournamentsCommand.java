@@ -8,7 +8,7 @@ public class ListTournamentsCommand extends Command {
     private final Controller controller;
 
     ListTournamentsCommand(Controller controller) {
-        super("tournaments", 0);
+        super("tournaments", 0, "Lista los torneos del sistema.");
         this.controller = controller;
     }
 

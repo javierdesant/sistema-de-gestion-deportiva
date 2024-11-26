@@ -7,7 +7,7 @@ public class LogoutCommand extends Command {
     private final Controller controller;
 
     LogoutCommand(Controller controller) {
-        super("logout", 0);
+        super("logout", 0, "Desautentica al usuario actualmente autenticado en el sistema.");
         this.controller = controller;
     }
 

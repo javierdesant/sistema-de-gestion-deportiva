@@ -7,7 +7,7 @@ public class CreateTournamentCommand extends Command {  // TODO: finish pending 
     private final Controller controller;
 
     CreateTournamentCommand(Controller controller) {
-        super("tournament-create", 0);
+        super("tournament-create", 0, "Registra un nuevo torneo en el sistema.");
         this.controller = controller;
     }
 
