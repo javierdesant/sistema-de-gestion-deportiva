@@ -1,6 +1,5 @@
 package es.upm.etsisi;
 
-import es.upm.etsisi.models.Administrator;
 import es.upm.etsisi.views.CLI;
 
 public class SportsManager {
@@ -17,9 +16,6 @@ public class SportsManager {
     }
 
     public void run() {
-        String[] defaultNames = {"Luisa", "Manuel", "Kurt", "Sofia", "Robert"};     // TODO: implement
-        Administrator administrator = new Administrator("admin@upm.es", "admin");   // TODO: implement
-
         System.out.println("\n### Bienvenido al Gestor Deportivo ###\n");
 
         System.out.println("Introduzca un comando o escriba 'exit' para salir.");
