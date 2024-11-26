@@ -55,6 +55,10 @@ public class CommandFactory {
         return commandList;
     }
 
+    ArrayList<Command> getCommands(Role role) {
+        return this.commands.get(role);
+    }
+
     public Command getCommand(Role role, String title) {
         ArrayList<Command> activeCommands = this.commands.getOrDefault(role, this.publicCommands);
         Command res = null;
