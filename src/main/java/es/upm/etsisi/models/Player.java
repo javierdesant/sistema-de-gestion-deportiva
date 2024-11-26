@@ -34,6 +34,7 @@ public class Player extends User implements Participant {
                   DNI dni,
                   User admin) {
         this(username, password, firstName, lastName, dni, new Statistics(), admin);
+        assert this.hasUpmEmail();
     }
 
     @Override
