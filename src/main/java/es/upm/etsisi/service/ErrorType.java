@@ -25,5 +25,9 @@ public enum ErrorType {
     INVALID_ARGUMENTS,
     INVALID_MATCH,
 
-    NULL
+    NULL;
+
+    public boolean isNull() {
+        return this == NULL;
+    }
 }
