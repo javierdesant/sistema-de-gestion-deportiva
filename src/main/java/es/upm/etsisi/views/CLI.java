@@ -44,9 +44,7 @@ public class CLI {
                 error = ErrorType.INVALID_COMMAND;
             }
 
-            if (error != null) {
-                new ErrorView(error).writeln();
-            }
+            new ErrorView(error).writeln();
         } while (this.isOpen(commandTitle));
     }
 
