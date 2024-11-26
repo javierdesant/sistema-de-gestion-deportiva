@@ -15,6 +15,6 @@ public class LogoutCommand extends Command {
     protected ErrorType execute(CommandArguments args) {
         this.controller.logout();
 
-        return null;
+        return ErrorType.NULL;
     }
 }

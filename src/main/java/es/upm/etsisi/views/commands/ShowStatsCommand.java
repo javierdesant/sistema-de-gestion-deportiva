@@ -27,6 +27,6 @@ public class ShowStatsCommand extends Command {
             System.out.println(category + "\t- " + stats.get(category));
         }
 
-        return null;
+        return ErrorType.NULL;
     }
 }

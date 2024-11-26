@@ -24,7 +24,7 @@ public class RemoveFromTeamCommand extends Command {
 
         error = this.controller.removeFromTeam(teamName, playerName);
 
-        if (error == null) {
+        if (error.isNull()) {
             Message.PLAYER_REMOVED_FROM_TEAM.writeln(playerName, teamName);
         }
         return error;
