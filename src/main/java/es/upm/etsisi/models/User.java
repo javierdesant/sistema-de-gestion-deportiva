@@ -15,6 +15,10 @@ public abstract class User {
         return this.role;
     }
 
+    public boolean isLoggedIn() {
+        return this.role != Role.GUEST;
+    }
+
     protected boolean hasUpmEmail() {
         return this.username.contains("@") && this.username.endsWith("upm.es");
     }
