@@ -34,7 +34,7 @@ public class CLI {
             String[] parsedInput = this.splitInput(input);
             commandTitle = parsedInput[0];
 
-            Command command = this.commandFactory.getCommand(user != null ? user.getRole() : null, commandTitle);
+            Command command = this.commandFactory.getCommand(user.getRole(), commandTitle);
             if (command != null) {
                 error = command.execute(Arrays.copyOfRange(parsedInput, 1, parsedInput.length));
                 if (commandTitle.equals("help")) {      // FIXME: i dont like this
@@ -53,7 +53,9 @@ public class CLI {
         User user = this.controller.getUser();
 
         console.writeln();
-        console.write(user != null ? user + " " : "");
+        if (user.isLoggedIn()) {
+            console.write(user + " ");
+        }
 
         return console.readString(Message.COMMAND_PROMPT.toString());
     }
@@ -75,7 +77,7 @@ public class CLI {
         User user = this.controller.getUser();
 
         console.writeln("Comandos disponibles:");
-        ArrayList<Command> commands = this.commandFactory.getAllCommands(user != null ? user.getRole() : null);
+        ArrayList<Command> commands = this.commandFactory.getAllCommands(user.getRole());
         for (Command command : commands) {
             console.writeln(" - " + command.getName() + ": " + command.getDescription());
         }
