@@ -6,6 +6,9 @@ import es.upm.etsisi.utils.Console;
 import es.upm.etsisi.utils.Message;
 import es.upm.etsisi.views.commands.Command;
 import es.upm.etsisi.views.commands.CommandFactory;
+import es.upm.etsisi.DefaultParameters;
+import es.upm.etsisi.models.Player;
+import es.upm.etsisi.models.Team;
 import es.upm.etsisi.models.User;
 
 import java.util.ArrayList;
@@ -27,6 +30,9 @@ public class CLI {
     public void run() {
         ErrorType error;
         String commandTitle;
+        
+        DefaultParameters defaultParameters = new DefaultParameters();
+        addDefaults(defaultParameters);
 
         do {
             User user = this.controller.getUser();
@@ -37,7 +43,7 @@ public class CLI {
             Command command = this.commandFactory.getCommand(user != null ? user.getRole() : null, commandTitle);
             if (command != null) {
                 error = command.execute(Arrays.copyOfRange(parsedInput, 1, parsedInput.length));
-                if (commandTitle.equals("help")) {      // FIXME: i dont like this
+                if (command.isCalled("help")) {
                     this.displayHelp();
                 }
             } else {
@@ -78,6 +84,16 @@ public class CLI {
         ArrayList<Command> commands = this.commandFactory.getAllCommands(user != null ? user.getRole() : null);
         for (Command command : commands) {
             console.writeln(" - " + command.getName() + ": " + command.getDescription());
+        }
+    }
+
+    private void addDefaults(DefaultParameters defaultParameters) {
+        this.controller.login(defaultParameters.getAdmin().getUsername(), "admin");
+        for (Player player : defaultParameters.getPlayers()) {
+            this.controller.createPlayer(player);
+        }
+        for (Team team : defaultParameters.getTeams()) {
+            this.controller.createTeam(team);
         }
     }
 }
