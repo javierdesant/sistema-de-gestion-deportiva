@@ -7,12 +7,13 @@ public class CreateTournamentCommand extends Command {  // TODO: finish pending 
     private final Controller controller;
 
     CreateTournamentCommand(Controller controller) {
-        super("createTournament", 0);
+        super("tournament-create", 0);
         this.controller = controller;
     }
 
     @Override
     protected ErrorType execute(CommandArguments args) {
+
         // TODO
         return null;
     }
