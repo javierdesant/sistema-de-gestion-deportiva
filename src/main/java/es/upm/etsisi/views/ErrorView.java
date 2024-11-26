@@ -42,7 +42,7 @@ public class ErrorView {
     }
 
     public void writeln() {
-        if (this.error != ErrorType.NULL) {
+        if (!this.error.isNull()) {
             String message = MESSAGES.getOrDefault(this.error, "Error desconocido");
             this.console.writeln(message);
         }
