@@ -16,7 +16,7 @@ public class MatchmakeCommand extends Command {
 
     @Override
     protected ErrorType execute(CommandArguments args) {
-        ErrorType error = null;
+        ErrorType error = ErrorType.NULL;
         String tournamentName = args.pollToken();
 
         if (this.areInvalidTokens(tournamentName)) {
@@ -24,7 +24,7 @@ public class MatchmakeCommand extends Command {
         }
 
         LinkedList<String> players = new LinkedList<>();
-        while (args.hasToken() && error == null) {
+        while (args.hasToken() && error.isNull()) {
             String token = args.pollToken();
             if (this.areInvalidTokens(token)) {
                 error = ErrorType.INVALID_ARGUMENTS;
@@ -32,13 +32,13 @@ public class MatchmakeCommand extends Command {
             players.add(token);
         }
 
-        if (error != null) {
+        if (!error.isNull()) {
             return error;
         }
 
         error = this.controller.tournamentMatchmake(tournamentName, players);
 
-        if (error != null) {
+        if (!error.isNull()) {
             // TODO: add message
         }
         return error;

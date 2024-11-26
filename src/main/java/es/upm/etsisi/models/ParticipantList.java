@@ -38,7 +38,7 @@ public class ParticipantList extends List<Participant> {
         if (removed) {
             for (Player child : participant.getChildren()) {
                 ErrorType error = this.add(child);
-                assert error == null;
+                assert error.isNull();
             }
         } else if (!participant.hasChildren()) {
             removed = this.removeFromTeam((Player) participant);

@@ -22,7 +22,7 @@ public class DeleteTournamentCommand extends Command {
 
         error = this.controller.deleteTournament(tournamentName);
 
-        if (error == null) {
+        if (error.isNull()) {
             // TODO: add message
         }
         return error;

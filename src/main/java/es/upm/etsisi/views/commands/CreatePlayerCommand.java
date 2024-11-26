@@ -23,13 +23,13 @@ public class CreatePlayerCommand extends Command {
         String dni = args.pollToken();
 
         error = this.validate(username, password, playerName, playerLastName, dni);
-        if (error != null) {
+        if (!error.isNull()) {
             return error;
         }
 
         error = this.controller.createPlayer(username, password, playerLastName, playerLastName, new DNI(dni));
 
-        if (error == null) {
+        if (error.isNull()) {
             Message.PLAYER_ADDED.writeln();
         }
         return error;
@@ -45,7 +45,7 @@ public class CreatePlayerCommand extends Command {
         } else if (!DNI.isValidDNI(dni)) {
             return ErrorType.INVALID_DNI_ERROR;
         } else {
-            return null;
+            return ErrorType.NULL;
         }
     }
 }

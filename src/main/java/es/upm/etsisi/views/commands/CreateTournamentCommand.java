@@ -15,6 +15,6 @@ public class CreateTournamentCommand extends Command {  // TODO: finish pending 
     protected ErrorType execute(CommandArguments args) {
 
         // TODO
-        return null;
+        return ErrorType.NULL;
     }
 }

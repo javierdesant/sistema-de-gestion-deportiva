@@ -14,6 +14,6 @@ public class LeaveCommand extends Command {
     @Override
     protected ErrorType execute(CommandArguments args) {
         // TODO
-        return null;
+        return ErrorType.NULL;
     }
 }

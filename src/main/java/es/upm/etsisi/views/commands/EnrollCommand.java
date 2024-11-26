@@ -14,6 +14,6 @@ public class EnrollCommand extends Command {
     @Override
     protected ErrorType execute(CommandArguments args) {
         // TODO
-        return null;
+        return ErrorType.NULL;
     }
 }

@@ -23,7 +23,7 @@ public class DeleteTeamCommand extends Command {
 
         error = this.controller.deleteTeam(teamName);
 
-        if (error == null) {
+        if (error.isNull()) {
             Message.TEAM_REMOVED.writeln();
         }
         return error;

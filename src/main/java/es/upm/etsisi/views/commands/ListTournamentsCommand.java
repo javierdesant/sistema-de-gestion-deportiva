@@ -17,6 +17,6 @@ public class ListTournamentsCommand extends Command {
         TournamentList tournaments = this.controller.getTournaments();
 
         // TODO
-        return null;
+        return ErrorType.NULL;
     }
 }

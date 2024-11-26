@@ -46,10 +46,12 @@ public abstract class List<T> {
     }
 
     public ErrorType add(T element) {
-        ErrorType error = null;
+        ErrorType error;
 
         if (!this.contains(element)) {
-            this.elements.add(element);
+            boolean added = this.elements.add(element);
+            assert added;
+            return ErrorType.NULL;
         } else {
             error = ErrorType.DUPLICATE_ELEMENT_ERROR;
         }

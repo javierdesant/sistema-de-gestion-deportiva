@@ -11,6 +11,6 @@ public class ExitCommand extends Command {
     @Override
     protected ErrorType execute(CommandArguments args) {
         Message.EXIT_MESSAGE.writeln();
-        return null;
+        return ErrorType.NULL;
     }
 }

@@ -25,7 +25,7 @@ public class Team implements Participant {
         if (!added) {
             return ErrorType.PLAYER_ALREADY_IN_TEAM_ERROR;
         }
-        return null;
+        return ErrorType.NULL;
     }
 
     public boolean remove(Player player) {

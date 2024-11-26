@@ -25,7 +25,7 @@ public class LoginCommand extends Command {
 
         error = this.controller.login(username, password);
 
-        if (error == null) {
+        if (error.isNull()) {
             // TODO: add message
         }
         return error;

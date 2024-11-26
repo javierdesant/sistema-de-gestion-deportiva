@@ -23,7 +23,7 @@ public class DeletePlayerCommand extends Command {
 
         error = this.controller.deletePlayer(playerName);
 
-        if (error != null) {
+        if (error.isNull()) {
             Message.PLAYER_REMOVED.writeln();
         }
         return error;

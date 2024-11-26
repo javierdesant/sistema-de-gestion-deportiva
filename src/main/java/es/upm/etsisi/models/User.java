@@ -19,10 +19,7 @@ public abstract class User {
     }
 
     private boolean isUpmEmail(String email) {
-        if (email == null || !email.contains("@")) {
-            return false;
-        }
-        return email.endsWith("upm.es");
+        return email.contains("@") && email.endsWith("upm.es");
     }
 
     public String getUsername() {

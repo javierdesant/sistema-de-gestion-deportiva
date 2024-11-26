@@ -9,6 +9,6 @@ public class HelpCommand extends Command {
 
     @Override
     protected ErrorType execute(CommandArguments args) {
-        return null;
+        return ErrorType.NULL;
     }
 }

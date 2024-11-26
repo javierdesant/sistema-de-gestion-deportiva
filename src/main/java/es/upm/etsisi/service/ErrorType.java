@@ -24,4 +24,10 @@ public enum ErrorType {
     INVALID_COMMAND,
     INVALID_ARGUMENTS,
     INVALID_MATCH,
+
+    NULL;
+
+    public boolean isNull() {
+        return this == NULL;
+    }
 }
