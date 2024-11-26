@@ -33,15 +33,15 @@ public class TournamentList extends List<Tournament> {
         return res;
     }
 
-    public boolean isPlaying(Participant participant) {
-        boolean res = false;
+    public boolean isFree(Participant participant) {
+        boolean isPlaying = false;
 
         Iterator<Tournament> iterator = this.iterator();
-        while (iterator.hasNext() && !res) {
+        while (iterator.hasNext() && !isPlaying) {
             Tournament next = iterator.next();
-            res = next.contains(participant) && next.isActive();
+            isPlaying = next.contains(participant) && next.isActive();
         }
 
-        return res;
+        return !isPlaying;
     }
 }

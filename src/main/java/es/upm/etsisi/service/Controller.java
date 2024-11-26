@@ -83,7 +83,7 @@ public class Controller {
         ErrorType error;
 
         Participant player = this.participantList.find(name);
-        if (this.isValidPlayer(player) && !this.tournamentList.isPlaying(player)) {
+        if (this.isValidPlayer(player) && this.tournamentList.isFree(player)) {
             boolean userRemoved = this.userList.remove(this.userList.findByPlayerName(name));
             assert userRemoved;
             boolean participantRemoved = this.participantList.remove(player);
@@ -102,7 +102,7 @@ public class Controller {
         ErrorType error;
 
         Participant team = this.participantList.find(name);
-        if (this.isValidTeam(team) && !this.tournamentList.isPlaying(team)) {
+        if (this.isValidTeam(team) && this.tournamentList.isFree(team)) {
             boolean removed = this.participantList.remove(team);
             assert removed;
             error = null;
