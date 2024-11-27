@@ -6,7 +6,7 @@ public abstract class User {
     private final Role role;
 
     public User(String username, String password, Role role) {
-        assert this.isUpmEmail(username) : "Not valid email";   // TODO: add Message, replace with an exception
+        assert isUpmEmail(username);
         assert role != null;
 
         this.username = username;
@@ -18,7 +18,7 @@ public abstract class User {
         return this.role;
     }
 
-    private boolean isUpmEmail(String email) {
+    public static boolean isUpmEmail(String email) {
         return email.contains("@") && email.endsWith("upm.es");
     }
 
