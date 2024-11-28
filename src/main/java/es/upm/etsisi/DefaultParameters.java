@@ -1,84 +1,93 @@
 package es.upm.etsisi;
 
 import es.upm.etsisi.models.Administrator;
-import es.upm.etsisi.models.Player;
-import es.upm.etsisi.models.Team;
-import es.upm.etsisi.models.DNI;
-import java.text.Normalizer;
+
+import java.util.LinkedList;
+import java.util.Iterator;
 import java.util.Random;
+import java.text.Normalizer;
 
 public class DefaultParameters {
-    private final int DEFAULT_PLAYERS = 6;
-    private final int DEFAULT_TEAMS = 2;
-    private final String[] DEFAULT_SURNAMES = { "Pérez", "Sánchez", "Jiménez", "Torres", "Blanco", "Navarro",
+    private static final int DEFAULT_PLAYERS = 6;
+    private static final int DEFAULT_TEAMS = 2;
+    private static final String[] DEFAULT_SURNAMES = { "Pérez", "Sánchez", "Jiménez", "Torres", "Blanco", "Navarro",
             "Paredes", "Moreno" };
-    private final String[] DEFAULT_NAMES = { "Luisa", "Manuel", "Kurt", "Sofia", "Robert", "Jose", "Ramón",
+    private static final String[] DEFAULT_NAMES = { "Luisa", "Manuel", "Kurt", "Sofia", "Robert", "Jose", "Ramón",
             "Pablo" };
-    private final String[] DEFAULT_TEAMNAMES = { "Alfa", "Beta", "Delta", "Omega", "Theta" };
-    private final Administrator defaultAdmin;
-    private final Player[] defaultPlayers;
-    private final Team[] defaultTeams;
+    private static final String[] DEFAULT_TEAMNAMES = { "Alfa", "Beta", "Delta", "Omega", "Theta" };
 
     public DefaultParameters() {
-        this.defaultAdmin = new Administrator("admin@upm.es", "admin");
-        this.defaultPlayers = generatePlayers();
-        this.defaultTeams = generateTeams();
     }
 
-    private DNI generateDNI() {
-        Random randomNumber = new Random();
-        String dniLetters = "TRWAGMYFPDXBNJZSQVHLCKE";
-        int digits = 0;
-        do {
-            digits = randomNumber.nextInt(99999999);
-        } while (digits == 0);
-
-        String dniNumber = String.format("%08d", digits);
-        return new DNI(dniNumber + dniLetters.charAt(digits % 23));
+    public static Administrator getDefaultAdmin() {
+        return new Administrator("admin@upm.es", "admin");
     }
 
-    private Player[] generatePlayers() {
-        Player[] players = new Player[DEFAULT_PLAYERS];
-        Random randomNumber = new Random();
-        String firstName, lastName, username; // De momento las contraseñas son default para todo jugador, igual retoco
-                                              // esto
-
-        for (int i = 0; i < players.length; i++) {
-            firstName = DEFAULT_NAMES[randomNumber.nextInt(DEFAULT_NAMES.length)];
-            lastName = DEFAULT_SURNAMES[randomNumber.nextInt(DEFAULT_SURNAMES.length)];
-
-            username = String.join(".", Normalizer.normalize(firstName.toLowerCase(), Normalizer.Form.NFD),
-                    Normalizer.normalize(lastName.toLowerCase(), Normalizer.Form.NFD));
-            username = username.replaceAll("\\p{M}", "");
-            username = username.concat("@upm.es");
-
-            players[i] = new Player(username, "default", firstName, lastName, generateDNI(), this.defaultAdmin);
+    public static LinkedList<LinkedList<String>> getDefaultParticipants() {
+        LinkedList<LinkedList<String>> parameters = new LinkedList<>();
+        int j = 0;
+        for (int i = 0; i < DEFAULT_PLAYERS; i++) {
+            LinkedList<String> playerParams;
+            do {
+                playerParams = generatePlayer();
+            } while (parameters.contains(playerParams));
+            parameters.add(playerParams);
+            if (j < DEFAULT_TEAMS) {
+                LinkedList<String> teamParams;
+                do {
+                    teamParams = generateTeam(playerParams.get(1));
+                } while (!isValidTeam(parameters, teamParams));
+                parameters.add(teamParams);
+                j++;
+            }
         }
-        return players;
+        return parameters;
     }
 
-    private Team[] generateTeams() {
-        Team[] teams = new Team[DEFAULT_TEAMS];
-        Random randomNumber = new Random();
-        String teamName;
-
-        for (int i = 0; i < teams.length; i++) {
-            teamName = DEFAULT_TEAMNAMES[randomNumber.nextInt(DEFAULT_TEAMNAMES.length)];
-            teams[i] = new Team(teamName, this.defaultAdmin,
-                    this.defaultPlayers[randomNumber.nextInt(this.defaultPlayers.length)]);
+    private static boolean isValidTeam(LinkedList<LinkedList<String>> parameters, LinkedList<String> teamParameters) {
+        Iterator<LinkedList<String>> iterator = parameters.iterator();
+        boolean result = true;
+        while (iterator.hasNext() && result) {
+            LinkedList<String> currentItem = iterator.next();
+            if (!currentItem.get(0).contains("@upm.es")) {
+                if (currentItem.get(0) == teamParameters.get(0) || currentItem.get(1) == teamParameters.get(1)) {
+                    result = false;
+                }
+            }
         }
-        return teams;
+        return result;
     }
 
-    public Administrator getAdmin() {
-        return this.defaultAdmin;
+    private static LinkedList<String> generatePlayer() {
+        Random randomNumber = new Random(); // De momento las contraseñas son default para todo jugador, igual retoco
+                                            // esto
+        LinkedList<String> parameters = new LinkedList<>();
+        String firstName = DEFAULT_NAMES[randomNumber.nextInt(DEFAULT_NAMES.length)];
+        String lastName = DEFAULT_SURNAMES[randomNumber.nextInt(DEFAULT_SURNAMES.length)];
+        parameters.add(createUserName(firstName, lastName));
+        parameters.add(firstName);
+        parameters.add(lastName);
+
+        return parameters;
     }
 
-    public Player[] getPlayers() {
-        return this.defaultPlayers;
+    private static LinkedList<String> generateTeam(String playerName) {
+        Random randomNumber = new Random();
+        LinkedList<String> parameters = new LinkedList<>();
+        String teamName = DEFAULT_TEAMNAMES[randomNumber.nextInt(DEFAULT_TEAMNAMES.length)];
+        parameters.add(teamName);
+        parameters.add(playerName);
+
+        return parameters;
     }
 
-    public Team[] getTeams() {
-        return this.defaultTeams;
+    private static String createUserName(String firstName, String lastName) {
+        String username = String.join(".", normalize(firstName.toLowerCase()), normalize(lastName.toLowerCase()));
+        return username.concat("@upm.es");
+    }
+
+    private static String normalize(String string) {
+        String result = Normalizer.normalize(string, Normalizer.Form.NFD);
+        return result.replaceAll("\\p{M}", "");
     }
 }
