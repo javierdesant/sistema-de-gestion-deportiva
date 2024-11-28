@@ -7,12 +7,13 @@ import es.upm.etsisi.utils.Message;
 import es.upm.etsisi.views.commands.Command;
 import es.upm.etsisi.views.commands.CommandFactory;
 import es.upm.etsisi.DefaultParameters;
-import es.upm.etsisi.models.Player;
-import es.upm.etsisi.models.Team;
+import es.upm.etsisi.models.DNI;
 import es.upm.etsisi.models.User;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 public class CLI {
     private final Controller controller;
@@ -30,9 +31,8 @@ public class CLI {
     public void run() {
         ErrorType error;
         String commandTitle;
-        
-        DefaultParameters defaultParameters = new DefaultParameters();
-        addDefaults(defaultParameters);
+
+        this.addDefaults();
 
         do {
             User user = this.controller.getUser();
@@ -87,13 +87,17 @@ public class CLI {
         }
     }
 
-    private void addDefaults(DefaultParameters defaultParameters) {
-        this.controller.login(defaultParameters.getAdmin().getUsername(), "admin");
-        for (Player player : defaultParameters.getPlayers()) {
-            this.controller.createPlayer(player);
-        }
-        for (Team team : defaultParameters.getTeams()) {
-            this.controller.createTeam(team);
+    private void addDefaults() {
+        LinkedList<LinkedList<String>> defaultParameters = DefaultParameters.getDefaultParticipants();
+        Iterator<LinkedList<String>> iterator = defaultParameters.iterator();
+        while (iterator.hasNext()) {
+            LinkedList<String> currentParameters = iterator.next();
+            if (currentParameters.get(0).contains("@upm.es")) {
+                this.controller.createPlayer(currentParameters.get(0), "default", currentParameters.get(1),
+                        currentParameters.get(2), DNI.generateDNI());
+            } else {
+                this.controller.createTeam(currentParameters.get(0), currentParameters.get(1));
+            }
         }
     }
 }
