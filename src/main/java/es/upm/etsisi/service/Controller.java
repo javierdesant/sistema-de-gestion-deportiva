@@ -49,14 +49,18 @@ public class Controller {
     public ErrorType createPlayer(String username, String password, String firstName, String lastName, DNI dni) {
         ErrorType error;
 
-        Player player = new Player(username, password, firstName, lastName, dni, this.user);
-
-        error = this.participantList.add(player);
-        if (error.isNull()) {
-            error = this.userList.add(player);
-            assert error.isNull();
+        if (User.isUpmEmail(username)){
+            Player player = new Player(username, password, firstName, lastName, dni, this.user);
+            
+            error = this.participantList.add(player);
+            if (error.isNull()) {
+                error = this.userList.add(player);
+                assert error.isNull();
+            }
+        } else {
+            error = ErrorType.INVALID_DNI_ERROR;
         }
-
+        
         return error;
     }
 
