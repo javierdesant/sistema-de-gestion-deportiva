@@ -1,5 +1,7 @@
 package es.upm.etsisi.models;
 
+import java.util.Random;
+
 public class DNI {
     private final String dni;
 
@@ -20,6 +22,18 @@ public class DNI {
         char expectedLetter = letters.charAt(number % 23);
 
         return dni.charAt(8) == expectedLetter;
+    }
+
+    public static DNI generateDNI() {
+        Random randomNumber = new Random();
+        String dniLetters = "TRWAGMYFPDXBNJZSQVHLCKE";
+        int digits = 0;
+        do {
+            digits = randomNumber.nextInt(99999999);
+        } while (digits == 0);
+
+        String dniNumber = String.format("%08d", digits);
+        return new DNI(dniNumber + dniLetters.charAt(digits % 23));
     }
 
     public String getValue() {
