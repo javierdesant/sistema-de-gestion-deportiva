@@ -4,6 +4,7 @@ out/
 !**/src/test/**/out/
 
 ### Maven ###
+test/
 target/
 pom.xml.tag
 pom.xml.releaseBackup
