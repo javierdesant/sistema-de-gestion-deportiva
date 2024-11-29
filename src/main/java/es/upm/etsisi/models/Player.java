@@ -73,4 +73,21 @@ public class Player extends User implements Participant {
     public String toString() {
         return this.getName();
     }
+
+    @Override
+    public boolean equals(Object object){
+        if (this == object){
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()){
+            return false;
+        }
+        Player player = (Player) object;
+        return this.dni.equals(player.getDni());
+    }
+
+    @Override
+    public int hashCode() {
+        return this.dni.hashCode();
+    }
 }
