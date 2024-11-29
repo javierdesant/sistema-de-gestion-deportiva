@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class CLI {
     private final Controller controller;
@@ -32,7 +35,13 @@ public class CLI {
         ErrorType error;
         String commandTitle;
 
-        this.addDefaults();
+        String testFile = "sistema-de-gestion-deportiva/src/test/java/es/upm/etsisi/resources/default_output.txt";
+        try {
+            this.addDefaults(testFile);
+        } catch (IOException exception) {
+            exception.toString();
+            exception.printStackTrace();
+        }
 
         do {
             User user = this.controller.getUser();
@@ -87,17 +96,27 @@ public class CLI {
         }
     }
 
-    private void addDefaults() {
+    private void addDefaults(String fileName) throws IOException {
         LinkedList<LinkedList<String>> defaultParameters = DefaultParameters.getDefaultParticipants();
         Iterator<LinkedList<String>> iterator = defaultParameters.iterator();
+        BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+        writer.write("Parámetros generados aleatoriamente:\n\n");
+
         while (iterator.hasNext()) {
             LinkedList<String> currentParameters = iterator.next();
+
             if (User.isUpmEmail(currentParameters.get(0))) {
                 this.controller.createPlayer(currentParameters.get(0), "default", currentParameters.get(1),
                         currentParameters.get(2), DNI.generateDNI());
+
+                for (String parameter : currentParameters) {
+                    writer.write(parameter + "\t");
+                }
+                writer.newLine();
             } else {
                 this.controller.createTeam(currentParameters.get(0), currentParameters.get(1));
             }
         }
+        writer.close();
     }
 }
