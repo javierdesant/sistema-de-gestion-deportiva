@@ -11,6 +11,7 @@ import java.text.Normalizer;
 public class DefaultParameters {
     private static final int DEFAULT_PLAYERS = 6;
     private static final int DEFAULT_TEAMS = 2;
+    private static final int DEFAULT_PASSWORD_LENGTH = 10;
     private static final String[] DEFAULT_SURNAMES = { "Pérez", "Sánchez", "Jiménez", "Torres", "Blanco", "Navarro",
             "Paredes", "Moreno" };
     private static final String[] DEFAULT_NAMES = { "Luisa", "Manuel", "Kurt", "Sofia", "Robert", "Jose", "Ramón",
@@ -66,6 +67,7 @@ public class DefaultParameters {
         String firstName = DEFAULT_NAMES[randomNumber.nextInt(DEFAULT_NAMES.length)];
         String lastName = DEFAULT_SURNAMES[randomNumber.nextInt(DEFAULT_SURNAMES.length)];
         parameters.add(createUserName(firstName, lastName));
+        parameters.add(createPassword());
         parameters.add(firstName);
         parameters.add(lastName);
 
@@ -85,6 +87,22 @@ public class DefaultParameters {
     private static String createUserName(String firstName, String lastName) {
         String username = String.join(".", normalize(firstName.toLowerCase()), normalize(lastName.toLowerCase()));
         return username.concat("@upm.es");
+    }
+
+    private static String createPassword(){
+        Random randomNumber = new Random();
+        StringBuilder password = new StringBuilder();
+        int key = randomNumber.nextInt(256);
+
+        for (int i = 0; i < DEFAULT_PASSWORD_LENGTH; i++) {
+            char character = (char) (randomNumber.nextInt(26) + 'A');
+            char shuffled = (char) (character ^ key);
+            while (shuffled < 'A' || shuffled > 'Z') {
+                shuffled = (char) ((shuffled ^ key) % ('Z' - 'A' + 1) + 'A');
+            }
+            password.append(shuffled);
+        }
+        return password.toString();
     }
 
     private static String normalize(String string) {
