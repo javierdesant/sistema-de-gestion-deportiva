@@ -83,7 +83,7 @@ public class Player extends User implements Participant {
             return false;
         }
         Player player = (Player) object;
-        return this.dni.equals(player.getDni());
+        return this.dni.getValue().equals(player.getDni().getValue());
     }
 
     @Override
