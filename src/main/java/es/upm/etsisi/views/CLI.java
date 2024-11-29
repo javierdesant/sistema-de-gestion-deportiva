@@ -106,8 +106,8 @@ public class CLI {
             LinkedList<String> currentParameters = iterator.next();
 
             if (User.isUpmEmail(currentParameters.get(0))) {
-                this.controller.createPlayer(currentParameters.get(0), "default", currentParameters.get(1),
-                        currentParameters.get(2), DNI.generateDNI());
+                this.controller.createPlayer(currentParameters.get(0), currentParameters.get(1), currentParameters.get(2),
+                        currentParameters.get(3), DNI.generateDNI());
 
                 for (String parameter : currentParameters) {
                     writer.write(parameter + "\t");
