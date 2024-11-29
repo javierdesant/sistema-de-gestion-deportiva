@@ -92,7 +92,7 @@ public class CLI {
         Iterator<LinkedList<String>> iterator = defaultParameters.iterator();
         while (iterator.hasNext()) {
             LinkedList<String> currentParameters = iterator.next();
-            if (currentParameters.get(0).contains("@upm.es")) {
+            if (User.isUpmEmail(currentParameters.get(0))) {
                 this.controller.createPlayer(currentParameters.get(0), "default", currentParameters.get(1),
                         currentParameters.get(2), DNI.generateDNI());
             } else {

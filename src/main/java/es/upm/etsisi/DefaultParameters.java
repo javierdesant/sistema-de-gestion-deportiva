@@ -1,6 +1,7 @@
 package es.upm.etsisi;
 
 import es.upm.etsisi.models.Administrator;
+import es.upm.etsisi.models.User;
 
 import java.util.LinkedList;
 import java.util.Iterator;
@@ -49,7 +50,7 @@ public class DefaultParameters {
         boolean result = true;
         while (iterator.hasNext() && result) {
             LinkedList<String> currentItem = iterator.next();
-            if (!currentItem.get(0).contains("@upm.es")) {
+            if (!User.isUpmEmail(currentItem.get(0))) {
                 if (currentItem.get(0) == teamParameters.get(0) || currentItem.get(1) == teamParameters.get(1)) {
                     result = false;
                 }
