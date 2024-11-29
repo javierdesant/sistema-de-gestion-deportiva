@@ -27,7 +27,7 @@ public class CreatePlayerCommand extends Command {
             return error;
         }
 
-        error = this.controller.createPlayer(username, password, playerLastName, playerLastName, new DNI(dni));
+        error = this.controller.createPlayer(username, password, playerName, playerLastName, new DNI(dni));
 
         if (error.isNull()) {
             Message.PLAYER_ADDED.writeln();
