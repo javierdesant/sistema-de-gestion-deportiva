@@ -80,4 +80,16 @@ public class Team implements Participant {
     public String toString() {
         return this.getName();
     }
+
+    @Override
+    public boolean equals(Object object){
+        if (this == object){
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()){
+            return false;
+        }
+        Team team = (Team) object;
+        return this.name.equals(team.getName());
+    }
 }
