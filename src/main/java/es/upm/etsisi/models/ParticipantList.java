@@ -22,13 +22,16 @@ public class ParticipantList extends List<Participant> {
     @Override
     public boolean contains(Participant participant) {
         boolean found = super.contains(participant);
+
         if (!participant.hasChildren()) {
             Player player = (Player) participant;
+
             Iterator<Participant> iterator = this.iterator();
             while (iterator.hasNext() && !found) {
                 found = iterator.next().contains(player);
             }
         }
+
         return found;
     }
 
