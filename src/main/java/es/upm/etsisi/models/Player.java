@@ -1,5 +1,7 @@
 package es.upm.etsisi.models;
 
+import es.upm.etsisi.utils.UpmEmail;
+
 import java.util.LinkedList;
 
 public class Player extends User implements Participant {
@@ -9,7 +11,7 @@ public class Player extends User implements Participant {
     private final Administrator admin;
     private Statistics stats;
 
-    public Player(String username,
+    public Player(UpmEmail username,
                   String password,
                   String firstName,
                   String lastName,
@@ -27,7 +29,7 @@ public class Player extends User implements Participant {
         this.admin = (Administrator) admin;
     }
 
-    public Player(String username,
+    public Player(UpmEmail username,
                   String password,
                   String firstName,
                   String lastName,

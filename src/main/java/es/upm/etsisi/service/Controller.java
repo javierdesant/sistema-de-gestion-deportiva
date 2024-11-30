@@ -1,8 +1,7 @@
 package es.upm.etsisi.service;
 
 import es.upm.etsisi.models.*;
-import es.upm.etsisi.models.DNI;
-import es.upm.etsisi.models.TimeFrame;
+import es.upm.etsisi.utils.UpmEmail;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,7 +15,7 @@ public class Controller {
 
     public Controller() {
         this.user = null;
-        this.userList = new UserList(new Administrator("admin@upm.es", "admin"));
+        this.userList = new UserList(new Administrator(UpmEmail.valueOf("admin@upm.es"), "admin"));
         this.participantList = new ParticipantList();
         this.tournamentList = new TournamentList();
     }
@@ -46,21 +45,17 @@ public class Controller {
         return this.user;
     }
 
-    public ErrorType createPlayer(String username, String password, String firstName, String lastName, DNI dni) {
+    public ErrorType createPlayer(UpmEmail username, String password, String firstName, String lastName, DNI dni) {
         ErrorType error;
 
-        if (User.isUpmEmail(username)){
-            Player player = new Player(username, password, firstName, lastName, dni, this.user);
-            
-            error = this.participantList.add(player);
-            if (error.isNull()) {
-                error = this.userList.add(player);
-                assert error.isNull();
-            }
-        } else {
-            error = ErrorType.INVALID_DNI_ERROR;
+        Player player = new Player(username, password, firstName, lastName, dni, this.user);
+
+        error = this.participantList.add(player);
+        if (error.isNull()) {
+            error = this.userList.add(player);
+            assert error.isNull();
         }
-        
+
         return error;
     }
 
