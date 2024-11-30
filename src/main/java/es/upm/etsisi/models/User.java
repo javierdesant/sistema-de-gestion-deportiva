@@ -1,12 +1,13 @@
 package es.upm.etsisi.models;
 
+import es.upm.etsisi.utils.UpmEmail;
+
 public abstract class User {
-    private final String username;
+    private final UpmEmail username;
     private final String password;
     private final Role role;
 
-    public User(String username, String password, Role role) {
-        assert isUpmEmail(username);
+    public User(UpmEmail username, String password, Role role) {
         assert role != null;
 
         this.username = username;
@@ -18,12 +19,8 @@ public abstract class User {
         return this.role;
     }
 
-    public static boolean isUpmEmail(String email) {
-        return email.contains("@") && email.endsWith("upm.es");
-    }
-
     public String getUsername() {
-        return this.username;
+        return this.username.toString();
     }
 
     public boolean validate(String password) {
@@ -44,6 +41,7 @@ public abstract class User {
 
     @Override
     public String toString() {
-        return this.username.split("@")[0];
+        String username = this.username.toString();
+        return username.split("@")[0];
     }
 }
