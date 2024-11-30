@@ -90,6 +90,6 @@ public class Team implements Participant {
             return false;
         }
         Team team = (Team) object;
-        return this.name.equals(team.getName());
+        return this.name.equals(team.name);
     }
 }
