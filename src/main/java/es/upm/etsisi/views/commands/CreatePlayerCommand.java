@@ -1,8 +1,8 @@
 package es.upm.etsisi.views.commands;
 
+import es.upm.etsisi.models.DNI;
 import es.upm.etsisi.service.Controller;
 import es.upm.etsisi.service.ErrorType;
-import es.upm.etsisi.models.DNI;
 import es.upm.etsisi.utils.Message;
 import es.upm.etsisi.utils.UpmEmail;
 

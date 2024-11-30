@@ -78,11 +78,11 @@ public class Player extends User implements Participant {
     }
 
     @Override
-    public boolean equals(Object object){
-        if (this == object){
+    public boolean equals(Object object) {
+        if (this == object) {
             return true;
         }
-        if (object == null || getClass() != object.getClass()){
+        if (object == null || getClass() != object.getClass()) {
             return false;
         }
         Player player = (Player) object;
