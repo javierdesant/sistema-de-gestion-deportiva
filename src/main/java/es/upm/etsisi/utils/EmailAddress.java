@@ -14,6 +14,10 @@ public class EmailAddress {
         return new EmailAddress(email);
     }
 
+    public static EmailAddress valueOf(String email) {
+        return valueOf(email, new DefaultEmailValidator());
+    }
+
     @Override
     public String toString() {
         return this.email;
