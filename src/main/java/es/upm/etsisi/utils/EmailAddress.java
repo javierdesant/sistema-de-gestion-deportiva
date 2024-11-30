@@ -3,19 +3,19 @@ package es.upm.etsisi.utils;
 public class EmailAddress {
     private final String email;
 
-    protected EmailAddress(String email) {
+    protected EmailAddress(String email, EmailValidator validator) {
         this.email = email;
-    }
-
-    public static EmailAddress valueOf(String email, EmailValidator validator) {
         if (!validator.isValid(email)) {
             throw new IllegalArgumentException("Invalid email address: " + email);
         }
-        return new EmailAddress(email);
     }
 
-    public static EmailAddress valueOf(String email) {
-        return valueOf(email, new DefaultEmailValidator());
+    protected EmailAddress(String email) {
+        this(email, new DefaultEmailValidator());
+    }
+
+    public static EmailAddress valueOf(String email) throws IllegalArgumentException {
+        return new EmailAddress(email);
     }
 
     @Override
