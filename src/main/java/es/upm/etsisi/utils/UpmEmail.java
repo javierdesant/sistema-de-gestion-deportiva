@@ -7,7 +7,7 @@ public class UpmEmail extends RestrictedEmail {
         super(email, UPM_POLICY);
     }
 
-    public static UpmEmail valueOf(String email) {
+    public static UpmEmail valueOf(String email) throws IllegalArgumentException {
         return new UpmEmail(email);
     }
 }
