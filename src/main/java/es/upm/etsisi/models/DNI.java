@@ -30,4 +30,16 @@ public class DNI {
     public String toString() {
         return this.dni;
     }
+
+    @Override
+    public boolean equals(Object object){
+        if (this == object){
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()){
+            return false;
+        }
+        DNI dni = (DNI) object;
+        return this.dni.equals(dni.dni);
+    }
 }
