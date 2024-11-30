@@ -26,21 +26,17 @@ public class DNI {
         return dni.charAt(8) == expectedLetter;
     }
 
-    public String getValue() {
-        return this.dni;
-    }
-
     @Override
     public String toString() {
         return this.dni;
     }
 
     @Override
-    public boolean equals(Object object){
-        if (this == object){
+    public boolean equals(Object object) {
+        if (this == object) {
             return true;
         }
-        if (object == null || getClass() != object.getClass()){
+        if (object == null || getClass() != object.getClass()) {
             return false;
         }
         DNI dni = (DNI) object;
