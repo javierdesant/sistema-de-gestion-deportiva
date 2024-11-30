@@ -17,7 +17,7 @@ public class Player extends User implements Participant {
                   String lastName,
                   DNI dni,
                   Statistics statistics,
-                  User admin) {
+                  Administrator admin) {
         super(username, password, Role.PLAYER);
 
         assert admin.getRole() == Role.ADMIN;
@@ -26,7 +26,7 @@ public class Player extends User implements Participant {
         this.lastName = lastName;
         this.dni = dni;
         this.stats = statistics;
-        this.admin = (Administrator) admin;
+        this.admin = admin;
     }
 
     public Player(UpmEmail username,
@@ -34,7 +34,7 @@ public class Player extends User implements Participant {
                   String firstName,
                   String lastName,
                   DNI dni,
-                  User admin) {
+                  Administrator admin) {
         this(username, password, firstName, lastName, dni, new Statistics(), admin);
         assert this.hasUpmEmail();
     }

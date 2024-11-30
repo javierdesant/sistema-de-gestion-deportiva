@@ -47,7 +47,8 @@ public class Controller {
     public ErrorType createPlayer(UpmEmail username, String password, String firstName, String lastName, DNI dni) {
         ErrorType error;
 
-        Player player = new Player(username, password, firstName, lastName, dni, this.user);
+        assert this.user.getRole().equals(Role.ADMIN);
+        Player player = new Player(username, password, firstName, lastName, dni, (Administrator) this.user);
 
         error = this.participantList.add(player);
         if (error.isNull()) {
