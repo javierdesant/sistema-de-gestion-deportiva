@@ -8,8 +8,6 @@ public abstract class User {
     private final Role role;
 
     public User(UpmEmail username, String password, Role role) {
-        assert role != null;
-
         this.username = username;
         this.password = password;
         this.role = role;
@@ -17,6 +15,10 @@ public abstract class User {
 
     public Role getRole() {
         return this.role;
+    }
+
+    public boolean isLoggedIn() {
+        return this.role != Role.GUEST;
     }
 
     public String getUsername() {

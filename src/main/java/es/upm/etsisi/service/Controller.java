@@ -14,7 +14,7 @@ public class Controller {
     private User user;
 
     public Controller() {
-        this.user = null;
+        this.user = Guest.getInstance();
         this.userList = new UserList(new Administrator(UpmEmail.valueOf("admin@upm.es"), "admin"));
         this.participantList = new ParticipantList();
         this.tournamentList = new TournamentList();
@@ -37,8 +37,7 @@ public class Controller {
     }
 
     public void logout() {
-        assert this.user != null;
-        this.user = null;
+        this.user = Guest.getInstance();
     }
 
     public User getUser() {
@@ -60,11 +59,11 @@ public class Controller {
     }
 
     public ErrorType createTeam(String teamName, String playerName) {
+        assert this.user.getRole() == Role.ADMIN;
         ErrorType error;
 
         Participant player = this.participantList.find(playerName);
         if (this.isValidPlayer(player)) {
-            assert this.user.getRole() == Role.ADMIN;
             Team team = new Team(teamName, (Administrator) this.user, (Player) player);
             error = this.participantList.add(team);
             if (error.isNull()) {
