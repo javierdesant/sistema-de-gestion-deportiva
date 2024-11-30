@@ -42,4 +42,9 @@ public class DNI {
         DNI dni = (DNI) object;
         return this.dni.equals(dni.dni);
     }
+
+    @Override
+    public int hashCode() {
+        return this.dni.hashCode();
+    }
 }
