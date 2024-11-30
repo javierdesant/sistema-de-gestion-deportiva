@@ -4,6 +4,7 @@ import es.upm.etsisi.service.Controller;
 import es.upm.etsisi.service.ErrorType;
 import es.upm.etsisi.models.DNI;
 import es.upm.etsisi.utils.Message;
+import es.upm.etsisi.utils.UpmEmail;
 
 public class CreatePlayerCommand extends Command {
     private final Controller controller;
@@ -40,13 +41,17 @@ public class CreatePlayerCommand extends Command {
             return ErrorType.INVALID_ARGUMENTS;
         } else if (password == null) {
             return ErrorType.INVALID_ARGUMENTS;
-        } else if (!playerName.matches("[a-zA-Z]+")) {
+        } else if (this.isNameWrong(playerName) || this.isNameWrong(playerLastName)) {
             return ErrorType.NAME_FORMAT_ERROR;
         } else if (!DNI.isValidDNI(dni)) {
             return ErrorType.INVALID_DNI_ERROR;
         } else {
             return this.validateUsername(username);
         }
+    }
+
+    private boolean isNameWrong(String name) {
+        return !name.matches("[a-zA-Z]+");
     }
 
     private ErrorType validateUsername(String username) {
