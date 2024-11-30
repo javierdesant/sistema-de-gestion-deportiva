@@ -24,6 +24,7 @@ public class ErrorView {
         MESSAGES.put(ErrorType.TOURNAMENT_NOT_FOUND, "Torneo no encontrado");
         MESSAGES.put(ErrorType.WRONG_PASSWORD, "Contraseña incorrecta");
         MESSAGES.put(ErrorType.INVALID_ARGUMENTS, "Argumentos no válidos");
+        MESSAGES.put(ErrorType.INVALID_EMAIL, "Email no válido");
         MESSAGES.put(ErrorType.PARTICIPANT_NOT_ENROLLED, "El participante no está inscrito en el torneo");
         MESSAGES.put(ErrorType.INVALID_DNI_ERROR, "El DNI no es válido");
         MESSAGES.put(ErrorType.TOURNAMENT_NOT_ACTIVE, "El torneo no se encuentra en curso");
