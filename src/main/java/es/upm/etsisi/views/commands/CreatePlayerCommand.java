@@ -27,7 +27,7 @@ public class CreatePlayerCommand extends Command {
             return error;
         }
 
-        error = this.controller.createPlayer(username, password, playerName, playerLastName, new DNI(dni));
+        error = this.controller.createPlayer(UpmEmail.valueOf(username), password, playerName, playerLastName, new DNI(dni));
 
         if (error.isNull()) {
             Message.PLAYER_ADDED.writeln();
@@ -45,7 +45,16 @@ public class CreatePlayerCommand extends Command {
         } else if (!DNI.isValidDNI(dni)) {
             return ErrorType.INVALID_DNI_ERROR;
         } else {
-            return ErrorType.NULL;
+            return this.validateUsername(username);
         }
+    }
+
+    private ErrorType validateUsername(String username) {
+        try {
+            UpmEmail.valueOf(username);
+        } catch (IllegalArgumentException ex) {
+            return ErrorType.INVALID_EMAIL;
+        }
+        return ErrorType.NULL;
     }
 }
