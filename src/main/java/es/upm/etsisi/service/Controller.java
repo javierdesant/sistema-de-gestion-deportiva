@@ -78,12 +78,12 @@ public class Controller {
         return error;
     }
 
-    public ErrorType deletePlayer(String name) {
+    public ErrorType deletePlayer(DNI dni) {
         ErrorType error;
 
-        Participant player = this.participantList.find(name);
+        Participant player = this.participantList.find(dni);
         if (this.isValidPlayer(player) && this.tournamentList.isFree(player)) {
-            boolean userRemoved = this.userList.remove(this.userList.findByPlayerName(name));
+            boolean userRemoved = this.userList.remove(this.userList.findByKey(dni));
             assert userRemoved;
             boolean participantRemoved = this.participantList.remove(player);
             assert participantRemoved;
