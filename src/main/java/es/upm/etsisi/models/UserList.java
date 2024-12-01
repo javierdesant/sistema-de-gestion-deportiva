@@ -31,13 +31,13 @@ public class UserList extends List<User> {
         return user;
     }
 
-    public Player findByPlayerName(String name) {
+    public Player findByKey(Object key) {
         Player player = null;
 
         Iterator<User> iterator = this.iterator();
         while (iterator.hasNext() && player == null) {
             User next = iterator.next();
-            if (next.getRole() == Role.PLAYER && ((Player) next).getName().equals(name)) {
+            if (next.getRole() == Role.PLAYER && ((Player) next).getKey().equals(key)) {
                 player = (Player) next;
             }
         }
