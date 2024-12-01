@@ -8,7 +8,7 @@ public class LeaveCommand extends Command {
     private final Controller controller;
 
     LeaveCommand(Controller controller) {
-        super("tournament-remove", 2, "Da de baja al jugador autenticado o a su equipo de un torneo.");
+        super("tournament-remove", 2, "[[-t],tournament] Da de baja al jugador autenticado o a su equipo de un torneo.");
         this.controller = controller;
     }
 

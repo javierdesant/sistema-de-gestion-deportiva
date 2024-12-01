@@ -10,7 +10,7 @@ public class CreatePlayerCommand extends Command {
     private final Controller controller;
 
     CreatePlayerCommand(Controller controller) {
-        super("player-create", 5, "Registra un nuevo jugador en el sistema.");
+        super("player-create", 5, "[username;password;name;lastname;dni] Registra un nuevo jugador en el sistema.");
         this.controller = controller;
     }
 

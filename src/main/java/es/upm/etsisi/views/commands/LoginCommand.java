@@ -7,7 +7,7 @@ public class LoginCommand extends Command {
     private final Controller controller;
 
     LoginCommand(Controller controller) {
-        super("login", 2, "Autentica al usuario en el sistema.");
+        super("login", 2, "[username;password] Autentica al usuario en el sistema.");
         this.controller = controller;
     }
 

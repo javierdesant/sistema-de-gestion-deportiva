@@ -8,7 +8,7 @@ public class EnrollCommand extends Command {
     private final Controller controller;
 
     EnrollCommand(Controller controller) {
-        super("tournament-add", 2, "Inscribe al jugador autenticado o a su equipo en un torneo.");
+        super("tournament-add", 2, "[tournament] Inscribe al jugador autenticado o a su equipo en un torneo.");
         this.controller = controller;
     }
 

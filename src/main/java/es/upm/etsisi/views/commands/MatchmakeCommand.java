@@ -9,13 +9,13 @@ public class MatchmakeCommand extends Command {
     private final Controller controller;
 
     MatchmakeCommand(Controller controller) {
-        super("tournament-matchmaking", 10, "Genera emparejamientos para el torneo especificado, permitiendo emparejamiento manual (-m) o automático aleatorio (-a).");
+        super("tournament-matchmaking", 10, "[-m/-a;tournament] Genera emparejamientos para el torneo especificado, permitiendo emparejamiento manual (-m) o automático aleatorio (-a).");
         // TODO: revisar el numero de argumentos para match ? grupos ?
         this.controller = controller;
     }
 
     @Override
-    protected ErrorType execute(CommandArguments args) {
+    protected ErrorType execute(CommandArguments args) {    // TODO
         ErrorType error = ErrorType.NULL;
         String tournamentName = args.pollToken();
 

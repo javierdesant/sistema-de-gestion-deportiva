@@ -16,7 +16,7 @@ public class ShowStatsCommand extends Command {
     }
 
     @Override
-    protected ErrorType execute(CommandArguments args) {
+    protected ErrorType execute(CommandArguments args) {    // TODO
         assert this.controller.getUser().getRole() == Role.PLAYER;
 
         Player player = (Player) this.controller.getUser();
