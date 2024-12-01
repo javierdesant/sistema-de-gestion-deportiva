@@ -94,7 +94,7 @@ public class Team implements Participant {
         if (object == null || getClass() != object.getClass()) {
             return false;
         }
-        Team team = (Team) object;
-        return this.name.equals(team.name);
+        Team that = (Team) object;
+        return this.getKey().equals(that.getKey());
     }
 }

@@ -85,8 +85,9 @@ public class Player extends User implements Participant {
         if (object == null || getClass() != object.getClass()) {
             return false;
         }
-        Player player = (Player) object;
-        return this.dni.equals(player.dni);
+        Player that = (Player) object;
+        return this.getKey().equals(that.getKey()) ||
+                this.getUsername().equals(that.getUsername());
     }
 
     @Override
