@@ -58,6 +58,21 @@ public class Tournament {
         return this.participantList.add(participant);
     }
 
+    public ErrorType remove(Participant participant) {
+        if (!this.participantList.contains(participant)) {
+            return ErrorType.PARTICIPANT_NOT_FOUND;
+        }
+
+        for (Match match : this.matchList.getElements()) {
+            if (match.contains(participant)) {
+                this.matchList.remove(match);
+            }
+        }
+        boolean removed = this.participantList.remove(participant);
+        assert removed;
+        return ErrorType.NULL;
+    }
+
     public ErrorType matchmake(Collection<Participant> participants) {  // FIXME
         ErrorType error;
 
