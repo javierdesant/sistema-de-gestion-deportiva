@@ -20,24 +20,27 @@ public class CLI {
         this.commandFactory = new CommandFactory(this.controller);
     }
 
-    public boolean isOpen(String commandTitle) {
-        return !commandTitle.equals("exit");
+    public boolean isOpen(Command command) {
+        if (command == null) {
+            return true;
+        }
+        return !command.isCalled("exit");
     }
 
     public void run() {
         ErrorType error;
-        String commandTitle;
+        Command command;
 
         do {
             User user = this.controller.getUser();
             String input = this.readInput();
             String[] parsedInput = this.splitInput(input);
-            commandTitle = parsedInput[0];
+            String commandTitle = parsedInput[0];
 
-            Command command = this.commandFactory.getCommand(user.getRole(), commandTitle);
+            command = this.commandFactory.getCommand(user.getRole(), commandTitle);
             if (command != null) {
                 error = command.execute(Arrays.copyOfRange(parsedInput, 1, parsedInput.length));
-                if (commandTitle.equals("help")) {      // FIXME: i dont like this
+                if (command.isCalled("help")) {
                     this.displayHelp();
                 }
             } else {
@@ -45,7 +48,7 @@ public class CLI {
             }
 
             new ErrorView(error).writeln();
-        } while (this.isOpen(commandTitle));
+        } while (this.isOpen(command));
     }
 
     private String readInput() {
