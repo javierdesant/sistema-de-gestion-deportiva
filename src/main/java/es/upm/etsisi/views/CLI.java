@@ -32,6 +32,7 @@ public class CLI {
         Command command;
 
         do {
+            error = ErrorType.NULL;
             User user = this.controller.getUser();
             String input = this.readInput();
             String[] parsedInput = this.splitInput(input);
@@ -43,7 +44,7 @@ public class CLI {
                 if (command.isCalled("help")) {
                     this.displayHelp();
                 }
-            } else {
+            } else if (!input.isBlank()) {
                 error = ErrorType.INVALID_COMMAND;
             }
 
@@ -55,7 +56,6 @@ public class CLI {
         Console console = Console.getInstance();
         User user = this.controller.getUser();
 
-        console.writeln();
         if (user.isLoggedIn()) {
             console.write(user + " ");
         }
