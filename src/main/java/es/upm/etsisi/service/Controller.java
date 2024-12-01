@@ -6,6 +6,7 @@ import es.upm.etsisi.utils.UpmEmail;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 
 public class Controller {
     private final UserList userList;
@@ -176,7 +177,7 @@ public class Controller {
         return error;
     }
 
-    public ErrorType tournamentMatchmake(String tournamentName, Collection<String> participantNames) {
+    public ErrorType tournamentMatchmake(String tournamentName, Collection<DNI> dnis) {
         Tournament tournament = this.tournamentList.find(tournamentName);
         if (tournament == null) {
             return ErrorType.TOURNAMENT_NOT_FOUND;
@@ -184,7 +185,7 @@ public class Controller {
             return ErrorType.TOURNAMENT_NOT_ACTIVE;
         }
 
-        ArrayList<Participant> participants = this.participantList.findAll(participantNames);
+        ArrayList<Participant> participants = this.participantList.findAll(Collections.singleton(dnis));
         if (participants == null) {
             return ErrorType.PARTICIPANT_NOT_FOUND;
         }
@@ -192,8 +193,8 @@ public class Controller {
         return tournament.matchmake(participants);
     }
 
-    public ErrorType tournamentMatchmake(String tournamentName, String... participantNames) {
-        return this.tournamentMatchmake(tournamentName, Arrays.asList(participantNames));
+    public ErrorType tournamentMatchmake(String tournamentName, DNI... dnis) {
+        return this.tournamentMatchmake(tournamentName, Arrays.asList(dnis));
     }
 
     public ErrorType tournamentRandomMatchmake(String tournamentName, int groupSize) {  // TODO: check groupSize here ?

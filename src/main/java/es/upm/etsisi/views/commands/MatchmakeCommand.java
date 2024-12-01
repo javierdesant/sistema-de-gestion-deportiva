@@ -1,5 +1,6 @@
 package es.upm.etsisi.views.commands;
 
+import es.upm.etsisi.models.DNI;
 import es.upm.etsisi.service.Controller;
 import es.upm.etsisi.service.ErrorType;
 
@@ -9,7 +10,7 @@ public class MatchmakeCommand extends Command {
     private final Controller controller;
 
     MatchmakeCommand(Controller controller) {
-        super("tournament-matchmaking", 10, "[-m/-a;tournament] Genera emparejamientos para el torneo especificado, permitiendo emparejamiento manual (-m) o automático aleatorio (-a).");
+        super("tournament-matchmaking", 10, "[-m/-a;tournament;[dni...]] Genera emparejamientos para el torneo especificado, permitiendo emparejamiento manual (-m) o automático aleatorio (-a).");
         // TODO: revisar el numero de argumentos para match ? grupos ?
         this.controller = controller;
     }
@@ -23,13 +24,15 @@ public class MatchmakeCommand extends Command {
             return ErrorType.INVALID_ARGUMENTS;
         }
 
-        LinkedList<String> players = new LinkedList<>();
+        LinkedList<DNI> players = new LinkedList<>();
         while (args.hasToken() && error.isNull()) {
             String token = args.pollToken();
             if (this.areInvalidTokens(token)) {
                 error = ErrorType.INVALID_ARGUMENTS;
+            } else if (!DNI.isValidDNI(token)) {
+                error = ErrorType.INVALID_DNI_ERROR;
             }
-            players.add(token);
+            players.add(DNI.valueOf(token));
         }
 
         if (!error.isNull()) {
