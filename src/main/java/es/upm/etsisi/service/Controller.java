@@ -59,11 +59,11 @@ public class Controller {
         return error;
     }
 
-    public ErrorType createTeam(String teamName, String playerName) {
+    public ErrorType createTeam(String teamName, DNI dni) {
         assert this.user.getRole() == Role.ADMIN;
         ErrorType error;
 
-        Participant player = this.participantList.find(playerName);
+        Participant player = this.participantList.find(dni);
         if (this.isValidPlayer(player)) {
             Team team = new Team(teamName, (Administrator) this.user, (Player) player);
             error = this.participantList.add(team);
