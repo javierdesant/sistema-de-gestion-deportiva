@@ -15,7 +15,7 @@ public class ParticipantList extends List<Participant> {
         super(participants);
     }
 
-    public ParticipantList(Collection<Participant> participants) {
+    public ParticipantList(Collection<Participant> participants) {  // FIXME
         super(participants);
     }
 
@@ -33,6 +33,34 @@ public class ParticipantList extends List<Participant> {
         }
 
         return found;
+    }
+
+    @Override
+    public ErrorType add(Participant participant) {
+        ErrorType error = super.add(participant);
+
+        if (error == ErrorType.DUPLICATE_ELEMENT_ERROR) {
+            if (participant.hasChildren()) {
+                return ErrorType.DUPLICATE_TEAM_ERROR;
+            } else {
+                return ErrorType.DUPLICATE_PLAYER_ERROR;
+            }
+        }
+        return error;
+    }
+
+    public Team getTeam(Player player) {
+        Team res = null;
+
+        Iterator<Participant> iterator = this.iterator();
+        while (iterator.hasNext() && res == null) {
+            Participant participant = iterator.next();
+            if (participant.contains(player)) {
+                res = (Team) participant;
+            }
+        }
+
+        return res;
     }
 
     @Override
@@ -117,19 +145,5 @@ public class ParticipantList extends List<Participant> {
         }
 
         return res;
-    }
-
-    public Team findTeam(Player player) {
-        Team team = null;
-
-        Iterator<Participant> iterator = this.iterator();
-        while (iterator.hasNext() && team == null) {
-            Participant next = iterator.next();
-            if (next.contains(player)) {
-                team = (Team) next;
-            }
-        }
-
-        return team;
     }
 }
