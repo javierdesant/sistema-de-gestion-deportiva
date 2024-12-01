@@ -35,8 +35,8 @@ public class Match {
         if (object == null || getClass() != object.getClass()) {
             return false;
         }
-        Match match = (Match) object;
-        return this.participants.equals(match.getParticipants());
+        Match that = (Match) object;
+        return this.participants.equals(that.participants);
     }
 
     @Override
