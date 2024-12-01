@@ -139,10 +139,10 @@ public class Controller {
         return participant != null && participant.hasChildren();
     }
 
-    public ErrorType removeFromTeam(String teamName, String playerName) {
+    public ErrorType removeFromTeam(String teamName, DNI dni) {
         ErrorType error;
 
-        Participant player = this.participantList.find(playerName);
+        Participant player = this.participantList.find(dni);
         Participant team = this.participantList.find(teamName);
         if (this.isValidPlayer(player) && this.isValidTeam(team)) {
             boolean removed = ((Team) team).remove((Player) player);
