@@ -233,8 +233,39 @@ public class Controller {
         }
     }
 
-    public void removeFromTournament(String tournamentName, String playerName) {
+    private ErrorType leave(String tournamentName, Participant participant) {
+        Tournament tournament = this.tournamentList.find(tournamentName);
+        if (tournament == null) {
+            return ErrorType.TOURNAMENT_NOT_FOUND;
+        } else if (!tournament.isActive()) {
+            return ErrorType.TOURNAMENT_NOT_ACTIVE;
+        }
 
+        return tournament.remove(participant);
+    }
+
+    public ErrorType leaveTournament(String tournamentName) {
+        assert this.user.getRole().equals(Role.PLAYER);
+        return this.leave(tournamentName, (Player) this.user);
+    }
+
+    // FIXME: the players go back to the list after removal
+    public ErrorType leaveTournamentAsTeam(String tournamentName) {
+        ErrorType error;
+
+        assert this.user.getRole().equals(Role.PLAYER);
+        Team team = this.participantList.getTeam((Player) this.user);
+        if (team != null) {
+            error = ErrorType.NULL;
+            for (Player player : team.getChildren()) {
+                error = this.leave(tournamentName, player);
+                assert error.isNull();
+            }
+        } else {
+            error = ErrorType.TEAM_NOT_FOUND;
+        }
+
+        return error;
     }
 
     public Statistics getParticipantStats(Participant participant) {
