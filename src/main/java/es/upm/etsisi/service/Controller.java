@@ -114,10 +114,10 @@ public class Controller {
         return error;
     }
 
-    public ErrorType addToTeam(String playerName, String teamName) {
+    public ErrorType addToTeam(DNI dni, String teamName) {
         ErrorType error;
 
-        Participant player = this.participantList.find(playerName);
+        Participant player = this.participantList.find(dni);
         Participant team = this.participantList.find(teamName);
         if (this.isValidPlayer(player) && this.isValidTeam(team)) {
             error = ((Team) team).add((Player) player);
