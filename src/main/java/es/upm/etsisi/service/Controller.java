@@ -207,8 +207,30 @@ public class Controller {
         return tournament.randomMatchmake(groupSize);
     }
 
-    public void addToTournament(String tournamentName, String playerName) {
+    private ErrorType enroll(String tournamentName, Participant participant) {
+        Tournament tournament = this.tournamentList.find(tournamentName);
+        if (tournament == null) {
+            return ErrorType.TOURNAMENT_NOT_FOUND;
+        } else if (!tournament.isActive()) {
+            return ErrorType.TOURNAMENT_NOT_ACTIVE;
+        }
 
+        return tournament.enroll(participant);
+    }
+
+    public ErrorType enrollUser(String tournamentName) {
+        assert this.user.getRole().equals(Role.PLAYER);
+        return this.enroll(tournamentName, (Player) this.user);
+    }
+
+    public ErrorType enrollTeamOfUser(String tournamentName) {
+        assert this.user.getRole().equals(Role.PLAYER);
+        Team team = this.participantList.getTeam((Player) this.user);
+        if (team != null) {
+            return this.enroll(tournamentName, team);
+        } else {
+            return ErrorType.TEAM_NOT_FOUND;
+        }
     }
 
     public void removeFromTournament(String tournamentName, String playerName) {
