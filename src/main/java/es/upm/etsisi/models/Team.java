@@ -71,6 +71,11 @@ public class Team implements Participant {
     }
 
     @Override
+    public String getKey() {
+        return this.name;
+    }
+
+    @Override
     public boolean hasChildren() {
         assert !this.children.isEmpty();
         return true;
