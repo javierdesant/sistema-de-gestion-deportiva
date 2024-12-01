@@ -10,6 +10,8 @@ public class ErrorView {
 
     static {
         MESSAGES.put(ErrorType.DUPLICATE_ELEMENT_ERROR, "El elemento ya existe en la lista");
+        MESSAGES.put(ErrorType.DUPLICATE_PLAYER_ERROR, "El jugador ya existe en la lista");
+        MESSAGES.put(ErrorType.DUPLICATE_TEAM_ERROR, "El equipo o uno de sus miembros ya existe en la lista");
         MESSAGES.put(ErrorType.DUPLICATE_TOURNAMENT_ERROR, "El torneo ya existe en la lista");
         MESSAGES.put(ErrorType.DUPLICATE_MATCH_ERROR, "El partido ya existe en la lista");
         MESSAGES.put(ErrorType.PLAYER_ALREADY_IN_MATCH_ERROR, "Un participante ya está asignado a otro partido o se encuentra duplicado");
