@@ -148,7 +148,7 @@ public class Tournament {
         if (object == null || getClass() != object.getClass()) {
             return false;
         }
-        Tournament tournament = (Tournament) object;
-        return this.getName().equals(tournament.getName());
+        Tournament that = (Tournament) object;
+        return this.getName().equals(that.getName());
     }
 }

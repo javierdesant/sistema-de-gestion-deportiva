@@ -37,8 +37,8 @@ public abstract class User {
         if (object == null || getClass() != object.getClass()) {
             return false;
         }
-        User user = (User) object;
-        return this.username.equals(user.username);
+        User that = (User) object;
+        return this.getUsername().equals(that.getUsername());
     }
 
     @Override

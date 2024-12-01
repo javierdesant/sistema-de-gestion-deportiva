@@ -101,29 +101,29 @@ public class ParticipantList extends List<Participant> {
         }
     }
 
-    public Participant find(String name) {
+    public Participant find(Object key) {
         Participant res = null;
 
         Iterator<Participant> iterator = this.iterator();
         while (iterator.hasNext() && res == null) {
             Participant next = iterator.next();
-            if (name.equals(next.getName())) {
+            if (key.equals(next.getKey())) {
                 res = next;
             } else if (next.hasChildren()) {
-                res = this.findPlayerInTeam(name, (Team) next);
+                res = this.findPlayerInTeam(key, (Team) next);
             }
         }
 
         return res;
     }
 
-    private Player findPlayerInTeam(String name, Team team) {
+    private Player findPlayerInTeam(Object key, Team team) {
         Player res = null;
 
         Iterator<Player> iterator = team.getChildren().iterator();
         while (iterator.hasNext() && res == null) {
             Player next = iterator.next();
-            if (name.equals(next.getName())) {
+            if (key.equals(next.getKey())) {
                 res = next;
             }
         }
@@ -131,10 +131,10 @@ public class ParticipantList extends List<Participant> {
         return res;
     }
 
-    public ArrayList<Participant> findAll(Collection<String> names) {
+    public ArrayList<Participant> findAll(Collection<Object> keys) {
         ArrayList<Participant> res = new ArrayList<>();
 
-        Iterator<String> iterator = names.iterator();
+        Iterator<Object> iterator = keys.iterator();
         while (iterator.hasNext() && res != null) {
             Participant participant = this.find(iterator.next());
             if (participant != null) {

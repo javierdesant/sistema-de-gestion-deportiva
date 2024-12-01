@@ -19,7 +19,7 @@ public class SportsManager {
 
         System.out.println("\n### Bienvenido al Gestor Deportivo ###\n");
 
-        System.out.println("Introduzca un comando o escriba 'exit' para salir.");
+        System.out.println("Introduzca un comando o escriba 'exit' para salir.\n");
 
         this.cli.run();
     }

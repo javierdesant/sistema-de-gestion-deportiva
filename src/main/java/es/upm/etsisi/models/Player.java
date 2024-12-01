@@ -39,12 +39,13 @@ public class Player extends User implements Participant {
     }
 
     @Override
-    public String getName() {
-        return this.firstName + " " + this.lastName;
+    public DNI getKey() {
+        return this.dni;
     }
 
-    public DNI getDni() {
-        return this.dni;
+    @Override
+    public String getName() {   // TODO: review usages to replace for getKey()
+        return this.firstName + " " + this.lastName;
     }
 
     @Override
@@ -84,8 +85,9 @@ public class Player extends User implements Participant {
         if (object == null || getClass() != object.getClass()) {
             return false;
         }
-        Player player = (Player) object;
-        return this.dni.equals(player.dni);
+        Player that = (Player) object;
+        return this.getKey().equals(that.getKey()) ||
+                this.getUsername().equals(that.getUsername());
     }
 
     @Override

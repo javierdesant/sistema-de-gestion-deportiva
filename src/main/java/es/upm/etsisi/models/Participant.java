@@ -12,4 +12,6 @@ public interface Participant {
     boolean hasChildren();
 
     boolean contains(Player player);
+
+    Object getKey();
 }
