@@ -7,9 +7,7 @@ import java.util.Iterator;
 public class Match {
     private final ParticipantList participants;
 
-    // FIXME: incorrect interpretation of groups ?
-    //  maybe they have to be even ?
-    public Match(Collection<Participant> participants) {
+    public Match(Collection<Participant> participants) {    // FIXME
         assert participants != null;
         assert participants.size() > 1;
 
