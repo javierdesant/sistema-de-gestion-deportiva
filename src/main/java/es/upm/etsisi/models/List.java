@@ -62,4 +62,16 @@ public abstract class List<T> {
     public boolean remove(T element) {
         return this.elements.remove(element);
     }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        List<?> that = (List<?>) object;
+        return this.elements.equals(that.elements);
+    }
 }
