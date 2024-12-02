@@ -15,7 +15,5 @@ public interface ParticipantManager {
     ErrorType addToTeam(DNI dni, String teamName);
 
     ErrorType removeFromTeam(String teamName, DNI dni);
-
-    // showStatistics, don't really know if it should return an ErrorType;
     
 }

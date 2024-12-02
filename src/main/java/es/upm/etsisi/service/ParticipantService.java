@@ -1,11 +1,13 @@
 package es.upm.etsisi.service;
 
 import es.upm.etsisi.models.Administrator;
+import es.upm.etsisi.models.Category;
 import es.upm.etsisi.models.DNI;
 import es.upm.etsisi.models.Participant;
 import es.upm.etsisi.models.ParticipantList;
 import es.upm.etsisi.models.Player;
 import es.upm.etsisi.models.Role;
+import es.upm.etsisi.models.Statistics;
 import es.upm.etsisi.models.Team;
 import es.upm.etsisi.utils.UpmEmail;
 
@@ -121,6 +123,41 @@ public class ParticipantService implements ParticipantManager {
         }
 
         return error;
+    }
+
+    public ErrorType showStatisticsCsv() {
+        assert this.authenticator.getUser().getRole() == Role.PLAYER;
+
+        Player player = (Player) this.authenticator.getUser();
+
+        Statistics stats = player.getStats();
+
+        for (int i = 0; i < Category.values().length; i++) {
+            System.out.print(Category.values()[i]);
+            if (i < Category.values().length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println();
+        for (Category category : Category.values()) {
+            System.out.print(stats.get(category) + "\t");
+        }
+        System.out.println();
+        return ErrorType.NULL;
+
+    }
+
+    public ErrorType showStatisticsJson() {
+        assert this.authenticator.getUser().getRole() == Role.PLAYER;
+
+        Player player = (Player) this.authenticator.getUser();
+
+        Statistics stats = player.getStats();
+
+        for (Category category : Category.values()) {
+            System.out.println("\"" + category + "\": \"" + stats.get(category) + "\"");
+        }
+        return ErrorType.NULL;
     }
 
     private boolean isValidPlayer(Participant participant) {
