@@ -1,17 +1,17 @@
 package es.upm.etsisi.views.commands;
 
 import es.upm.etsisi.models.DNI;
-import es.upm.etsisi.service.Controller;
 import es.upm.etsisi.service.ErrorType;
+import es.upm.etsisi.service.ParticipantService;
 import es.upm.etsisi.utils.Message;
 import es.upm.etsisi.utils.UpmEmail;
 
 public class CreatePlayerCommand extends Command {
-    private final Controller controller;
+    private final ParticipantService participantService;
 
-    CreatePlayerCommand(Controller controller) {
+    CreatePlayerCommand(ParticipantService participantService) {
         super("player-create", 5, "[username;password;name;lastname;dni] Registra un nuevo jugador en el sistema.");
-        this.controller = controller;
+        this.participantService = participantService;
     }
 
     @Override
@@ -28,7 +28,8 @@ public class CreatePlayerCommand extends Command {
             return error;
         }
 
-        error = this.controller.createPlayer(UpmEmail.valueOf(username), password, playerName, playerLastName, DNI.valueOf(dni));
+        error = this.participantService.createPlayer(UpmEmail.valueOf(username), password, playerName, playerLastName,
+                DNI.valueOf(dni));
 
         if (error.isNull()) {
             Message.PLAYER_ADDED.writeln();
