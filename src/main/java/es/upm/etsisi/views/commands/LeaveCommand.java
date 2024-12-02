@@ -1,15 +1,16 @@
 package es.upm.etsisi.views.commands;
 
-import es.upm.etsisi.service.Controller;
 import es.upm.etsisi.service.ErrorType;
+import es.upm.etsisi.service.TournamentService;
 import es.upm.etsisi.utils.Message;
 
 public class LeaveCommand extends Command {
-    private final Controller controller;
+    private final TournamentService tournamentService;
 
-    LeaveCommand(Controller controller) {
-        super("tournament-remove", 2, "[[-t],tournament] Da de baja al jugador autenticado o a su equipo de un torneo.");
-        this.controller = controller;
+    LeaveCommand(TournamentService tournamentService) {
+        super("tournament-remove", 2,
+                "[[-t],tournament] Da de baja al jugador autenticado o a su equipo de un torneo.");
+        this.tournamentService = tournamentService;
     }
 
     @Override
@@ -22,9 +23,9 @@ public class LeaveCommand extends Command {
         }
 
         if (args.containsFlag("-t")) {
-            error = this.controller.leaveTournamentAsTeam(tournamentName);
+            error = this.tournamentService.leaveTournamentAsTeam(tournamentName);
         } else {
-            error = this.controller.leaveTournament(tournamentName);
+            error = this.tournamentService.leaveTournament(tournamentName);
         }
 
         if (error.isNull()) {
