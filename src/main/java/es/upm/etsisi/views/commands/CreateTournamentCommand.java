@@ -55,7 +55,7 @@ public class CreateTournamentCommand extends Command {
         } else if (!validateDate(startDate).isNull() || !validateDate(endDate).isNull()) {
             return ErrorType.INVALID_ARGUMENTS;
         } else if (LocalDate.parse(endDate, DateTimeFormatter.ofPattern("dd/MM/yyyy")).isBefore(LocalDate.now())) {
-            return ErrorType.INVALID_ARGUMENTS;
+            return ErrorType.INVALID_DATE;
         } else {
             return ErrorType.NULL;
         }
@@ -63,7 +63,7 @@ public class CreateTournamentCommand extends Command {
 
     private ErrorType validateDate(String date) {
         if (!date.matches("^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\\d{4}$")) {
-            return ErrorType.INVALID_ARGUMENTS;
+            return ErrorType.DATE_FORMAT_ERROR;
         } else {
             return ErrorType.NULL;
         }
