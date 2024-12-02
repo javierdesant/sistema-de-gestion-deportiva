@@ -1,8 +1,10 @@
 package es.upm.etsisi.views;
 
 import es.upm.etsisi.models.User;
-import es.upm.etsisi.service.Controller;
+import es.upm.etsisi.service.AuthenticationService;
 import es.upm.etsisi.service.ErrorType;
+import es.upm.etsisi.service.ParticipantService;
+import es.upm.etsisi.service.TournamentService;
 import es.upm.etsisi.utils.Console;
 import es.upm.etsisi.utils.Message;
 import es.upm.etsisi.views.commands.Command;
@@ -12,12 +14,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class CLI {
-    private final Controller controller;
+    private final AuthenticationService authenticationService;
+    private final ParticipantService participantService;
+    private final TournamentService tournamentService;
     private final CommandFactory commandFactory;
 
     public CLI() {
-        this.controller = new Controller();
-        this.commandFactory = new CommandFactory(this.controller);
+        this.authenticationService = new AuthenticationService();
+        this.participantService = new ParticipantService(authenticationService);
+        this.tournamentService = new TournamentService(authenticationService);
+        this.commandFactory = new CommandFactory(authenticationService, participantService, tournamentService);
     }
 
     public boolean isOpen(Command command) {
@@ -33,7 +39,7 @@ public class CLI {
 
         do {
             error = ErrorType.NULL;
-            User user = this.controller.getUser();
+            User user = this.authenticationService.getUser();
             String input = this.readInput();
             String[] parsedInput = this.splitInput(input);
             String commandTitle = parsedInput[0];
@@ -54,7 +60,7 @@ public class CLI {
 
     private String readInput() {
         Console console = Console.getInstance();
-        User user = this.controller.getUser();
+        User user = this.authenticationService.getUser();
 
         if (user.isLoggedIn()) {
             console.write(user + " ");
@@ -77,7 +83,7 @@ public class CLI {
 
     private void displayHelp() {
         Console console = Console.getInstance();
-        User user = this.controller.getUser();
+        User user = this.authenticationService.getUser();
 
         console.writeln("Comandos disponibles:");
         ArrayList<Command> commands = this.commandFactory.getAllCommands(user.getRole());
