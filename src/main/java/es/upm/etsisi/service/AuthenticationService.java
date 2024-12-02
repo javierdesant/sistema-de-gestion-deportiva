@@ -31,12 +31,23 @@ public class AuthenticationService implements Authenticator {
         return error;
     }
 
+    public ErrorType signIn(User user) {
+        ErrorType error;
+        error = this.userList.add(user);
+        assert error.isNull();
+        return error;
+    }
+
     public void logout() {
         this.user = Guest.getInstance();
     }
 
     public User getUser() {
         return this.user;
+    }
+
+    public UserList getUsers() {
+        return this.userList;
     }
 
 }
