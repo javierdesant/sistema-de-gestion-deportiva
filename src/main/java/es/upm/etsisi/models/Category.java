@@ -20,7 +20,16 @@ public enum Category {
         return title;
     }
 
-    public String getCode() {
+    private String getCode() {
         return code;
+    }
+
+    public static Category getFromCode(String code) {
+        for (Category category : Category.values()) {
+            if (category.getCode().equals(code)) {
+                return category;
+            }
+        }
+        return null;
     }
 }

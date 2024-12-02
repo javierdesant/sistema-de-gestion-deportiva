@@ -28,7 +28,16 @@ public enum League {
         return title;
     }
 
-    public String getCode() {
+    private String getCode() {
         return code;
+    }
+
+    public static League getFromCode(String code) {
+        for (League league : League.values()) {
+            if (league.getCode().equals(code)) {
+                return league;
+            }
+        }
+        return null;
     }
 }

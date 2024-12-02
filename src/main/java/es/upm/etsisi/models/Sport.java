@@ -55,7 +55,16 @@ public enum Sport {
         return name;
     }
 
-    public String getCode() {
+    private String getCode() {
         return code;
+    }
+
+    public static Sport getFromCode(String code) {
+        for (Sport sport : Sport.values()) {
+            if (sport.getCode().equals(code)) {
+                return sport;
+            }
+        }
+        return null;
     }
 }
