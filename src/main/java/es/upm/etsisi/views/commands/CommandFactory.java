@@ -1,7 +1,9 @@
 package es.upm.etsisi.views.commands;
 
 import es.upm.etsisi.models.Role;
-import es.upm.etsisi.service.Controller;
+import es.upm.etsisi.service.AuthenticationService;
+import es.upm.etsisi.service.ParticipantService;
+import es.upm.etsisi.service.TournamentService;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,12 +11,17 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 public class CommandFactory {
-    private final Controller controller;
+    private final AuthenticationService authenticationService;
+    private final ParticipantService participantService;
+    private final TournamentService tournamentService;
     private final HashMap<Role, ArrayList<Command>> commands;
     private final ArrayList<Command> publicCommands;
 
-    public CommandFactory(Controller controller) {
-        this.controller = controller;
+    public CommandFactory(AuthenticationService authenticationService, ParticipantService participantService,
+            TournamentService tournamentService) {
+        this.authenticationService = authenticationService;
+        this.participantService = participantService;
+        this.tournamentService = tournamentService;
         this.commands = new HashMap<>();
         this.publicCommands = new ArrayList<>();
 
@@ -24,27 +31,25 @@ public class CommandFactory {
 
     private void initializeCommands() {
         this.commands.put(Role.ADMIN, createCommands(
-                new CreatePlayerCommand(this.controller),
-                new CreateTeamCommand(this.controller),
-                new DeletePlayerCommand(this.controller),
-                new DeleteTeamCommand(this.controller),
-                new AddToTeamCommand(this.controller),
-                new RemoveFromTeamCommand(this.controller),
-                new CreateTournamentCommand(this.controller),
-                new DeleteTournamentCommand(this.controller),
-                new MatchmakeCommand(this.controller)
-        ));
+                new CreatePlayerCommand(this.participantService),
+                new CreateTeamCommand(this.participantService),
+                new DeletePlayerCommand(this.participantService),
+                new DeleteTeamCommand(this.participantService),
+                new AddToTeamCommand(this.participantService),
+                new RemoveFromTeamCommand(this.participantService),
+                new CreateTournamentCommand(this.tournamentService),
+                new DeleteTournamentCommand(this.tournamentService),
+                new MatchmakeCommand(this.tournamentService)));
 
         this.commands.put(Role.PLAYER, createCommands(
-                new EnrollCommand(this.controller),
-                new LeaveCommand(this.controller),
-                new ShowStatsCommand(this.controller)
-        ));
+                new EnrollCommand(this.tournamentService),
+                new LeaveCommand(this.tournamentService),
+                new ShowStatsCommand(this.participantService)));
     }
 
     private void initializePublicCommands() {
-        this.publicCommands.add(new LoginCommand(this.controller));
-        this.publicCommands.add(new LogoutCommand(this.controller));
+        this.publicCommands.add(new LoginCommand(this.authenticationService));
+        this.publicCommands.add(new LogoutCommand(this.authenticationService));
         this.publicCommands.add(new HelpCommand());
         this.publicCommands.add(new ExitCommand());
     }
