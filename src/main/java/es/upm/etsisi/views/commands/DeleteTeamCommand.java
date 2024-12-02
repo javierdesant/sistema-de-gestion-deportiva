@@ -1,15 +1,16 @@
 package es.upm.etsisi.views.commands;
 
-import es.upm.etsisi.service.Controller;
 import es.upm.etsisi.service.ErrorType;
+import es.upm.etsisi.service.ParticipantService;
 import es.upm.etsisi.utils.Message;
 
 public class DeleteTeamCommand extends Command {
-    private final Controller controller;
+    private final ParticipantService participantService;
 
-    DeleteTeamCommand(Controller controller) {
-        super("team-delete", 1, "[team] Elimina del sistema al equipo, siempre que no esté participando en un torneo en curso.");
-        this.controller = controller;
+    DeleteTeamCommand(ParticipantService participantService) {
+        super("team-delete", 1,
+                "[team] Elimina del sistema al equipo, siempre que no esté participando en un torneo en curso.");
+        this.participantService = participantService;
     }
 
     @Override
@@ -21,7 +22,7 @@ public class DeleteTeamCommand extends Command {
             return ErrorType.INVALID_ARGUMENTS;
         }
 
-        error = this.controller.deleteTeam(teamName);
+        error = this.participantService.deleteTeam(teamName);
 
         if (error.isNull()) {
             Message.TEAM_REMOVED.writeln();
