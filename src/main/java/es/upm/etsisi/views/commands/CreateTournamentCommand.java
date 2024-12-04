@@ -1,8 +1,5 @@
 package es.upm.etsisi.views.commands;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 import es.upm.etsisi.models.Category;
 import es.upm.etsisi.models.League;
 import es.upm.etsisi.models.Sport;
@@ -54,8 +51,6 @@ public class CreateTournamentCommand extends Command {
             return ErrorType.INVALID_ARGUMENTS;
         } else if (!validateDate(startDate).isNull() || !validateDate(endDate).isNull()) {
             return ErrorType.INVALID_ARGUMENTS;
-        } else if (LocalDate.parse(endDate, DateTimeFormatter.ofPattern("dd/MM/yyyy")).isBefore(LocalDate.now())) {
-            return ErrorType.INVALID_DATE;
         } else {
             return ErrorType.NULL;
         }
