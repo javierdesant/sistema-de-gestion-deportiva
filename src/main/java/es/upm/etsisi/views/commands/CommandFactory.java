@@ -50,6 +50,7 @@ public class CommandFactory {
     private void initializePublicCommands() {
         this.publicCommands.add(new LoginCommand(this.authenticationService));
         this.publicCommands.add(new LogoutCommand(this.authenticationService));
+        this.publicCommands.add(new ListTournamentsCommand(tournamentService));
         this.publicCommands.add(new HelpCommand());
         this.publicCommands.add(new ExitCommand());
     }
