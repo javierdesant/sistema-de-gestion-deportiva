@@ -32,14 +32,14 @@ public class MatchmakeCommand extends Command {
             }
             error = this.tournamentService.tournamentMatchmake(tournamentName, players);
 
-            if (!error.isNull()) {
+            if (error.isNull()) {
                 CommandFeedback.MATCH_ADDED.writeln();
             }
         } else if (args.containsFlag("-a")) {
             String groupSize = args.pollToken();
             error = this.tournamentService.tournamentRandomMatchmake(tournamentName, Integer.valueOf(groupSize));
 
-            if (!error.isNull()) {
+            if (error.isNull()) {
                 CommandFeedback.MATCHES_RANDOMIZED.writeln();
             }
         } else {
