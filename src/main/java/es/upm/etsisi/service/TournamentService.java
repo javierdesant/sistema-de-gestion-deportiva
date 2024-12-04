@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 import es.upm.etsisi.models.DNI;
+import es.upm.etsisi.models.Match;
 import es.upm.etsisi.models.Role;
 import es.upm.etsisi.models.Participant;
 import es.upm.etsisi.models.Player;
@@ -42,7 +43,7 @@ public class TournamentService implements TournamentManager {
         return error;
     }
 
-    public ErrorType tournamentMatchmake(String tournamentName, Collection<DNI> dnis) {
+    public ErrorType tournamentMatchmake(String tournamentName, Collection<DNI> dnis) { //FIXME: Players that are in teams enrolled in the tournament are not found
         Tournament tournament = tournamentList.find(tournamentName);
         if (tournament == null) {
             return ErrorType.TOURNAMENT_NOT_FOUND;
@@ -133,6 +134,42 @@ public class TournamentService implements TournamentManager {
         }
 
         return tournament.remove(participant);
+    }
+
+    public ErrorType listTournament() {
+        Role currentRole = this.authenticator.getUser().getRole();
+        if (!tournamentList.isEmpty()) {
+            if (currentRole != Role.GUEST) {
+                Collections.sort(tournamentList.getElements(), (t1, t2) -> t1.getCategory().compareTo(t2.getCategory()));
+                if (currentRole == Role.ADMIN){
+                    ArrayList<Tournament> copy = new ArrayList<>(tournamentList.getElements());
+                    copy.removeIf(tournament -> !tournament.isActive());
+                    this.printTournament(copy);
+                } else {
+                    this.printTournament(tournamentList.getElements());
+                }
+            } else {
+                ArrayList<Tournament> copy = new ArrayList<Tournament>(tournamentList.getElements());
+                Collections.shuffle(copy);
+                this.printTournament(copy);
+            }
+        } else {
+            System.out.println("No hay torneos inscritos en el sistema.");
+        }
+        return ErrorType.NULL;
+    }
+
+    private void printTournament(Collection<Tournament> tournamentList) {
+        for (Tournament tournament : tournamentList) {
+            System.out.println("---------- Torneo: " + tournament.getName() + " ---------\n");
+            int i = 0;
+            for (Match match : tournament.getMatches().getElements()) {
+                System.out.print("Partido " + (i + 1) + ": " + match.toString());
+                if (i < tournament.getMatches().getElements().size() - 1) {
+                    System.out.print(", ");
+                }
+            }
+        }
     }
 
     public static TournamentList getTournaments() {
