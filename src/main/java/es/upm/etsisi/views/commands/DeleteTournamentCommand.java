@@ -2,6 +2,7 @@ package es.upm.etsisi.views.commands;
 
 import es.upm.etsisi.service.ErrorType;
 import es.upm.etsisi.service.TournamentService;
+import es.upm.etsisi.utils.CommandFeedback;
 
 public class DeleteTournamentCommand extends Command {
     private final TournamentService tournamentService;
@@ -23,7 +24,7 @@ public class DeleteTournamentCommand extends Command {
         error = this.tournamentService.deleteTournament(tournamentName);
 
         if (error.isNull()) {
-            // TODO: add message
+            CommandFeedback.TOURNAMENT_REMOVED.write();
         }
         return error;
     }

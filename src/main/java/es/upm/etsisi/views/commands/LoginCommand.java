@@ -2,6 +2,7 @@ package es.upm.etsisi.views.commands;
 
 import es.upm.etsisi.service.AuthenticationService;
 import es.upm.etsisi.service.ErrorType;
+import es.upm.etsisi.utils.CommandFeedback;
 
 public class LoginCommand extends Command {
     private final AuthenticationService authenticationService;
@@ -26,7 +27,7 @@ public class LoginCommand extends Command {
         error = this.authenticationService.login(username, password);
 
         if (error.isNull()) {
-            // TODO: add message
+           CommandFeedback.USER_LOGGED_IN.writeln(username);
         }
         return error;
     }

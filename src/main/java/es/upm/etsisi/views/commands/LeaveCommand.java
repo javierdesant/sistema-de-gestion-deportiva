@@ -2,7 +2,7 @@ package es.upm.etsisi.views.commands;
 
 import es.upm.etsisi.service.ErrorType;
 import es.upm.etsisi.service.TournamentService;
-import es.upm.etsisi.utils.Message;
+import es.upm.etsisi.utils.CommandFeedback;
 
 public class LeaveCommand extends Command {
     private final TournamentService tournamentService;
@@ -24,13 +24,16 @@ public class LeaveCommand extends Command {
 
         if (args.containsFlag("-t")) {
             error = this.tournamentService.leaveTournamentAsTeam(tournamentName);
+            if (error.isNull()) {
+                CommandFeedback.TEAM_DELISTED.writeln();
+            }
         } else {
             error = this.tournamentService.leaveTournament(tournamentName);
+            if (error.isNull()) {
+                CommandFeedback.PLAYER_DELISTED.writeln();
+            }
         }
 
-        if (error.isNull()) {
-            Message.PLAYER_ADDED.writeln();
-        }
         return error;
     }
 }

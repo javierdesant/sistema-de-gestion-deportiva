@@ -3,6 +3,7 @@ package es.upm.etsisi.views.commands;
 import es.upm.etsisi.models.DNI;
 import es.upm.etsisi.service.ErrorType;
 import es.upm.etsisi.service.TournamentService;
+import es.upm.etsisi.utils.CommandFeedback;
 
 import java.util.LinkedList;
 
@@ -32,14 +33,14 @@ public class MatchmakeCommand extends Command {
             error = this.tournamentService.tournamentMatchmake(tournamentName, players);
 
             if (!error.isNull()) {
-                // TODO: add message
+                CommandFeedback.MATCH_ADDED.writeln();
             }
         } else if (args.containsFlag("-a")) {
             String groupSize = args.pollToken();
             error = this.tournamentService.tournamentRandomMatchmake(tournamentName, Integer.valueOf(groupSize));
 
             if (!error.isNull()) {
-                // TODO: add message
+                CommandFeedback.MATCHES_RANDOMIZED.writeln();
             }
         } else {
             error = ErrorType.INVALID_ARGUMENTS;

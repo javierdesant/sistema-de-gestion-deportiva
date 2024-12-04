@@ -7,6 +7,7 @@ import es.upm.etsisi.models.TimeFrame;
 import es.upm.etsisi.models.TournamentInfo;
 import es.upm.etsisi.service.ErrorType;
 import es.upm.etsisi.service.TournamentService;
+import es.upm.etsisi.utils.CommandFeedback;
 
 public class CreateTournamentCommand extends Command {
     private final TournamentService tournamentService;
@@ -36,7 +37,7 @@ public class CreateTournamentCommand extends Command {
         error = this.tournamentService.createTournament(new TournamentInfo(name, Sport.getFromCode(sport),
                 League.getFromCode(league), Category.getFromCode(category)), new TimeFrame(startDate, endDate));
         if (error.isNull()) {
-            // TODO: Add message
+            CommandFeedback.TOURNAMENT_ADDED.writeln();
         }
 
         return error;
