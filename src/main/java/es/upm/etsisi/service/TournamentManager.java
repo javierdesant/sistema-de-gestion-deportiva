@@ -23,5 +23,5 @@ public interface TournamentManager {
 
     ErrorType leaveTournamentAsTeam(String tournamentName);
 
-    // listTournament, same issue as in showStatistics
+    ErrorType listTournament();
 }
