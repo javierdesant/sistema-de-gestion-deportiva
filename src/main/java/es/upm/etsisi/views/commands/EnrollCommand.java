@@ -8,7 +8,7 @@ public class EnrollCommand extends Command {
     private final TournamentService tournamentService;
 
     EnrollCommand(TournamentService tournamentService) {
-        super("tournament-add", 2, "[tournament] Inscribe al jugador autenticado o a su equipo en un torneo.");
+        super("tournament-add", 2, "[[-t];tournament] Inscribe al jugador autenticado o a su equipo (-t) en un torneo.");
         this.tournamentService = tournamentService;
     }
 
