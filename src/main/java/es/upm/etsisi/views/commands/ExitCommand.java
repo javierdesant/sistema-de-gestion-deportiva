@@ -1,7 +1,7 @@
 package es.upm.etsisi.views.commands;
 
 import es.upm.etsisi.service.ErrorType;
-import es.upm.etsisi.utils.Message;
+import es.upm.etsisi.utils.CommandFeedback;
 
 public class ExitCommand extends Command {
     ExitCommand() {
@@ -10,7 +10,7 @@ public class ExitCommand extends Command {
 
     @Override
     protected ErrorType execute(CommandArguments args) {
-        Message.EXIT_MESSAGE.writeln();
+        CommandFeedback.EXIT_MESSAGE.writeln();
         return ErrorType.NULL;
     }
 }

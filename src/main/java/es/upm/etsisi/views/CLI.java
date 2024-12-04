@@ -6,7 +6,7 @@ import es.upm.etsisi.service.ErrorType;
 import es.upm.etsisi.service.ParticipantService;
 import es.upm.etsisi.service.TournamentService;
 import es.upm.etsisi.utils.Console;
-import es.upm.etsisi.utils.Message;
+import es.upm.etsisi.utils.CommandFeedback;
 import es.upm.etsisi.views.commands.Command;
 import es.upm.etsisi.views.commands.CommandFactory;
 
@@ -66,7 +66,7 @@ public class CLI {
             console.write(user + " ");
         }
 
-        return console.readString(Message.COMMAND_PROMPT.toString());
+        return console.readString(CommandFeedback.COMMAND_PROMPT.toString());
     }
 
     private String[] splitInput(String input) {

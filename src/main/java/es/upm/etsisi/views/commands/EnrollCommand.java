@@ -2,7 +2,7 @@ package es.upm.etsisi.views.commands;
 
 import es.upm.etsisi.service.ErrorType;
 import es.upm.etsisi.service.TournamentService;
-import es.upm.etsisi.utils.Message;
+import es.upm.etsisi.utils.CommandFeedback;
 
 public class EnrollCommand extends Command {
     private final TournamentService tournamentService;
@@ -23,13 +23,16 @@ public class EnrollCommand extends Command {
 
         if (args.containsFlag("-t")) {
             error = this.tournamentService.enrollTeamOfUser(tournamentName);
+            if (error.isNull()) {
+                CommandFeedback.TEAM_ENROLLED.writeln();
+            }
         } else {
             error = this.tournamentService.enrollUser(tournamentName);
+            if (error.isNull()) {
+                CommandFeedback.PLAYER_ENROLLED.writeln();
+            }
         }
 
-        if (error.isNull()) {
-            Message.PLAYER_ADDED.writeln();
-        }
         return error;
     }
 }

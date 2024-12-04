@@ -2,7 +2,7 @@ package es.upm.etsisi.views.commands;
 
 import es.upm.etsisi.service.ErrorType;
 import es.upm.etsisi.service.ParticipantService;
-import es.upm.etsisi.utils.Message;
+import es.upm.etsisi.utils.CommandFeedback;
 
 public class DeleteTeamCommand extends Command {
     private final ParticipantService participantService;
@@ -25,7 +25,7 @@ public class DeleteTeamCommand extends Command {
         error = this.participantService.deleteTeam(teamName);
 
         if (error.isNull()) {
-            Message.TEAM_REMOVED.writeln();
+            CommandFeedback.TEAM_REMOVED.writeln();
         }
         return error;
     }

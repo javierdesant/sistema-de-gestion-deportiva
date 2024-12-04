@@ -3,7 +3,7 @@ package es.upm.etsisi.views.commands;
 import es.upm.etsisi.models.DNI;
 import es.upm.etsisi.service.ErrorType;
 import es.upm.etsisi.service.ParticipantService;
-import es.upm.etsisi.utils.Message;
+import es.upm.etsisi.utils.CommandFeedback;
 
 public class AddToTeamCommand extends Command {
     private final ParticipantService participantService;
@@ -28,7 +28,7 @@ public class AddToTeamCommand extends Command {
         error = this.participantService.addToTeam(DNI.valueOf(playerDni), teamName);
 
         if (error.isNull()) {
-            Message.PLAYER_ADDED_TO_TEAM.writeln(playerDni, teamName);
+            CommandFeedback.PLAYER_ADDED_TO_TEAM.writeln(playerDni, teamName);
         }
         return error;
     }

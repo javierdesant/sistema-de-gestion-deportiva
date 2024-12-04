@@ -3,7 +3,7 @@ package es.upm.etsisi.views.commands;
 import es.upm.etsisi.models.DNI;
 import es.upm.etsisi.service.ErrorType;
 import es.upm.etsisi.service.ParticipantService;
-import es.upm.etsisi.utils.Message;
+import es.upm.etsisi.utils.CommandFeedback;
 import es.upm.etsisi.utils.UpmEmail;
 
 public class CreatePlayerCommand extends Command {
@@ -32,7 +32,7 @@ public class CreatePlayerCommand extends Command {
                 DNI.valueOf(dni));
 
         if (error.isNull()) {
-            Message.PLAYER_ADDED.writeln();
+            CommandFeedback.PLAYER_ADDED.writeln();
         }
         return error;
     }
