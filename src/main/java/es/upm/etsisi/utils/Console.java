@@ -4,13 +4,17 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class Console {
-    private static final Console instance = new Console();
-    private final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+    private static Console instance;
+    private final BufferedReader bufferedReader;
 
     private Console() {
+        this.bufferedReader = new BufferedReader(new InputStreamReader(System.in));
     }
 
     public static Console getInstance() {
+        if (instance == null) {
+            instance = new Console();
+        }
         return instance;
     }
 
