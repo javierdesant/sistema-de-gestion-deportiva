@@ -136,11 +136,13 @@ public class ParticipantList extends List<Participant> {
 
         Iterator<Object> iterator = keys.iterator();
         while (iterator.hasNext() && res != null) {
-            Participant participant = this.find(iterator.next());
-            if (participant != null) {
-                res.add(participant);
-            } else {
-                res = null;
+            Object currentItem = iterator.next();
+            Iterator<DNI> dniIterator = ((Collection<DNI>) currentItem).iterator();
+            while (dniIterator.hasNext()){
+                Participant participant = this.find(dniIterator.next());
+                if (participant != null) {
+                    res.add(participant);
+                }
             }
         }
 
