@@ -18,7 +18,7 @@ public class CommandFactory {
     private final ArrayList<Command> publicCommands;
 
     public CommandFactory(AuthenticationService authenticationService, ParticipantService participantService,
-            TournamentService tournamentService) {
+                          TournamentService tournamentService) {
         this.authenticationService = authenticationService;
         this.participantService = participantService;
         this.tournamentService = tournamentService;

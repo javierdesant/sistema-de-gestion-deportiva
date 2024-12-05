@@ -50,15 +50,6 @@ public enum Sport {
         this.code = code;
     }
 
-    @Override
-    public String toString() {
-        return name;
-    }
-
-    private String getCode() {
-        return code;
-    }
-
     public static Sport getFromCode(String code) {
         for (Sport sport : Sport.values()) {
             if (sport.getCode().equals(code)) {
@@ -66,5 +57,14 @@ public enum Sport {
             }
         }
         return null;
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    private String getCode() {
+        return code;
     }
 }

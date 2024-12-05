@@ -1,20 +1,11 @@
 package es.upm.etsisi.service;
 
+import es.upm.etsisi.models.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-
-import es.upm.etsisi.models.DNI;
-import es.upm.etsisi.models.Match;
-import es.upm.etsisi.models.Role;
-import es.upm.etsisi.models.Participant;
-import es.upm.etsisi.models.Player;
-import es.upm.etsisi.models.Team;
-import es.upm.etsisi.models.TimeFrame;
-import es.upm.etsisi.models.Tournament;
-import es.upm.etsisi.models.TournamentInfo;
-import es.upm.etsisi.models.TournamentList;
 
 public class TournamentService implements TournamentManager {
     private final static TournamentList tournamentList = new TournamentList();
@@ -22,6 +13,10 @@ public class TournamentService implements TournamentManager {
 
     public TournamentService(AuthenticationService authenticator) {
         this.authenticator = authenticator;
+    }
+
+    public static TournamentList getTournaments() {
+        return tournamentList;
     }
 
     public ErrorType createTournament(TournamentInfo tournamentInfo, TimeFrame timeFrame) {
@@ -141,7 +136,7 @@ public class TournamentService implements TournamentManager {
         if (!tournamentList.isEmpty()) {
             if (currentRole != Role.GUEST) {
                 Collections.sort(tournamentList.getElements(), (t1, t2) -> t1.getCategory().compareTo(t2.getCategory()));
-                if (currentRole == Role.ADMIN){
+                if (currentRole == Role.ADMIN) {
                     ArrayList<Tournament> copy = new ArrayList<>(tournamentList.getElements());
                     copy.removeIf(tournament -> !tournament.isActive());
                     this.printTournament(copy);
@@ -170,10 +165,6 @@ public class TournamentService implements TournamentManager {
                 }
             }
         }
-    }
-
-    public static TournamentList getTournaments() {
-        return tournamentList;
     }
 
 }

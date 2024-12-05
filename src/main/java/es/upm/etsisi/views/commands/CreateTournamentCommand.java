@@ -1,16 +1,12 @@
 package es.upm.etsisi.views.commands;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
-import es.upm.etsisi.models.Category;
-import es.upm.etsisi.models.League;
-import es.upm.etsisi.models.Sport;
-import es.upm.etsisi.models.TimeFrame;
-import es.upm.etsisi.models.TournamentInfo;
+import es.upm.etsisi.models.*;
 import es.upm.etsisi.service.ErrorType;
 import es.upm.etsisi.service.TournamentService;
 import es.upm.etsisi.utils.CommandFeedback;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class CreateTournamentCommand extends Command {
     private final TournamentService tournamentService;
@@ -48,7 +44,7 @@ public class CreateTournamentCommand extends Command {
     }
 
     private ErrorType validate(String name, String sport, String league, String category, String startDate,
-            String endDate) {
+                               String endDate) {
         if (this.areInvalidTokens(name, sport, league, category, startDate, endDate)) {
             return ErrorType.INVALID_ARGUMENTS;
         } else if (Sport.getFromCode(sport) == null || League.getFromCode(league) == null

@@ -1,7 +1,7 @@
 package es.upm.etsisi.service;
 
-import es.upm.etsisi.utils.UpmEmail;
 import es.upm.etsisi.models.DNI;
+import es.upm.etsisi.utils.UpmEmail;
 
 public interface ParticipantManager {
     ErrorType createPlayer(UpmEmail username, String password, String firstName, String lastName, DNI dni);
@@ -15,5 +15,5 @@ public interface ParticipantManager {
     ErrorType addToTeam(DNI dni, String teamName);
 
     ErrorType removeFromTeam(String teamName, DNI dni);
-    
+
 }

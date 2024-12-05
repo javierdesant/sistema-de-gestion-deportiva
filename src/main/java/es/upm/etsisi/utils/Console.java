@@ -35,9 +35,11 @@ public class Console {
     public void write(String string) {
         System.out.print(string);
     }
-    public void write(double num){
+
+    public void write(double num) {
         System.out.print(num);
     }
+
     public void writeln() {
         System.out.println();
     }
@@ -47,7 +49,7 @@ public class Console {
         this.writeln();
     }
 
-    public void writeln(double num){
+    public void writeln(double num) {
         this.write(num);
         this.writeln();
     }

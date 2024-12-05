@@ -5,7 +5,6 @@ import es.upm.etsisi.models.Match;
 import es.upm.etsisi.utils.Console;
 
 public class MatchListView extends ListView<Match> {
-
     private final MatchView MatchView;
     private Console console;
 

@@ -1,14 +1,6 @@
 package es.upm.etsisi.service;
 
-import es.upm.etsisi.models.Administrator;
-import es.upm.etsisi.models.Category;
-import es.upm.etsisi.models.DNI;
-import es.upm.etsisi.models.Participant;
-import es.upm.etsisi.models.ParticipantList;
-import es.upm.etsisi.models.Player;
-import es.upm.etsisi.models.Role;
-import es.upm.etsisi.models.Statistics;
-import es.upm.etsisi.models.Team;
+import es.upm.etsisi.models.*;
 import es.upm.etsisi.utils.UpmEmail;
 
 public class ParticipantService implements ParticipantManager {
@@ -17,6 +9,10 @@ public class ParticipantService implements ParticipantManager {
 
     public ParticipantService(AuthenticationService authenticator) {
         this.authenticator = authenticator;
+    }
+
+    public static ParticipantList getParticipants() {
+        return participantList;
     }
 
     public ErrorType createPlayer(UpmEmail username, String password, String firstName, String lastName, DNI dni) {
@@ -166,10 +162,6 @@ public class ParticipantService implements ParticipantManager {
 
     private boolean isValidTeam(Participant participant) {
         return participant != null && participant.hasChildren();
-    }
-
-    public static ParticipantList getParticipants() {
-        return participantList;
     }
 
 }

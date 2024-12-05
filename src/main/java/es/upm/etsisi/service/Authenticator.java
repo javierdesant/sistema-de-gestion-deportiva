@@ -6,6 +6,6 @@ public interface Authenticator {
     ErrorType login(String username, String password);
 
     void logout();
-    
+
     User getUser();
 }

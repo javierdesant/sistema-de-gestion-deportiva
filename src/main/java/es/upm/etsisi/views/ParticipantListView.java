@@ -4,7 +4,6 @@ import es.upm.etsisi.models.List;
 import es.upm.etsisi.models.Participant;
 
 public class ParticipantListView extends ListView<Participant> {
-
     private ParticipantView participantView;
 
     public ParticipantListView() {

@@ -23,7 +23,8 @@ public class CreateTeamCommand extends Command {
             return ErrorType.INVALID_ARGUMENTS;
         } else if (!teamName.matches("[a-zA-Z]+")) {
             return ErrorType.NAME_FORMAT_ERROR;
-        } if (!DNI.isValidDNI(playerDni)) {
+        }
+        if (!DNI.isValidDNI(playerDni)) {
             return ErrorType.INVALID_DNI_ERROR;
         }
 

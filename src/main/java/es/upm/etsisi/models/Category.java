@@ -15,15 +15,6 @@ public enum Category {
         this.code = code;
     }
 
-    @Override
-    public String toString() {
-        return title;
-    }
-
-    private String getCode() {
-        return code;
-    }
-
     public static Category getFromCode(String code) {
         for (Category category : Category.values()) {
             if (category.getCode().equals(code)) {
@@ -31,5 +22,14 @@ public enum Category {
             }
         }
         return null;
+    }
+
+    @Override
+    public String toString() {
+        return title;
+    }
+
+    private String getCode() {
+        return code;
     }
 }

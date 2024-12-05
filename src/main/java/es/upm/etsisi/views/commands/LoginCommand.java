@@ -27,7 +27,7 @@ public class LoginCommand extends Command {
         error = this.authenticationService.login(username, password);
 
         if (error.isNull()) {
-           CommandFeedback.USER_LOGGED_IN.writeln(username);
+            CommandFeedback.USER_LOGGED_IN.writeln(username);
         }
         return error;
     }

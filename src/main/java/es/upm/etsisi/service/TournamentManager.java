@@ -1,10 +1,10 @@
 package es.upm.etsisi.service;
 
-import java.util.Collection;
-
 import es.upm.etsisi.models.DNI;
 import es.upm.etsisi.models.TimeFrame;
 import es.upm.etsisi.models.TournamentInfo;
+
+import java.util.Collection;
 
 public interface TournamentManager {
     ErrorType createTournament(TournamentInfo tournamentInfo, TimeFrame timeFrame);

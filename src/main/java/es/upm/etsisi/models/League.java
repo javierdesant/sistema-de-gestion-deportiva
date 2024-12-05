@@ -23,15 +23,6 @@ public enum League {
         this.code = code;
     }
 
-    @Override
-    public String toString() {
-        return title;
-    }
-
-    private String getCode() {
-        return code;
-    }
-
     public static League getFromCode(String code) {
         for (League league : League.values()) {
             if (league.getCode().equals(code)) {
@@ -39,5 +30,14 @@ public enum League {
             }
         }
         return null;
+    }
+
+    @Override
+    public String toString() {
+        return title;
+    }
+
+    private String getCode() {
+        return code;
     }
 }
