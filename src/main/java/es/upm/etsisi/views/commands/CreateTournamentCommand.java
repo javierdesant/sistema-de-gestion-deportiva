@@ -1,5 +1,8 @@
 package es.upm.etsisi.views.commands;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import es.upm.etsisi.models.Category;
 import es.upm.etsisi.models.League;
 import es.upm.etsisi.models.Sport;
@@ -15,8 +18,9 @@ public class CreateTournamentCommand extends Command {
     CreateTournamentCommand(TournamentService tournamentService) {
         super("tournament-create", 6,
                 "[name;sport;league;category;startDate;endDate] Registra un nuevo torneo en el sistema.\n" +
-                "\tLos códigos de Deporte, Liga y Categoría deben ser del formato correspondiente según el documento tipo_code_references en la carpeta docs.\n" +
-                "\tEl formato de la fecha debe ser dd/mm/aaaa.\n");
+                        "\tLos códigos de Deporte, Liga y Categoría deben ser del formato correspondiente según el documento tipo_code_references en la carpeta docs.\n"
+                        +
+                        "\tEl formato de la fecha debe ser dd/mm/aaaa.\n");
         this.tournamentService = tournamentService;
     }
 
@@ -51,6 +55,9 @@ public class CreateTournamentCommand extends Command {
                 || Category.getFromCode(category) == null) {
             return ErrorType.INVALID_ARGUMENTS;
         } else if (!validateDate(startDate).isNull() || !validateDate(endDate).isNull()) {
+            return ErrorType.INVALID_ARGUMENTS;
+        } else if (LocalDate.parse(endDate, DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+                .isBefore(LocalDate.parse(startDate, DateTimeFormatter.ofPattern("dd/MM/yyyy")))) {
             return ErrorType.INVALID_ARGUMENTS;
         } else {
             return ErrorType.NULL;
