@@ -2,34 +2,32 @@ package es.upm.etsisi.models;
 
 import es.upm.etsisi.service.ErrorType;
 
-import java.util.HashSet;
 import java.util.LinkedList;
 
 public class Team implements Participant {
     private final String name;
+    private final ParticipantList members;
     private final Administrator admin;
-    private final HashSet<Player> members;
 
-    public Team(String name, Administrator admin, Player player) {
-        assert admin.getRole() == Role.ADMIN;
-
+    public Team(String name, ParticipantList members, Administrator admin) {
         this.name = name;
+        this.members = members;
         this.admin = admin;
-        this.members = new HashSet<>();
-        this.members.add(player);
     }
 
     public ErrorType add(Player player) {
-        boolean added = this.members.add(player);
+        ErrorType error = this.members.add(player);
 
-        if (!added) {
+        if (error == ErrorType.DUPLICATE_PLAYER_ERROR) {
             return ErrorType.PLAYER_ALREADY_IN_TEAM_ERROR;
+        } else {
+            assert error.isNull();
         }
-        return ErrorType.NULL;
+        return error;
     }
 
     public boolean remove(Player player) {
-        assert this.size() > 1;
+        assert this.size() > 2;
         return this.members.remove(player);
     }
 
@@ -49,8 +47,8 @@ public class Team implements Participant {
         for (Category category : Category.values()) {
             double product = 1.0;
 
-            for (Player child : this.members) {
-                product *= child.getStats().get(category);
+            for (Participant member : this.members.getElements()) {
+                product *= member.getStats().get(category);
             }
 
             double geometricMean = Math.pow(product, 1.0 / this.members.size());
@@ -62,7 +60,14 @@ public class Team implements Participant {
 
     @Override
     public LinkedList<Player> getMembers() {
-        return new LinkedList<>(this.members);
+        LinkedList<Player> members = new LinkedList<>();
+
+        for (Participant member : this.members.getElements()) {
+            assert !member.hasChildren();
+            members.add((Player) member);
+        }
+
+        return members;
     }
 
     @Override

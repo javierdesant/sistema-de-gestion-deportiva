@@ -29,6 +29,10 @@ public abstract class List<T> {
         return new LinkedList<>(this.elements).iterator();
     }
 
+    public int size() {
+        return this.elements.size();
+    }
+
     public boolean isEmpty() {
         return this.elements.isEmpty();
     }
