@@ -29,8 +29,8 @@ public class ParticipantView extends View<Participant> {
             }
             Console.getInstance().writeln("----------------------");
         } else {
-            writelnConsole("EQUIPO " + element.getName());
-            writelnConsole("----------------------");
+            writeln("EQUIPO " + element.getName());
+            writeln("----------------------");
             for (Participant player : element.getChildren()) {
                 write(player);
             }

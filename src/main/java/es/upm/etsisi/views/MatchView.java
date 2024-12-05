@@ -10,6 +10,6 @@ public class MatchView extends View<Match> {
 
     @Override
     public void write(Match element) {
-        this.writelnConsole(element.toString());
+        this.writeln(element.toString());
     }
 }
