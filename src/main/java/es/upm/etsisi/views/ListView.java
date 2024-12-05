@@ -1,29 +1,21 @@
 package es.upm.etsisi.views;
 
 import es.upm.etsisi.models.List;
-import es.upm.etsisi.utils.Console;
 
-import java.util.Iterator;
-
-abstract class ListView<T> extends View<T> {
-
-    private final Console console;
-
-    protected ListView() {
-        console = Console.getInstance();
+public abstract class ListView<T> extends View<T> {
+    public ListView() {
+        super();
     }
 
     protected void writeList(List<T> list) {
         assert list != null;
-        if (!list.isEmpty()) {
-            Iterator<T> iterator = list.iterator();
-            while (iterator.hasNext()) {
-                this.write(iterator.next());
-            }
+        if (list.isEmpty()) {
+            this.writeln("La lista esta vacia.");
         } else {
-            console.writeln("La lista esta vacia.");
+            for (T element : list.getElements()) {
+                this.display(element);
+            }
         }
-
     }
 
     public abstract void write(List<T> list);

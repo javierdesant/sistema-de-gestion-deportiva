@@ -5,14 +5,22 @@ import es.upm.etsisi.utils.Console;
 public abstract class View<T> {
     private final Console console;
 
-    protected View() {
+    public View() {
         this.console = Console.getInstance();
     }
 
-    protected void writeln(String string) {
-        this.console.writeln(string);
+    protected void writeln(String message) {
+        this.console.writeln(message);
     }
 
-    protected abstract void write(T element);
+    protected void writeln(Double value) {
+        this.console.writeln(value);
+    }
+
+    protected void write(String message) {
+        this.console.write(message);
+    }
+
+    public abstract void display(T element);
 }
     

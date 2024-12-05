@@ -1,17 +1,18 @@
 package es.upm.etsisi.views;
 
 import es.upm.etsisi.models.Tournament;
-import es.upm.etsisi.utils.Console;
 
 public class TournamentView extends View<Tournament> {
 
-    private TournamentView() {
+    public TournamentView() {
         super();
     }
 
-    public void write(Tournament tournament) {
-        Console.getInstance().writeln(tournament.getName());
-        Console.getInstance().writeln(tournament.getStartDate().toString() + "-" + tournament.getEndDate().toString());
-        Console.getInstance().writeln("Liga: " + tournament.getLeague().toString() + " de " + tournament.getSport().toString());
+    public void display(Tournament tournament) {
+        this.writeln(tournament.getName());
+        this.writeln(tournament.getStartDate() + "-" + tournament.getEndDate());
+        this.writeln("Liga: " + tournament.getLeague() + " de " + tournament.getSport());
+
+        new MatchListView().write(tournament.getMatches());
     }
 }

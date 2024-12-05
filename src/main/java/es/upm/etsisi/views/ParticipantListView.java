@@ -4,8 +4,6 @@ import es.upm.etsisi.models.List;
 import es.upm.etsisi.models.Participant;
 
 public class ParticipantListView extends ListView<Participant> {
-    private ParticipantView participantView;
-
     public ParticipantListView() {
         super();
     }
@@ -16,9 +14,7 @@ public class ParticipantListView extends ListView<Participant> {
     }
 
     @Override
-    protected void write(Participant participant) {
-        participantView.write(participant);
+    public void display(Participant participant) {
+        new ParticipantView().display(participant);
     }
-
-
 }

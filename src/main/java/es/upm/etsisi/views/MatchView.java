@@ -9,7 +9,7 @@ public class MatchView extends View<Match> {
     }
 
     @Override
-    public void write(Match element) {
+    public void display(Match element) {
         this.writeln(element.toString());
     }
 }
