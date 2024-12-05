@@ -19,9 +19,6 @@ public class Player extends User implements Participant {
                   Statistics statistics,
                   Administrator admin) {
         super(username, password, Role.PLAYER);
-
-        assert admin.getRole() == Role.ADMIN;
-
         this.firstName = firstName;
         this.lastName = lastName;
         this.dni = dni;

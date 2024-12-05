@@ -4,6 +4,9 @@ import es.upm.etsisi.models.*;
 import es.upm.etsisi.utils.UpmEmail;
 import es.upm.etsisi.views.StatisticsView;
 
+import java.util.Collection;
+import java.util.Iterator;
+
 public class ParticipantService implements ParticipantManager {
     private final static ParticipantList participantList = new ParticipantList();
     private final AuthenticationService authenticator;
@@ -20,10 +23,9 @@ public class ParticipantService implements ParticipantManager {
         ErrorType error;
 
         assert this.authenticator.getUser().getRole().equals(Role.ADMIN);
-        Player player = new Player(username, password, firstName, lastName, dni,
-                (Administrator) this.authenticator.getUser());
+        Player player = new Player(username, password, firstName, lastName, dni, (Administrator) this.authenticator.getUser());
 
-        error = participantList.add(player);
+        error = this.addParticipant(player);
         if (error.isNull()) {
             error = this.authenticator.signIn(player);
             assert error.isNull();
@@ -32,20 +34,56 @@ public class ParticipantService implements ParticipantManager {
         return error;
     }
 
-    public ErrorType createTeam(String teamName, DNI dni) {
+    private boolean isInTeam(Participant participant) {
+        return this.isValidPlayer(participant) && this.participantList.getTeamOf((Player) participant) != null;
+    }
+
+    public ErrorType createTeam(String teamName, Collection<DNI> dnis) {
+        assert dnis.size() > 1;
         ErrorType error;
 
-        assert this.authenticator.getUser().getRole().equals(Role.ADMIN);
-        Participant player = participantList.find(dni);
-        if (this.isValidPlayer(player)) {
-            Team team = new Team(teamName, (Administrator) this.authenticator.getUser(), (Player) player);
-            error = participantList.add(team);
-            if (error.isNull()) {
-                boolean removed = participantList.remove(player);
-                assert removed;
+        ParticipantList players = new ParticipantList();
+        Iterator<DNI> iterator = dnis.iterator();
+        do {
+            Participant player = participantList.find(iterator.next());
+            if (this.isValidPlayer(player) && !this.isInTeam(player)) {
+                error = players.add(player);
+            } else if (isValidPlayer(player)) {
+                error = ErrorType.PLAYER_ALREADY_IN_TEAM_ERROR;
+            } else {
+                error = ErrorType.PLAYER_NOT_FOUND;
+            }
+        } while (iterator.hasNext() && error.isNull());
+
+        if (error.isNull()) {
+            error = this.addParticipant(new Team(teamName, players, (Administrator) this.authenticator.getUser()));
+        }
+
+        return error;
+    }
+
+    public ErrorType addParticipant(Participant participant) {
+        assert this.isValidPlayer(participant) || this.isValidTeam(participant);
+        ErrorType error;
+
+        if (this.isInTeam(participant)) {
+            error = ErrorType.PLAYER_ALREADY_IN_TEAM_ERROR;
+        } else if (this.isValidTeam(participant)) {
+            error = ErrorType.NULL;
+            for (Player player : participant.getMembers()) {
+                if (this.isInTeam(player)) {
+                    error = ErrorType.PLAYER_ALREADY_IN_TEAM_ERROR;
+                }
             }
         } else {
-            error = ErrorType.PLAYER_NOT_FOUND;
+            error = participantList.add(participant);
+        }
+
+        if (error.isNull()) {
+            for (Player player : participant.getMembers()) {
+                participantList.remove(player);
+                assert participantList.getTeamOf(player) == participant;
+            }
         }
 
         return error;
