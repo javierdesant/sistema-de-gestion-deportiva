@@ -5,24 +5,22 @@ import es.upm.etsisi.models.List;
 
 public class ParticipantListView extends ListView<Participant> {
     
-    private static final ParticipantListView instance = new ParticipantListView();
+    private ParticipantView participantView;
 
-    private ParticipantListView(){
+    public ParticipantListView(){
+        super();
     }
 
-    public ParticipantListView getInstace(){
-        return instance;
-    }
-
-    public void write(List<Participant> participant){
-        super.writeList(participant);
-    }
     @Override
-    protected void writeElement(Participant participant){
-        ParticipantView.getInstance().write(participant);
+    public void write(List<Participant> participant){
+        this.writeList(participant);
+    }
+
+    @Override
+    protected void write(Participant participant){
+        participantView.write(participant);
     }
     
-
 
     
 }

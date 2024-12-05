@@ -1,20 +1,15 @@
 package es.upm.etsisi.views;
 
 import es.upm.etsisi.models.Match;
-import es.upm.etsisi.utils.Console;
 
-public class MatchView implements View<Match> {
+public class MatchView extends View<Match> {
 
-    private static final MatchView instance = new MatchView();
-    
-    private MatchView(){
+    public MatchView(){
+        super();
     }
 
-    public static MatchView getInstance(){
-        return instance;
-    }
-
+    @Override
     public void write(Match element) {
-        Console.getInstance().writeln(element.toString());
+        this.writelnConsole(element.toString());
     }
 }

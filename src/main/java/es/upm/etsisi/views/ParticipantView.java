@@ -5,19 +5,15 @@ import es.upm.etsisi.utils.Console;
 import es.upm.etsisi.models.Participant;
 import es.upm.etsisi.models.Statistics;
 import es.upm.etsisi.models.Category;
-public class ParticipantView implements View<Participant> {
-    
-    private static final ParticipantView instance = new ParticipantView();
+public class ParticipantView extends View<Participant> {
 
     private ParticipantView(){
-    }
-
-    public static ParticipantView getInstance(){
-        return instance;
+        super()
     }
 
     @Override
     public void write(Participant element) {
+        //comprobar si llega equipo o jugador
         Console.getInstance().writeln("     JUGADOR     ");
         Console.getInstance().writeln(element.getName());
         Statistics statistics = element.getStats();

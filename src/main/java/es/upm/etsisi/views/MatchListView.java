@@ -5,23 +5,24 @@ import es.upm.etsisi.utils.Console;
 import es.upm.etsisi.models.List;
 
 public class MatchListView extends ListView<Match> {
-    private static final MatchListView instance = new MatchListView();
-
-    private MatchListView(){
-
+    
+    private MatchView MatchView;
+    private Console console;
+   
+    public MatchListView(){
+        super();
+        MatchView = new MatchView();
     }
     
-    public static MatchListView getInstance(){
-        return instance;
-    }
-
-    public void write(List<Match> list){
-        Console.getInstance().writeln("     PARTIDOS     ");
-        Console.getInstance().writeln("------------------");
-        super.writeList(list);
-    }
     @Override
-    protected void writeElement(Match match){
-        MatchView.getInstance().write(match);
+    public void write(List<Match> list){
+        console.writeln("     PARTIDOS     ");
+        console.writeln("------------------");
+        this.writeList(list);
+    }
+    
+    @Override
+    protected void write(Match match){
+        MatchView.write(match);
     } 
 }

@@ -5,20 +5,19 @@ import es.upm.etsisi.models.Tournament;
 
 public class TournamentListView extends ListView<Tournament> {
 
-    private static final TournamentListView instance = new TournamentListView();
+    private TournamentView tournamentView;
 
-    private TournamentListView(){
+    public TournamentListView(){
+        super();
     }
 
-    public static TournamentListView getInstance(){
-        return instance;
-    }
     @Override
     public void write(List<Tournament> list) {
         super.writeList(list);
     }
+
     @Override
-    protected void writeElement(Tournament elemenT) {
-        TournamentView.getInstance().write(elemenT);
+    protected void write(Tournament elemenT) {
+        tournamentView.write(elemenT);
     }
 }
