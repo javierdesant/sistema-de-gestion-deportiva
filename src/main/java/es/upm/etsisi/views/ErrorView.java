@@ -27,6 +27,7 @@ public class ErrorView {
         MESSAGES.put(ErrorType.TEAM_NOT_FOUND, "Equipo no encontrado");
         MESSAGES.put(ErrorType.TOURNAMENT_NOT_FOUND, "Torneo no encontrado");
         MESSAGES.put(ErrorType.WRONG_PASSWORD, "Contraseña incorrecta");
+        MESSAGES.put(ErrorType.MORE_PLAYERS_NEEDED, "Hacen falta al menos 2 jugadores para crear un equipo");
         MESSAGES.put(ErrorType.INVALID_ARGUMENTS, "Argumentos no válidos");
         MESSAGES.put(ErrorType.INVALID_EMAIL, "Email no válido");
         MESSAGES.put(ErrorType.INVALID_CODE, "Código no válido");
@@ -34,6 +35,7 @@ public class ErrorView {
         MESSAGES.put(ErrorType.PARTICIPANT_NOT_ENROLLED, "El participante no está inscrito en el torneo");
         MESSAGES.put(ErrorType.TOURNAMENT_NOT_ACTIVE, "El torneo no se encuentra en curso");
         MESSAGES.put(ErrorType.PLAYER_IN_GAME_ERROR, "El jugador participa en un torneo activo");
+        MESSAGES.put(ErrorType.PLAYER_IN_ANOTHER_TEAM, "El jugador pertenece a otro equipo");
         MESSAGES.put(ErrorType.TEAM_IN_GAME_ERROR, "El equipo participa en un torneo activo");
         MESSAGES.put(ErrorType.INVALID_COMMAND, "Comando no válido");
         MESSAGES.put(ErrorType.INVALID_MATCH, "Los partidos deben tener al menos dos jugadores");

@@ -30,6 +30,8 @@ public enum ErrorType {
     INVALID_TIME_FRAME,
     INVALID_MATCH,
     INVALID_EMAIL,
+    MORE_PLAYERS_NEEDED,
+    PLAYER_IN_ANOTHER_TEAM,
 
     NULL;
 
