@@ -49,11 +49,12 @@ public class MatchList extends List<Match> {
         return !hasDuplicate;
     }
 
-    public void remove(String name) {
+    public void removeByKey(Object key) {
         for (Match match : this.getElements()) {
             for (Participant participant : match.getParticipants().getElements()) {
-                if (participant.getName().equals(name))
+                if (participant.getKey().equals(key)) {
                     this.remove(match);
+                }
             }
         }
     }
