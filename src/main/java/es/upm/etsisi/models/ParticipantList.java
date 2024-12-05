@@ -49,7 +49,7 @@ public class ParticipantList extends List<Participant> {
         return error;
     }
 
-    public Team getTeam(Player player) {
+    public Team getTeamOf(Player player) {
         Team res = null;
 
         Iterator<Participant> iterator = this.iterator();
