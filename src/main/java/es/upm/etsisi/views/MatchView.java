@@ -4,7 +4,7 @@ import es.upm.etsisi.models.Match;
 
 public class MatchView extends View<Match> {
 
-    public MatchView(){
+    public MatchView() {
         super();
     }
 

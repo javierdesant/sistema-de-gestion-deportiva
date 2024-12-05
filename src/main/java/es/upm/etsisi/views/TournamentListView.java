@@ -7,7 +7,7 @@ public class TournamentListView extends ListView<Tournament> {
 
     private TournamentView tournamentView;
 
-    public TournamentListView(){
+    public TournamentListView() {
         super();
     }
 

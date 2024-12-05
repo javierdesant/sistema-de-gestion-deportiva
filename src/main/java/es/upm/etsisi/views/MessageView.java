@@ -1,10 +1,9 @@
 package es.upm.etsisi.views;
 
-import es.upm.etsisi.utils.Message;
 
-public class MessageView extends View<Message>{
+public class MessageView extends View<Message> {
 
-    public MessageView(){
+    public MessageView() {
         super();
     }
 

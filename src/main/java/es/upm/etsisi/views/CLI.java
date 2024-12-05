@@ -5,8 +5,8 @@ import es.upm.etsisi.service.AuthenticationService;
 import es.upm.etsisi.service.ErrorType;
 import es.upm.etsisi.service.ParticipantService;
 import es.upm.etsisi.service.TournamentService;
-import es.upm.etsisi.utils.Console;
 import es.upm.etsisi.utils.CommandFeedback;
+import es.upm.etsisi.utils.Console;
 import es.upm.etsisi.views.commands.Command;
 import es.upm.etsisi.views.commands.CommandFactory;
 
