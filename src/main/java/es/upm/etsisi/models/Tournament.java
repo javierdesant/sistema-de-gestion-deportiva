@@ -123,15 +123,15 @@ public class Tournament {
         ErrorType error;
         LinkedList<Participant> participants = new LinkedList<>(this.participantList.getElements());
 
-        if (participants.size() < 2 || Integer.bitCount(groupSize) != 1 || groupSize >= participants.size()) {
+        if (participants.size() < 2 || groupSize < 2 || Integer.bitCount(groupSize) != 1 || groupSize > participants.size()) {
             return ErrorType.INVALID_MATCH;
         }
-
+        this.matchList.clear();
         Collections.shuffle(participants);
-        for (int i = participants.size() - 1; i < groupSize; i -= groupSize) {
+        for (int i = participants.size() - 1; i >= groupSize - 1; i -= groupSize) {
             LinkedList<Participant> group = new LinkedList<>();
             for (int j = 0; j < groupSize; j++) {
-                group.add(participants.remove(i));
+                group.add(participants.remove(i - j));
             }
             error = this.matchmake(group);
             assert error.isNull();
