@@ -73,7 +73,7 @@ public class Tournament {
         return ErrorType.NULL;
     }
 
-    public ErrorType matchmake(Collection<Participant> participants) {  // FIXME
+    public ErrorType matchmake(Collection<Participant> participants) {
         ErrorType error;
 
         if (participants.size() < 2) {
@@ -119,11 +119,11 @@ public class Tournament {
         return repeated;
     }
 
-    public ErrorType randomMatchmake(int groupSize) {   // FIXME
+    public ErrorType randomMatchmake(int groupSize) {
         ErrorType error;
         LinkedList<Participant> participants = new LinkedList<>(this.participantList.getElements());
 
-        if (participants.size() < 2) {
+        if (participants.size() < 2 || Integer.bitCount(groupSize) != 1 || groupSize >= participants.size()) {
             return ErrorType.INVALID_MATCH;
         }
 

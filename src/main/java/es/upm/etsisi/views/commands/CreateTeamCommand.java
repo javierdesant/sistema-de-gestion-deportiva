@@ -1,16 +1,16 @@
 package es.upm.etsisi.views.commands;
 
 import es.upm.etsisi.models.DNI;
-import es.upm.etsisi.service.Controller;
 import es.upm.etsisi.service.ErrorType;
-import es.upm.etsisi.utils.Message;
+import es.upm.etsisi.service.ParticipantService;
+import es.upm.etsisi.utils.CommandFeedback;
 
 public class CreateTeamCommand extends Command {
-    private final Controller controller;
+    private final ParticipantService participantService;
 
-    CreateTeamCommand(Controller controller) {
+    CreateTeamCommand(ParticipantService participantService) {
         super("team-create", 2, "[new-team;player] Añade a un jugador a un nuevo equipo.");
-        this.controller = controller;
+        this.participantService = participantService;
     }
 
     @Override
@@ -27,10 +27,10 @@ public class CreateTeamCommand extends Command {
             return ErrorType.INVALID_DNI_ERROR;
         }
 
-        error = this.controller.createTeam(teamName, DNI.valueOf(playerDni));
+        error = this.participantService.createTeam(teamName, DNI.valueOf(playerDni));
 
         if (error.isNull()) {
-            Message.TEAM_ADDED.writeln();
+            CommandFeedback.TEAM_ADDED.writeln();
         }
         return error;
     }

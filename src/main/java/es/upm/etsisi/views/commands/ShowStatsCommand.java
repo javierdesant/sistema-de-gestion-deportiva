@@ -1,32 +1,28 @@
 package es.upm.etsisi.views.commands;
 
-import es.upm.etsisi.models.Category;
-import es.upm.etsisi.models.Player;
-import es.upm.etsisi.models.Role;
-import es.upm.etsisi.models.Statistics;
-import es.upm.etsisi.service.Controller;
 import es.upm.etsisi.service.ErrorType;
+import es.upm.etsisi.service.ParticipantService;
 
 public class ShowStatsCommand extends Command {
-    private final Controller controller;
+    private final ParticipantService participantService;
 
-    ShowStatsCommand(Controller controller) {
-        super("statistics-show", 0, "Muestra las estadísticas del jugador autenticado. Con la opción -csv, se presentan en formato tabla; con -json, en formato clave-valor.");
-        this.controller = controller;
+    ShowStatsCommand(ParticipantService participantService) {
+        super("statistics-show", 1,
+                "Muestra las estadísticas del jugador autenticado. Con la opción -csv, se presentan en formato tabla; con -json, en formato clave-valor.");
+        this.participantService = participantService;
     }
 
     @Override
-    protected ErrorType execute(CommandArguments args) {    // TODO
-        assert this.controller.getUser().getRole() == Role.PLAYER;
+    protected ErrorType execute(CommandArguments args) {
+        ErrorType error;
 
-        Player player = (Player) this.controller.getUser();
-
-        Statistics stats = this.controller.getParticipantStats(player);
-
-        for (Category category : Category.values()) {
-            System.out.println(category + "\t- " + stats.get(category));
+        if (args.containsFlag("-csv")) {
+            error = this.participantService.showStatisticsCsv();
+        } else if (args.containsFlag("-json")) {
+            error = this.participantService.showStatisticsJson();
+        } else {
+            error = ErrorType.INVALID_ARGUMENTS;
         }
-
-        return ErrorType.NULL;
+        return error;
     }
 }

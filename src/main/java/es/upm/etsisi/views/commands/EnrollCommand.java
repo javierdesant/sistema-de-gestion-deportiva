@@ -1,15 +1,15 @@
 package es.upm.etsisi.views.commands;
 
-import es.upm.etsisi.service.Controller;
 import es.upm.etsisi.service.ErrorType;
-import es.upm.etsisi.utils.Message;
+import es.upm.etsisi.service.TournamentService;
+import es.upm.etsisi.utils.CommandFeedback;
 
 public class EnrollCommand extends Command {
-    private final Controller controller;
+    private final TournamentService tournamentService;
 
-    EnrollCommand(Controller controller) {
-        super("tournament-add", 2, "[tournament] Inscribe al jugador autenticado o a su equipo en un torneo.");
-        this.controller = controller;
+    EnrollCommand(TournamentService tournamentService) {
+        super("tournament-add", 2, "[[-t];tournament] Inscribe al jugador autenticado o a su equipo (-t) en un torneo.");
+        this.tournamentService = tournamentService;
     }
 
     @Override
@@ -22,14 +22,17 @@ public class EnrollCommand extends Command {
         }
 
         if (args.containsFlag("-t")) {
-            error = this.controller.enrollTeamOfUser(tournamentName);
+            error = this.tournamentService.enrollTeamOfUser(tournamentName);
+            if (error.isNull()) {
+                CommandFeedback.TEAM_ENROLLED.writeln();
+            }
         } else {
-            error = this.controller.enrollUser(tournamentName);
+            error = this.tournamentService.enrollUser(tournamentName);
+            if (error.isNull()) {
+                CommandFeedback.PLAYER_ENROLLED.writeln();
+            }
         }
 
-        if (error.isNull()) {
-            Message.PLAYER_ADDED.writeln();
-        }
         return error;
     }
 }

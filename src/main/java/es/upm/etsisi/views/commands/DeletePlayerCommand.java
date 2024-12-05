@@ -1,16 +1,17 @@
 package es.upm.etsisi.views.commands;
 
 import es.upm.etsisi.models.DNI;
-import es.upm.etsisi.service.Controller;
 import es.upm.etsisi.service.ErrorType;
-import es.upm.etsisi.utils.Message;
+import es.upm.etsisi.service.ParticipantService;
+import es.upm.etsisi.utils.CommandFeedback;
 
 public class DeletePlayerCommand extends Command {
-    private final Controller controller;
+    private final ParticipantService participantService;
 
-    DeletePlayerCommand(Controller controller) {
-        super("player-remove", 1, "[dni] Elimina del sistema a un jugador, siempre que no participe en un torneo en curso ni pertenezca a un equipo que esté participando en uno.");
-        this.controller = controller;
+    DeletePlayerCommand(ParticipantService participantService) {
+        super("player-delete", 1,
+                "[dni] Elimina del sistema a un jugador, siempre que no participe en un torneo en curso ni pertenezca a un equipo que esté participando en uno.");
+        this.participantService = participantService;
     }
 
     @Override
@@ -24,10 +25,10 @@ public class DeletePlayerCommand extends Command {
             return ErrorType.INVALID_DNI_ERROR;
         }
 
-        error = this.controller.deletePlayer(DNI.valueOf(playerDni));
+        error = this.participantService.deletePlayer(DNI.valueOf(playerDni));
 
         if (error.isNull()) {
-            Message.PLAYER_REMOVED.writeln();
+            CommandFeedback.PLAYER_REMOVED.writeln();
         }
         return error;
     }

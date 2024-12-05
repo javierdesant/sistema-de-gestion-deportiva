@@ -1,55 +1,70 @@
 package es.upm.etsisi.models;
 
 public enum Sport {
-    SOCCER("Futbol"),
-    BASKETBALL("Baloncesto"),
-    TENNIS("Tenis"),
-    SWIMMING("Natacion"),
-    BOXING("Boxeo"),
-    ATHLETICS("Atletismo"),
-    GOLF("Golf"),
-    CRICKET("Criquet"),
-    BASEBALL("Beisbol"),
-    RUGBY("Rugby"),
-    VOLLEYBALL("Voleibol"),
-    HANDBALL("Balonmano"),
-    CYCLING("Ciclismo"),
-    HOCKEY("Hockey"),
-    SKIING("Esqui"),
-    SNOWBOARDING("Snowboard"),
-    ICE_HOCKEY("Hockey sobre hielo"),
-    SURFING("Surf"),
-    BADMINTON("Badminton"),
-    TABLE_TENNIS("Tenis de mesa"),
-    WRESTLING("Lucha"),
-    JUDO("Judo"),
-    KARATE("Karate"),
-    TAEKWONDO("Taekwondo"),
-    FENCING("Esgrima"),
-    ARCHERY("Tiro con arco"),
-    SHOOTING("Tiro"),
-    EQUESTRIAN("Equitacion"),
-    TRIATHLON("Triatlon"),
-    WEIGHTLIFTING("Halterofilia"),
-    SAILING("Vela"),
-    ROWING("Remo"),
-    CANOEING("Piragüismo"),
-    SKATEBOARDING("Monopatín"),
-    CLIMBING("Escalada"),
-    GYMNASTICS("Gimnasia"),
-    MARTIAL_ARTS("Artes marciales"),
-    POLO("Polo"),
-    MOTORSPORTS("Deportes de motor"),
-    ESPORTS("Esports");
+    SOCCER("Futbol", "FBL"),
+    BASKETBALL("Baloncesto", "BSK"),
+    TENNIS("Tenis", "TEN"),
+    SWIMMING("Natacion", "SWM"),
+    BOXING("Boxeo", "BOX"),
+    ATHLETICS("Atletismo", "ATH"),
+    GOLF("Golf", "GLF"),
+    CRICKET("Criquet", "CKT"),
+    BASEBALL("Beisbol", "BSB"),
+    RUGBY("Rugby", "RUG"),
+    VOLLEYBALL("Voleibol", "VOL"),
+    HANDBALL("Balonmano", "HBL"),
+    CYCLING("Ciclismo", "CYC"),
+    HOCKEY("Hockey", "HOC"),
+    SKIING("Esqui", "SKI"),
+    SNOWBOARDING("Snowboard", "SBD"),
+    ICE_HOCKEY("Hockey sobre hielo", "IHO"),
+    SURFING("Surf", "SRF"),
+    BADMINTON("Badminton", "BDM"),
+    TABLE_TENNIS("Tenis de mesa", "TTE"),
+    WRESTLING("Lucha", "WRS"),
+    JUDO("Judo", "JUD"),
+    KARATE("Karate", "KTE"),
+    TAEKWONDO("Taekwondo", "TKW"),
+    FENCING("Esgrima", "FEN"),
+    ARCHERY("Tiro con arco", "ARC"),
+    SHOOTING("Tiro", "SHO"),
+    EQUESTRIAN("Equitacion", "EQU"),
+    TRIATHLON("Triatlon", "TRI"),
+    WEIGHTLIFTING("Halterofilia", "WLF"),
+    SAILING("Vela", "SAL"),
+    ROWING("Remo", "ROW"),
+    CANOEING("Piragüismo", "CAS"),
+    SKATEBOARDING("Monopatín", "SKS"),
+    CLIMBING("Escalada", "CLB"),
+    GYMNASTICS("Gimnasia", "GYM"),
+    MARTIAL_ARTS("Artes marciales", "MAR"),
+    POLO("Polo", "POL"),
+    MOTORSPORTS("Deportes de motor", "MCS"),
+    ESPORTS("Esports", "ESP");
 
     private final String name;
+    private final String code;
 
-    Sport(String name) {
+    Sport(String name, String code) {
         this.name = name;
+        this.code = code;
     }
 
     @Override
     public String toString() {
         return name;
+    }
+
+    private String getCode() {
+        return code;
+    }
+
+    public static Sport getFromCode(String code) {
+        for (Sport sport : Sport.values()) {
+            if (sport.getCode().equals(code)) {
+                return sport;
+            }
+        }
+        return null;
     }
 }

@@ -1,16 +1,16 @@
 package es.upm.etsisi.views.commands;
 
 import es.upm.etsisi.models.DNI;
-import es.upm.etsisi.service.Controller;
 import es.upm.etsisi.service.ErrorType;
-import es.upm.etsisi.utils.Message;
+import es.upm.etsisi.service.ParticipantService;
+import es.upm.etsisi.utils.CommandFeedback;
 
 public class RemoveFromTeamCommand extends Command {
-    private final Controller controller;
+    private final ParticipantService participantService;
 
-    RemoveFromTeamCommand(Controller controller) {
+    RemoveFromTeamCommand(ParticipantService participantService) {
         super("team-remove", 2, "[team;dni] Elimina al jugador de un equipo.");
-        this.controller = controller;
+        this.participantService = participantService;
     }
 
     @Override
@@ -25,10 +25,10 @@ public class RemoveFromTeamCommand extends Command {
             return ErrorType.INVALID_DNI_ERROR;
         }
 
-        error = this.controller.removeFromTeam(teamName, DNI.valueOf(playerDni));
+        error = this.participantService.removeFromTeam(teamName, DNI.valueOf(playerDni));
 
         if (error.isNull()) {
-            Message.PLAYER_REMOVED_FROM_TEAM.writeln(playerDni, teamName);
+            CommandFeedback.PLAYER_REMOVED_FROM_TEAM.writeln(playerDni, teamName);
         }
         return error;
     }

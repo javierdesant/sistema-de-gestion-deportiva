@@ -1,22 +1,20 @@
 package es.upm.etsisi.views.commands;
 
-import es.upm.etsisi.models.TournamentList;
-import es.upm.etsisi.service.Controller;
 import es.upm.etsisi.service.ErrorType;
+import es.upm.etsisi.service.TournamentManager;
 
 public class ListTournamentsCommand extends Command {
-    private final Controller controller;
+    private final TournamentManager tournamentService;
 
-    ListTournamentsCommand(Controller controller) {
-        super("tournaments", 0, "Lista los torneos del sistema.");
-        this.controller = controller;
+    ListTournamentsCommand(TournamentManager tournamentManager) {
+        super("tournament-list", 0, "Lista los torneos del sistema.");
+        this.tournamentService = tournamentManager;
     }
 
     @Override
     protected ErrorType execute(CommandArguments args) {
-        TournamentList tournaments = this.controller.getTournaments();
+        this.tournamentService.listTournament();
 
-        // TODO
         return ErrorType.NULL;
     }
 }

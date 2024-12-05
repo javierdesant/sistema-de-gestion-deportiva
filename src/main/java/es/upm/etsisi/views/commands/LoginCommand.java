@@ -1,14 +1,15 @@
 package es.upm.etsisi.views.commands;
 
-import es.upm.etsisi.service.Controller;
+import es.upm.etsisi.service.AuthenticationService;
 import es.upm.etsisi.service.ErrorType;
+import es.upm.etsisi.utils.CommandFeedback;
 
 public class LoginCommand extends Command {
-    private final Controller controller;
+    private final AuthenticationService authenticationService;
 
-    LoginCommand(Controller controller) {
+    LoginCommand(AuthenticationService authenticationService) {
         super("login", 2, "[username;password] Autentica al usuario en el sistema.");
-        this.controller = controller;
+        this.authenticationService = authenticationService;
     }
 
     @Override
@@ -23,10 +24,10 @@ public class LoginCommand extends Command {
             return ErrorType.INVALID_ARGUMENTS;
         }
 
-        error = this.controller.login(username, password);
+        error = this.authenticationService.login(username, password);
 
         if (error.isNull()) {
-            // TODO: add message
+           CommandFeedback.USER_LOGGED_IN.writeln(username);
         }
         return error;
     }

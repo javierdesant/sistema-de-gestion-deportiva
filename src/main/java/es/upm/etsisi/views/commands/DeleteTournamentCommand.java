@@ -1,14 +1,15 @@
 package es.upm.etsisi.views.commands;
 
-import es.upm.etsisi.service.Controller;
 import es.upm.etsisi.service.ErrorType;
+import es.upm.etsisi.service.TournamentService;
+import es.upm.etsisi.utils.CommandFeedback;
 
 public class DeleteTournamentCommand extends Command {
-    private final Controller controller;
+    private final TournamentService tournamentService;
 
-    DeleteTournamentCommand(Controller controller) {
+    DeleteTournamentCommand(TournamentService tournamentService) {
         super("tournament-delete", 1, "[tournament] Elimina un torneo del sistema, incluso si está en curso.");
-        this.controller = controller;
+        this.tournamentService = tournamentService;
     }
 
     @Override
@@ -20,10 +21,10 @@ public class DeleteTournamentCommand extends Command {
             return ErrorType.INVALID_ARGUMENTS;
         }
 
-        error = this.controller.deleteTournament(tournamentName);
+        error = this.tournamentService.deleteTournament(tournamentName);
 
         if (error.isNull()) {
-            // TODO: add message
+            CommandFeedback.TOURNAMENT_REMOVED.write();
         }
         return error;
     }

@@ -2,24 +2,27 @@
 skinparam groupInheritance 4
 
 package models {
-    class User
     class Administrator extends User
-    enum Role
-    class DNI
-    class Player extends User implements Participant
-    class Team implements Participant
-    interface Participant
-    class Statistics
     enum Category
-    class Tournament
-    class Match
+    class DNI
+    class Guest extends User
+    enum League
     abstract class List<T>
-    class UserList extends List
-    class ParticipantList extends List
+    class Match
     class MatchList extends List
-    class TournamentList extends List
-    class TournamentInfo <<(R,yellow)>>
+    interface Participant
+    class ParticipantList extends List
+    class Player extends User implements Participant
+    enum Role
+    enum Sport
+    class Statistics
+    class Team implements Participant
     class TimeFrame <<(R,yellow)>>
+    class Tournament
+    class TournamentInfo <<(R,yellow)>>
+    class TournamentList extends List
+    class User
+    class UserList extends List
 
     User --> Role
     Player --> Statistics
@@ -41,11 +44,19 @@ package models {
 }
 
 package service {
-    class Controller
+    class AuthenticationService implements Authenticator
+    interface Authenticator
     enum ErrorType
+    interface ParticipantManager
+    class ParticipantService implements ParticipantManager
+    interface TournamentManager
+    class TournamentService implements TournamentManager
 
-    Controller --> User
-    Controller *--> List
+    AuthenticationService --> User
+    ParticipantService *--> List
+    ParticipantService <-- AuthenticationService
+    TournamentService <-- AuthenticationService
+    TournamentService *--> List
 }
 
 package views {
@@ -62,9 +73,9 @@ package views {
         Command <|-- SubCommandA
         Command <|-- SubCommandB
         Command <|-- SubCommandC
-        SubCommandA ..> Controller
-        SubCommandB ..> Controller
-        SubCommandC ..> Controller
+        SubCommandA .right.> AuthenticationService
+        SubCommandB .down.> ParticipantService
+        SubCommandC .left.> TournamentService
     }
 
     CLI --> CommandFactory
@@ -72,8 +83,15 @@ package views {
 }
 
 package utils {
+    enum CommandFeedback
     class Console
-
+    class DefaultEmailValidator implements EmailValidator
+    interface DomainPolicy
+    class EmailAdress
+    interface EmailValidator
+    class RestrictedEmail extends EmailAdress
+    class UpmDomainPolicy implements DomainPolicy
+    class UpmEmail extends RestrictedEmail
 }
 
 class SportsManager
