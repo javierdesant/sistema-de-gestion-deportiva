@@ -3,10 +3,18 @@ package es.upm.etsisi.models;
 import es.upm.etsisi.service.ErrorType;
 
 import java.util.Iterator;
+import java.util.LinkedList;
 
 public class TournamentList extends List<Tournament> {
     public TournamentList() {
         super();
+    }
+
+    public TournamentList(LinkedList<Tournament> list) {
+        this();
+        for (Tournament tournament : list) {
+            this.add(tournament);
+        }
     }
 
     @Override

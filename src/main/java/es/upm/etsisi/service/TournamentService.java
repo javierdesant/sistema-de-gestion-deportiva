@@ -1,11 +1,9 @@
 package es.upm.etsisi.service;
 
 import es.upm.etsisi.models.*;
+import es.upm.etsisi.views.TournamentListView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.*;
 
 public class TournamentService implements TournamentManager {
     private final static TournamentList tournamentList = new TournamentList();
@@ -131,40 +129,25 @@ public class TournamentService implements TournamentManager {
         return tournament.remove(participant);
     }
 
-    public ErrorType listTournament() {
-        Role currentRole = this.authenticator.getUser().getRole();
-        if (!tournamentList.isEmpty()) {
-            if (currentRole != Role.GUEST) {
-                Collections.sort(tournamentList.getElements(), (t1, t2) -> t1.getCategory().compareTo(t2.getCategory()));
-                if (currentRole == Role.ADMIN) {
-                    ArrayList<Tournament> copy = new ArrayList<>(tournamentList.getElements());
-                    copy.removeIf(tournament -> !tournament.isActive());
-                    this.printTournament(copy);
-                } else {
-                    this.printTournament(tournamentList.getElements());
-                }
-            } else {
-                ArrayList<Tournament> copy = new ArrayList<Tournament>(tournamentList.getElements());
-                Collections.shuffle(copy);
-                this.printTournament(copy);
-            }
-        } else {
+    public ErrorType listTournaments() {
+        if (tournamentList.isEmpty()) {
             System.out.println("No hay torneos inscritos en el sistema.");
+        } else {
+            LinkedList<Tournament> res = new LinkedList<>(tournamentList.getElements());
+            switch (this.authenticator.getUser().getRole()) {
+                case ADMIN:
+                    res.removeIf(tournament -> !tournament.isActive());
+                case PLAYER:
+                    res.sort(Comparator.comparing(Tournament::getCategory));
+                    break;
+                case GUEST:
+                default:
+                    Collections.shuffle(res);
+            }
+
+            new TournamentListView().write(new TournamentList(res));
         }
+
         return ErrorType.NULL;
     }
-
-    private void printTournament(Collection<Tournament> tournamentList) {
-        for (Tournament tournament : tournamentList) {
-            System.out.println("---------- Torneo: " + tournament.getName() + " ---------\n");
-            int i = 0;
-            for (Match match : tournament.getMatches().getElements()) {
-                System.out.print("Partido " + (i + 1) + ": " + match.toString());
-                if (i < tournament.getMatches().getElements().size() - 1) {
-                    System.out.print(", ");
-                }
-            }
-        }
-    }
-
 }

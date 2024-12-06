@@ -9,7 +9,7 @@ public class LeaveCommand extends Command {
 
     LeaveCommand(TournamentService tournamentService) {
         super("tournament-remove", 2,
-                "[[-t],tournament] Da de baja al jugador autenticado o a su equipo de un torneo.");
+                "[[-t];tournament] Da de baja al jugador autenticado o a su equipo de un torneo.");
         this.tournamentService = tournamentService;
     }
 
