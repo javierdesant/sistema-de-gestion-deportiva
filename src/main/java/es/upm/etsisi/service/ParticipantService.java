@@ -8,15 +8,18 @@ import java.util.Collection;
 import java.util.Iterator;
 
 public class ParticipantService implements ParticipantManager {
-    private final static ParticipantList participantList = new ParticipantList();
+    private final ParticipantList participantList;
     private final AuthenticationService authenticator;
+    private final ServiceCoordinator coordinator;
 
-    public ParticipantService(AuthenticationService authenticator) {
+    public ParticipantService(AuthenticationService authenticator, ServiceCoordinator coordinator) {
         this.authenticator = authenticator;
+        this.coordinator = coordinator;
+        this.participantList = new ParticipantList();
     }
 
-    public static ParticipantList getParticipants() {
-        return participantList;
+    public ParticipantList getParticipants() {
+        return this.participantList;
     }
 
     public ErrorType createPlayer(UpmEmail username, String password, String firstName, String lastName, DNI dni) {
@@ -35,7 +38,7 @@ public class ParticipantService implements ParticipantManager {
     }
 
     private boolean isInTeam(Participant participant) {
-        return this.isValidPlayer(participant) && participantList.getTeamOf((Player) participant) != null;
+        return this.isValidPlayer(participant) && this.participantList.getTeamOf((Player) participant) != null;
     }
 
     public ErrorType createTeam(String teamName, Collection<DNI> dnis) {
@@ -45,7 +48,7 @@ public class ParticipantService implements ParticipantManager {
         ParticipantList players = new ParticipantList();
         Iterator<DNI> iterator = dnis.iterator();
         do {
-            Participant player = participantList.find(iterator.next());
+            Participant player = this.participantList.find(iterator.next());
             if (this.isValidPlayer(player) && !this.isInTeam(player)) {
                 error = players.add(player);
             } else if (isValidPlayer(player)) {
@@ -76,13 +79,13 @@ public class ParticipantService implements ParticipantManager {
                 }
             }
         } else {
-            error = participantList.add(participant);
+            error = this.participantList.add(participant);
         }
 
         if (error.isNull()) {
             for (Player player : participant.getMembers()) {
-                participantList.remove(player);
-                assert participantList.getTeamOf(player) == participant;
+                this.participantList.remove(player);
+                assert this.participantList.getTeamOf(player) == participant;
             }
         }
 
@@ -92,11 +95,11 @@ public class ParticipantService implements ParticipantManager {
     public ErrorType deletePlayer(DNI dni) {
         ErrorType error;
 
-        Participant player = participantList.find(dni);
-        if (this.isValidPlayer(player) && TournamentService.getTournaments().isFree(player)) {
+        Participant player = this.participantList.find(dni);
+        if (this.isValidPlayer(player) && this.coordinator.getTournamentService().getTournaments().isFree(player)) {
             boolean userRemoved = this.authenticator.getUsers().remove(this.authenticator.getUsers().findByKey(dni));
             assert userRemoved;
-            boolean participantRemoved = participantList.remove(player);
+            boolean participantRemoved = this.participantList.remove(player);
             assert participantRemoved;
             error = ErrorType.NULL;
         } else if (!this.isValidPlayer(player)) {
@@ -111,9 +114,9 @@ public class ParticipantService implements ParticipantManager {
     public ErrorType deleteTeam(String name) {
         ErrorType error;
 
-        Participant team = participantList.find(name);
-        if (this.isValidTeam(team) && TournamentService.getTournaments().isFree(team)) {
-            boolean removed = participantList.remove(team);
+        Participant team = this.participantList.find(name);
+        if (this.isValidTeam(team) && this.coordinator.getTournamentService().getTournaments().isFree(team)) {
+            boolean removed = this.participantList.remove(team);
             assert removed;
             error = ErrorType.NULL;
         } else if (!this.isValidTeam(team)) {
@@ -128,8 +131,8 @@ public class ParticipantService implements ParticipantManager {
     public ErrorType addToTeam(DNI dni, String teamName) {
         ErrorType error;
 
-        Participant player = participantList.find(dni);
-        Participant team = participantList.find(teamName);
+        Participant player = this.participantList.find(dni);
+        Participant team = this.participantList.find(teamName);
         if (this.isValidPlayer(player) && this.isValidTeam(team)) {
             error = ((Team) team).add((Player) player);
         } else if (!this.isValidPlayer(player)) {
@@ -144,8 +147,8 @@ public class ParticipantService implements ParticipantManager {
     public ErrorType removeFromTeam(String teamName, DNI dni) {
         ErrorType error;
 
-        Participant player = participantList.find(dni);
-        Participant team = participantList.find(teamName);
+        Participant player = this.participantList.find(dni);
+        Participant team = this.participantList.find(teamName);
         if (this.isValidPlayer(player) && this.isValidTeam(team)) {
             boolean removed = ((Team) team).remove((Player) player);
             if (removed) {
