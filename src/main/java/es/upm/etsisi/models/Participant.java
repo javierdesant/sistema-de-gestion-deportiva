@@ -7,7 +7,7 @@ public interface Participant {
 
     Statistics getStats();
 
-    LinkedList<Player> getChildren();
+    LinkedList<Player> getMembers();
 
     boolean hasChildren();
 

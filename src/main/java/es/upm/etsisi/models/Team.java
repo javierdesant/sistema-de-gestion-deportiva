@@ -8,19 +8,19 @@ import java.util.LinkedList;
 public class Team implements Participant {
     private final String name;
     private final Administrator admin;
-    private final HashSet<Player> children;
+    private final HashSet<Player> members;
 
     public Team(String name, Administrator admin, Player player) {
         assert admin.getRole() == Role.ADMIN;
 
         this.name = name;
         this.admin = admin;
-        this.children = new HashSet<>();
-        this.children.add(player);
+        this.members = new HashSet<>();
+        this.members.add(player);
     }
 
     public ErrorType add(Player player) {
-        boolean added = this.children.add(player);
+        boolean added = this.members.add(player);
 
         if (!added) {
             return ErrorType.PLAYER_ALREADY_IN_TEAM_ERROR;
@@ -30,11 +30,11 @@ public class Team implements Participant {
 
     public boolean remove(Player player) {
         assert this.size() > 1;
-        return this.children.remove(player);
+        return this.members.remove(player);
     }
 
     public int size() {
-        return this.children.size();
+        return this.members.size();
     }
 
     @Override
@@ -49,11 +49,11 @@ public class Team implements Participant {
         for (Category category : Category.values()) {
             double product = 1.0;
 
-            for (Player child : this.children) {
+            for (Player child : this.members) {
                 product *= child.getStats().get(category);
             }
 
-            double geometricMean = Math.pow(product, 1.0 / this.children.size());
+            double geometricMean = Math.pow(product, 1.0 / this.members.size());
             stats.setStatistic(category, geometricMean);
         }
 
@@ -61,13 +61,13 @@ public class Team implements Participant {
     }
 
     @Override
-    public LinkedList<Player> getChildren() {
-        return new LinkedList<>(this.children);
+    public LinkedList<Player> getMembers() {
+        return new LinkedList<>(this.members);
     }
 
     @Override
     public boolean contains(Player player) {
-        return this.children.contains(player);
+        return this.members.contains(player);
     }
 
     @Override
@@ -77,7 +77,7 @@ public class Team implements Participant {
 
     @Override
     public boolean hasChildren() {
-        assert !this.children.isEmpty();
+        assert !this.members.isEmpty();
         return true;
     }
 

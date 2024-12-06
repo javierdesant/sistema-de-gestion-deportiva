@@ -15,7 +15,7 @@ public class ParticipantView extends View<Participant> {
         if (participant.hasChildren()) {
             writeln("EQUIPO " + participant.getName().toUpperCase());
             writeln("----------------------");
-            for (Participant player : participant.getChildren()) {
+            for (Participant player : participant.getMembers()) {
                 display(player);
             }
         } else {

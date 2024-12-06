@@ -63,7 +63,7 @@ public class Player extends User implements Participant {
     }
 
     @Override
-    public LinkedList<Player> getChildren() {
+    public LinkedList<Player> getMembers() {
         return new LinkedList<>();
     }
 

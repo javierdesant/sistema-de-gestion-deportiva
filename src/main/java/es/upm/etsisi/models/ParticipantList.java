@@ -67,7 +67,7 @@ public class ParticipantList extends List<Participant> {
     public boolean remove(Participant participant) {
         boolean removed = super.remove(participant);
         if (removed) {
-            for (Player child : participant.getChildren()) {
+            for (Player child : participant.getMembers()) {
                 ErrorType error = this.add(child);
                 assert error.isNull();
             }
@@ -120,7 +120,7 @@ public class ParticipantList extends List<Participant> {
     private Player findPlayerInTeam(Object key, Team team) {
         Player res = null;
 
-        Iterator<Player> iterator = team.getChildren().iterator();
+        Iterator<Player> iterator = team.getMembers().iterator();
         while (iterator.hasNext() && res == null) {
             Player next = iterator.next();
             if (key.equals(next.getKey())) {

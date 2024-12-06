@@ -110,7 +110,7 @@ public class Tournament {
         Set<Player> seenPlayers = new HashSet<>();
         boolean repeated = false;
 
-        Iterator<Player> iterator = team.getChildren().iterator();
+        Iterator<Player> iterator = team.getMembers().iterator();
         while (iterator.hasNext() && !repeated) {
             Player next = iterator.next();
             repeated = !seenPlayers.add(next) || this.matchList.contains(next);

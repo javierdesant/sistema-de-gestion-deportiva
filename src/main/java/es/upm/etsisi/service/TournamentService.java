@@ -107,7 +107,7 @@ public class TournamentService implements TournamentManager {
         Team team = ParticipantService.getParticipants().getTeam((Player) this.authenticator.getUser());
         if (team != null) {
             error = ErrorType.NULL;
-            for (Player player : team.getChildren()) {
+            for (Player player : team.getMembers()) {
                 error = this.leave(tournamentName, player);
                 assert error.isNull();
             }

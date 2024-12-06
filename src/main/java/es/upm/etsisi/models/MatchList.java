@@ -39,7 +39,7 @@ public class MatchList extends List<Match> {
         while (iterator.hasNext() && !hasDuplicate) {
             Participant participant = iterator.next();
             hasDuplicate = this.contains(participant);
-            Iterator<Player> playerIterator = participant.getChildren().iterator();
+            Iterator<Player> playerIterator = participant.getMembers().iterator();
             while (playerIterator.hasNext() && !hasDuplicate) {
                 Player player = playerIterator.next();
                 hasDuplicate = this.contains(player);
