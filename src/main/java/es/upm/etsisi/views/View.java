@@ -9,6 +9,10 @@ public abstract class View<T> {
         this.console = Console.getInstance();
     }
 
+    protected void writeln() {
+        this.console.writeln();
+    }
+
     protected void writeln(String message) {
         this.console.writeln(message);
     }
