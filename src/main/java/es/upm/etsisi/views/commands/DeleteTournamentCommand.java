@@ -8,7 +8,7 @@ public class DeleteTournamentCommand extends Command {
     private final TournamentService tournamentService;
 
     DeleteTournamentCommand(TournamentService tournamentService) {
-        super("tournament-delete", 1, "[tournament] Elimina un torneo del sistema, incluso si está en curso.");
+        super("tournament-delete", 1, "[tournament] Elimina un torneo del sistema.");
         this.tournamentService = tournamentService;
     }
 
@@ -24,7 +24,7 @@ public class DeleteTournamentCommand extends Command {
         error = this.tournamentService.deleteTournament(tournamentName);
 
         if (error.isNull()) {
-            CommandFeedback.TOURNAMENT_REMOVED.write();
+            CommandFeedback.TOURNAMENT_REMOVED.writeln();
         }
         return error;
     }
