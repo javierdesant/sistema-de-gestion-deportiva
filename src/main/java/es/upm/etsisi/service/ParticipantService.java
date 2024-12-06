@@ -2,6 +2,7 @@ package es.upm.etsisi.service;
 
 import es.upm.etsisi.models.*;
 import es.upm.etsisi.utils.UpmEmail;
+import es.upm.etsisi.views.StatisticsView;
 
 public class ParticipantService implements ParticipantManager {
     private final static ParticipantList participantList = new ParticipantList();
@@ -126,21 +127,8 @@ public class ParticipantService implements ParticipantManager {
 
         Player player = (Player) this.authenticator.getUser();
 
-        Statistics stats = player.getStats();
-
-        for (int i = 0; i < Category.values().length; i++) {
-            System.out.print(Category.values()[i]);
-            if (i < Category.values().length - 1) {
-                System.out.print(", ");
-            }
-        }
-        System.out.println();
-        for (Category category : Category.values()) {
-            System.out.print(stats.get(category) + "\t");
-        }
-        System.out.println();
+        new StatisticsView().displayCsv(player.getStats());
         return ErrorType.NULL;
-
     }
 
     public ErrorType showStatisticsJson() {
@@ -148,11 +136,7 @@ public class ParticipantService implements ParticipantManager {
 
         Player player = (Player) this.authenticator.getUser();
 
-        Statistics stats = player.getStats();
-
-        for (Category category : Category.values()) {
-            System.out.println("\"" + category + "\": \"" + stats.get(category) + "\"");
-        }
+        new StatisticsView().displayJson(player.getStats());
         return ErrorType.NULL;
     }
 
