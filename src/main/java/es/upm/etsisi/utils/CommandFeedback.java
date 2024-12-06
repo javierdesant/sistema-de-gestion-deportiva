@@ -25,15 +25,12 @@ public enum CommandFeedback {
         this.message = message;
     }
 
-    public void write() {
-        System.out.print(this.message);
-    }
-
     public void writeln() {
         System.out.println(this.message);
     }
 
     public void writeln(String player, String team) {
+        assert this.message.contains("#player") && this.message.contains("#team");
         System.out.println(this.message.replaceAll("#player", player).replaceAll("#team", team));
     }
 

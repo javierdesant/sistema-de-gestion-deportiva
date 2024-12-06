@@ -8,8 +8,8 @@ import es.upm.etsisi.service.TournamentService;
 import es.upm.etsisi.utils.CommandFeedback;
 import es.upm.etsisi.utils.Console;
 import es.upm.etsisi.views.commands.Command;
-import es.upm.etsisi.views.commands.ParsedInput;
 import es.upm.etsisi.views.commands.CommandFactory;
+import es.upm.etsisi.views.commands.ParsedInput;
 
 import java.util.ArrayList;
 

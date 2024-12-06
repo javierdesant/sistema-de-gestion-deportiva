@@ -5,9 +5,6 @@ import es.upm.etsisi.service.ErrorType;
 import es.upm.etsisi.service.TournamentService;
 import es.upm.etsisi.utils.CommandFeedback;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 public class CreateTournamentCommand extends Command {
     private final TournamentService tournamentService;
 
