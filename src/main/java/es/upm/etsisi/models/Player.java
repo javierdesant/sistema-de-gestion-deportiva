@@ -41,7 +41,7 @@ public class Player extends User implements Participant {
     }
 
     @Override
-    public String getName() {   // TODO: review usages to replace for getKey()
+    public String getName() {
         return this.firstName + " " + this.lastName;
     }
 

@@ -7,7 +7,7 @@ import java.util.Iterator;
 public class Match {
     private final ParticipantList participants;
 
-    public Match(Collection<Participant> participants) {    // FIXME
+    public Match(Collection<Participant> participants) {
         assert participants != null;
         assert participants.size() > 1;
 

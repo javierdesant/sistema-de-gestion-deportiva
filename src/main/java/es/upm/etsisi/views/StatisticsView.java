@@ -1,10 +1,7 @@
 package es.upm.etsisi.views;
 
 import es.upm.etsisi.models.Category;
-import es.upm.etsisi.models.Player;
-import es.upm.etsisi.models.Role;
 import es.upm.etsisi.models.Statistics;
-import es.upm.etsisi.service.ErrorType;
 
 public class StatisticsView extends View<Statistics> {
 

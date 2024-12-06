@@ -36,7 +36,7 @@ public class TournamentService implements TournamentManager {
         return error;
     }
 
-    public ErrorType tournamentMatchmake(String tournamentName, Collection<DNI> dnis) { //FIXME: Players that are in teams enrolled in the tournament are not found
+    public ErrorType tournamentMatchmake(String tournamentName, Collection<DNI> dnis) {
         Tournament tournament = tournamentList.find(tournamentName);
         if (tournament == null) {
             return ErrorType.TOURNAMENT_NOT_FOUND;
@@ -99,7 +99,6 @@ public class TournamentService implements TournamentManager {
         return this.leave(tournamentName, (Player) this.authenticator.getUser());
     }
 
-    // FIXME: the players go back to the list after removal
     public ErrorType leaveTournamentAsTeam(String tournamentName) {
         ErrorType error;
 

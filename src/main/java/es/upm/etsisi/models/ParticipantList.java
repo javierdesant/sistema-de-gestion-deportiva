@@ -15,7 +15,7 @@ public class ParticipantList extends List<Participant> {
         super(participants);
     }
 
-    public ParticipantList(Collection<Participant> participants) {  // FIXME
+    public ParticipantList(Collection<Participant> participants) {
         super(participants);
     }
 

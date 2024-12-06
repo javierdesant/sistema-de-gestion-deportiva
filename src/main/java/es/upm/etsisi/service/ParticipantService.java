@@ -35,7 +35,7 @@ public class ParticipantService implements ParticipantManager {
     }
 
     private boolean isInTeam(Participant participant) {
-        return this.isValidPlayer(participant) && this.participantList.getTeamOf((Player) participant) != null;
+        return this.isValidPlayer(participant) && participantList.getTeamOf((Player) participant) != null;
     }
 
     public ErrorType createTeam(String teamName, Collection<DNI> dnis) {
