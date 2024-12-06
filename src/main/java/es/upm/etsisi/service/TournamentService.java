@@ -75,7 +75,7 @@ public class TournamentService implements TournamentManager {
 
     public ErrorType enrollTeamOfUser(String tournamentName) {
         assert this.authenticator.getUser().getRole().equals(Role.PLAYER);
-        Team team = ParticipantService.getParticipants().getTeam((Player) this.authenticator.getUser());
+        Team team = ParticipantService.getParticipants().getTeamOf((Player) this.authenticator.getUser());
         if (team != null) {
             return this.enroll(tournamentName, team);
         } else {
@@ -104,7 +104,7 @@ public class TournamentService implements TournamentManager {
         ErrorType error;
 
         assert this.authenticator.getUser().getRole().equals(Role.PLAYER);
-        Team team = ParticipantService.getParticipants().getTeam((Player) this.authenticator.getUser());
+        Team team = ParticipantService.getParticipants().getTeamOf((Player) this.authenticator.getUser());
         if (team != null) {
             error = ErrorType.NULL;
             for (Player player : team.getMembers()) {
