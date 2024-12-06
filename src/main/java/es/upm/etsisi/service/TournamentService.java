@@ -6,27 +6,30 @@ import es.upm.etsisi.views.TournamentListView;
 import java.util.*;
 
 public class TournamentService implements TournamentManager {
-    private final static TournamentList tournamentList = new TournamentList();
+    private final TournamentList tournamentList;
     private final AuthenticationService authenticator;
+    private final ServiceCoordinator coordinator;
 
-    public TournamentService(AuthenticationService authenticator) {
+    public TournamentService(AuthenticationService authenticator, ServiceCoordinator coordinator) {
         this.authenticator = authenticator;
+        this.coordinator = coordinator;
+        this.tournamentList = new TournamentList();
     }
 
-    public static TournamentList getTournaments() {
-        return tournamentList;
+    public TournamentList getTournaments() {
+        return this.tournamentList;
     }
 
     public ErrorType createTournament(TournamentInfo tournamentInfo, TimeFrame timeFrame) {
-        return tournamentList.add(new Tournament(tournamentInfo, timeFrame));
+        return this.tournamentList.add(new Tournament(tournamentInfo, timeFrame));
     }
 
     public ErrorType deleteTournament(String tournamentName) {
         ErrorType error;
 
-        Tournament tournament = TournamentService.tournamentList.find(tournamentName);
+        Tournament tournament = this.tournamentList.find(tournamentName);
         if (tournament != null) {
-            boolean removed = tournamentList.remove(tournament);
+            boolean removed = this.tournamentList.remove(tournament);
             assert removed;
             error = ErrorType.NULL;
         } else {
@@ -37,14 +40,14 @@ public class TournamentService implements TournamentManager {
     }
 
     public ErrorType tournamentMatchmake(String tournamentName, Collection<DNI> dnis) {
-        Tournament tournament = tournamentList.find(tournamentName);
+        Tournament tournament = this.tournamentList.find(tournamentName);
         if (tournament == null) {
             return ErrorType.TOURNAMENT_NOT_FOUND;
         } else if (!tournament.isActive()) {
             return ErrorType.TOURNAMENT_NOT_ACTIVE;
         }
 
-        ArrayList<Participant> participants = ParticipantService.getParticipants()
+        ArrayList<Participant> participants = this.coordinator.getParticipantService().getParticipants()
                 .findAll(Collections.singleton(dnis));
         if (participants == null) {
             return ErrorType.PARTICIPANT_NOT_FOUND;
@@ -75,7 +78,7 @@ public class TournamentService implements TournamentManager {
 
     public ErrorType enrollTeamOfUser(String tournamentName) {
         assert this.authenticator.getUser().getRole().equals(Role.PLAYER);
-        Team team = ParticipantService.getParticipants().getTeamOf((Player) this.authenticator.getUser());
+        Team team = this.coordinator.getParticipantService().getParticipants().getTeamOf((Player) this.authenticator.getUser());
         if (team != null) {
             return this.enroll(tournamentName, team);
         } else {
@@ -103,7 +106,7 @@ public class TournamentService implements TournamentManager {
         ErrorType error;
 
         assert this.authenticator.getUser().getRole().equals(Role.PLAYER);
-        Team team = ParticipantService.getParticipants().getTeamOf((Player) this.authenticator.getUser());
+        Team team = this.coordinator.getParticipantService().getParticipants().getTeamOf((Player) this.authenticator.getUser());
         if (team != null) {
             error = ErrorType.NULL;
             for (Player player : team.getMembers()) {
