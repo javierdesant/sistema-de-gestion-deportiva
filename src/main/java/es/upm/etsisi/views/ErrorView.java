@@ -19,7 +19,7 @@ public class ErrorView {
         MESSAGES.put(ErrorType.ELEMENT_NOT_FOUND, "El elemento no se encuentra en la lista");
         MESSAGES.put(ErrorType.PARTICIPANT_NOT_FOUND, "El participante no se encuentra en la lista");
         MESSAGES.put(ErrorType.NAME_FORMAT_ERROR, "El nombre sólo puede contener letras");
-        MESSAGES.put(ErrorType.DATE_FORMAT_ERROR, "La fecha debe ser del formato dd/mm/aaaa");
+        MESSAGES.put(ErrorType.DATE_FORMAT_ERROR, "La fecha debe ser del formato dd/MM/yyyy");
         MESSAGES.put(ErrorType.INVALID_DNI_ERROR, "El DNI no es válido");
         MESSAGES.put(ErrorType.PLAYER_NOT_IN_TEAM, "El jugador no pertenece al equipo");
         MESSAGES.put(ErrorType.USER_NOT_FOUND, "El usuario no existe");
@@ -29,6 +29,8 @@ public class ErrorView {
         MESSAGES.put(ErrorType.WRONG_PASSWORD, "Contraseña incorrecta");
         MESSAGES.put(ErrorType.INVALID_ARGUMENTS, "Argumentos no válidos");
         MESSAGES.put(ErrorType.INVALID_EMAIL, "Email no válido");
+        MESSAGES.put(ErrorType.INVALID_CODE, "Código no válido");
+        MESSAGES.put(ErrorType.INVALID_TIME_FRAME, "El intervalo de tiempo está mal definido");
         MESSAGES.put(ErrorType.PARTICIPANT_NOT_ENROLLED, "El participante no está inscrito en el torneo");
         MESSAGES.put(ErrorType.TOURNAMENT_NOT_ACTIVE, "El torneo no se encuentra en curso");
         MESSAGES.put(ErrorType.PLAYER_IN_GAME_ERROR, "El jugador participa en un torneo activo");
