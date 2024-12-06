@@ -4,6 +4,7 @@ import es.upm.etsisi.models.User;
 import es.upm.etsisi.service.AuthenticationService;
 import es.upm.etsisi.service.ErrorType;
 import es.upm.etsisi.service.ParticipantService;
+import es.upm.etsisi.service.ServiceCoordinator;
 import es.upm.etsisi.service.TournamentService;
 import es.upm.etsisi.utils.CommandFeedback;
 import es.upm.etsisi.utils.Console;
@@ -17,12 +18,14 @@ public class CLI {
     private final AuthenticationService authenticationService;
     private final ParticipantService participantService;
     private final TournamentService tournamentService;
+    private final ServiceCoordinator serviceCoordinator;
     private final CommandFactory commandFactory;
 
     public CLI() {
         this.authenticationService = new AuthenticationService();
-        this.participantService = new ParticipantService(authenticationService);
-        this.tournamentService = new TournamentService(authenticationService);
+        this.serviceCoordinator = new ServiceCoordinator(authenticationService);
+        this.participantService = this.serviceCoordinator.getParticipantService();
+        this.tournamentService = this.serviceCoordinator.getTournamentService();
         this.commandFactory = new CommandFactory(authenticationService, participantService, tournamentService);
     }
 
