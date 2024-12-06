@@ -20,6 +20,15 @@ public class TimeFrame {
         this.endDate = LocalDate.parse(endDate, formatter);
     }
 
+    public static boolean isValidFrame(LocalDate startDate, LocalDate endDate) {
+        return startDate.isBefore(endDate);
+    }
+
+    public static boolean isValidFrame(String startDate, String endDate) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return isValidFrame(LocalDate.parse(startDate, formatter), LocalDate.parse(endDate, formatter));
+    }
+
     public LocalDate getStartDate() {
         return this.startDate;
     }

@@ -8,10 +8,10 @@ import es.upm.etsisi.service.TournamentService;
 import es.upm.etsisi.utils.CommandFeedback;
 import es.upm.etsisi.utils.Console;
 import es.upm.etsisi.views.commands.Command;
+import es.upm.etsisi.views.commands.ParsedInput;
 import es.upm.etsisi.views.commands.CommandFactory;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class CLI {
     private final AuthenticationService authenticationService;
@@ -41,12 +41,10 @@ public class CLI {
             error = ErrorType.NULL;
             User user = this.authenticationService.getUser();
             String input = this.readInput();
-            String[] parsedInput = this.splitInput(input);
-            String commandTitle = parsedInput[0];
 
-            command = this.commandFactory.getCommand(user.getRole(), commandTitle);
+            command = this.commandFactory.getCommand(user.getRole(), ParsedInput.getTitle(input));
             if (command != null) {
-                error = command.execute(Arrays.copyOfRange(parsedInput, 1, parsedInput.length));
+                error = command.execute(input);
                 if (command.isCalled("help")) {
                     this.displayHelp();
                 }
@@ -69,18 +67,6 @@ public class CLI {
         return console.readString(CommandFeedback.COMMAND_PROMPT.toString());
     }
 
-    private String[] splitInput(String input) {
-        String[] split = input.trim().split(" ", 2);
-        String title = split[0];
-        String[] arguments = split.length > 1 ? split[1].split(";") : new String[0];
-
-        String[] result = new String[arguments.length + 1];
-        result[0] = title;
-        System.arraycopy(arguments, 0, result, 1, arguments.length);
-
-        return result;
-    }
-
     private void displayHelp() {
         Console console = Console.getInstance();
         User user = this.authenticationService.getUser();
@@ -88,7 +74,7 @@ public class CLI {
         console.writeln("Comandos disponibles:");
         ArrayList<Command> commands = this.commandFactory.getAllCommands(user.getRole());
         for (Command command : commands) {
-            console.writeln(" - " + command.getName() + ": " + command.getDescription());
+            console.writeln(" - " + command.getTitle() + ": " + command.getDescription());
         }
     }
 }

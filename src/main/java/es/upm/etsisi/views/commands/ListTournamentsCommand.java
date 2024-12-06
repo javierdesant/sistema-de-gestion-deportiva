@@ -12,7 +12,7 @@ public class ListTournamentsCommand extends Command {
     }
 
     @Override
-    protected ErrorType execute(CommandArguments args) {
+    protected ErrorType execute(ParsedInput args) {
         this.tournamentService.listTournament();
 
         return ErrorType.NULL;

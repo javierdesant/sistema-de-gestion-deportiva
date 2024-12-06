@@ -13,7 +13,7 @@ public class DeleteTournamentCommand extends Command {
     }
 
     @Override
-    protected ErrorType execute(CommandArguments args) {
+    protected ErrorType execute(ParsedInput args) {
         ErrorType error;
         String tournamentName = args.pollToken();
 

@@ -17,7 +17,7 @@ public class MatchmakeCommand extends Command {
     }
 
     @Override
-    protected ErrorType execute(CommandArguments args) {
+    protected ErrorType execute(ParsedInput args) {
         ErrorType error = ErrorType.NULL;
         String tournamentName = args.pollToken();
 
@@ -48,7 +48,7 @@ public class MatchmakeCommand extends Command {
         return error;
     }
 
-    private ErrorType pollPlayers(CommandArguments args, LinkedList<DNI> players) {
+    private ErrorType pollPlayers(ParsedInput args, LinkedList<DNI> players) {
         ErrorType error = ErrorType.NULL;
         while (args.hasToken() && error.isNull()) {
             String token = args.pollToken();

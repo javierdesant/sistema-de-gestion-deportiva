@@ -2,21 +2,19 @@ package es.upm.etsisi.views.commands;
 
 import es.upm.etsisi.service.ErrorType;
 
-import java.util.List;
-
 public abstract class Command {
-    private final String name;
+    private final String title;
     private final int maxArguments;
     private final String description;
 
-    Command(String name, int maxArguments, String description) {
-        this.name = name;
+    Command(String title, int maxArguments, String description) {
+        this.title = title;
         this.maxArguments = maxArguments;
         this.description = description;
     }
 
-    public String getName() {
-        return this.name;
+    public String getTitle() {
+        return this.title;
     }
 
     public String getDescription() {
@@ -24,7 +22,10 @@ public abstract class Command {
     }
 
     public boolean isCalled(String title) {
-        return title.equals(this.name);
+        if (title == null) {
+            return false;
+        }
+        return title.equals(this.title);
     }
 
     protected boolean areInvalidTokens(String... tokens) {
@@ -37,13 +38,15 @@ public abstract class Command {
         return false;
     }
 
-    public ErrorType execute(String[] args) {
-        if (args.length > this.maxArguments) {
+    public ErrorType execute(String input) {
+        ParsedInput parsedInput = ParsedInput.parse(input);
+
+        if (parsedInput.size() > this.maxArguments) {
             return ErrorType.INVALID_ARGUMENTS;
         }
 
-        return this.execute(new CommandArguments(List.of(args)));
+        return this.execute(parsedInput);
     }
 
-    protected abstract ErrorType execute(CommandArguments args);
+    protected abstract ErrorType execute(ParsedInput args);
 }

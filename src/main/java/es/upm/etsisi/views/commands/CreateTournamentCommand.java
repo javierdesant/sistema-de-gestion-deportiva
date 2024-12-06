@@ -21,7 +21,7 @@ public class CreateTournamentCommand extends Command {
     }
 
     @Override
-    protected ErrorType execute(CommandArguments args) {
+    protected ErrorType execute(ParsedInput args) {
         ErrorType error;
         String name = args.pollToken();
         String sport = args.pollToken();

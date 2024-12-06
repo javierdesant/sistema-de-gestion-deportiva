@@ -9,7 +9,7 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    protected ErrorType execute(CommandArguments args) {
+    protected ErrorType execute(ParsedInput args) {
         return ErrorType.NULL;
     }
 }

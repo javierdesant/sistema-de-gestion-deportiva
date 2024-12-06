@@ -12,7 +12,7 @@ public class LogoutCommand extends Command {
     }
 
     @Override
-    protected ErrorType execute(CommandArguments args) {
+    protected ErrorType execute(ParsedInput args) {
         this.authenticationService.logout();
 
         return ErrorType.NULL;

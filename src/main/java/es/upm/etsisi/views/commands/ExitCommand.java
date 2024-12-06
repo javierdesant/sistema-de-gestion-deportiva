@@ -9,7 +9,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    protected ErrorType execute(CommandArguments args) {
+    protected ErrorType execute(ParsedInput args) {
         CommandFeedback.EXIT_MESSAGE.writeln();
         return ErrorType.NULL;
     }

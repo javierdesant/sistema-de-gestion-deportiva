@@ -13,7 +13,7 @@ public class LoginCommand extends Command {
     }
 
     @Override
-    protected ErrorType execute(CommandArguments args) {
+    protected ErrorType execute(ParsedInput args) {
         ErrorType error;
         String username = args.pollToken();
         String password = args.pollToken();

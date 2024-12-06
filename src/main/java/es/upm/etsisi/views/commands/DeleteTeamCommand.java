@@ -14,7 +14,7 @@ public class DeleteTeamCommand extends Command {
     }
 
     @Override
-    protected ErrorType execute(CommandArguments args) {
+    protected ErrorType execute(ParsedInput args) {
         ErrorType error;
         String teamName = args.pollToken();
 

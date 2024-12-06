@@ -14,7 +14,7 @@ public class AddToTeamCommand extends Command {
     }
 
     @Override
-    protected ErrorType execute(CommandArguments args) {
+    protected ErrorType execute(ParsedInput args) {
         ErrorType error;
         String playerDni = args.pollToken();
         String teamName = args.pollToken();
