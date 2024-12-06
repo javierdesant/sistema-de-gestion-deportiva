@@ -5,10 +5,10 @@
 
     <groupId>es.upm.etsisi</groupId>
     <artifactId>sistema-de-gestion-deportiva</artifactId>
-    <version>1.0</version>
+    <version>2.0</version>
 
     <name>Sistema de gestión deportiva</name>
-    <description>Sistema básico de gestión de jugadores. Práctica 1 POO</description>
+    <description>Sistema básico de gestión deportiva. Gestor de usuarios, equipos y torneos. Práctica 2 y 3 POO</description>
     <url>https://github.com/javierdesant/sistema-de-gestion-deportiva</url>
 
     <developers>
