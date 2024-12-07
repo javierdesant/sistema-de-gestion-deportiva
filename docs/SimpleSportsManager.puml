@@ -1,4 +1,4 @@
-@startuml
+@startuml SimpleSportsManager
 skinparam groupInheritance 4
 
 package models {
@@ -49,10 +49,14 @@ package service {
     enum ErrorType
     interface ParticipantManager
     class ParticipantService implements ParticipantManager
+    class ServiceCoordinator
     interface TournamentManager
     class TournamentService implements TournamentManager
 
     AuthenticationService --> User
+    ServiceCoordinator .up.> AuthenticationService
+    ServiceCoordinator <-down-> ParticipantService
+    ServiceCoordinator <-down-> TournamentService
     ParticipantService *--> List
     ParticipantService <-- AuthenticationService
     TournamentService <-- AuthenticationService
@@ -63,23 +67,36 @@ package views {
     class CLI
     class ErrorView
     class TournamentView
+    class ListView extends View
+    class MatchListView extends ListView
+    class MatchView extends View
+    class ParticipantListView extends ListView
+    class ParticipantView extends View
+    class StatisticsView extends View
+    class TournamentListView extends ListView
+    class TournamentView extends View
+    class View<T>
 
     package commands {
         abstract class Command
         class CommandFactory
-        class CommandArguments
-        CommandFactory --> Command
-        Command .right.> CommandArguments
-        Command <|-- SubCommandA
-        Command <|-- SubCommandB
-        Command <|-- SubCommandC
-        SubCommandA .right.> AuthenticationService
-        SubCommandB .down.> ParticipantService
-        SubCommandC .left.> TournamentService
+        class ParsedInput
+        class SubCommandA extends Command
+        class SubCommandB extends Command
+        class SubCommandC extends Command
+        CommandFactory <-- Command
+        Command .left.> ParsedInput
+        SubCommandA -left-> AuthenticationService
+        SubCommandB -up-> ParticipantService
+        SubCommandC -right-> TournamentService
+        Command .up.> View
+        Command --> ErrorType
     }
-
-    CLI --> CommandFactory
-    CLI ..> Command
+    ErrorView ..> ErrorType
+    CLI <-- AuthenticationService
+    CLI <-- ParticipantService
+    CLI <-- TournamentService
+    CLI ..> CommandFactory
 }
 
 package utils {
@@ -92,6 +109,15 @@ package utils {
     class RestrictedEmail extends EmailAdress
     class UpmDomainPolicy implements DomainPolicy
     class UpmEmail extends RestrictedEmail
+
+    Console <.. CLI
+    CommandFeedback <.up. SubCommandA
+    CommandFeedback <.up. SubCommandB
+    CommandFeedback <.up. SubCommandC
+    EmailAdress --> DefaultEmailValidator
+    UpmEmail --> UpmDomainPolicy
+    UpmEmail <-- User
+
 }
 
 class SportsManager
