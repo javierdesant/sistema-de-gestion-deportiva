@@ -1,4 +1,4 @@
-@startuml
+@startuml SportsManager
 skinparam groupInheritance 4
 
 package models {
@@ -21,8 +21,9 @@ package models {
     }
 
     enum Role {
-        ADMIN,
+        ADMIN
         PLAYER
+        GUEST
     }
 
     class DNI {
@@ -78,6 +79,35 @@ package models {
         + get(Category category): double
     }
 
+    enum Sport {
+        SOCCER
+        BASKETBALL
+        TENNIS
+        SWIMMING
+        BOXING
+        ATHLETICS
+        GOLF
+        CRICKET
+        BASEBALL
+        RUGBY
+        ...
+    }
+
+    enum League {
+        U10
+        U12
+        U14
+        U16
+        U18
+        U20
+        U23
+        ADULT
+        MASTER
+        SENIOR
+        OVER_40
+        OVER_50
+        OVER_60
+    }
     enum Category {
         POINTS_SCORED,
         MATCHES_WON,
@@ -190,92 +220,428 @@ package models {
 }
 
 package service {
-    class CLI {
-        - SportsManager sportsManager
-        - LinkedList<Command> commands
-        - Controller controller
-        - Scanner scanner
-        + CLI(SportsManager sportsManager)
-        + getCommands(): ArrayList<Command>
-        + updateCommands()
-        + run()
-        + addPublicCommands()
-        + add(Command command)
-        + readCommand(): Command
-    }
-
-    class Controller {
-        - UserList userList
-        - ParticipantList participantList
-        - TournamentList tournamentList
-        - User user
-        + Controller()
-        + getUser(): User
-        + getParticipantList(): ParticipantList
-        + getTournamentList(): TournamentList
-        + login(String username, String password): boolean
+    interface Authenticator {
+        + login(String username, String password)
         + logout()
-        + createPlayer(String username, String password, String firstName, String lastName, DNI dni, String playerName)
-        + createTeam(String teamName)
-        + deleteParticipant(String name)
-        + addToTeam(String playerName, String teamName)
-        + removeFromTeam(String teamName, String playerName)
-        + createTournament(String tournamentName, LocalDate startDate, LocalDate endDate, Sport sport, League league, Category category)
+        + getUser()
+    }
+
+    class AuthenticationService implements Authenticator {
+        - UserList userList
+        - User user
+        + AuthenticationService()
+        + login(String username, String password)
+        + signIn(User user)
+        + logout()
+        + getUser()
+        + getUsers()
+    }
+
+    interface ParticipantManager {
+        + createPlayer(UpmEmail username, String password, String firstName, String lastName, DNI dni)
+        + createTeam(String teamName, DNI dni)
+        + deletePlayer(DNI dni)
+        + deleteTeam(String name)
+        + addToTeam(DNI dni, String teamName)
+        + removeFromTeam(String teamName, DNI dni)
+    }
+
+    class ParticipantService implements ParticipantManager {
+        - ParticipantList participantList
+        - AuthenticationService authenticator
+        + ParticipantService(AuthenticationService authenticator)
+        + createPlayer(UpmEmail username, String password, String firstName, String lastName, DNI dni)
+        + createTeam(String teamName, DNI dni)
+        + deletePlayer(DNI dni)
+        + deleteTeam(String name)
+        + addToTeam(DNI dni, String teamName)
+        + removeFromTeam(String teamName, DNI dni)
+        + showStatisticsCsv()
+        + showStatisticsJson()
+        - isValidPlayer(Participant participant)
+        - isValidTeam(Participant participant)
+        + {static} getParticipants()
+    }
+
+    class ServiceCoordinator {
+        - ParticipantService ParticipantService
+        - TournamentService TournamentService
+        + ServiceCoordinator(AuthenticationService authenticationService)
+        + getParticipantService()
+        + getTournamentService()
+    }
+
+    interface TournamentManager {
+        + createTournament(TournamentInfo tournamentInfo, TimeFrame timeFrame)
         + deleteTournament(String tournamentName)
-        + tournamentMatchmake(String tournamentName, String... playerNames)
-        + tournamentRandomMatchmake(String tournamentName)
-        + addToTournament(String tournamentName, Player player)
-        + removeFromTournament(String tournamentName, Player player)
-        + getParticipantStats(Participant participant): Statistics
-        + getTournaments(): TournamentList
+        + tournamentMatchmake(String tournamentName, Collection<DNI> dnis)
+        + tournamentRandomMatchmake(String tournamentName, int groupSize)
+        + enrollUser(String tournamentName)
+        + enrollTeamOfUser(String tournamentName)
+        + leaveTournament(String tournamentName)
+        + leaveTournamentAsTeam(String tournamentName)
+        + listTournament()
     }
 
-'   FIXME
-'    class DisplayService {
-'        + {static} show(Tournament tournament)
-'        + {static} show(Match match)
-'        + {static} show(Participant participant)
-'    }
-}
-
-package commands {
-    abstract class Command {
-        - String name
-        - int maxArguments
-        - String[] arguments
-        + Command(String name, int maxArguments)
-        + getName(): String
-        + getArgument(int index): String
-        + validate(String input)
-        + isCalled(String input): boolean
-        + {abstract} execute()
+    class TournamentService implements TournamentManager{
+        - TournamentList tournamentList
+        - AuthenticationService authenticator
+        + TournamentService(AuthenticationService authenticator)
+        + createTournament(TournamentInfo tournamentInfo, TimeFrame timeFrame)
+        + deleteTournament(String tournamentName)
+        + tournamentMatchmake(String tournamentName, Collection<DNI> dnis)
+        + tournamentRandomMatchmake(String tournamentName, int groupSize)
+        + enrollUser(String tournamentName)
+        + enrollTeamOfUser(String tournamentName)
+        + leaveTournament(String tournamentName)
+        + leaveTournamentAsTeam(String tournamentName)
+        + listTournament()
+    }
+    enum ErrorType {
+        + isNull(º)
     }
 
-'TODO: fill up commands attributes and methods
+    AuthenticationService --> User
+    ServiceCoordinator .up.> AuthenticationService
+    ServiceCoordinator <-down-> ParticipantService
+    ServiceCoordinator <-down-> TournamentService
+    ParticipantService *--> List
+    ParticipantService <-- AuthenticationService
+    TournamentService <-- AuthenticationService
+    TournamentService *--> List
+}
+package views{
 
-Command <|-- LoginCommand
-Command <|-- LogoutCommand
-Command <|-- HelpCommand
-Command <|-- ExitCommand
-Command <|-- CreatePlayerCommand
-Command <|-- AddToTeamCommand
-Command <|-- RemoveFromTeamCommand
-Command <|-- CreateTournamentCommand
-Command <|-- DeleteTournamentCommand
-Command <|-- TournamentMatchmakeCommand
-Command <|-- TournamentRandomMatchmakeCommand
-Command <|-- AddToTournamentCommand
-Command <|-- RemoveFromTournamentCommand
-Command <|-- ShowParticipantStatsCommand
-Command <|-- ShowTournamentCommand
-Command <|-- ShowMatchCommand
+    class CLI {
+        - AuthenticationService authenticationService
+        - ParticipantService ParticipantService
+        - TournamentService TournamentService
+        - ServiceCoordinator serviceCoordinator
+        - CommandFactory commandFactory
+
+        + CLI()
+        + isOpen(Command command)
+        + run()
+        + readInput()
+        + displayHelp()
+    }
+
+    class ErrorView {
+        - {static} EnumMap<ErrorType, String> MESSAGES
+        - Console console
+        - ErrorType ErrorType
+        + ErrorView(ErrorType error)
+        + writeln()
+    } 
+
+    class ListView extends View {
+        + ListView()
+        # writeList(List<T> list)
+        + {abstract} write(List<T> list)
+    }
+
+    class MatchListView extends ListView {
+        + MatchListView()
+        + write(List<Match> list)
+        + display(Match match)
+    }
+
+    class MatchView extends View {
+        + MatchView()
+        + display(Match element)
+    }
+
+    class ParticipantListView extends ListView {
+        + ParticipantListView()
+        + write(List<Participant> participant)
+        + display(Participant participant)
+    }
+
+    class ParticipantView extends View {
+        + ParticipantView()
+        + display(Participant participant)
+    }
+
+    class StatisticsView extends View {
+        + display(Statistics stats)
+        + displayJson(Statistics stats)
+        + displayCsv(Statistics stats)
+        - printBanner()
+        - printLine()
+    }
+
+    class TournamentListView extends ListView {
+        + TournamentListView()
+        + write(List<Tournament> list)
+        + display(Tournament tournament)
+    }
+
+    class TournamentView extends View {
+        + TournamentView()
+        + display(Tournament tournament)
+    }
+
+    class View<T> {
+        - Console console
+        + View()
+        # writeln()
+        # writeln(String message)
+        # writeln(Double value)
+        # write(String message)
+        + {abstract} display(T element)
+
+    }
+
+    package commands {
+        class AddToTeamCommand extends Command {
+            - ParticipantService participantService
+            AddToTeamCommand(ParticipantService participantService)
+            # execute(ParsedInput args)
+        }
+
+        abstract class Command {
+            - String name
+            - int maxArguments
+            - String[] arguments
+            + Command(String name, int maxArguments)
+            + getName(): String
+            + getArgument(int index): String
+            + validate(String input)
+            + isCalled(String input): boolean
+            + {abstract} execute()
+        }
+
+        class CommandFactory {
+            - AuthenticationService authenticationService
+            - ParticipantService participantService
+            - TournamentService TournamentService
+            - HashMap<Role, ArrayList<Command>> commands
+            - ArrayList<Command> publicCommands
+            + CommandFactory(AuthenticationService authenticationService, ParticipantService participantService, TournamentService tournamentService)
+            - initializeCommands()
+            - initializePublicCommands
+            - createCommands(Command... specificCommands)
+            + getAllCommands(Role role)
+            + Command getCommand(Role role, String title)
+        }
+
+        class CreatePlayerCommand extends Command {
+            - ParticipantService participantService
+            CreatePlayerCommand(ParticipantService participantService)
+            # execute(ParsedInput args)
+            - validate(String username, String password, String playerName, String playerLastName, String dni)
+            - isNameWrong(String name)
+            - validateUsername
+        }
+
+        class CreateTeamCommand extends Command {
+            - ParticipantService participantService
+            AddToTeamCommand(ParticipantService participantService)
+            # execute(ParsedInput args)
+            - createTeam(String teamName, ParsedInput args)
+        }
+
+        class CreateTournamentCommand extends Command {
+            - TournamentService tournamentService
+            CreateTournamentCommand(TournamentService tournamentService)
+            # execute(ParsedInput args)
+            - validate (String name, String sportCode, String leagueCode, String categoryCode, String startDate, String endDate)
+            - isNotValidDateFormat(String date)
+            - cantFindCodes(String sportCode, String leagueCode, String categoryCode)
+        }
+
+        class DeletePlayerCommand extends Command {
+            - ParticipantService participantService
+            DeletePlayerCommand(ParticipantService participantService)
+            # execute(ParsedInput args)
+        }
+
+        class DeleteTeamCommand extends Command {
+            - ParticipantService participantService
+            DeleteTeamCommand(ParticipantService participantService)
+            # execute(ParsedInput args)
+        }
+
+        class DeleteTournamentCommand extends Command {
+            - TournamentService tournamentService
+            DeleteTournamentCommand(TournamentService tournamentService)
+            # execute(ParsedInput args)
+        }
+
+        class EnrollCommand extends Command {
+            - TournamentService tournamentService
+            EnrollCommand(TournamentService tournamentService)
+            # execute(ParsedInput args)
+        }
+
+        class ExitCommand extends Command {
+            ExitCommand()
+            # execute(ParsedInput args)
+        }
+
+        class HelpCommand extends Command {
+            HelpCommand()
+            # execute(ParsedInput args)
+        }
+
+        class LeaveCommand extends Command {
+            - TournamentService tournamentService 
+            LeaveCommand(TournamentService)
+            # execute(ParsedInput args)
+        }
+
+        class ListTournamentsCommand extends Command {
+            - TournamentService tournamentService 
+            LeaveCommand(TournamentService)
+            # execute(ParsedInput args)
+        }
+
+        class LoginCommand extends Command {
+            - AuthenticationService authenticationService
+            LoginCommand(AuthenticationService authenticationService)
+            # execute(ParsedInput args)
+        }
+
+        class LogoutCommand extends Command {
+            - AuthenticationService authenticationService
+            LogoutCommand(AuthenticationService authenticationService)
+            # execute(ParsedInput args)
+        }
+
+        class MatchmakeCommand extends Command {
+            - TournamentService tournamentService
+            MatchmakeCommand(TournamentService tournamentService)
+            # execute(ParsedInput args)
+        }
+
+        class ParsedInput {
+            - String title
+            - LinkedList<String> tokens
+            - LinkedList<String> flags
+            - ParsedInput(String input)
+            + {static} parse(String input)
+            + {static} getTitle(String input)
+            - splitInput(String input)
+            + getTitle()
+            - separateFlags()
+            + size()
+            + containsFlag(String flag)
+            + hasToken()
+            + pollToken()
+        }
+
+        class RemoveFromTeamCommand extends Command {
+            - ParticipantService participantService
+            RemoveFromTeamCommand(ParticipantService participantService)
+            # execute(ParsedInput args)
+        }
+
+        class ShowStatsCommand extends Command  {
+            - ParticipantService participantService
+            ShowStatsCommand(ParticipantService participantService)
+            # execute(ParsedInput args)
+        }
+
+        CommandFactory <-- Command
+        Command .left.> ParsedInput
+        LoginCommand -down-> AuthenticationService
+        LogoutCommand -down-> AuthenticationService
+        AddToTeamCommand -down-> ParticipantService
+        CreatePlayerCommand -down-> ParticipantService
+        CreateTeamCommand -down-> ParticipantService
+        DeletePlayerCommand -down-> ParticipantService
+        DeleteTeamCommand -down-> ParticipantService
+        RemoveFromTeamCommand -down-> ParticipantService
+        ShowStatsCommand -down-> ParticipantService
+        CreateTournamentCommand -down-> TournamentService
+        DeleteTournamentCommand -down-> TournamentService
+        EnrollCommand -down-> TournamentService
+        LeaveCommand -down-> TournamentService
+        ListTournamentsCommand -down-> TournamentService
+        MatchmakeCommand -down-> TournamentService
+        Command .up.> View
+        Command --> ErrorType
+    }
+
+    ErrorView ..> ErrorType
+    CLI <-- AuthenticationService
+    CLI <-- ParticipantService
+    CLI <-- TournamentService
+    CLI ..> CommandFactory
+}
+
+package utils {
+    enum CommandFeedback {
+        - String message
+        CommandFeedback(String message)
+        + writeln()
+        + writeln(String player, String team)
+        + writeln(String user)
+        + toString()
+    }
+
+    class Console {
+        - {static} Console instance
+        - BufferedReader bufferedReader
+        - Console()
+        + {static} getInstance()
+        + readString(String title)
+        + readString()
+        + write(String string)
+        + write(double num)
+        + writeln()
+        + writeln(String string)
+        + writeln(double num)
+    }
+
+    class DefaultEmailValidator implements EmailValidator {
+        - {static} String EMAIL_REGEX
+        - {static} Pattern EMAIL_PATTERN
+        + isValid(String email)
+    }
+
+    interface DomainPolicy {
+        isValidForDormain(String email)
+    }
+
+    class EmailAdress {
+        - String email
+        # EmailAddress(String email, EmailValidator validator)
+        # EmailAddress(String email)
+        + {static} valueOf(String email)
+        + toString()
+        + equals(Object object)
+        + hashCode()
+    }
+
+    interface EmailValidator {
+        boolean isValid(String email)
+    }
+
+    class RestrictedEmail extends EmailAdress {
+        # RestrictedEmail(String email, DomainPolicy domainPolicy)
+    }
+
+    class UpmDomainPolicy implements DomainPolicy {
+        - {static} String[] UPM_DOMAINS
+    }
+
+    class UpmEmail extends RestrictedEmail {
+        - {static} DomainPolicy UPM_POLICY
+        - UpmEmail(String email)
+        + {static} valueOf(String email)
+    }
+
+    Console <.. CLI
+    CommandFeedback <.. Command
+    EmailAdress --> DefaultEmailValidator
+    UpmEmail --> UpmDomainPolicy
+    UpmEmail <-- User
 
 }
 
-'TODO: add utils package ?
+class SportsManager
 
-CLI "1..*" o--> "0..*" Command
-Command ..> Controller
-Controller ..> models
+SportsManager --> CLI
 
 @enduml
