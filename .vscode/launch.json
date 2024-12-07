@@ -3,9 +3,9 @@
     "configurations": [
         {
             "type": "java",
-            "name": "App",
+            "name": "SportsManager",
             "request": "launch",
-            "mainClass": "es.upm.etsisi.App",
+            "mainClass": "es.upm.etsisi.SportsManager",
             "projectName": "sistema-de-gestion-deportiva"
         },
         {

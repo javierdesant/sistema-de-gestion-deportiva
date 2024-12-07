@@ -1,0 +1,126 @@
+@startuml SimpleSportsManager
+skinparam groupInheritance 4
+
+package models {
+    class Administrator extends User
+    enum Category
+    class DNI
+    class Guest extends User
+    enum League
+    abstract class List<T>
+    class Match
+    class MatchList extends List
+    interface Participant
+    class ParticipantList extends List
+    class Player extends User implements Participant
+    enum Role
+    enum Sport
+    class Statistics
+    class Team implements Participant
+    class TimeFrame <<(R,yellow)>>
+    class Tournament
+    class TournamentInfo <<(R,yellow)>>
+    class TournamentList extends List
+    class User
+    class UserList extends List
+
+    User --> Role
+    Player --> Statistics
+    Player --> DNI
+    Team "0..1" o--> "1..*" Participant
+    Match *--> ParticipantList
+    Tournament *--> MatchList
+    Statistics "1" ..> "0..*" Category
+    Tournament *--> ParticipantList
+    Tournament --> TimeFrame
+    Tournament --> TournamentInfo
+    TournamentInfo --> Category
+    TournamentInfo --> League
+    TournamentInfo --> Sport
+    TournamentList "1" o--> "0..*" Tournament
+    ParticipantList "1" o--> "0..*" Participant
+    MatchList "1" o--> "0..*" Match
+    UserList "1" o--> "0..*" User
+}
+
+package service {
+    class AuthenticationService implements Authenticator
+    interface Authenticator
+    enum ErrorType
+    interface ParticipantManager
+    class ParticipantService implements ParticipantManager
+    class ServiceCoordinator
+    interface TournamentManager
+    class TournamentService implements TournamentManager
+
+    AuthenticationService --> User
+    ServiceCoordinator .up.> AuthenticationService
+    ServiceCoordinator <-down-> ParticipantService
+    ServiceCoordinator <-down-> TournamentService
+    ParticipantService *--> List
+    ParticipantService <-- AuthenticationService
+    TournamentService <-- AuthenticationService
+    TournamentService *--> List
+}
+
+package views {
+    class CLI
+    class ErrorView
+    class TournamentView
+    class ListView extends View
+    class MatchListView extends ListView
+    class MatchView extends View
+    class ParticipantListView extends ListView
+    class ParticipantView extends View
+    class StatisticsView extends View
+    class TournamentListView extends ListView
+    class TournamentView extends View
+    class View<T>
+
+    package commands {
+        abstract class Command
+        class CommandFactory
+        class ParsedInput
+        class SubCommandA extends Command
+        class SubCommandB extends Command
+        class SubCommandC extends Command
+        CommandFactory <-- Command
+        Command .left.> ParsedInput
+        SubCommandA -left-> AuthenticationService
+        SubCommandB -up-> ParticipantService
+        SubCommandC -right-> TournamentService
+        Command .up.> View
+        Command --> ErrorType
+    }
+    ErrorView ..> ErrorType
+    CLI <-- AuthenticationService
+    CLI <-- ParticipantService
+    CLI <-- TournamentService
+    CLI ..> CommandFactory
+}
+
+package utils {
+    enum CommandFeedback
+    class Console
+    class DefaultEmailValidator implements EmailValidator
+    interface DomainPolicy
+    class EmailAdress
+    interface EmailValidator
+    class RestrictedEmail extends EmailAdress
+    class UpmDomainPolicy implements DomainPolicy
+    class UpmEmail extends RestrictedEmail
+
+    Console <.. CLI
+    CommandFeedback <.up. SubCommandA
+    CommandFeedback <.up. SubCommandB
+    CommandFeedback <.up. SubCommandC
+    EmailAdress --> DefaultEmailValidator
+    UpmEmail --> UpmDomainPolicy
+    UpmEmail <-- User
+
+}
+
+class SportsManager
+
+SportsManager --> CLI
+@enduml
